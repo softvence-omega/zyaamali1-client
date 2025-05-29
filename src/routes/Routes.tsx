@@ -26,8 +26,9 @@ import DashboardContentPreview from "@/Dashboard/DashboardPages/DashboardContent
 import DashboardAnalytics from "@/Dashboard/DashboardPages/DashboardAnalytics";
 import DashboardSubscription from "@/Dashboard/DashboardPages/DashboardSubscription";
 import DashboardProfile from "@/Dashboard/DashboardPages/DashboardProfile";
-import DashboardProfileEdit from "@/Dashboard/DashboardPages/DashboardProfileEdit";
+
 import DashboardHelp from "@/Dashboard/DashboardPages/DashboardHelp";
+import Services5 from "@/pages/Services5";
 
 const routes = createBrowserRouter([
   {
@@ -47,20 +48,24 @@ const routes = createBrowserRouter([
         element: <ServicesLayout />,
         children: [
           {
-            path: "/services",
+            path: "/services/chat",
             element: <Services />,
           },
           {
-            path: "/services/details-1",
+            path: "/services/campaign",
             element: <Services2 />,
           },
           {
-            path: "/services/details-2",
+            path: "/services/copy",
             element: <Services3 />,
           },
           {
-            path: "/services/details-3",
+            path: "/services/feedback",
             element: <Services4 />,
+          },
+          {
+            path: "/services/marketing",
+            element: <Services5 />,
           },
         ],
       },
@@ -136,10 +141,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/userprofile",
         element: <DashboardProfile />,
       },
-      {
-        path: "/dashboard/userprofile/edit",
-        element: <DashboardProfileEdit />,
-      },
+      
       {
         path: "/dashboard/help",
         element: <DashboardHelp />,
