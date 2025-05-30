@@ -1,10 +1,16 @@
-import { Button } from "@/components/ui/button";
+import Banner from "@/components/About/Banner";
+import FeaturesSection from "@/components/About/FaturesSection";
+import JoinTeam from "@/components/About/JoinTeam";
+import MissionVision from "@/components/About/MissionVision";
 
 
 const About = () => {
   return (
-    <div className="h-screen">
-      <Button>About Us Page</Button>
+    <div >
+      <Banner/>
+      <MissionVision/>
+      <FeaturesSection/>
+      <JoinTeam/>
     </div>
   );
 };
