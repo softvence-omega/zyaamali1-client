@@ -25,7 +25,7 @@ const Services = () => {
               <span className="bg-gradient-to-b from-[#8E6EFF] to-[#000000] bg-clip-text text-transparent block">
                 Sterling Chatbot
               </span>
-              <span className="text-black block">Assistant</span>
+              <span className="text-black block mt-2">Assistant</span>
             </h1>
 
             <p className="text-T-600 mt-4  sm:text-lg max-w-6xl mx-auto">
@@ -93,7 +93,7 @@ const Services = () => {
         </div>
 
         {/* banner with video background */}
-        <div className="relative w-full h-[600px] md:h-[800px] overflow-hidden mt-10 rounded-3xl mb-24 mx-4 sm:mx-auto max-w-7xl">
+        <div className="relative w-full h-[600px] sm:h-[700px] md:h-[800px] overflow-hidden mt-10 rounded-3xl mb-24 mx-auto max-w-7xl px-4 lg:px-0">
           <video
             className="absolute top-0 left-0 w-full h-full object-cover"
             src={serviceVideo}
@@ -102,14 +102,17 @@ const Services = () => {
             muted
             playsInline
           />
-          <div className="absolute top-0 left-0 w-full h-full bg-black/40 flex flex-col items-center justify-center text-center px-4">
-            <h1 className="text-white text-3xl sm:text-4xl md:text-7xl font-bold text-center mb-12">
+          <div className="absolute top-0 left-0 w-full h-full bg-black/50 flex flex-col items-center justify-center text-center px-4 sm:px-8">
+            <h1
+              className="text-white font-bold text-center mb-12 leading-tight"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 4.5rem)" }}
+            >
               Let Adelo <span className="outline-text">Optimize</span> <br />
-              <span className="outline-text"> Your Campaign</span> <br />
+              <span className="outline-text">Your Campaign</span> <br />
               <span className="italic">Effortlessly</span>
             </h1>
 
-            <div className="flex gap-4 mt-6 flex-wrap justify-center">
+            <div className="flex flex-wrap justify-center gap-4 mt-6">
               <button className="bg-gradient-to-r from-[#654FAE] via-[#A891FB] to-[#8E6EFF] text-white px-6 py-3 rounded-2xl font-semibold hover:opacity-90 transition duration-300">
                 Start Your Free Trial
               </button>
