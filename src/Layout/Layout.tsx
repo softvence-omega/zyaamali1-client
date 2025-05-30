@@ -6,7 +6,7 @@ const Layout: React.FC = () => {
   return (
     <div>
 
-      <div className="w-full fixed"><Navbar /></div>
+      <div className="w-full absolute z-10"><Navbar /></div>
 
       <main >
         <Outlet />
