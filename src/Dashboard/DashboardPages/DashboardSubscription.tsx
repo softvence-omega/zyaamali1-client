@@ -128,7 +128,7 @@ const DashboardSubscription: React.FC = () => {
   );
 
   return (
-    <div className="w-full mx-auto p-6 space-y-8">
+    <div className="w-full mx-auto p-6 space-y-8 ">
       {/* Header */}
       <div>
         <h1 className="bg-gradient-to-b from-[#8E6EFF] to-[#000000] bg-clip-text text-transparent block text-4xl font-bold">
