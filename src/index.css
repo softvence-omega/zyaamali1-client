@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
+html {
+  overflow-y: scroll;
+}
 
 @theme {
   --color-blue-50: #f4f1ff;
@@ -11,7 +16,7 @@
   --color-blue-700: #654eb5;
   --color-blue-800: #4e3d8c;
   --color-blue-900: #3c2e6b;
-  
+
   --color-T-50: #fdfdfd;
   --color-T-100: #f7f7f7;
   --color-T-200: #f4f4f5;

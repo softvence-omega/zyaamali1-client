@@ -1,10 +1,13 @@
+import CommonWrapper from "@/common/CommonWrapper"
 
 
 function Landing() {
   return (
-    <div>
-      
-    </div>
+    <CommonWrapper>
+      <div className="h-screen bg-white/20 pt-34">
+        adasdasdsad
+      </div>
+    </CommonWrapper>
   )
 }
 
