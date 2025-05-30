@@ -29,3 +29,9 @@
     font-family: "Manrope", sans-serif;
   }
 }
+
+/* extra css */
+.outline-text {
+  -webkit-text-stroke: 1px white;
+  color: transparent;
+}
