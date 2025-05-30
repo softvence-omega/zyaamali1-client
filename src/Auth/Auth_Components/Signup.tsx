@@ -150,108 +150,131 @@
 // };
 
 // export default Signup;
-
-
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { RiAppleLine } from "react-icons/ri";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import video from '../../assets/6676845_Gradient_Banner_1920x1080.mp4'
 
-export default function LoginForm() {
+export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4">
-      <div className="w-full max-w-xl rounded-[20px] p-8 md:p-12 shadow-lg bg-gradient-to-br from-[#cbd3f5] via-[#d8c1e7] to-[#f6d4df]">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-black">
-          <span className="text-black text-4xl">Sign</span>
-          <span className="text-[#8a63f8] text-4xl">Up</span>
+    <div className="relative flex items-center justify-center min-h-screen p-2 sm:p-4 md:p-6 overflow-hidden">
+      {/* Background Video */}
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        autoPlay
+        loop
+        muted
+      >
+        <source src={video} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Optional dark overlay */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-10" />
+
+      {/* Sign Up Form */}
+      <div className="relative z-20 w-full max-w-sm sm:max-w-md md:max-w-lg rounded-xl p-4 sm:p-6 md:p-8 shadow-md bg-gradient-to-br from-[#cbd3f5] via-[#d8c1e7] to-[#f6d4df]">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-black">
+          <span className="text-black">Sign</span>
+          <span className="text-[#8a63f8]">Up</span>
         </h2>
 
-        <form className="space-y-6">
-            <div>
-            <label className="block text-sm font-medium text-black mb-2">Full Name</label>
+        <form className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-black mb-1">Full Name</label>
             <input
               type="text"
               placeholder="your name"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white"
+              className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white text-sm"
             />
           </div>
-            <div>
-            <label className="block text-sm font-medium text-black mb-2">Company Name</label>
+
+          <div>
+            <label className="block text-sm font-medium text-black mb-1">Company Name</label>
             <input
               type="text"
               placeholder="company name"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white"
+              className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white text-sm"
             />
           </div>
-            <div>
-            <label className="block text-sm font-medium text-black mb-2">Country</label>
-            <select name="" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white">
+
+          <div>
+            <label className="block text-sm font-medium text-black mb-1">Country</label>
+            <select
+              className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white text-sm"
+            >
               <option value=""></option>
               <option value="bangladesh">Bangladesh</option>
               <option value="india">India</option>
               <option value="usa">USA</option>
             </select>
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-black mb-2">Email</label>
+            <label className="block text-sm font-medium text-black mb-1">Email</label>
             <input
               type="email"
               placeholder="Enter your email"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white"
+              className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white text-sm"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-black mb-2">Password</label>
+            <label className="block text-sm font-medium text-black mb-1">Password</label>
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Enter your password"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white"
+                className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white text-sm"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600"
               >
-                {showPassword ? <FaEyeSlash className="w-6 text-[#8E6EFF]" /> : <FaEye className="w-6 text-[#8E6EFF]" />}
+                {showPassword ? (
+                  <FaEyeSlash className="w-4 h-4 text-[#8E6EFF]" />
+                ) : (
+                  <FaEye className="w-4 h-4 text-[#8E6EFF]" />
+                )}
               </button>
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-[#b084f5] to-[#8a63f8] text-white font-medium py-3 rounded-full shadow-md hover:opacity-90 transition"
+            className="w-full bg-gradient-to-r from-[#b084f5] to-[#8a63f8] text-white font-medium py-2 text-sm rounded-full shadow-xl hover:opacity-90 transition mt-2"
           >
             Sign Up
           </button>
         </form>
 
-        <div className="flex items-center my-6">
+        <div className="flex items-center my-4">
           <hr className="flex-grow border-t border-gray-300" />
-          <span className="mx-4 text-gray-800 text-sm font-semi-bold">OR</span>
+          <span className="mx-2 text-gray-800 text-xs font-medium">OR</span>
           <hr className="flex-grow border-t border-gray-300" />
         </div>
 
-        <div className="space-y-4">
-          <button className="w-full flex items-center justify-center gap-2 bg-black text-white py-3 rounded-full">
-            <FcGoogle className="h-6 w-6" />
+        <div className="space-y-3">
+          <button className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 text-sm rounded-full">
+            <FcGoogle className="h-5 w-5" />
             Continue With Google
           </button>
 
-          <button className="w-full flex items-center justify-center gap-2 bg-black text-white py-3 rounded-full">
-            <RiAppleLine className="w-6 h-6" />
+          <button className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 text-sm rounded-full">
+            <RiAppleLine className="w-5 h-5" />
             Continue With Apple
           </button>
         </div>
 
-        <p className="text-center text-sm text-gray-700 mt-6">
+        <p className="text-center text-xs text-gray-700 mt-4">
           Already have an account?{' '}
-          <Link to='/auth/login' className="text-[#8a63f8] font-medium hover:underline">
+          <Link to="/auth/login" className="text-[#8a63f8] font-medium hover:underline">
             Login
           </Link>
         </p>
@@ -259,4 +282,3 @@ export default function LoginForm() {
     </div>
   );
 }
-
