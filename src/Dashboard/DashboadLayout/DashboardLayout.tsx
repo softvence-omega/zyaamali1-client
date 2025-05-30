@@ -1,10 +1,13 @@
+import Sidebar from "@/components/Dashboard/Sidebar"
 import { Outlet } from "react-router-dom"
 
-
-function DashboardLayout() {
+const DashboardLayout = () => {
   return (
-    <div>
+    <div className="flex px-4 py-8 gap-x-10">
+      <Sidebar/>
+      <div>
       <Outlet/>
+      </div>
     </div>
   )
 }
