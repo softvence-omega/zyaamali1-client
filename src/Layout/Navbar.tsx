@@ -1,25 +1,83 @@
-import UserAvatar from "@/ui/UserAvatar";
+
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+
 import { useAppDispatch } from "@/hooks/useRedux";
 import { logout } from "@/store/Slices/AuthSlice/authSlice";
+import CommonWrapper from "@/common/CommonWrapper";
+import logo from "../assets/logo.png"
 
 
 const Navbar: React.FC = () => {
+  const link = <>
+    <li>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `font-medium transition-colors duration-300 ease-in-out px-3 py-2 rounded-md
+               ${isActive ? 'text-[#8E6EFF] bg-[#F4F1FF]' : 'text-[#4F4D73]'}
+               ${isActive ? '' : 'hover:text-gray-600'} ` /* Optional: hover effect for inactive */
+        }
+      >
+        Home
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        to="/about"
+        className={({ isActive }) =>
+          `font-medium transition-colors duration-300 ease-in-out px-3 py-2 rounded-md
+                ${isActive ? 'text-[#8E6EFF] bg-[#F4F1FF]' : 'text-[#4F4D73]'}
+               ${isActive ? '' : 'hover:text-gray-600'} `
+        }
+      >
+        About Us
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        to="/services"
+        className={({ isActive }) =>
+          `font-medium transition-colors duration-300 ease-in-out px-3 py-2 rounded-md
+               ${isActive ? 'text-[#8E6EFF] bg-[#F4F1FF]' : 'text-[#4F4D73]'}
+               ${isActive ? '' : 'hover:text-gray-600'} `
+        }
+      >
+        Services
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        to="/contact"
+        className={({ isActive }) =>
+          `font-medium transition-colors duration-300 ease-in-out px-3 py-2 rounded-md
+                ${isActive ? 'text-[#8E6EFF] bg-[#F4F1FF]' : 'text-[#4F4D73]'}
+               ${isActive ? '' : 'hover:text-gray-600'} `
+        }
+      >
+        Contact
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        to="/tutorial"
+        className={({ isActive }) =>
+          `font-medium transition-colors duration-300 ease-in-out px-3 py-2 rounded-md
+                ${isActive ? 'text-[#8E6EFF] bg-[#F4F1FF]' : 'text-[#4F4D73]'}
+               ${isActive ? '' : 'hover:text-gray-600'} `
+        }
+      >
+        Tutorial
+      </NavLink>
+    </li></>
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   const dispatch = useAppDispatch();
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  // const toggleMenu = () => {
+  //   setIsOpen(!isOpen);
+  // };
 
   const handleLogout = () => {
     dispatch(logout());
@@ -27,124 +85,34 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-website-color-green shadow-lg">
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link to="/" className="text-white text-2xl font-bold">
-              MyApp
-            </Link>
-          </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-4">
-            <Link
-              to="/"
-              className="text-white hover:bg-website-color-lightGray hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className="text-white hover:bg-website-color-lightGray hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-            >
-              About
-            </Link>
-            <Link
-              to="/services"
-              className="text-white hover:bg-website-color-lightGray hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Services
-            </Link>
-            <Link
-              to="/contact"
-              className="text-white hover:bg-website-color-lightGray hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Contact
-            </Link>
+    <CommonWrapper>
+      <div className="navbar bg-base-100 shadow-sm my-12 rounded-4xl px-8  ">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              {link}
 
-            <Popover>
-              <PopoverTrigger>
-                <UserAvatar userName="Mahim" />
-              </PopoverTrigger>
-              <PopoverContent className="mr-3 bg-website-color-darkGray border-none text-white">
-                <Button
-                  onClick={handleLogout}
-                  className="bg-website-color-lightGray text-black w-full"
-                >
-                  Logout
-                </Button>
-              </PopoverContent>
-            </Popover>
+            </ul>
           </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={toggleMenu}
-              type="button"
-              className="text-white hover:text-gray-300 focus:outline-none"
-            >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {isOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16m-7 6h7"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
+          <Link to={"/"} className="text-xl"><img src={logo} className="w-28 h-12 cursor-pointer" alt="" /></Link>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            {link}
+          </ul>
+        </div>
+        <div className="navbar-end">
+          <Link to={"/auth/login"} className="cursor-pointer">
+            <button className=" px-4 py-2 rounded-4xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer">Sign In</button></Link>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link
-              to="/"
-              className="text-white block hover:bg-purple-700 px-3 py-2 rounded-md text-base font-medium"
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className="text-white block hover:bg-purple-700 px-3 py-2 rounded-md text-base font-medium"
-            >
-              About
-            </Link>
-            <Link
-              to="/services"
-              className="text-white block hover:bg-purple-700 px-3 py-2 rounded-md text-base font-medium"
-            >
-              Services
-            </Link>
-            <Link
-              to="/contact"
-              className="text-white block hover:bg-purple-700 px-3 py-2 rounded-md text-base font-medium"
-            >
-              Contact
-            </Link>
-          </div>
-        </div>
-      )}
-    </nav>
+    </CommonWrapper>
   );
 };
 
