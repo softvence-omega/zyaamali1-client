@@ -121,10 +121,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/content",
         element: <DashboardContent />,
       },
-      {
-        path: "/dashboard/content/preview",
-        element: <DashboardContentPreview />,
-      },
+
       {
         path: "/dashboard/analytics",
         element: <DashboardAnalytics />,
@@ -141,12 +138,16 @@ const routes = createBrowserRouter([
         path: "/dashboard/userprofile",
         element: <DashboardProfile />,
       },
-      
+
       {
         path: "/dashboard/help",
         element: <DashboardHelp />,
       },
     ],
+  },
+  {
+    path: "/contentpreview",
+    element: <DashboardContentPreview />,
   },
   {
     path: "*",
