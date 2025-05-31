@@ -72,7 +72,7 @@ const DashboardSubscription: React.FC = () => {
         "Email support",
       ],
       buttonText: "Upgrade",
-      buttonStyle: "bg-purple-600 text-white hover:bg-purple-700",
+      buttonStyle: "rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-T-100 font-bold",
     },
   ];
 
@@ -92,19 +92,19 @@ const DashboardSubscription: React.FC = () => {
     {
       invoice: "INV-2025-0023",
       date: "22/06/2025",
-      amount: "1,000",
+      amount: "$1,000",
       status: "Download",
     },
     {
       invoice: "INV-2025-0023",
       date: "22/06/2025",
-      amount: "1,200",
+      amount: "$1,200",
       status: "Download",
     },
     {
       invoice: "INV-2025-0023",
       date: "22/06/2025",
-      amount: "500",
+      amount: "$500",
       status: "Download",
     },
   ];
@@ -116,7 +116,7 @@ const DashboardSubscription: React.FC = () => {
     <button
       onClick={() => onChange(!checked)}
       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-        checked ? "bg-purple-600" : "bg-gray-300"
+        checked ? "bg-blue-600" : "bg-gray-300"
       }`}
     >
       <span
@@ -139,43 +139,34 @@ const DashboardSubscription: React.FC = () => {
         </p>
       </div>
 
-      {/* Current Subscription Plan */}
-      <div className="bg-white ">
+      {/* Current Plan */}
+      <div className="bg-white">
         <div className="py-3 px-4 bg-T-300 rounded-2xl flex items-center justify-start">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">
             Current Subscription Plan
           </h2>
         </div>
 
-        <div className="flex items-center justify-between mt-2">
-          <div className="flex items-center space-x-4">
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="text-lg font-medium text-gray-900">
-                  Pro Plan
-                </span>
-                <span className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-3xl">
-                  ACTIVE
-                </span>
-              </div>
-              <div className="mt-2 space-y-1">
-                <div className="flex items-center text-lg text-gray-600">
+        <div className="flex flex-col lg:flex-row items-start justify-between mt-2 gap-6">
+          <div className="flex-1">
+            <div className="flex items-center space-x-2">
+              <span className="text-lg font-medium text-gray-900">Pro Plan</span>
+              <span className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-3xl">
+                ACTIVE
+              </span>
+            </div>
+            <div className="mt-2 space-y-1">
+              {[
+                "Up to 10 members",
+                "50 Marketing Campaigns per month",
+                "Advanced analytics and reports",
+                "Email & chat support",
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center text-lg text-gray-600">
                   <FaCheck className="w-3 h-3 text-[#FF8818] mr-2" />
-                  Up to 10 members
+                  {item}
                 </div>
-                <div className="flex items-center text-lg text-gray-600">
-                  <FaCheck className="w-3 h-3 text-[#FF8818] mr-2" />
-                  50 Marketing Campaigns per month
-                </div>
-                <div className="flex items-center text-lg text-gray-600">
-                  <FaCheck className="w-3 h-3 text-[#FF8818] mr-2" />
-                  Advanced analytics and reports
-                </div>
-                <div className="flex items-center text-lg text-gray-600">
-                  <FaCheck className="w-3 h-3 text-[#FF8818] mr-2" />
-                  Email & chat support
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -186,10 +177,10 @@ const DashboardSubscription: React.FC = () => {
             <div className="text-2xl font-bold text-gray-900">$19.99</div>
 
             <div className="flex space-x-2 mt-4">
-              <button className=" px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-T-100 font-bold">
+              <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-T-100 font-bold">
                 Change Plan
               </button>
-              <button className="bg-white border border-blue-600 text-blue-600 px-4 py-2 text-sm font-medium  cursor-pointer rounded-3xl">
+              <button className="bg-white border border-blue-600 text-blue-600 px-4 py-2 text-sm font-medium cursor-pointer rounded-3xl">
                 Cancel Subscription
               </button>
             </div>
@@ -198,48 +189,49 @@ const DashboardSubscription: React.FC = () => {
       </div>
 
       {/* Pricing Plans */}
-      <div className="bg-white ">
+      <div className="bg-white">
         <h2 className="text-xl font-medium text-T-900 mb-6">Pricing Plans</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {pricingPlans.map((plan, index) => (
             <div
               key={index}
-              className={`border rounded-lg p-6 relative bg-T-300 h-[468px] ${
+              className={`flex flex-col justify-between border rounded-lg p-6 relative bg-T-300 h-full ${
                 plan.popular ? "border-purple-500" : "border-gray-200"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                    POPULAR
+                <div className="absolute -top-[-6px] right-[-50px] transform -translate-x-1/2">
+                  <span className="bg-blue-600 text-white px-3 py-3 rounded-xl text-xs font-medium">
+                    Current Plan
                   </span>
                 </div>
               )}
 
-              <div className="text-center">
+              <div>
                 <h3 className="text-lg font-semibold text-gray-900">
                   {plan.name}
                 </h3>
                 <div className="mt-2">
-                  <span className="text-3xl font-bold text-gray-900">
+                  <span className="text-3xl font-bold text-blue-400">
                     {plan.price}
                   </span>
                   <span className="text-gray-600">{plan.period}</span>
                 </div>
-              </div>
+                <hr className="mt-6 text-T-400" />
 
-              <ul className="mt-6 space-y-3">
-                {plan.features.map((feature, featureIndex) => (
-                  <li
-                    key={featureIndex}
-                    className="flex items-center text-sm text-gray-600"
-                  >
-                    <FaCheck className="w-3 h-3 text-green-500 mr-3 flex-shrink-0" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+                <ul className="mt-6 space-y-3">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li
+                      key={featureIndex}
+                      className="flex items-center text-sm text-gray-600"
+                    >
+                      <FaCheck className="w-3 h-3 text-[#FF8818] mr-3 flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               <button
                 className={`w-full mt-6 px-4 py-2 rounded-md text-sm font-medium transition-colors ${plan.buttonStyle}`}
@@ -252,7 +244,7 @@ const DashboardSubscription: React.FC = () => {
       </div>
 
       {/* Payment Methods */}
-      <div className="bg-T-300  p-6 rounded-2xl">
+      <div className="bg-T-300 p-6 rounded-2xl">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-gray-900">
             Payment Methods
@@ -327,13 +319,13 @@ const DashboardSubscription: React.FC = () => {
       </div>
 
       {/* Auto Renew & Notification */}
-      <div className="bg-white rounded-lg shadow-sm border p-6">
+      <div className="bg-white p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">
           Auto Renew & Notification
         </h2>
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between p-4 border border-T-300 rounded-2xl">
             <div>
               <div className="font-medium text-gray-900">Auto Renew</div>
               <div className="text-sm text-gray-600">
@@ -343,7 +335,7 @@ const DashboardSubscription: React.FC = () => {
             <ToggleSwitch checked={autoRenew} onChange={setAutoRenew} />
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between p-4 border border-T-300 rounded-2xl">
             <div>
               <div className="font-medium text-gray-900">
                 Payment Confirmed Email
@@ -355,7 +347,7 @@ const DashboardSubscription: React.FC = () => {
             <ToggleSwitch checked={paymentEmail} onChange={setPaymentEmail} />
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between p-4 border border-T-300 rounded-2xl">
             <div>
               <div className="font-medium text-gray-900">
                 Billing Reminders Email
@@ -373,10 +365,10 @@ const DashboardSubscription: React.FC = () => {
       </div>
 
       {/* Contact Support */}
-      <div className="bg-white rounded-lg shadow-sm border p-6">
-        <div className="flex items-center justify-between">
+      <div className="bg-white p-6">
+        <div className="flex flex-col items-start justify-start">
           <div className="flex items-center space-x-3">
-            <FaHeadset className="w-6 h-6 text-gray-400" />
+            <FaHeadset className="w-6 h-6 font-black text-black" />
             <div>
               <div className="font-medium text-gray-900">Contact Support</div>
               <div className="text-sm text-gray-600">
@@ -384,7 +376,7 @@ const DashboardSubscription: React.FC = () => {
               </div>
             </div>
           </div>
-          <button className="flex items-center text-purple-600 text-sm font-medium hover:text-purple-700">
+          <button className="flex items-center text-purple-600 text-sm font-medium hover:text-purple-700 mt-2">
             Go to Contact Us Page
             <FaChevronRight className="w-3 h-3 ml-1" />
           </button>
