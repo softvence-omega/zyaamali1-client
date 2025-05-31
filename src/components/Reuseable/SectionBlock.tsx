@@ -7,9 +7,9 @@ interface SectionBlockProps {
 
 const SectionBlock:React.FC<SectionBlockProps> = ({ img, title, description }) => {
   return (
-    <div className="md:max-w-6xl mx-auto my-5">
+    <div className=" my-5">
       {img && (
-        <div className="my-5">
+        <div className="my-5 max-w-7xl">
           <img src={img} alt={title || "section image"} />
         </div>
       )}
