@@ -1,9 +1,42 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
+html {
+  overflow-y: scroll;
+}
 
 @theme {
-  --color-website-color-black: #212a31;
-  --color-website-color-darkGray: #2e3944;
-  --color-website-color-lightGray: #d3d9d4;
-  --color-website-color-green: #124e66;
-  --color-website-color-lightGreen: #748d92;
+  --color-blue-50: #f4f1ff;
+  --color-blue-100: #dcd2ff;
+  --color-blue-200: #cbbcff;
+  --color-blue-300: #b39eff;
+  --color-blue-400: #a58bff;
+  --color-blue-500: #8e6eff;
+  --color-blue-600: #8164e8;
+  --color-blue-700: #654eb5;
+  --color-blue-800: #4e3d8c;
+  --color-blue-900: #3c2e6b;
+
+  --color-T-50: #fdfdfd;
+  --color-T-100: #f7f7f7;
+  --color-T-200: #f4f4f5;
+  --color-T-300: #f4f4f5;
+  --color-T-400: #a1a1aa;
+  --color-T-500: #71717a;
+  --color-T-600: #52525b;
+  --color-T-700: #3f3f46;
+  --color-T-800: #27272a;
+  --color-T-900: #18181b;
+}
+
+@layer base {
+  body {
+      font-family: 'Nunito Sans', sans-serif;
+  }
+}
+
+/* extra css */
+.outline-text {
+  -webkit-text-stroke: 1px white;
+  color: transparent;
 }

@@ -5,8 +5,10 @@ import Navbar from "./Navbar";
 const Layout: React.FC = () => {
   return (
     <div>
-      <Navbar />
-      <main>
+
+      <div className="w-full absolute z-10"><Navbar /></div>
+
+      <main >
         <Outlet />
       </main>
       <Footer />
