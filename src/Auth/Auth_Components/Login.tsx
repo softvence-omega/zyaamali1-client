@@ -1,81 +1,104 @@
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { RiAppleLine } from "react-icons/ri";
-import { FaEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa6";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import video from "../../assets/6676845_Gradient_Banner_1920x1080.mp4";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4">
-      <div className="w-full max-w-xl rounded-[20px] p-8 md:p-12 shadow-lg bg-gradient-to-br from-[#cbd3f5] via-[#d8c1e7] to-[#f6d4df]">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-black">
-          <span className="text-black text-4xl">Log </span>
-          <span className="text-[#8a63f8] text-4xl">In</span>
-        </h2>
+    <div className="flex items-center justify-center min-h-screen px-2 sm:px-4 bg-white">
+      {/* Login Box */}
+      <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg rounded-[20px] p-4 sm:p-6 md:p-8 overflow-hidden bg-gradient-to-br from-[#eef1ff] via-[#e9ddfa] to-[#ffe7f2] shadow-[0_15px_80px_rgba(130,112,255,0.2)] border border-white/30 backdrop-blur-sm">
 
-        <form className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-black mb-2">Email</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white"
-            />
-          </div>
+        {/* Form Background Video */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          autoPlay
+          loop
+          muted
+        >
+          <source src={video} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
 
-          <div>
-            <label className="block text-sm font-medium text-black mb-2">Password</label>
-            <div className="relative">
+        {/* White overlay for frosted glass effect */}
+        <div className="absolute inset-0 bg-white/40 z-10 backdrop-blur-sm" />
+
+        {/* Form content */}
+        <div className="relative z-20">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-black">
+            <span>Log </span>
+            <span className="text-[#8a63f8]">In</span>
+          </h2>
+
+          <form className="space-y-4 sm:space-y-5">
+            <div>
+              <label className="block text-sm text-black mb-1">Email</label>
               <input
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Enter your password"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white"
+                type="email"
+                placeholder="Enter your email"
+                className="w-full px-3 py-2 text-sm rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white"
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
-              >
-                {showPassword ? <FaEyeSlash className="w-6 text-[#8E6EFF]" /> : <FaEye className="w-6 text-[#8E6EFF]" />}
-              </button>
             </div>
+
+            <div>
+              <label className="block text-sm text-black mb-1">Password</label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  className="w-full px-3 py-2 text-sm rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600"
+                >
+                  {showPassword ? (
+                    <FaEyeSlash className="w-4 h-4 text-[#8E6EFF]" />
+                  ) : (
+                    <FaEye className="w-4 h-4 text-[#8E6EFF]" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-[#b084f5] to-[#8a63f8] text-white font-medium py-2 sm:py-2.5 rounded-full text-sm shadow-md hover:opacity-90 transition mt-2"
+            >
+              Log In
+            </button>
+          </form>
+
+          <div className="flex items-center my-4">
+            <hr className="flex-grow border-gray-300" />
+            <span className="mx-2 text-xs sm:text-sm text-gray-800 font-medium">OR</span>
+            <hr className="flex-grow border-gray-300" />
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-[#b084f5] to-[#8a63f8] text-white font-medium py-3 rounded-full shadow-md hover:opacity-90 transition"
-          >
-            Log In
-          </button>
-        </form>
+          <div className="space-y-3">
+            <button className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 text-sm rounded-full">
+              <FcGoogle className="w-5 h-5" />
+              Continue With Google
+            </button>
 
-        <div className="flex items-center my-6">
-          <hr className="flex-grow border-t border-gray-300" />
-          <span className="mx-4 text-gray-800 text-sm font-semi-bold">OR</span>
-          <hr className="flex-grow border-t border-gray-300" />
+            <button className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 text-sm rounded-full">
+              <RiAppleLine className="w-5 h-5" />
+              Continue With Apple
+            </button>
+          </div>
+
+          <p className="text-center text-xs sm:text-sm text-gray-700 mt-4">
+            Don’t have an account?{" "}
+            <Link to="/auth/signup" className="text-[#8a63f8] font-medium hover:underline">
+              Sign Up
+            </Link>
+          </p>
         </div>
-
-        <div className="space-y-4">
-          <button className="w-full flex items-center justify-center gap-2 bg-black text-white py-3 rounded-full">
-            <FcGoogle className="h-6 w-6" />
-            Continue With Google
-          </button>
-
-          <button className="w-full flex items-center justify-center gap-2 bg-black text-white py-3 rounded-full">
-            <RiAppleLine className="w-6 h-6" />
-            Continue With Apple
-          </button>
-        </div>
-
-        <p className="text-center text-sm text-gray-700 mt-6">
-          Don’t have an account?{' '}
-          <Link to='/auth/signup' className="text-[#8a63f8] font-medium hover:underline">
-            Sign Up
-          </Link>
-        </p>
       </div>
     </div>
   );
