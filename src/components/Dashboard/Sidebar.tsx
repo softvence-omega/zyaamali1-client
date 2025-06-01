@@ -1,10 +1,9 @@
-import { FaChartBar} from "react-icons/fa";
+import { FaChartBar } from "react-icons/fa";
 import { RiMegaphoneFill } from "react-icons/ri";
 import { MdMessage, MdVideoLibrary } from "react-icons/md";
-import dashboardHeader from '../../assets/dashboard-header.png'
+import dashboardHeader from "../../assets/dashboard-header.png";
 import { LuLayoutGrid } from "react-icons/lu";
 import { BiWallet } from "react-icons/bi";
-
 
 const Sidebar = () => {
   return (

@@ -30,6 +30,8 @@ html {
 
   --color-gray-text: #6c7078;
   --color-Foundation-text-T-75: #979aa0;
+  --color-Foundation-text-T-50: #e6e6e8;
+  --color-Foundation-gray-bg: #2d323e;
 }
 
 @layer base {

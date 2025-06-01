@@ -29,6 +29,7 @@ import DashboardProfile from "@/Dashboard/DashboardPages/DashboardProfile";
 
 import DashboardHelp from "@/Dashboard/DashboardPages/DashboardHelp";
 import Services5 from "@/pages/Services5";
+import DashboardGenerateContent from "@/Dashboard/DashboardPages/DashboardGenerateContent";
 
 const routes = createBrowserRouter([
   {
@@ -144,6 +145,10 @@ const routes = createBrowserRouter([
         element: <DashboardHelp />,
       },
     ],
+  },
+  {
+    path: "/dashboard/generate-content",
+    element: <DashboardGenerateContent />,
   },
   {
     path: "/contentpreview",

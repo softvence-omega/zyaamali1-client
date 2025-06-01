@@ -7,8 +7,10 @@ import { usersCards } from "@/lib/Dashboard/DashboardCard";
 import ActiveCampaign from "@/components/DashboardHome/ActiveCampaign";
 import AiSuggestion from "@/components/DashboardHome/AiSuggestion";
 import Sale from "@/components/DashboardHome/Sale";
+import { useNavigate } from "react-router-dom";
 
 function DashboardHome() {
+  const navigate = useNavigate();
   return (
     <div>
       {/* heading  */}
@@ -23,7 +25,12 @@ function DashboardHome() {
         </div>
         <div className="lg:flex gap-4 items-end">
           <PrimaryButton icon={<FaPlus />}>Create New Campaign</PrimaryButton>
-          <OutlineButton icon={<FaWandMagicSparkles />}>
+          <OutlineButton
+            icon={<FaWandMagicSparkles />}
+            onClick={() => {
+              navigate("generate-content");
+            }}
+          >
             Generate Marketing Content
           </OutlineButton>
         </div>
