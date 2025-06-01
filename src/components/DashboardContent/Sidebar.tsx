@@ -16,7 +16,7 @@ const Sidebar: React.FC = () => {
     };
 
     return (
-        <div className="bg-white p-4 md:p-6 rounded-lg shadow-lg w-full md:w-64 lg:w-72 flex-shrink-0">
+        <div className=" p-4 md:p-6  rounded-lg  w-full md:w-64 lg:w-72 flex-shrink-0">
             {/* Search Template */}
             <div className="mb-6">
                 <div className="relative">

@@ -55,12 +55,12 @@ const ContentHeader: React.FC = () => {
             {/* Background Image */}
             <img
                 src={img}
-                className="absolute inset-0 w-full h-full object-cover object-center z-0 rounded-b-3xl"
+                className="absolute -top-14 inset-0 w-full h-full object-cover object-center z-0 rounded-b-3xl"
                 alt="Content Library Background"
             />
 
             {/* Overlay to darken image slightly and make text more readable */}
-            <div className="absolute inset-0 bg-black opacity-40 z-0 rounded-b-3xl"></div>
+            <div className="absolute inset-0  opacity-40 z-0 rounded-b-3xl"></div>
 
             {/* Content for the header (title and input bar) */}
             <div className="relative z-10 h-full p-4 pb-12 sm:p-6 sm:pb-16 md:p-8 md:pb-20">
@@ -71,7 +71,7 @@ const ContentHeader: React.FC = () => {
                 </div>
 
                 {/* Main input and buttons row */}
-                <div className=" bg-opacity-20 backdrop-filter backdrop-blur-lg p-4 rounded-full flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4">
+                <div className=" bg-opacity-20  p-4 rounded-full flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4">
                     {/* Content Type Dropdown */}
                     <div className="relative flex-shrink-0 w-full sm:w-auto">
                         <select
