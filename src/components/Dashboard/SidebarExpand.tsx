@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaChartBar } from "react-icons/fa";
 import { RiMegaphoneFill } from "react-icons/ri";
 import { MdMessage, MdVideoLibrary } from "react-icons/md";
-import dashboardHeader from '../../assets/dashboard-header.png';
+import dashboardHeader from "../../assets/dashboard-header.png";
 import { LuLayoutGrid } from "react-icons/lu";
 import { BiWallet } from "react-icons/bi";
 
@@ -23,7 +23,11 @@ const SidebarExpand = () => {
       <div className="flex flex-col items-start w-full">
         {/* Logo/Header */}
         <div className="mb-8 p-3 shadow-lg flex items-center gap-3 w-full">
-          <img src={dashboardHeader} alt="Dashboard Logo" className="h-10 w-10" />
+          <img
+            src={dashboardHeader}
+            alt="Dashboard Logo"
+            className="h-10 w-10"
+          />
           <h1 className="text-2xl font-bold text-white">ADELO</h1>
         </div>
 
@@ -34,7 +38,9 @@ const SidebarExpand = () => {
               key={label}
               onClick={() => setActiveItem(label)}
               className={`flex items-center gap-3 cursor-pointer transition-colors duration-200 ${
-                activeItem === label ? "text-white" : "text-gray-400 hover:text-white"
+                activeItem === label
+                  ? "text-white"
+                  : "text-gray-400 hover:text-white"
               }`}
             >
               {icon}
