@@ -39,11 +39,11 @@ function DashboardHome() {
         <ActiveCampaign />
       </div>
       {/* AI Suggestion  */}
-      <div className="grid grid-cols-3 gap-4 my-16">
+      <div className="lg:grid grid-cols-3 gap-4 my-16">
         <div className="col-span-2">
           <AiSuggestion />
         </div>
-        <div className="bg-white p-5 rounded-lg shadow-lg">
+        <div className="border border-gray-200 rounded-lg overflow-hidden p-5 m-5">
           <Sale />
         </div>
       </div>
