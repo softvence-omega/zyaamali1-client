@@ -47,7 +47,7 @@ export const Services = () => {
             </div>
             <div className="max-w-[1400px] mx-auto my-auto">
                 <div className="flex flex-col gap-10 p-10">
-                    {data.map((service, id) => (
+                    {data.map((service) => (
                         <div key={service.id} className="flex justify-between items-center pb-8 border-b-2">
                             <div className="flex-1"><h1 className="text-3xl text-white font-light w-2/4">{service?.title}</h1></div>
                             <div className="flex-1"><h1 className="text-white/30">{service?.description}</h1></div>
