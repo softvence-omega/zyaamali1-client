@@ -2,6 +2,9 @@ import React from "react";
 import HeaderSection from "@/components/Reuseable/headerSection";
 import img from "../../assets/giminy.png"
 import light from "../../assets/light.png";
+import frame from "../../assets/Frame-1.png"
+import frame1 from "../../assets/Frame-2.png"
+import frame2 from "../../assets/Frame-3.png"
 import {
   Select,
   SelectContent,
@@ -270,6 +273,55 @@ const DashboardAnalytics = () => {
       </div>
 
 
+
+      <div className="flex justify-between">
+        <div className="w-1/2">
+          <div>
+            <h1>chart</h1>
+          </div>
+          <div className="bg-[#E6E6E8] rounded-md pb-2">
+            <h1 className="mx-3 pt-3 mb-5">Conversion Funnel</h1>
+            <div className=" flex bg-blue-50 items-center justify-between mx-4 px-4 py-3 rounded-md mb-4">
+              <div className="flex items-center gap-3">
+                <img className="h-8 w-8" src={frame} alt="" />
+                <div>
+                  <h1 className="text-xl">Impressions</h1>
+                  <p className="text-sm">Total views on your ads</p>
+                </div>
+              </div>
+              <h1> $3,456</h1>
+            </div>
+            <div className=" flex bg-green-100 items-center justify-between mx-4 px-4 py-3 rounded-md mb-4">
+              <div className="flex items-center gap-3">
+                <img className="h-8 w-8" src={frame1} alt="" />
+                <div>
+                  <h1 className="text-xl">Clicks</h1>
+                  <p className="text-sm">User who clicked ads</p>
+                </div>
+              </div>
+              <h1> $3,456</h1>
+            </div>
+            <div className=" flex bg-blue-100 items-center justify-between mx-4 px-4 py-3 rounded-md mb-4 ">
+              <div className="flex items-center gap-3">
+                <img className="h-8 w-8" src={frame2} alt="" />
+                <div>
+                  <h1 className="text-xl">Conversions</h1>
+                  <p className="text-sm">Completed desired actions</p>
+                </div>
+              </div>
+              <h1> $3,456</h1>
+            </div>
+
+          </div>
+
+        </div>
+        <div>
+          <h1>card</h1>
+
+        </div>
+      </div>
+
+
       <div className="mt-5 bg-[#F3F4F6] pb-5 rounded-md">
         <div className="flex justify-between my-5 mx-5 pt-4">
           <h1 className="text-xl ">Campaign Performance</h1>
@@ -339,19 +391,19 @@ const DashboardAnalytics = () => {
           <h3>View All </h3>
         </div>
 
-      <div className=" ">
+        <div className=" ">
           {items.map((item, index) => (
-          <div key={index} className="flex  gap-4 rounded-md my-5 p-3 mx-5 bg-[#B39EFF] ">
-            <div>
-              <img src={item.icon} alt={item.title} className="w-6 h-6" />
+            <div key={index} className="flex  gap-4 rounded-md my-5 p-3 mx-5 bg-[#B39EFF] ">
+              <div>
+                <img src={item.icon} alt={item.title} className="w-6 h-6" />
+              </div>
+              <div>
+                <h1 className="font-semibold">{item.title}</h1>
+                <p className="text-gray-600 text-sm w-2/3">{item.description}</p>
+              </div>
             </div>
-            <div>
-              <h1 className="font-semibold">{item.title}</h1>
-              <p className="text-gray-600 text-sm w-2/3">{item.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
 
       </div>
