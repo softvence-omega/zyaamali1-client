@@ -29,6 +29,7 @@ html {
   --color-T-900: #18181b;
 
   --color-gray-text: #6c7078;
+  --color-Foundation-text-T-75: #979aa0;
 }
 
 @layer base {

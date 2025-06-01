@@ -12,8 +12,8 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   borderColor = "border-gray-300",
 }) => {
   return (
-    <div className="bg-white flex flex-col gap-5 p-3 rounded-2xl shadow-2xl">
-      <div className="flex items-center gap-8">
+    <div className="bg-white flex flex-col gap-5 p-10  rounded-2xl shadow-2xl">
+      <div className="flex items-center justify-center gap-4">
         <div className={`p-2 rounded-full text-xl ${iconBgColor} ${iconColor}`}>
           {React.isValidElement(icon)
             ? icon

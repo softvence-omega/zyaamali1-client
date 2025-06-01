@@ -16,7 +16,7 @@ export default function PrimaryButton({
   return (
     <Button
       onClick={onClick}
-      className="h-[52px] rounded-[48px] px-[40px] py-[10px] text-white bg-gradient-to-r from-[#654FAE] via-[#A891FB] to-[#8E6EFF] flex items-center justify-center gap-[10px] hover:opacity-90 transition-all duration-200"
+      className="h-[52px] my-2 lg:my-0 rounded-[48px] lg:px-[40px] py-[10px] text-white bg-gradient-to-r from-[#654FAE] via-[#A891FB] to-[#8E6EFF] flex items-center justify-center gap-[10px] hover:opacity-90 transition-all duration-200"
     >
       {children}
       {icon && <span>{icon}</span>}
