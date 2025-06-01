@@ -115,14 +115,12 @@ const DashboardSubscription: React.FC = () => {
   }> = ({ checked, onChange }) => (
     <button
       onClick={() => onChange(!checked)}
-      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-        checked ? "bg-blue-600" : "bg-gray-300"
-      }`}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${checked ? "bg-blue-600" : "bg-gray-300"
+        }`}
     >
       <span
-        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-          checked ? "translate-x-6" : "translate-x-1"
-        }`}
+        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${checked ? "translate-x-6" : "translate-x-1"
+          }`}
       />
     </button>
   );
@@ -196,9 +194,8 @@ const DashboardSubscription: React.FC = () => {
           {pricingPlans.map((plan, index) => (
             <div
               key={index}
-              className={`flex flex-col justify-between border rounded-lg p-6 relative bg-T-300 h-full ${
-                plan.popular ? "border-purple-500" : "border-gray-200"
-              }`}
+              className={`flex flex-col justify-between border rounded-lg p-6 relative bg-T-300 h-full ${plan.popular ? "border-purple-500" : "border-gray-200"
+                }`}
             >
               {plan.popular && (
                 <div className="absolute -top-[-6px] right-[-50px] transform -translate-x-1/2">

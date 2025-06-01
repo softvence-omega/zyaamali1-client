@@ -1,0 +1,60 @@
+
+import elipse from "../../assets/Ellipse 5.png";
+
+type Service = {
+    id: string;
+    title: string;
+    description: string;
+}
+
+export const Services = () => {
+    // Corrected type: data should be an array of Service objects (Service[])
+    const data: Service[] = [
+        {
+            "id": "1",
+            "title": "AI Marketing Assistant Sterling",
+            "description": "Get expert-level marketing guidance in real time. Sterling, your intelligent chatbot assistant, helps you strategize, build campaigns, and refine your content all through simple conversations."
+        },
+        {
+            "id": "2",
+            "title": "Ad Campaign Automation",
+            "description": "Automate the full lifecycle of your ad campaigns—from generating copy and visuals to targeting the right audience and optimizing for performance. Just input your goal, and we'll do the rest."
+        },
+        {
+            "id": "3",
+            "title": "Content & Copy Generation",
+            "description": "Effortlessly generate high-converting social media posts, emails, and ad copy with AI. Choose from ready-made templates or create content from scratch—fast, relevant, and always on-brand."
+        },
+        {
+            "id": "4",
+            "title": "AI-Powered Feedback Loop",
+            "description": "Upload your marketing content and receive instant actionable insights. Improve clarity, engagement, and messaging based on proven marketing principles and AI analysis."
+        },
+        {
+            "id": "5",
+            "title": "Marketing Template Library",
+            "description": "Access a growing library of customizable marketing templates for every channel—from social media to Google Ads. Save time and stay consistent with proven formats."
+        }
+    ]
+
+    return (
+        <div className="bg-[#010610]  relative">
+            <img src={elipse} alt="" className="absolute" />
+            <div className="flex justify-center items-center pt-20 pb-10">
+                <h1 className="bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] bg-clip-text                          
+          text-transparent                      
+          inline-block text-4xl md:text-6xl text-center">Services</h1>
+            </div>
+            <div className="max-w-[1400px] mx-auto my-auto">
+                <div className="flex flex-col gap-10 p-10">
+                    {data.map((service, id) => (
+                        <div key={service.id} className="flex justify-between items-center pb-8 border-b-2">
+                            <div className="flex-1"><h1 className="text-3xl text-white font-light w-2/4">{service?.title}</h1></div>
+                            <div className="flex-1"><h1 className="text-white/30">{service?.description}</h1></div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+}
