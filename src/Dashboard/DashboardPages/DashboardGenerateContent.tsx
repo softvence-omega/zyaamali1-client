@@ -4,9 +4,9 @@ import GenerateSidebar from "@/components/DashboardHome/GenerateContent/Generate
 
 const DashboardGenerateContent = () => {
   return (
-    <div className="flex ">
+    <div className="flex">
       {/* sidebar expand  */}
-      <div className="hidden lg:block  h-[200px] mt-8 mx-5">
+      <div className="hidden lg:block h-[200px] mt-8 mx-5">
         <Sidebar />
       </div>
       {/* sidebar  */}
