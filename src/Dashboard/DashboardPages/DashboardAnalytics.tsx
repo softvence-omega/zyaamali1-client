@@ -511,7 +511,7 @@ const DashboardAnalytics = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-between md:px-10 pb-2 text-sm text-gray-500">
+                  <div className="flex justify-between px-5 md:px-10 pb-2 text-sm text-gray-500">
                     <div>
                       <p>Impression</p>
                       <p className="text-gray-700">{p.impression}</p>
@@ -542,7 +542,7 @@ const DashboardAnalytics = () => {
         <div className="bg-white mx-5 rounded-md overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow className="text-T-400 text-sm">
+              <TableRow className="text-T-400 text-sm md:text-[16px]">
                 <TableHead>Campaign Name</TableHead>
                 <TableHead>Platform</TableHead>
                 <TableHead className="hidden md:table-cell">Status</TableHead>
@@ -560,13 +560,13 @@ const DashboardAnalytics = () => {
 
             <TableBody>
               {campaignData.map((campaign, index) => (
-                <TableRow key={index} className="text-[14px] md:text-[16px]">
+                <TableRow key={index} className="text-[10px]  md:text-[16px]">
                   <TableCell>{campaign.campaignName}</TableCell>
 
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <img src={campaign.platform} alt="" className="w-5 h-5" />
-                      <span>{campaign.name}</span>
+                      <span className=" mr-3  ">{campaign.name}</span>
                     </div>
                   </TableCell>
 
