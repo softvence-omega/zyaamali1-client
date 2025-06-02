@@ -173,14 +173,14 @@ export default function SignupForm() {
         Your browser does not support the video tag.
       </video>
       {/* Login Box */}
-      <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg rounded-[20px] p-4 sm:p-6 md:p-8 overflow-hidden shadow-[0_30px_30px_rgba(0,0,0,0.1)] border border-T-500/10 backdrop-blur-sm">
+      <div className="relative w-full max-w-sm md:max-w-lg lg:max-w-2xl rounded-[20px] p-4 sm:p-6 md:p-8 overflow-hidden shadow-[0_30px_30px_rgba(0,0,0,0.1)] border border-T-500/10 backdrop-blur-sm">
         {/* Form Background Video */}
 
         {/* White overlay for frosted glass effect */}
         <div className="absolute inset-0 shadow-xl z-10 backdrop-blur-sm" />
 
         {/* Form content */}
-        <div className="relative z-20">
+        <div className="relative z-20 px-16 py-5">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-black">
             <span className="text-black">Sign</span>
             <span className="text-[#8a63f8]">Up</span>
@@ -256,6 +256,21 @@ export default function SignupForm() {
               </div>
             </div>
 
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-[#b084f5] to-[#8a63f8] text-white font-medium py-2 text-sm rounded-full shadow-xl hover:opacity-90 transition mt-2"
+            >
+              Sign Up
+            </button>
+
+            <div className="flex items-center my-4">
+              <hr className="flex-grow border-gray-300" />
+              <span className="mx-2 text-xs sm:text-sm text-gray-800 font-medium">
+                OR
+              </span>
+              <hr className="flex-grow border-gray-300" />
+            </div>
+
             <div className="space-y-3">
               <button className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 text-sm rounded-full">
                 <FcGoogle className="w-5 h-5" />
@@ -277,13 +292,6 @@ export default function SignupForm() {
                 Login
               </Link>
             </p>
-
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-[#b084f5] to-[#8a63f8] text-white font-medium py-2 text-sm rounded-full shadow-xl hover:opacity-90 transition mt-2"
-            >
-              Sign Up
-            </button>
           </form>
         </div>
       </div>

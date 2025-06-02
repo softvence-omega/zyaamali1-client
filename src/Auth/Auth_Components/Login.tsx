@@ -20,14 +20,14 @@ export default function LoginForm() {
         Your browser does not support the video tag.
       </video>
       {/* Login Box */}
-      <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg rounded-xl p-4 sm:p-6 md:p-8 overflow-hidden shadow-[0_30px_30px_rgba(0,0,0,0.1)] border border-T-500/10 backdrop-blur-sm">
+      <div className="relative w-full max-w-sm md:max-w-lg lg:max-w-2xl rounded-xl p-4 sm:p-6 md:p-8 overflow-hidden shadow-[0_30px_30px_rgba(0,0,0,0.1)] border border-T-500/10 backdrop-blur-sm">
         {/* Form Background Video */}
 
         {/* White overlay for frosted glass effect */}
         <div className="absolute inset-0 shadow-xl z-10 backdrop-blur-sm" />
 
         {/* Form content */}
-        <div className="relative z-20">
+        <div className="relative z-20 px-16 py-5">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-black">
             <span>Log </span>
             <span className="text-[#8a63f8]">In</span>
