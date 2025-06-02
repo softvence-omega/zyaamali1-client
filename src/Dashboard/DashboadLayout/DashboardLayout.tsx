@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
   return (
-    <div className="flex px-4 py-8 gap-x-10 min-h-screen">
+    <div className="flex px-4 py-8 gap-x-6 min-h-screen">
       <div className="block lg:hidden h-fit">
         <Sidebar />
       </div>

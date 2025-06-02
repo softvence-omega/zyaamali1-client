@@ -52,7 +52,7 @@ function Services3() {
               01
             </h2>
             <h3 className="font-bold text-T-900 text-3xl sm:text-4xl mb-3">
-             Provide Your Campaign Goals & Audience Details
+            Provide Your Campaign Goals & Audience Details
             </h3>
             <p className="text-T-600 text-base sm:text-lg">
               Start by sharing key details about your business, campaign objectives, and target audience. Whether you want to drive sales, increase brand awareness, or generate leads, Sterling tailors your content to align with your goals.
