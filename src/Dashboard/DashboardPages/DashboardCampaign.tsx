@@ -6,29 +6,20 @@ import { IoMdDownload } from "react-icons/io";
 import { FaRegSquare } from "react-icons/fa";
 import { LuImagePlus } from "react-icons/lu";
 import img from "../../assets/Orange.png";
-const dummyImages = [
-  'https://via.placeholder.com/300x300/1e40af/ffffff?text=Product+1', // Blueish tone
-  'https://via.placeholder.com/300x300/a8a29e/ffffff?text=Product+2', // Grayish tone
-  'https://via.placeholder.com/300x300/8b5cf6/ffffff?text=Product+3', // Purple tone (like the tree)
-  'https://via.placeholder.com/300x300/1e40af/ffffff?text=Product+4',
-  'https://via.placeholder.com/300x300/a8a29e/ffffff?text=Product+5',
-  'https://via.placeholder.com/300x300/8b5cf6/ffffff?text=Product+6',
-  'https://via.placeholder.com/300x300/eab308/ffffff?text=Product+7', // Example for more variety
-  'https://via.placeholder.com/300x300/f97316/ffffff?text=Product+8',
-  'https://via.placeholder.com/300x300/8b5cf6/ffffff?text=Product+9',
-];
+import img1 from "../../assets/media-1.png";
+import img2 from "../../assets/media-2.png";
+import img3 from "../../assets/media-3.png";
+import img4 from "../../assets/media-4.png";
 
 
 
 
 
 const DashboardCampaign = () => {
-   const handleBackClick = () => console.log('Back button clicked!');
-  const handleShareClick = () => console.log('Share button clicked!');
-  const handleProfileClick = () => console.log('Profile icon clicked!');
+  
   return (
     <div>
-   <nav className="flex justify-between items-center  "> 
+   <nav className="flex justify-between items-center mx-5  "> 
      
       <button className="bg-primary p-3 rounded-full">
         <GoArrowLeft className="text-xl text-white" />
@@ -48,7 +39,7 @@ const DashboardCampaign = () => {
 
 
     <div className="flex mt-6">
-      <div className="flex flex-col min-h-screen Primary text-white font-sans">
+      <div className="flex  Primary text-white font-sans">
     
 
       <div className="flex flex-1">
@@ -99,13 +90,51 @@ const DashboardCampaign = () => {
       
       </div>
     </div>
-    <div className=" w-[900px] bg-black md:pr-6 md:p-6">
+    <div className=" w-[1000px] bg-black md:pr-6 md:p-6">
       <img src={img} alt="" />
     </div>
     </div>
+<div className="  bg-black">
+<div className="ml-90 pt-6 ">
+  <h1 className="text-[48px] text-white ">My media</h1>
 
-    
+<div className=" flex gap-4">
+      <img className="mb-2" src={img1} alt="" />
+      <img className="mb-2" src={img2} alt="" />
+      <img className="mb-2" src={img3} alt="" />
+      <img className="mb-2"  src={img4} alt="" />
+      
     </div>
+
+<div className=" flex gap-4">
+      <img className="mb-2" src={img1} alt="" />
+      <img className="mb-2"  src={img2} alt="" />
+      <img className="mb-2" src={img3} alt="" />
+      <img className="mb-2"  src={img4} alt="" />
+      
+    </div>
+
+<div className=" flex gap-4">
+      <img className="mb-2" src={img1} alt="" />
+      <img className="mb-2"  src={img2} alt="" />
+      <img className="mb-2" src={img3} alt="" />
+      <img className="mb-2"  src={img4} alt="" />
+      
+    </div>
+
+<div className=" flex gap-4">
+      <img className="mb-2" src={img1} alt="" />
+      <img className="mb-2"  src={img2} alt="" />
+      <img className="mb-2" src={img3} alt="" />
+      <img className="mb-2"  src={img4} alt="" />
+      
+    </div>
+</div>
+</div>
+
+    </div>
+    
+
   )
 }
 
