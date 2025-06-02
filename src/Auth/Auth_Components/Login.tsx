@@ -10,22 +10,21 @@ export default function LoginForm() {
 
   return (
     <div className="flex items-center justify-center min-h-screen px-2 sm:px-4 bg-white">
+      <video
+        className="absolute w-full max-w-lg blur-[180px] sm:max-w-xl md:max-w-2xl inset-0 mx-auto mt-32 h-4/5 my-auto object-cover z-0"
+        autoPlay
+        loop
+        muted
+      >
+        <source src={video} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       {/* Login Box */}
-      <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg rounded-[20px] p-4 sm:p-6 md:p-8 overflow-hidden bg-gradient-to-br from-[#eef1ff] via-[#e9ddfa] to-[#ffe7f2] shadow-[0_15px_80px_rgba(130,112,255,0.2)] border border-white/30 backdrop-blur-sm">
-
+      <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg rounded-xl p-4 sm:p-6 md:p-8 overflow-hidden shadow-[0_30px_30px_rgba(0,0,0,0.1)] border border-T-500/10 backdrop-blur-sm">
         {/* Form Background Video */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover z-0"
-          autoPlay
-          loop
-          muted
-        >
-          <source src={video} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
 
         {/* White overlay for frosted glass effect */}
-        <div className="absolute inset-0 bg-white/40 z-10 backdrop-blur-sm" />
+        <div className="absolute inset-0 shadow-xl z-10 backdrop-blur-sm" />
 
         {/* Form content */}
         <div className="relative z-20">
@@ -76,7 +75,9 @@ export default function LoginForm() {
 
           <div className="flex items-center my-4">
             <hr className="flex-grow border-gray-300" />
-            <span className="mx-2 text-xs sm:text-sm text-gray-800 font-medium">OR</span>
+            <span className="mx-2 text-xs sm:text-sm text-gray-800 font-medium">
+              OR
+            </span>
             <hr className="flex-grow border-gray-300" />
           </div>
 
@@ -94,7 +95,10 @@ export default function LoginForm() {
 
           <p className="text-center text-xs sm:text-sm text-gray-700 mt-4">
             Don’t have an account?{" "}
-            <Link to="/auth/signup" className="text-[#8a63f8] font-medium hover:underline">
+            <Link
+              to="/auth/signup"
+              className="text-[#8a63f8] font-medium hover:underline"
+            >
               Sign Up
             </Link>
           </p>
