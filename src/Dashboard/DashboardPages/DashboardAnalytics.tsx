@@ -47,7 +47,7 @@ import {
   Linkedin,
 } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
-import HeaderSection from "@/components/Reuseable/HeaderSection";
+
 
 import {
   AreaChart,
@@ -602,13 +602,13 @@ const DashboardAnalytics = () => {
 
         <div className=" ">
           {items.map((item, index) => (
-            <div key={index} className="flex  gap-4 rounded-md my-5 p-3 mx-5 bg-[#B39EFF] ">
+            <div key={index} className="flex  gap-4 rounded-md my-5 p-3 mx-5 bg-blue-300 ">
               <div>
                 <img src={item.icon} alt={item.title} className="w-6 h-6" />
               </div>
               <div>
-                <h1 className="font-semibold">{item.title}</h1>
-                <p className="text-gray-600 text-sm w-2/3">{item.description}</p>
+                <h1 className="text-[20px] text-white">{item.title}</h1>
+                <p className="text-white text-[14px] text-sm w-2/3">{item.description}</p>
               </div>
             </div>
           ))}
