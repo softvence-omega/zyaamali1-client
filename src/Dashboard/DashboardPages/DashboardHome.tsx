@@ -11,6 +11,9 @@ import { useNavigate } from "react-router-dom";
 
 function DashboardHome() {
   const navigate = useNavigate();
+  const handleclick = () =>{
+    navigate("/dashboard/campaign/create")
+  }
   return (
     <div>
       {/* heading  */}
@@ -24,7 +27,7 @@ function DashboardHome() {
           </p>
         </div>
         <div className="lg:flex gap-4 items-end">
-          <PrimaryButton icon={<FaPlus />}>Create New Campaign</PrimaryButton>
+          <PrimaryButton onClick={handleclick} icon={<FaPlus />}>Create New Campaign</PrimaryButton>
           <OutlineButton
             icon={<FaWandMagicSparkles />}
             onClick={() => {
