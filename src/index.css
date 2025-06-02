@@ -83,9 +83,14 @@ html {
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+
+    border-color: var(--sidebar-border);
+    outline-color: hsl(
+      217.2 91.2% 59.8% / 0.5
+    ); /* if you want outline-ring/50 */
   }
   body {
-    @apply bg-background text-foreground;
+    /* @apply bg-background text-foreground; */
+ 
   }
 }
