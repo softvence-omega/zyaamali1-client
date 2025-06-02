@@ -38,12 +38,7 @@ import {
   ArrowUpRight,
   ArrowUp,
   ArrowDown,
-  Facebook,
-  Instagram,
-  Youtube,
-  Linkedin,
 } from "lucide-react";
-import { FcGoogle } from "react-icons/fc";
 
 import {
   AreaChart,
@@ -176,13 +171,6 @@ const statItems: StatItem[] = [
   },
 ];
 
-const platformIcons = {
-  Facebook: Facebook,
-  Instagram: Instagram,
-  YouTube: Youtube,
-  LinkedIn: Linkedin,
-  Google: FcGoogle,
-};
 interface Campaign {
   campaignName: string;
   platform: string;
