@@ -38,6 +38,7 @@ import {
 import CampaignSubHeader from "@/components/Dashboard/campaign/CampaignSubHeader";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import OutlineButton from "@/components/ui/OutlineButton";
+import { useNavigate } from "react-router-dom";
 
 const objectives = [
   {
@@ -89,7 +90,7 @@ const adTypes = [
 
 const DashboardCampaignCreate = () => {
   const [selected, setSelected] = useState("mobile");
-
+ const navigate = useNavigate()
   const [interests, setInterests] = useState([
     "Fitness",
     "Running",
@@ -114,7 +115,10 @@ const DashboardCampaignCreate = () => {
   const [totalBudget, setTotalBudget] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const handlegenerate =() =>{
 
+    navigate("/dashboard/campaign/preview")
+  } 
   const handleSubmit = () => {
     const data = {
       businessInfo,
@@ -532,7 +536,8 @@ const DashboardCampaignCreate = () => {
               <img src="/src/assets/mobilepreview.jpg" />
             </div>
             <div className="flex justify-end mt-5">
-              <button className="px-3 py-2 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-md cursor-pointer">
+              <button onClick={handlegenerate} className="px-3 py-2 text-white
+               rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-md cursor-pointer">
                 Get AI Optimize Suggestions
                 <FaWandMagicSparkles className="text-white ml-2" />
               </button>

@@ -2,12 +2,15 @@ import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { RiAppleLine } from "react-icons/ri";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import video from "../../assets/6676845_Gradient_Banner_1920x1080.mp4";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate()
+ const handleClick = () => {
+    navigate("/dashboard");
+  };
   return (
     <div className="flex items-center justify-center min-h-screen px-2 sm:px-4 bg-white">
       {/* Login Box */}
@@ -67,6 +70,7 @@ export default function LoginForm() {
             </div>
 
             <button
+            onClick={handleClick}
               type="submit"
               className="w-full bg-gradient-to-r from-[#b084f5] to-[#8a63f8] text-white font-medium py-2 sm:py-2.5 rounded-full text-sm shadow-md hover:opacity-90 transition mt-2"
             >

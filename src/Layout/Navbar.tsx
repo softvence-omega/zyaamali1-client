@@ -101,18 +101,7 @@ const Navbar: React.FC = () => {
           Contact
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/tutorial"
-          className={({ isActive }) =>
-            `font-medium transition-colors duration-300 ease-in-out px-3 py-2 rounded-md
-            ${isActive ? "text-[#8E6EFF] bg-[#F4F1FF]" : "text-[#4F4D73]"}
-            ${isActive ? "" : "hover:text-gray-600"}`
-          }
-        >
-          Tutorial
-        </NavLink>
-      </li>
+     
     </>
   );
 
@@ -160,11 +149,7 @@ const Navbar: React.FC = () => {
           Contact
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/tutorial" className="font-medium px-3 py-2 rounded-md text-[#4F4D73] hover:text-[#8E6EFF]">
-          Tutorial
-        </NavLink>
-      </li>
+      
     </>
   );
 
