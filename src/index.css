@@ -1,4 +1,6 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
 @plugin "daisyui";
 
 html {
@@ -81,6 +83,7 @@ html {
 
 @layer base {
   * {
+
     border-color: var(--sidebar-border);
     outline-color: hsl(
       217.2 91.2% 59.8% / 0.5
@@ -88,5 +91,6 @@ html {
   }
   body {
     /* @apply bg-background text-foreground; */
+ 
   }
 }

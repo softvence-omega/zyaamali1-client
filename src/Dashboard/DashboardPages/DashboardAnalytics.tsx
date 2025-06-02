@@ -1,10 +1,21 @@
 import React from "react";
-import HeaderSection from "@/components/Reuseable/headerSection";
 import img from "../../assets/giminy.png"
 import light from "../../assets/light.png";
 import frame from "../../assets/Frame-1.png"
 import frame1 from "../../assets/Frame-2.png"
 import frame2 from "../../assets/Frame-3.png"
+import face from "../../assets/face.png"
+import instra from "../../assets/instra.png"
+import google from "../../assets/google.png"
+import tiktok from "../../assets/tiktok.png"
+import facebook from "../../assets/f1.png"
+import instragram from "../../assets/in1.png"
+import google1 from "../../assets/g1.png"
+import linkdine from "../../assets/li1.png"
+
+
+
+
 import {
   Select,
   SelectContent,
@@ -36,6 +47,95 @@ import {
   Linkedin,
 } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
+
+
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+
+} from 'recharts';
+
+const data = [
+  { date: 'April 1', spend: 400, click: 1600 },
+  { date: 'April 5', spend: 480, click: 1700 },
+  { date: 'April 10', spend: 500, click: 1800 },
+  { date: 'April 15', spend: 550, click: 1900 },
+  { date: 'April 20', spend: 600, click: 2100 },
+  { date: 'April 25', spend: 680, click: 2300 },
+  { date: 'April 30', spend: 700, click: 2600 },
+];
+
+
+type Platform = {
+  name: string;
+  campaigns: string;
+  impression: string;
+  clicks: string;
+  spend: string;
+  roas: string;
+  roasColor: string;
+  icon: string;
+};
+
+const platforms: Platform[] = [
+  {
+    name: "Facebook",
+    campaigns: "3 Active Campaigns",
+    impression: "452k",
+    clicks: "452k",
+    spend: "$3,456",
+    roas: "4.2x",
+    roasColor: "text-green-500",
+    icon: facebook,
+  },
+  {
+    name: "Instagram",
+    campaigns: "5 Active Campaigns",
+    impression: "500k",
+    clicks: "300k",
+    spend: "$2,789",
+    roas: "3.8x",
+    roasColor: "text-green-500",
+    icon: instragram
+  },
+  {
+    name: "Google",
+    campaigns: "2 Active Campaigns",
+    impression: "200k",
+    clicks: "150k",
+    spend: "$1,200",
+    roas: "2.5x",
+    roasColor: "text-green-500",
+    icon: google1,
+  },
+  {
+    name: "LinkedIn",
+    campaigns: "4 Active Campaigns",
+    impression: "300k",
+    clicks: "180k",
+    spend: "$4,000",
+    roas: "5.0x",
+    roasColor: "text-green-500",
+    icon: linkdine,
+  },
+  {
+    name: "Instagram",
+    campaigns: "5 Active Campaigns",
+    impression: "500k",
+    clicks: "300k",
+    spend: "$2,789",
+    roas: "3.8x",
+    roasColor: "text-green-500",
+    icon: instragram,
+  },
+ 
+];
+
 
 
 // Type for stat items
@@ -94,19 +194,21 @@ const platformIcons = {
 };
 interface Campaign {
   campaignName: string;
-  platform: "Facebook" | "Instagram" | "YouTube" | "LinkedIn" | "Google";
+  platform: string;
   status: string;
   budget: number;
   impressions: number;
   clicks: number;
   conversions: number;
   roas: number;
+  name:string;
 }
 
 const campaignData: Campaign[] = [
   {
     campaignName: "Summer Blast",
-    platform: "Facebook",
+    name:"Facebook",
+    platform: face,
     status: "Active",
     budget: 1000,
     impressions: 25000,
@@ -116,7 +218,8 @@ const campaignData: Campaign[] = [
   },
   {
     campaignName: "Winter Sale",
-    platform: "Google",
+    name:"Google Ads",
+    platform: google,
     status: "Inactive",
     budget: 2000,
     impressions: 40000,
@@ -126,7 +229,8 @@ const campaignData: Campaign[] = [
   },
   {
     campaignName: "Spring Launch",
-    platform: "Instagram",
+    name:"Instragram",
+    platform: instra,
     status: "Active",
     budget: 1500,
     impressions: 30000,
@@ -136,7 +240,8 @@ const campaignData: Campaign[] = [
   },
   {
     campaignName: "Black Friday",
-    platform: "YouTube",
+    name:"Tiktok",
+    platform: tiktok,
     status: "Active",
     budget: 5000,
     impressions: 100000,
@@ -146,7 +251,8 @@ const campaignData: Campaign[] = [
   },
   {
     campaignName: "New Year Boost",
-    platform: "LinkedIn",
+    name:"Facebook",
+    platform: face,
     status: "Active",
     budget: 1200,
     impressions: 18000,
@@ -185,28 +291,32 @@ const items = [
 const DashboardAnalytics = () => {
   return (
     <div className=" ">
-      <HeaderSection
-        title="Report & Analytics"
-        subtitle="Monitor & Analyse your marketing performance"
-      />
 
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mt-8">
+       <h2 className=" text-4xl font-bold">Report & <span className="bg-gradient-to-r from-[#000000] via-[#4F3FBF] to-[#8E6EFF] bg-clip-text text-transparent   text-4xl font-bold ">Analytics</span></h2>
+     
+        <p className="text-T-400 mt-3 ">Monitor & Analyse your marketing performence </p>
+   
+      
+  
+
+
+      <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mt-6">
         {statItems.map(({ title, icon, amount, percentage }, index) => {
           const numericValue = parseFloat(percentage.replace(/[+ - %]/g, ""));
           const isTrulyPositive = percentage.startsWith("+") && numericValue >= 1;
 
           const TrendIcon = isTrulyPositive ? ArrowUp : ArrowDown;
-          const colorClass = isTrulyPositive ? "text-green-600" : "text-red-600";
+          const colorClass = isTrulyPositive ? "text-green-400" : "text-red-400";
 
           return (
-            <div key={index} className="bg-[#F3F4F6] rounded-md p-5">
+            <div key={index} className="bg-T-200 rounded-xl p-5">
               <div className="flex justify-between items-center mb-2">
                 <h4 className="capitalize  text-T-400">{title}</h4>
                 <div className="text-blue-400">{icon}</div>
               </div>
-              <h1 className="text-xl  mb-2">{amount}</h1>
+              <h1 className="text-2xl bg-[linear-gradient(to_right,_#000000_10%,_#4F3FBF_20%,_#8E6EFF_80%)] bg-clip-text text-transparent mb-2">{amount}</h1>
               <div className={`flex items-center gap-1 text-sm font-semibold ${colorClass}`}>
-                <TrendIcon size={16} />
+                <TrendIcon size={14} />
                 <span>{percentage}</span>
               </div>
             </div>
@@ -214,10 +324,10 @@ const DashboardAnalytics = () => {
         })}
       </div>
 
-      <div className="flex flex-wrap gap-5 mt-5">
-        <div className="flex-1 min-w-[200px] ">
-          <h1>Business</h1>
-          <Select>
+      <div className="  flex flex-wrap gap-5 mt-5">
+        <div className="flex-1 min-w-[200px] text-T-400 ">
+          <h1 className="text-T-500">Business</h1>
+          <Select >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Business" />
             </SelectTrigger>
@@ -229,8 +339,8 @@ const DashboardAnalytics = () => {
           </Select>
         </div>
 
-        <div className="flex-1 min-w-[200px]">
-          <h1>Platform</h1>
+        <div className="flex-1 min-w-[200px] text-T-400">
+          <h1 className="text-T-500">Platform</h1>
           <Select>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="All Platforms" />
@@ -243,8 +353,8 @@ const DashboardAnalytics = () => {
           </Select>
         </div>
 
-        <div className="flex-1 min-w-[200px]">
-          <h1>Champign</h1>
+        <div className="flex-1 min-w-[200px] text-T-400">
+          <h1 className="text-T-500">Champign</h1>
           <Select>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="All Champign" />
@@ -257,8 +367,8 @@ const DashboardAnalytics = () => {
           </Select>
         </div>
 
-        <div className="flex-1 min-w-[200px]">
-          <h1>Date Range</h1>
+        <div className="flex-1 min-w-[200px] text-T-400">
+          <h1 className="text-T-500">Date Range</h1>
           <Select>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Last 30 days" />
@@ -274,12 +384,62 @@ const DashboardAnalytics = () => {
 
 
 
-      <div className="flex justify-between">
+      <div className="flex justify-between mt-10 gap-5">
         <div className="w-1/2">
           <div>
-            <h1>chart</h1>
+            <div className="w-full mb-5  bg-T-200 rounded-xl shadow-sm  ">
+              <div className="flex justify-between items-center mb-2 p-4">
+                <h2 className="text-xl text-black">Spend & Clicks</h2>
+                <div className="flex items-center space-x-3 text-xs">
+                  <div className="flex items-center space-x-1">
+                    <span className="w-2 h-2 rounded-full bg-red-300" />
+                    <span className="text-T-400 text-sm">Spend</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <span className="w-2 h-2 rounded-full bg-purple-300" />
+                    <span className="text-T-400 text-sm">Click</span>
+                  </div>
+                </div>
+              </div>
+
+              <ResponsiveContainer className="" width="100%" height={250}>
+                <AreaChart data={data}>
+                  <defs>
+                    <linearGradient id="colorSpend" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#fca5a5" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#fca5a5" stopOpacity={0} />
+                    </linearGradient>
+                    <linearGradient id="colorClick" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#c4b5fd" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#c4b5fd" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="date" fontSize={12} />
+                  <YAxis yAxisId="left" domain={[400, 750]} fontSize={12} />
+                  <YAxis yAxisId="right" orientation="right" domain={[1600, 2700]} fontSize={12} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                  <Tooltip />
+                  <Area
+                    yAxisId="left"
+                    type="monotone"
+                    dataKey="spend"
+                    stroke="#f87171"
+                    fill="url(#colorSpend)"
+                    name="Spend"
+                  />
+                  <Area
+                    yAxisId="right"
+                    type="monotone"
+                    dataKey="click"
+                    stroke="#a78bfa"
+                    fill="url(#colorClick)"
+                    name="Click"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
           </div>
-          <div className="bg-[#E6E6E8] rounded-md pb-2">
+          <div className="bg-T-200 rounded-md pb-2">
             <h1 className="mx-3 pt-3 mb-5">Conversion Funnel</h1>
             <div className=" flex bg-blue-50 items-center justify-between mx-4 px-4 py-3 rounded-md mb-4">
               <div className="flex items-center gap-3">
@@ -315,24 +475,73 @@ const DashboardAnalytics = () => {
           </div>
 
         </div>
-        <div>
-          <h1>card</h1>
 
+
+        <div className="w-full md:w-1/2 bg-T-300 rounded-md">
+  <div className="rounded-xl shadow-sm mx-auto">
+    {/* Header */}
+    <div className="flex justify-between items-center p-3">
+      <h2 className="text-lg font-semibold">Platform Breakdown</h2>
+      <a href="#" className="text-sm text-violet-600 font-medium">View All</a>
+    </div>
+
+
+    <div className="px-2 rounded-xl space-y-4">
+      {platforms.map((p, idx) => (
+        <div key={idx} className="bg-white rounded-lg shadow-sm">
+      
+          <div className="flex justify-between items-center p-2">
+       
+            <div className="flex items-center space-x-3">
+              <div className="h-5 w-5"><img src={p.icon} alt="" /></div>
+              <div>
+                <h3 className="font-semibold text-gray-800">{p.name}</h3>
+                <p className="text-sm text-gray-500">{p.campaigns}</p>
+              </div>
+            </div>
+
+        
+            <div className="text-right">
+              <p className="text-sm text-gray-500">Spend</p>
+              <p className="">{p.spend}</p>
+            </div>
+          </div>
+
+      
+          <div className="flex justify-between md:px-10 pb-2 text-sm text-gray-500">
+            <div>
+              <p>Impression</p>
+              <p className="text-gray-700">{p.impression}</p>
+            </div>
+            <div>
+              <p>Clicks</p>
+              <p className="text-gray-700">{p.clicks}</p>
+            </div>
+            <div>
+              <p>ROAS</p>
+              <p className={`font-semibold ${p.roasColor}`}>{p.roas}</p>
+            </div>
+          </div>
         </div>
+      ))}
+    </div>
+  </div>
+</div>
+
       </div>
 
-
-      <div className="mt-5 bg-[#F3F4F6] pb-5 rounded-md">
+   {/* table */}
+      <div className="mt-5 bg-T-200 pb-5 rounded-md">
         <div className="flex justify-between my-5 mx-5 pt-4">
           <h1 className="text-xl ">Campaign Performance</h1>
-          <h3>View All </h3>
+          <h3 className="text-primary text-sm">View All </h3>
         </div>
 
         <div className="bg-white mx-5 rounded-md ">
           <Table>
 
             <TableHeader>
-              <TableRow>
+              <TableRow className="text-T-400 text-sm">
                 <TableHead>Campaign Name</TableHead>
                 <TableHead>Platform</TableHead>
                 <TableHead>Status</TableHead>
@@ -345,14 +554,14 @@ const DashboardAnalytics = () => {
             </TableHeader>
             <TableBody className="">
               {campaignData.map((campaign, index) => {
-                const Icon = platformIcons[campaign.platform];
+              
                 return (
-                  <TableRow key={index} className="">
-                    <TableCell>{campaign.campaignName}</TableCell>
+                  <TableRow key={index} className="text-[18px] ">
+                    <TableCell >{campaign.campaignName}</TableCell>
                     <TableCell>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        {Icon && <Icon size={16} />}
-                        {campaign.platform}
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                       <div><img src={campaign.platform} alt="" /></div>
+                          <h1>{campaign.name}</h1>
                       </span>
                     </TableCell>
 
@@ -373,7 +582,7 @@ const DashboardAnalytics = () => {
                     <TableCell>{campaign.impressions}</TableCell>
                     <TableCell>{campaign.clicks}</TableCell>
                     <TableCell>{campaign.conversions}</TableCell>
-                    <TableCell>{campaign.roas}</TableCell>
+                    <TableCell className="text-green-300">{campaign.roas}</TableCell>
                   </TableRow>
                 );
               })}
@@ -381,25 +590,25 @@ const DashboardAnalytics = () => {
           </Table>
         </div>
       </div>
-      <div className="mt-5 pb-3 bg-[#F3F4F6] rounded-md">
+      <div className="mt-5 pb-3 bg-T-200 rounded-md">
         <div className="flex items-center justify-between my-5 mx-5 pt-2">
           <div className="flex gap-2 items-center">
             <img src={img} alt="giminy" />
             <h1 className="text-xl ">Ai Insights</h1>
 
           </div>
-          <h3>View All </h3>
+          <h3 className="text-primary text-sm">View All </h3>
         </div>
 
         <div className=" ">
           {items.map((item, index) => (
-            <div key={index} className="flex  gap-4 rounded-md my-5 p-3 mx-5 bg-[#B39EFF] ">
+            <div key={index} className="flex  gap-4 rounded-md my-5 p-3 mx-5 bg-blue-300 ">
               <div>
                 <img src={item.icon} alt={item.title} className="w-6 h-6" />
               </div>
               <div>
-                <h1 className="font-semibold">{item.title}</h1>
-                <p className="text-gray-600 text-sm w-2/3">{item.description}</p>
+                <h1 className="text-[20px] text-white">{item.title}</h1>
+                <p className="text-white text-[14px] text-sm w-2/3">{item.description}</p>
               </div>
             </div>
           ))}

@@ -1,12 +1,16 @@
+
 import FunnelIcon from "@/assets/CustomIcon/FunnelIcon";
 import CampaignPerformanceTable from "@/components/Dashboard/CampaignPerformance/CampaignPerformanceTable";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import { FaPlus } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 
+
 const DashboardCampaign = () => {
+  
   return (
     <div>
+
       <h1 className="text-4xl mb-5 font-medium">
         <span className="bg-gradient-to-r from-black to-[#8e6eff] bg-clip-text text-transparent">
           Campaign Performance
@@ -34,5 +38,6 @@ const DashboardCampaign = () => {
     </div>
   );
 };
+
 
 export default DashboardCampaign;
