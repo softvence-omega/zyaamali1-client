@@ -291,6 +291,7 @@ const items = [
 const DashboardAnalytics = () => {
   return (
     <div className=" ">
+      {/* title */}
 
       <h2 className=" text-4xl font-bold">Report & <span className="bg-gradient-to-r from-[#000000] via-[#4F3FBF] to-[#8E6EFF] bg-clip-text text-transparent   text-4xl font-bold ">Analytics</span></h2>
 
@@ -299,7 +300,7 @@ const DashboardAnalytics = () => {
 
 
 
-
+      {/* card */}
       <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mt-6">
         {statItems.map(({ title, icon, amount, percentage }, index) => {
           const numericValue = parseFloat(percentage.replace(/[+ - %]/g, ""));
@@ -323,6 +324,8 @@ const DashboardAnalytics = () => {
           );
         })}
       </div>
+
+      {/* Filtering */}
 
       <div className="  flex flex-col md:flex-row gap-5 mt-5">
         <div className="flex-1 min-w-[200px] text-T-400 ">
@@ -386,6 +389,8 @@ const DashboardAnalytics = () => {
 
       <div className="flex flex-col md:flex-row justify-between mt-10 gap-5">
         <div className="w-1/2">
+
+        {/* rechart */}
           <div>
             <div className="w-full mb-5  bg-T-200 rounded-xl shadow-sm  ">
               <div className="flex justify-between items-center mb-2 p-4">
@@ -439,8 +444,10 @@ const DashboardAnalytics = () => {
               </ResponsiveContainer>
             </div>
           </div>
+
+          {/* Conversion Funnel */}
           <div className="bg-T-200 rounded-md pb-2">
-            <h1 className="mx-3 pt-3 mb-5">Conversion Funnel</h1>
+            <h1 className="mx-3 pt-3 mb-5 text-xl text-black">Conversion Funnel</h1>
             <div className=" flex bg-blue-50 items-center justify-between mx-4 px-4 py-3 rounded-md mb-4">
               <div className="flex items-center gap-3">
                 <img className="h-8 w-8" src={frame} alt="" />
@@ -476,12 +483,12 @@ const DashboardAnalytics = () => {
 
         </div>
 
-
+        {/* Platform Breakdown */}
         <div className="w-full md:w-1/2 bg-T-300 rounded-md">
           <div className="rounded-xl shadow-sm mx-auto">
             {/* Header */}
             <div className="flex justify-between items-center p-3">
-              <h2 className="text-lg font-semibold">Platform Breakdown</h2>
+              <h2 className="text-xl text-black ">Platform Breakdown</h2>
               <a href="#" className="text-sm text-violet-600 font-medium">View All</a>
             </div>
 
@@ -530,10 +537,10 @@ const DashboardAnalytics = () => {
 
       </div>
 
-      {/* table */}
+      {/* table  Campaign Performance */}
       <div className="mt-5 bg-T-200 pb-5 rounded-md">
         <div className="flex justify-between my-5 mx-5 pt-4">
-          <h1 className="text-xl ">Campaign Performance</h1>
+          <h1 className="text-xl text-black ">Campaign Performance</h1>
           <h3 className="text-primary text-sm">View All </h3>
         </div>
 
@@ -590,6 +597,9 @@ const DashboardAnalytics = () => {
           </Table>
         </div>
       </div>
+
+      {/* Ai Insights */}
+      
       <div className="mt-5 pb-3 bg-T-200 rounded-md">
         <div className="flex items-center justify-between my-5 mx-5 pt-2">
           <div className="flex gap-2 items-center">
