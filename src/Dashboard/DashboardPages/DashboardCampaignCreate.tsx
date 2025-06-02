@@ -36,10 +36,60 @@ import {
 } from "@/components/ui/select";
 
 import CampaignSubHeader from "@/components/Dashboard/campaign/CampaignSubHeader";
+import PrimaryButton from "@/components/ui/PrimaryButton";
+import OutlineButton from "@/components/ui/OutlineButton";
+
+const objectives = [
+  {
+    icon: ImBullhorn,
+    label: "Brand Awareness",
+    value: "brand-awareness",
+    color: "bg-purple-100 text-purple-600",
+  },
+  {
+    icon: IoMagnetSharp,
+    label: "Lead Generation",
+    value: " lead-generation",
+    color: "bg-gray-100 text-gray-600",
+  },
+  {
+    icon: BsFillBarChartLineFill,
+    label: "Sales",
+    value: "sales",
+    color: "bg-gray-100 text-gray-600",
+  },
+  {
+    icon: FaPeopleGroup,
+    label: "Engagement",
+    value: "engagement",
+    color: "bg-gray-100 text-gray-600",
+  },
+];
+
+const platforms = [
+  { icon: FaFacebookF, color: "text-blue-600", value: "facebook" },
+  { icon: FaGoogle, color: "text-red-500", value: "google" },
+  { icon: FaLinkedinIn, color: "text-blue-700", value: "linkedin" },
+  { icon: FaTwitter, color: "text-black", value: "twitter" },
+  { icon: FaTiktok, color: "text-black", value: "tiktok" },
+  { icon: FaYoutube, color: "text-red-600", value: "youtube" },
+];
+
+const adTypes = [
+  { icon: FaImage, label: "Image Ads", value: "image-ads" },
+  { icon: FaMousePointer, label: "Interactive Ads", value: "interactive-ads" },
+  { icon: FaImages, label: "Carousel Ads", value: "carousel-ads" },
+  { icon: FaPlay, label: "Slideshow Ads", value: "slideshow-ads" },
+  { icon: FaFont, label: "Text Ads", value: "text-ads" },
+  { icon: FaCog, label: "Dynamic Ads", value: "dynamic-ads" },
+  { icon: FaVideo, label: "Video Ads", value: "video-ads" },
+  { icon: FaInstagram, label: "Story Ads", value: "story-ads" },
+  { icon: FaShoppingCart, label: "Shopping Ads", value: "shopping-ads" },
+];
 
 const DashboardCampaignCreate = () => {
   const [selected, setSelected] = useState("mobile");
-  const [selectedGender, setSelectedGender] = useState("All");
+
   const [interests, setInterests] = useState([
     "Fitness",
     "Running",
@@ -50,56 +100,47 @@ const DashboardCampaignCreate = () => {
     setInterests(interests.filter((i) => i !== interest));
   };
 
-  const objectives = [
-    {
-      icon: ImBullhorn,
-      label: "Brand Awareness",
-      color: "bg-purple-100 text-purple-600",
-    },
-    {
-      icon: IoMagnetSharp,
-      label: "Lead Generation",
-      color: "bg-gray-100 text-gray-600",
-    },
-    {
-      icon: BsFillBarChartLineFill,
-      label: "Sales",
-      color: "bg-gray-100 text-gray-600",
-    },
-    {
-      icon: FaPeopleGroup,
-      label: "Engagement",
-      color: "bg-gray-100 text-gray-600",
-    },
-  ];
+  // state for getting all the value
+  const [businessInfo, setBusinessInfo] = useState("");
+  const [title, setTitle] = useState("");
+  const [selectedObjective, setSelectedObjective] = useState("brand-awareness");
+  const [selectedPlatform, setSelectedPlatform] = useState("facebook");
+  const [selectedAdType, setSelectedAdType] = useState("");
+  const [location, setLocation] = useState("");
+  const [ageFrom, setAgeFrom] = useState("");
+  const [ageTo, setAgeTo] = useState("");
+  const [selectedGender, setSelectedGender] = useState("All");
+  const [dailyBudget, setDailyBudget] = useState("");
+  const [totalBudget, setTotalBudget] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
-  const platforms = [
-    { icon: FaFacebookF, color: "text-blue-600" },
-    { icon: FaGoogle, color: "text-red-500" },
-    { icon: FaLinkedinIn, color: "text-blue-700" },
-    { icon: FaTwitter, color: "text-black" },
-    { icon: FaTiktok, color: "text-black" },
-    { icon: FaYoutube, color: "text-red-600" },
-  ];
+  const handleSubmit = () => {
+    const data = {
+      businessInfo,
+      title,
+      selectedObjective,
+      selectedPlatform,
+      selectedAdType,
+      location,
+      ageFrom,
+      ageTo,
+      selectedGender,
+      dailyBudget,
+      totalBudget,
+      startDate,
+      endDate,
+    };
+    console.log("Form Data:", data);
+  };
 
-  const adTypes = [
-    { icon: FaImage, label: "Image Ads" },
-    { icon: FaMousePointer, label: "Interactive Ads" },
-    { icon: FaImages, label: "Carousel Ads" },
-    { icon: FaPlay, label: "Slideshow Ads" },
-    { icon: FaFont, label: "Text Ads" },
-    { icon: FaCog, label: "Dynamic Ads" },
-    { icon: FaVideo, label: "Video Ads" },
-    { icon: FaInstagram, label: "Story Ads" },
-    { icon: FaShoppingCart, label: "Shopping Ads" },
-  ];
   return (
     <div>
       <p className="text-lg ">
         <span>Ad Campaign/</span>
         <span className="ml-1 text-blue-500">Create New Ad</span>
       </p>
-      <div className="flex gap-9 mt-5">
+      <div className="flex flex-col md:flex-row gap-9 mt-5">
         {/* **********left side section****************************************************************************** */}
         <div className="flex-1 bg-[#F3F4F6] rounded-[20px] p-4 space-y-5">
           <h5 className="text-3xl font-semibold">Create New Ad Campaign</h5>
@@ -108,14 +149,21 @@ const DashboardCampaignCreate = () => {
           <div>
             <CampaignSubHeader text="Business Information" />
             <div>
-              <Select>
+              <Select
+                onValueChange={(value) => setBusinessInfo(value)}
+                value={businessInfo}
+              >
                 <SelectTrigger className="w-full py-2">
                   <SelectValue placeholder="Acme Sportswear" />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
-                  <SelectItem value="light">Acme Sportswear</SelectItem>
-                  <SelectItem value="dark">Target Audience</SelectItem>
-                  <SelectItem value="system">Primary Goals</SelectItem>
+                  <SelectItem value="Acme Sportswear">
+                    Acme Sportswear
+                  </SelectItem>
+                  <SelectItem value="Target Audience">
+                    Target Audience
+                  </SelectItem>
+                  <SelectItem value="Primary Goals">Primary Goals</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -124,7 +172,11 @@ const DashboardCampaignCreate = () => {
           <div>
             <CampaignSubHeader text="Add Title" />
             <div>
-              <Input type="text" />
+              <Input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </div>
           </div>
 
@@ -137,7 +189,12 @@ const DashboardCampaignCreate = () => {
               {objectives.map((objective, index) => (
                 <div
                   key={index}
-                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${objective.color}`}
+                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${
+                    selectedObjective === objective.value
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8] border-gray-200"
+                  } hover:bg-[#F4F1FF]`}
+                  onClick={() => setSelectedObjective(objective.value)}
                 >
                   <objective.icon className="text-xl" />
                   <span className="text-sm font-medium text-center">
@@ -157,9 +214,14 @@ const DashboardCampaignCreate = () => {
               {platforms.map((platform, index) => (
                 <div
                   key={index}
-                  className="bg-[#E6E6E8] px-7 py-5 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]"
+                  className={`${
+                    selectedPlatform === platform.value
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8]"
+                  } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
+                  onClick={() => setSelectedPlatform(platform.value)}
                 >
-                  <platform.icon className={`text-3xl ${platform.color}`} />
+                  <platform.icon className={`text-2xl ${platform.color}`} />
                 </div>
               ))}
             </div>
@@ -173,7 +235,12 @@ const DashboardCampaignCreate = () => {
               {adTypes.map((adType, index) => (
                 <div
                   key={index}
-                  className="flex items-center p-3 gap-2 rounded-lg border bg-[#E6E6E8] border-gray-200 cursor-pointer hover:bg-gray-50"
+                  className={`flex items-center p-3 gap-2 rounded-lg border  border-gray-200 cursor-pointer hover:bg-gray-50 ${
+                    selectedAdType === adType.value
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8]"
+                  }`}
+                  onClick={() => setSelectedAdType(adType.value)}
                 >
                   <adType.icon className="text-lg text-gray-600" />
                   <span className="text-xs text-center text-gray-700">
@@ -191,7 +258,10 @@ const DashboardCampaignCreate = () => {
             <div>
               <p className="text-sm">Location</p>
 
-              <Select defaultValue="united-states">
+              <Select
+                onValueChange={(value) => setLocation(value)}
+                value={location}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue />
                 </SelectTrigger>
@@ -206,7 +276,10 @@ const DashboardCampaignCreate = () => {
             <div>
               <p className="text-sm">Age range</p>
               <div className="flex items-center gap-2">
-                <Select defaultValue="18">
+                <Select
+                  onValueChange={(value) => setAgeFrom(value)}
+                  value={ageFrom}
+                >
                   <SelectTrigger className="w-full">
                     <SelectValue />
                   </SelectTrigger>
@@ -217,7 +290,10 @@ const DashboardCampaignCreate = () => {
                   </SelectContent>
                 </Select>
                 <p>To</p>
-                <Select defaultValue="18">
+                <Select
+                  onValueChange={(value) => setAgeTo(value)}
+                  value={ageTo}
+                >
                   <SelectTrigger className="w-full">
                     <SelectValue />
                   </SelectTrigger>
@@ -286,7 +362,10 @@ const DashboardCampaignCreate = () => {
             <div>
               <p className="text-sm">Daily Budget</p>
 
-              <Select defaultValue="50">
+              <Select
+                onValueChange={(value) => setDailyBudget(value)}
+                value={dailyBudget}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue />
                 </SelectTrigger>
@@ -301,7 +380,10 @@ const DashboardCampaignCreate = () => {
             <div>
               <p className="text-sm">Total Budget</p>
 
-              <Select defaultValue="500">
+              <Select
+                onValueChange={(value) => setTotalBudget(value)}
+                value={totalBudget}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue />
                 </SelectTrigger>
@@ -316,11 +398,19 @@ const DashboardCampaignCreate = () => {
             <div className="flex gap-4">
               <div className="flex-1">
                 <p className="text-sm">Start Date</p>
-                <Input type="date" />
+                <Input
+                  type="date"
+                  onChange={(e) => setStartDate(e.target.value)}
+                  value={startDate}
+                />
               </div>
               <div className="flex-1">
                 <p className="text-sm">End Date</p>
-                <Input type="date" />
+                <Input
+                  type="date"
+                  onChange={(e) => setEndDate(e.target.value)}
+                  value={endDate}
+                />
               </div>
             </div>
           </div>
@@ -328,12 +418,10 @@ const DashboardCampaignCreate = () => {
         {/* **********right side section****************************************************************************** */}
         <div className="flex-1">
           <div className="flex justify-end items-center gap-5">
-            <button className="px-4 py-2 rounded-3xl border cursor-pointer text-T-100 font-bold">
-              Save Draft
-            </button>
-            <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-T-100 font-bold">
+            <OutlineButton>Save Draft</OutlineButton>
+            <PrimaryButton onClick={handleSubmit}>
               Launch Campaign
-            </button>
+            </PrimaryButton>
           </div>
           <div className="border border-gray-300 my-3" />
           {/* prompt section */}
