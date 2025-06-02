@@ -1,8 +1,8 @@
 const JoinTeam = () => {
     return (
         <div className="w-full px-4 md:px-8 lg:px-16 mb-20">
-            <div className="max-w-md mx-auto lg:ml-0 lg:mr-auto">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center lg:text-left">
+            <div className="max-w-lg mx-auto lg:ml-0 lg:mr-auto">
+                <h1 className="text-5xl md:text-4xl font-bold mb-4 text-center lg:text-left">
                     Join the Team
                 </h1>
                 <p className="mb-6 text-gray-700 text-sm md:text-base text-center lg:text-left">
