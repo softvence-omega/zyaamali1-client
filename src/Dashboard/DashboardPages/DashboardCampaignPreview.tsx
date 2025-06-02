@@ -14,6 +14,31 @@ import img2 from "../../assets/media-2.png";
 import img3 from "../../assets/media-3.png";
 import img4 from "../../assets/media-4.png";
 
+type ImageRow = {
+  id: number;
+  images: string[];
+};
+
+const imageGrid: ImageRow[] = [
+  {
+    id: 1,
+    images: [img1, img2, img3, img4],
+  },
+  {
+    id: 2,
+    images: [img1, img2, img3, img4],
+  },
+  {
+    id: 3,
+    images: [img1, img2, img3, img4],
+  },
+  {
+    id: 4,
+    images: [img1, img2, img3, img4],
+  },
+];
+
+
 
 
 
@@ -40,7 +65,7 @@ const DashboardCampaignPreview = () => {
       </nav>
 
 
-      <div className="flex mt-6">
+      <div className="flex flex-col md:flex-row mt-6">
         <div className="flex  Primary text-white font-sans">
 
 
@@ -92,45 +117,26 @@ const DashboardCampaignPreview = () => {
 
           </div>
         </div>
-        <div className=" w-[1000px] bg-black md:pr-6 md:p-6">
+        <div className=" md:w-[1000px] w-80 bg-black md:pr-6 md:p-6">
           <img src={img} alt="" />
         </div>
       </div>
+     
       <div className="  bg-black">
-        <div className="ml-90 pt-6 ">
+         <hr className="mx-8 md:ml-98 bg-[#6C7078]" />
+        <div className="md:ml-90 pt-6 pb-3">
           <h1 className="text-[48px] text-white ">My media</h1>
 
-          <div className=" flex gap-4">
-            <img className="mb-2" src={img1} alt="" />
-            <img className="mb-2" src={img2} alt="" />
-            <img className="mb-2" src={img3} alt="" />
-            <img className="mb-2" src={img4} alt="" />
+      <div className="space-y-4 ">
+  {imageGrid.map((row: ImageRow) => (
+    <div key={row.id} className="flex flex-col md:flex-row gap-4">
+      {row.images.map((imgSrc: string, index: number) => (
+        <img key={index} className="mb-2" src={imgSrc} alt={`Image ${row.id}-${index}`} />
+      ))}
+    </div>
+  ))}
+</div>
 
-          </div>
-
-          <div className=" flex gap-4">
-            <img className="mb-2" src={img1} alt="" />
-            <img className="mb-2" src={img2} alt="" />
-            <img className="mb-2" src={img3} alt="" />
-            <img className="mb-2" src={img4} alt="" />
-
-          </div>
-
-          <div className=" flex gap-4">
-            <img className="mb-2" src={img1} alt="" />
-            <img className="mb-2" src={img2} alt="" />
-            <img className="mb-2" src={img3} alt="" />
-            <img className="mb-2" src={img4} alt="" />
-
-          </div>
-
-          <div className=" flex gap-4">
-            <img className="mb-2" src={img1} alt="" />
-            <img className="mb-2" src={img2} alt="" />
-            <img className="mb-2" src={img3} alt="" />
-            <img className="mb-2" src={img4} alt="" />
-
-          </div>
         </div>
       </div>
 

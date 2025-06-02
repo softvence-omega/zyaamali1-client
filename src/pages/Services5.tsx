@@ -24,12 +24,12 @@ const Services5 = () => {
      
       <HeroSection
           backgroundImage={serviceBack}
-          titleTop="AI-Powered  "
-          titleBottom="Feedback Loop"
-          description="Before publishing your marketing materials, make sure they’re optimized for success. Our AI-Powered Feedback Loop analyzes your content and strategies in real-time, benchmarking them against best practices and industry standards. It identifies potential issues, highlights opportunities, and provides concrete recommendations to boost your campaign’s effectiveness."
+          titleTop="Marketing Template"
+          titleBottom="Library"
+          description="Our expansive Marketing Template Library provides professionally designed, customizable templates for every type of campaign. Whether you need social media graphics, email newsletters, or ad copy templates, you’ll find ready-made layouts and messaging frameworks tailored to your industry and marketing goals."
         />
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="w-1/2 mb-10">
+          <div className="md:w-2/3 mb-10">
         <h1 className="text-2xl font-semibold">Marketing Template Library</h1>
         <p>Our expansive Marketing Template Library provides professionally designed, customizable templates for every type of campaign. Whether you need social media graphics, email newsletters, or ad copy templates, you’ll find ready-made layouts and messaging frameworks tailored to your industry and marketing goals.</p>
        </div>
