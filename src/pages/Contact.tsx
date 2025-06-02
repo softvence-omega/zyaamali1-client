@@ -45,6 +45,27 @@ const faqs = [
 const Contact = () => {
   const [openFAQ, setOpenFAQ] = useState(0); // Only one open at a time
 
+  // Add state for form inputs
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form Data:", formData);
+    // Optionally clear form or keep values as is
+  };
+
   return (
     <section>
       <div>
@@ -84,25 +105,37 @@ const Contact = () => {
             className="absolute bottom-0 left-0 w-32 sm:w-48 md:w-64 z-10"
           />
           <div className="absolute top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center text-center px-4 sm:px-8">
-            <form className="w-full max-w-xl space-y-4">
+            <form className="w-full max-w-xl space-y-4" onSubmit={handleSubmit}>
               <input
                 type="text"
+                name="name"
                 placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
                 className="w-full px-4 py-4 rounded-xl bg-T-500 text-T-100 placeholder-T-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
                 type="email"
+                name="email"
                 placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
                 className="w-full px-4 py-4 rounded-xl bg-T-500 text-T-100 placeholder-T-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
                 type="text"
+                name="subject"
                 placeholder="Subject"
+                value={formData.subject}
+                onChange={handleChange}
                 className="w-full px-4 py-4 rounded-xl bg-T-500 text-T-100 placeholder-T-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
                 type="text"
+                name="message"
                 placeholder="Message"
+                value={formData.message}
+                onChange={handleChange}
                 className="w-full px-4 py-4 rounded-xl bg-T-500 text-T-100 placeholder-T-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button
