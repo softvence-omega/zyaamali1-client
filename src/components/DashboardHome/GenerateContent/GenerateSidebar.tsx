@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const GenerateSidebar = () => {
   return (
-    <div className="lg:w-[316px] h-screen bg-Foundation-text-T-50 rounded-l-2xl">
+    <div className="lg:w-[360px] h-screen bg-Foundation-text-T-50 rounded-l-2xl">
       <div className="flex items-center justify-center gap-5 my-5">
         <div>
           <GeminiIcon />
