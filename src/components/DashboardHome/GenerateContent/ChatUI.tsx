@@ -9,7 +9,9 @@ const MessageBubble = ({ role, message }: MessageBubbleProps) => {
 
   return (
     <div
-      className={`flex ${isUser ? "justify-end" : "justify-start"} mb-4 pt-5`}
+      className={`flex ${
+        isUser ? "justify-end" : "justify-start"
+      } mb-4 pt-5 m-4`}
     >
       <div
         className={`max-w-xs md:max-w-md rounded-lg px-4 py-3 text-sm shadow-md ${
@@ -40,7 +42,8 @@ const ChatUI = () => {
   ];
 
   return (
-    <div className="flex flex-col h-screen bg-gray-900 text-white p-4">
+    <div className="flex flex-col h-screen bg-gray-900 text-white">
+      <div className="w-full h-[72px] bg-blue-900" />
       {/* Chat messages container */}
       <div className="flex-1 overflow-y-auto space-y-2">
         {messages.map((msg, idx) => (
@@ -49,7 +52,7 @@ const ChatUI = () => {
       </div>
 
       {/* Prompt input box - updated to match screenshot */}
-      <div className="relative mt-4 mb-24 bg-white rounded-xl p-4">
+      <div className="relative mt-12 mb-8 bg-white rounded-xl p-4 m-5">
         <div className="flex items-center gap-2">
           <input
             type="text"
