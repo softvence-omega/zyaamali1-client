@@ -1,5 +1,6 @@
 import AnnouncementIcon from "@/assets/CustomIcon/AnnouncementIcon";
 import { campaignData } from "@/lib/Dashboard/CampaignData";
+import { FaArrowRight } from "react-icons/fa6";
 
 // Reusable table cell component
 const TableCell = ({ value, label }: { value: string; label: string }) => (
@@ -35,6 +36,13 @@ const ActiveCampaign = () => {
             ))}
           </tbody>
         </table>
+        <div className="flex items-center gap-2 md:gap-3 flex-wrap">
+          <button className="text-[#8E6EFF] text-sm md:text-base font-medium hover:underline">
+            View All Campaigns
+          </button>
+          <FaArrowRight className="text-[#8E6EFF] text-base" />
+        </div>
+
       </div>
     </div>
   );
