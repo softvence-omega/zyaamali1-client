@@ -15,7 +15,10 @@ import img10 from "../../assets/20.png";
 import img11 from "../../assets/21.png";
 import img12 from "../../assets/22.png";
 import img13 from "../../assets/23.png";
+import { useNavigate } from 'react-router-dom';
 const ContentHeader: React.FC = () => {
+    const navigate = useNavigate()
+
     const inspirationImages = [
         { id: 1, src: img1, alt: "Inspiration Image 1" },
         { id: 2, src: img2, alt: "Inspiration Image 2" },
@@ -48,7 +51,11 @@ const ContentHeader: React.FC = () => {
         console.log('Prompt:', prompt);
         console.log('Aspect Ratio:', aspectRatio);
         // Implement actual generation logic here (e.g., API call)
+        navigate("/contentpreview")
     };
+    const handleGeneratew =()=>{
+         navigate("/contentpreview")
+    }
 
     return (
         <div className="relative mb-8 w-full">
@@ -126,7 +133,8 @@ const ContentHeader: React.FC = () => {
                         {/* Masonry Grid */}
                         <div className="columns-1 sm:columns-2 md:columns-4 gap-4 space-y-4 mt-12">
                             {inspirationImages.map((img) => (
-                                <div
+                                <div 
+                                onClick={handleGeneratew}
                                     key={img.id}
                                     className="cursor-pointer break-inside-avoid overflow-hidden rounded-2xl shadow-md  transition-transform duration-300"
                                 >
