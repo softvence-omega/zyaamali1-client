@@ -9,12 +9,14 @@ export const Pricing = () => {
         features: string[];
         buttonText: string;
         buttonStyle: string;
+        shortDesc:string;
     }
     const pricingPlans: PricingPlan[] = [
         {
             name: "Basic",
             price: "$19",
             period: "/month",
+            shortDesc:'For Small Teams Getting Started',
             features: [
                 "Up to 3 members",
                 "10 Marketing Campaigns per month",
@@ -29,6 +31,7 @@ export const Pricing = () => {
             name: "Pro",
             price: "$59",
             period: "/month",
+            shortDesc:'For Growing Teams and Business',
             popular: true,
             features: [
                 "Up to 10 members",
@@ -43,6 +46,7 @@ export const Pricing = () => {
             name: "Elite",
             price: "$99",
             period: "/month",
+            shortDesc:'For Large Teams and Enterprises',
             features: [
                 "Unlimited team members",
                 "Unlimited marketing campaigns",
@@ -83,6 +87,7 @@ export const Pricing = () => {
                                         {plan.price}
                                     </span>
                                     <span className="text-gray-600">{plan.period}</span>
+                                    <p className="text-[#6C7078] text-sm mt-3">{plan.shortDesc}</p>
                                 </div>
                                 <hr className="mt-6 text-T-400" />
 

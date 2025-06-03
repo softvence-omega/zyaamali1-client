@@ -50,7 +50,7 @@ export const Inspiration = () => {
                     ))}
                 </div>
                 <div className="flex justify-center items-center py-6">
-                    <div className="flex justify-center items-center gap-5 rounded-3xl border border-solid border-[#654FAE]  px-6 py-3 text-[#8e6eff]font-semibold text-lg transition-colors duration-300 cursor-pointer hover:bg-[#b1a7d4]">
+                    <div className="flex justify-center items-center gap-5 rounded-3xl border border-solid border-[#654FAE]  px-8 py-2 text-[#8e6eff]font-semibold text-lg transition-colors duration-300 cursor-pointer hover:bg-[#b1a7d4]">
                         <h1>More</h1>
                         <svg className="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <g clip-path="url(#clip0_823_965)">

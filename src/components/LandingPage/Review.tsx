@@ -116,9 +116,9 @@ export const Review = () => {
             <div className="max-w-7xl mx-auto "> {/* Ensure content is above the overlay */}
                 <div className="flex justify-center items-center flex-col gap-6 text-center px-4">
                     <h1 className="bg-gradient-to-l from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] bg-clip-text text-transparent md:text-7xl text-4xl font-bold">
-                        Love From Our Users
+                       <span className="text-gray-700"> Love From</span> Our Users
                     </h1>
-                    <p className="max-w-2xl text-black/50">
+                    <p className="max-w-2xl text-black/50 mb-10">
                         Lorem ipsum dolor sit amet consectetur. Nulla ornare erat mauris vulputate id ullamcorper mauris ante molestie. Vestibulum amet nibh eget eu.
                     </p>
                 </div>
@@ -128,7 +128,7 @@ export const Review = () => {
                         <div
                             key={review.id}
                             className={`
-                                bg-white rounded-2xl p-6 shadow-md flex flex-col
+                                bg-white rounded-2xl p-6 shadow-md border-1 flex flex-col
                                
                             `}
                         >
