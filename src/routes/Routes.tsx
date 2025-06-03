@@ -16,7 +16,6 @@ import Login from "@/Auth/Auth_Components/Login";
 import Signup from "@/Auth/Auth_Components/Signup";
 import DashboardLayout from "@/Dashboard/DashboadLayout/DashboardLayout";
 import DashboardHome from "@/Dashboard/DashboardPages/DashboardHome";
-import DashboardChat from "@/Dashboard/DashboardPages/DashboardChat";
 import DashboardCampaign from "@/Dashboard/DashboardPages/DashboardCampaign";
 import DashboardCampaignCreate from "@/Dashboard/DashboardPages/DashboardCampaignCreate";
 import DashboardCampaignPreview from "@/Dashboard/DashboardPages/DashboardCampaignPreview";
@@ -97,10 +96,6 @@ const routes = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashboardHome />,
-      },
-      {
-        path: "/dashboard/chat",
-        element: <DashboardChat />,
       },
       {
         path: "/dashboard/campaign",
