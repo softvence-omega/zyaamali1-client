@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaChartBar } from "react-icons/fa";
 import { RiMegaphoneFill } from "react-icons/ri";
 import { MdMessage, MdVideoLibrary } from "react-icons/md";
@@ -56,14 +56,16 @@ const SidebarExpand = () => {
     <div className="bg-[#020817] rounded-[40px] p-6 flex flex-col items-center justify-between w-full lg:w-60 h-full lg:min-h-[600px] shadow-lg">
       <div className="flex flex-col items-start w-full">
         {/* Logo/Header */}
-        <div className="mb-8 p-3 shadow-lg flex items-center gap-3 w-full">
-          <img
-            src={dashboardHeader}
-            alt="Dashboard Logo"
-            className="h-10 w-10"
-          />
-          <h1 className="text-2xl font-bold text-white">ADELO</h1>
-        </div>
+        <Link to="/">
+          <div className="mb-8 p-3 shadow-lg flex items-center gap-3 w-full">
+            <img
+              src={dashboardHeader}
+              alt="Dashboard Logo"
+              className="h-10 w-10"
+            />
+            <h1 className="text-2xl font-bold text-white">ADELO</h1>
+          </div>
+        </Link>
 
         {/* Navigation Items */}
         <div className="flex flex-col gap-6 w-full text-white">
