@@ -41,7 +41,7 @@ const MissionVision = () => {
       </div>
 
       {/* Mission & Vision Text at Bottom */}
-      <h1 className="hidden lg:flex items-center justify-center gap-4 text-[90px] font-bold absolute bottom-10 left-1/2 -translate-x-1/2 leading-none text-center z-10">
+      <h1 className="hidden lg:flex items-center justify-center gap-4 text-[90px] font-bold absolute bottom-10 left-[47.5%] -translate-x-1/2 leading-none text-center z-10">
         Mission
         <img src={andImg} alt="&" className="w-[50px] h-auto inline-block align-middle" />
         <span className="text-white">Vision</span>

@@ -48,7 +48,7 @@ const MyCarousel = () => {
             >
                 {images.map((img, index) => (
                     <div key={index} className="px-2">
-                        <div className="bg-white px-3 py-3 rounded-xl shadow-md h-full flex items-center justify-center">
+                        <div className="bg-white px-3 border-1 py-3 rounded-xl shadow-md h-full flex items-center justify-center">
                             <img
                                 src={img}
                                 alt={`Slide ${index + 1}`}
