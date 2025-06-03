@@ -51,28 +51,38 @@ const Accordion = () => {
       {faqs.map((faq, index) => (
         <div
           key={index}
-          className="border-b last:border-b-0 py-6 md:py-8 border-[#D9DBE9]"
+          className="border-b last:border-b-0 py-6 md:py-8 border-[#D9DBE9] transition-all duration-200 ease-in-out"
         >
           <button
             onClick={() => toggle(index)}
-            className="w-full flex justify-between items-start text-left"
+            className="w-full flex justify-between items-start text-left focus:outline-none group"
           >
             <span
-              className={`text-lg sm:text-xl md:text-2xl font-medium ${
-                openIndex === index ? "text-[#3A4C67]" : "text-[#212121]"
+              className={`text-lg sm:text-xl md:text-2xl font-medium transition-colors duration-200 ${
+                openIndex === index
+                  ? "text-[#3A4C67]"
+                  : "text-[#212121] hover:text-[#3A4C67]"
               }`}
             >
               {faq.question}
             </span>
-            <span className="text-purple-500 text-xl">
+            <span className="text-purple-500 text-xl transition-transform duration-200 transform group-hover:scale-110">
               {openIndex === index ? <FiMinus /> : <FiPlus />}
             </span>
           </button>
-          {openIndex === index && faq.answer && (
-            <p className="mt-2 text-sm text-[#878788] leading-relaxed">
-              {faq.answer}
-            </p>
-          )}
+          <div
+            className={`grid transition-all duration-300 ease-in-out ${
+              openIndex === index
+                ? "grid-rows-[1fr] opacity-100"
+                : "grid-rows-[0fr] opacity-0"
+            }`}
+          >
+            <div className="overflow-hidden">
+              <p className="mt-2 text-sm text-[#878788] leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
+          </div>
         </div>
       ))}
     </div>

@@ -7,8 +7,8 @@ import video from "../../assets/6676845_Gradient_Banner_1920x1080.mp4";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate()
- const handleClick = () => {
+  const navigate = useNavigate();
+  const handleClick = () => {
     navigate("/dashboard");
   };
   return (
@@ -69,7 +69,7 @@ export default function LoginForm() {
             </div>
 
             <button
-            onClick={handleClick}
+              onClick={handleClick}
               type="submit"
               className="w-full bg-gradient-to-r from-[#b084f5] to-[#8a63f8] text-white font-medium py-2 sm:py-2.5 rounded-full text-sm shadow-md hover:opacity-90 transition mt-2"
             >

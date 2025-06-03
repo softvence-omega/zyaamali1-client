@@ -44,16 +44,16 @@ const SidebarExpand = () => {
     },
   ];
 
-const handleNavClick = (label: string, path: string) => {
-  setActiveItem(label);
-  navigate(path);
-};
-const handleprof =()=>{
-  navigate("/dashboard/userprofile")
-}
+  const handleNavClick = (label: string, path: string) => {
+    setActiveItem(label);
+    navigate(path);
+  };
+  const handleprof = () => {
+    navigate("/dashboard/userprofile");
+  };
 
   return (
-    <div className="bg-black rounded-[40px] p-6 flex flex-col items-center justify-between w-full lg:w-60 h-full lg:min-h-[600px] shadow-lg">
+    <div className="bg-[#020817] rounded-[40px] p-6 flex flex-col items-center justify-between w-full lg:w-60 h-full lg:min-h-[600px] shadow-lg">
       <div className="flex flex-col items-start w-full">
         {/* Logo/Header */}
         <div className="mb-8 p-3 shadow-lg flex items-center gap-3 w-full">
@@ -85,7 +85,10 @@ const handleprof =()=>{
       </div>
 
       {/* User Avatar */}
-      <div onClick={handleprof} className="flex items-center gap-3 cursor-pointer hover:text-white text-gray-400 transition-colors duration-200 mt-8 w-full">
+      <div
+        onClick={handleprof}
+        className="flex items-center gap-3 cursor-pointer hover:text-white text-gray-400 transition-colors duration-200 mt-8 w-full"
+      >
         <img
           src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"
           alt="User Avatar"

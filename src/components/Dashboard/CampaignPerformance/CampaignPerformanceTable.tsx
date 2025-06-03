@@ -9,7 +9,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-// Import logos (you'll need to add these to your project)
 import FacebookLogo from "@/assets/SocialIcon/facebook.svg";
 import GoogleAdsLogo from "@/assets/SocialIcon/google.svg";
 import InstagramLogo from "@/assets/SocialIcon/instagram.svg";
@@ -17,7 +16,6 @@ import LinkedinLogo from "@/assets/SocialIcon/linkedin.svg";
 import TikTokLogo from "@/assets/SocialIcon/tiktok.svg";
 
 const CampaignPerformanceTable = () => {
-  // Platform logo mapping
   const platformLogos: Record<string, string> = {
     Facebook: FacebookLogo,
     "Google Ads": GoogleAdsLogo,
@@ -134,69 +132,124 @@ const CampaignPerformanceTable = () => {
         </div>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[180px]">Campaign Name</TableHead>
-            <TableHead>Platform</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Budget</TableHead>
-            <TableHead>Impressions</TableHead>
-            <TableHead>Clicks</TableHead>
-            <TableHead>Conversions</TableHead>
-            <TableHead>ROAS</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {campaigns.map((campaign) => (
-            <TableRow key={campaign.id}>
-              <TableCell className="font-medium">
-                {campaign.campaignName}
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <img
-                    src={platformLogos[campaign.platform]}
-                    alt={campaign.platform}
-                    className="w-5 h-5 object-contain"
-                  />
-                  <span>{campaign.platform}</span>
-                </div>
-              </TableCell>
-              <TableCell>
-                <span
-                  className={`px-2 py-1 rounded-full text-xs ${
-                    campaign.status === "Active"
-                      ? "bg-green-100 text-green-800"
-                      : campaign.status === "Inactive"
-                      ? "bg-red-100 text-red-800"
-                      : campaign.status === "Draft"
-                      ? "bg-yellow-100 text-yellow-800"
-                      : "bg-blue-100 text-blue-800"
-                  }`}
-                >
-                  {campaign.status}
-                </span>
-              </TableCell>
-              <TableCell>{campaign.budget}</TableCell>
-              <TableCell>{campaign.impressions}</TableCell>
-              <TableCell>{campaign.clicks}</TableCell>
-              <TableCell>{campaign.conversions}</TableCell>
-              <TableCell>{campaign.roas}</TableCell>
-              <TableCell className="flex space-x-2">
-                <button className="text-blue-500 underline">Details</button>
+      {/* Desktop Table (lg and above) */}
+      <div className="hidden lg:block w-full overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[180px]">Campaign Name</TableHead>
+              <TableHead>Platform</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Budget</TableHead>
+              <TableHead>Impressions</TableHead>
+              <TableHead>Clicks</TableHead>
+              <TableHead>Conversions</TableHead>
+              <TableHead>ROAS</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {campaigns.map((campaign) => (
+              <TableRow key={campaign.id}>
+                <TableCell className="font-medium">
+                  {campaign.campaignName}
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={platformLogos[campaign.platform]}
+                      alt={campaign.platform}
+                      className="w-5 h-5 object-contain"
+                    />
+                    <span>{campaign.platform}</span>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs ${
+                      campaign.status === "Active"
+                        ? "bg-green-100 text-green-800"
+                        : campaign.status === "Inactive"
+                        ? "bg-red-100 text-red-800"
+                        : campaign.status === "Draft"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : "bg-blue-100 text-blue-800"
+                    }`}
+                  >
+                    {campaign.status}
+                  </span>
+                </TableCell>
+                <TableCell>{campaign.budget}</TableCell>
+                <TableCell>{campaign.impressions}</TableCell>
+                <TableCell>{campaign.clicks}</TableCell>
+                <TableCell>{campaign.conversions}</TableCell>
+                <TableCell>{campaign.roas}</TableCell>
+                <TableCell className="flex space-x-2">
+                  <button className="text-blue-500 underline">Details</button>
+                  <button
+                    className="text-red-500 underline"
+                    onClick={() => handleDeleteCampaign(campaign.id)}
+                  >
+                    Delete
+                  </button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Mobile/Tablet View (lg below) */}
+      <div className="lg:hidden space-y-4">
+        {campaigns.map((campaign) => (
+          <div key={campaign.id} className="border rounded-lg p-4">
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="font-medium">{campaign.campaignName}</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  Budget: {campaign.budget}
+                </p>
+              </div>
+              <div className="flex space-x-2">
+                <button className="text-blue-500 text-sm underline">
+                  Details
+                </button>
                 <button
-                  className="text-red-500 underline"
+                  className="text-red-500 text-sm underline"
                   onClick={() => handleDeleteCampaign(campaign.id)}
                 >
                   Delete
                 </button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+              </div>
+            </div>
+
+            {/* Additional info that can be shown on medium devices */}
+            <div className="md:flex md:justify-between md:items-center mt-3 space-y-2 md:space-y-0">
+              <div className="flex items-center gap-2">
+                <img
+                  src={platformLogos[campaign.platform]}
+                  alt={campaign.platform}
+                  className="w-4 h-4 object-contain"
+                />
+                <span className="text-sm">{campaign.platform}</span>
+              </div>
+              <span
+                className={`px-2 py-1 rounded-full text-xs ${
+                  campaign.status === "Active"
+                    ? "bg-green-100 text-green-800"
+                    : campaign.status === "Inactive"
+                    ? "bg-red-100 text-red-800"
+                    : campaign.status === "Draft"
+                    ? "bg-yellow-100 text-yellow-800"
+                    : "bg-blue-100 text-blue-800"
+                }`}
+              >
+                {campaign.status}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

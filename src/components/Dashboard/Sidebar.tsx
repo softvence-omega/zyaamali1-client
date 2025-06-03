@@ -7,13 +7,13 @@ import { BiWallet } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
-  const navigate = useNavigate()
-  const handleprof =()=>{
-  navigate("/dashboard/userprofile")
-}
+  const navigate = useNavigate();
+  const handleprof = () => {
+    navigate("/dashboard/userprofile");
+  };
 
   return (
-    <div className="bg-gray-800 rounded-[40px] p-4 flex flex-col items-center justify-between w-full lg:w-24 h-full lg:min-h-[600px] shadow-lg">
+    <div className="bg-[#020817] rounded-[40px] p-4 flex flex-col items-center justify-between w-full lg:w-24 h-full lg:min-h-[600px] shadow-lg">
       <div className="flex flex-col items-center w-full">
         <div className="mb-8 p-3 shadow-lg">
           <img src={dashboardHeader} alt="" />
@@ -42,7 +42,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div  onClick={handleprof} className="mt-auto pt-8">
+      <div onClick={handleprof} className="mt-auto pt-8">
         <img
           src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"
           alt="User Avatar"

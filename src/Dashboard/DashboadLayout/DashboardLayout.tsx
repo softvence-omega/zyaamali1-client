@@ -8,7 +8,7 @@ const DashboardLayout = () => {
       <div className="block lg:hidden h-fit">
         <Sidebar />
       </div>
-      <div className="hidden lg:block h-fit">
+      <div className="hidden lg:block h-fit sticky top-8">
         <SidebarExpand />
       </div>
       <div className="flex-1">
