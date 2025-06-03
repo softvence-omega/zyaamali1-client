@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaChartBar } from "react-icons/fa";
 import { RiMegaphoneFill } from "react-icons/ri";
 import { MdMessage, MdVideoLibrary } from "react-icons/md";
@@ -8,15 +9,48 @@ import { BiWallet } from "react-icons/bi";
 
 const SidebarExpand = () => {
   const [activeItem, setActiveItem] = useState("Dashboard");
+  const navigate = useNavigate();
 
   const navItems = [
-    { icon: <LuLayoutGrid className="h-6 w-6" />, label: "Dashboard" },
-    { icon: <RiMegaphoneFill className="h-6 w-6" />, label: "Ad Campaign" },
-    { icon: <MdVideoLibrary className="h-6 w-6" />, label: "Content Library" },
-    { icon: <FaChartBar className="h-6 w-6" />, label: "Analytics & Reports" },
-    { icon: <BiWallet className="h-6 w-6" />, label: "Billing & Subscription" },
-    { icon: <MdMessage className="h-6 w-6" />, label: "Help & Support" },
+    {
+      icon: <LuLayoutGrid className="h-6 w-6" />,
+      label: "Dashboard",
+      path: "/dashboard",
+    },
+    {
+      icon: <RiMegaphoneFill className="h-6 w-6" />,
+      label: "Ad Campaign",
+      path: "/dashboard/campaign",
+    },
+    {
+      icon: <MdVideoLibrary className="h-6 w-6" />,
+      label: "Content Library",
+      path: "/dashboard/content",
+    },
+    {
+      icon: <FaChartBar className="h-6 w-6" />,
+      label: "Analytics & Reports",
+      path: "/dashboard/analytics",
+    },
+    {
+      icon: <BiWallet className="h-6 w-6" />,
+      label: "Billing & Subscription",
+      path: "/dashboard/subscription", // You might need to create this route if not present
+    },
+    {
+      icon: <MdMessage className="h-6 w-6" />,
+      label: "Help & Support",
+      path: "/dashboard/help", // You might need to create this route if not present
+    },
   ];
+
+const handleNavClick = (label: string, path: string) => {
+  setActiveItem(label);
+  navigate(path);
+};
+const handleprof =()=>{
+  navigate("/dashboard/userprofile")
+}
 
   return (
     <div className="bg-black rounded-[40px] p-6 flex flex-col items-center justify-between w-full lg:w-60 h-full lg:min-h-[600px] shadow-lg">
@@ -33,10 +67,10 @@ const SidebarExpand = () => {
 
         {/* Navigation Items */}
         <div className="flex flex-col gap-6 w-full text-white">
-          {navItems.map(({ icon, label }) => (
+          {navItems.map(({ icon, label, path }) => (
             <div
               key={label}
-              onClick={() => setActiveItem(label)}
+              onClick={() => handleNavClick(label, path)}
               className={`flex items-center gap-3 cursor-pointer transition-colors duration-200 ${
                 activeItem === label
                   ? "text-white"
@@ -51,7 +85,7 @@ const SidebarExpand = () => {
       </div>
 
       {/* User Avatar */}
-      <div className="flex items-center gap-3 cursor-pointer hover:text-white text-gray-400 transition-colors duration-200 mt-8 w-full">
+      <div onClick={handleprof} className="flex items-center gap-3 cursor-pointer hover:text-white text-gray-400 transition-colors duration-200 mt-8 w-full">
         <img
           src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"
           alt="User Avatar"
