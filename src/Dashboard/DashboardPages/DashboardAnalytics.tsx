@@ -285,7 +285,7 @@ const DashboardAnalytics = () => {
       </p>
 
       {/* card */}
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mt-6">
         {statItems.map(({ title, icon, amount, percentage }, index) => {
           const numericValue = parseFloat(percentage.replace(/[+ - %]/g, ""));
           const isTrulyPositive =
@@ -318,7 +318,7 @@ const DashboardAnalytics = () => {
 
       {/* Filtering */}
 
-      <div className="  flex flex-col md:flex-row gap-5 mt-5">
+      <div className="  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
         <div className="flex-1 min-w-[200px] text-T-400 ">
           <h1 className="text-T-500">Business</h1>
           <Select>
@@ -511,8 +511,8 @@ const DashboardAnalytics = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-between px-5 md:px-10 pb-2 text-sm text-gray-500">
-                    <div>
+                  <div className="flex justify-between pl-5 md:pl-10 pb-2 text-sm text-gray-500">
+                    <div className="pl-5 md:pl-0">
                       <p>Impression</p>
                       <p className="text-gray-700">{p.impression}</p>
                     </div>
@@ -520,7 +520,7 @@ const DashboardAnalytics = () => {
                       <p>Clicks</p>
                       <p className="text-gray-700">{p.clicks}</p>
                     </div>
-                    <div>
+                    <div className="flex flex-col items-center pr-2">
                       <p>ROAS</p>
                       <p className={`font-semibold ${p.roasColor}`}>{p.roas}</p>
                     </div>
@@ -621,7 +621,7 @@ const DashboardAnalytics = () => {
               className="flex  gap-4 rounded-md my-5 p-3 mx-5 bg-blue-300 "
             >
               <div>
-                <img src={item.icon} alt={item.title} className=" w-6 h-6" />
+                <img src={item.icon} alt={item.title} className=" max-w-6 max-h-6" />
               </div>
               <div>
                 <h1 className="text-[20px] text-white">{item.title}</h1>
