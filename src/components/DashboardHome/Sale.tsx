@@ -27,13 +27,13 @@ const SaleItem = ({ image, title, ctr, conversion }: SaleItemProps) => {
         </h1>
         <div className="flex flex-col sm:flex-row gap-2 md:gap-3 items-center mt-2 w-full justify-center lg:justify-start">
           <div className="flex gap-2 items-center">
-            <ThunderIcon className="w-4 h-4 md:w-5 md:h-5" />
+            <ThunderIcon />
             <span className="text-xs md:text-sm">
               CTR: <span className="text-blue-500 font-medium">{ctr}</span>
             </span>
           </div>
           <div className="flex gap-2 items-center">
-            <ConversionIcon className="w-4 h-4 md:w-5 md:h-5" />
+            <ConversionIcon />
             <span className="text-xs md:text-sm">
               Conversion:{" "}
               <span className="text-blue-500 font-medium">{conversion}</span>
