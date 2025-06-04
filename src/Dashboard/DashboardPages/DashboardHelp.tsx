@@ -1,7 +1,7 @@
 import { FiSearch } from "react-icons/fi";
 import icon from "../../assets/fi_2676818.png";
 import Accordion from "@/components/DashboardHelp/Accordion";
-
+import elipse from "../../assets/Ellipse 5.png";
 const DashboardHelp = () => {
   return (
     <div className="py-10">
@@ -20,7 +20,6 @@ const DashboardHelp = () => {
         </p>
       </div>
 
-
       {/* Search Bar */}
       <div className="flex items-center bg-white border border-gray-300 rounded-full px-4 py-2 w-full max-w-3xl mx-auto mt-2">
         <FiSearch className="text-gray-400 text-lg mr-2 shrink-0" />
@@ -37,6 +36,64 @@ const DashboardHelp = () => {
       {/* Accordion Section */}
       <div className="mt-10">
         <Accordion />
+      </div>
+
+      <div className="mt-12 relative bg-[#010610]  overflow-hidden rounded-2xl">
+        {/* Positioned Ellipse Image */}
+        <img
+          src={elipse}
+          alt=""
+          className="absolute left-0  object-contain"
+        />
+
+        <h2 className="text-xl font-semibold mb-4 text-center text-white sm:text-4xl lg:text-7xl mt-24">
+          Need More Help?
+        </h2>
+
+        {/* Form Section */}
+        <div className="mt-12 max-w-3xl mx-auto bg-white border border-gray-200 rounded-lg p-6 shadow-sm mb-24">
+          <form className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
+              <input
+                type="email"
+                placeholder="you@example.com"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8D4EF4] text-sm"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Subject
+              </label>
+              <input
+                type="text"
+                placeholder="Subject of your query"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8D4EF4] text-sm"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Details
+              </label>
+              <textarea
+                placeholder="Describe your issue or question..."
+                rows={5}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8D4EF4] text-sm resize-none"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-[#4D2DB7] to-[#8D4EF4] text-white px-6 py-2 rounded-md text-sm font-medium hover:opacity-90 transition"
+            >
+              Submit Request
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

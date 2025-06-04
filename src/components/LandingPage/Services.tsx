@@ -64,7 +64,7 @@ export const Services = () => {
                 </h1>
               </div>
               <div className="flex-1">
-                <h1 className="text-white/30">{service?.description}</h1>
+                <h1 className="text-white/70">{service?.description}</h1>
               </div>
             </div>
           ))}
