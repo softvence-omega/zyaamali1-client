@@ -11,23 +11,25 @@ import { useNavigate } from "react-router-dom";
 
 function DashboardHome() {
   const navigate = useNavigate();
-  const handleclick = () =>{
-    navigate("/dashboard/campaign/create")
-  }
+  const handleclick = () => {
+    navigate("/dashboard/campaign/create");
+  };
   return (
-    <div>
+    <div className="px-4 md:px-6">
       {/* heading  */}
-      <div className="flex justify-between">
+      <div className="flex flex-col md:flex-row justify-between gap-4 md:gap-0">
         <div>
-          <h1 className="lg:text-5xl mb-5 bg-gradient-to-r from-[#000000] to-[#8E6EFF] bg-clip-text text-transparent">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl mb-3 md:mb-5 bg-gradient-to-r from-[#000000] to-[#8E6EFF] bg-clip-text text-transparent">
             Welcome Ramsey
           </h1>
-          <p className="text-gray-text">
+          <p className="text-gray-text text-sm md:text-base">
             Manage your campaign and accelerate your marketing with ai tools
           </p>
         </div>
-        <div className="lg:flex gap-4 items-end">
-          <PrimaryButton onClick={handleclick} icon={<FaPlus />}>Create New Campaign</PrimaryButton>
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-start md:items-end">
+          <PrimaryButton onClick={handleclick} icon={<FaPlus />}>
+            Create New Campaign
+          </PrimaryButton>
           <OutlineButton
             icon={<FaWandMagicSparkles />}
             onClick={() => {
@@ -39,7 +41,7 @@ function DashboardHome() {
         </div>
       </div>
       {/* cards  */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-16 mx-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-8 md:my-16">
         {usersCards.map((card, idx) => (
           <DashboardCard key={idx} {...card} />
         ))}
@@ -49,11 +51,11 @@ function DashboardHome() {
         <ActiveCampaign />
       </div>
       {/* AI Suggestion  */}
-      <div className="lg:grid grid-cols-3 gap-4 my-16">
-        <div className="col-span-2">
+      <div className="flex flex-col lg:grid lg:grid-cols-3 gap-4 my-8 md:my-16">
+        <div className="lg:col-span-2">
           <AiSuggestion />
         </div>
-        <div className="border border-gray-200 rounded-lg overflow-hidden p-5 m-5">
+        <div className="border border-gray-200 rounded-lg overflow-hidden p-5 mt-5 lg:mt-0">
           <Sale />
         </div>
       </div>
