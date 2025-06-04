@@ -2,10 +2,10 @@
 
 export const Banner = () => {
     return (
-        <div className=" flex flex-col items-center justify-center gap-5 py-24 text-center mx-auto ">
+        <div className=" flex flex-col items-center justify-center gap-5 py-12 lg:py-24 text-center mx-auto ">
             <h1 className="md:text-9xl text-7xl font-bold  text-[#6749d2]            
             ">Marketing That Thinks <span className="text-[#000000]">For You</span></h1>
-            <p className="text-lg text-[#6C7078] md:w-2/4 w-3/4">Adelo uses advanced AI to create, optimize, and manage your marketing campaigns, helping you reach the right audience with the perfect message.
+            <p className="text-lg text-T-600 md:w-2/4 w-3/4">Adelo uses advanced AI to create, optimize, and manage your marketing campaigns, helping you reach the right audience with the perfect message.
 
             </p>
             <div className="flex justify-between items-center gap-5 my-4">

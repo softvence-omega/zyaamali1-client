@@ -1,19 +1,14 @@
 import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink} from "react-router-dom";
 
-import { useAppDispatch } from "@/hooks/useRedux";
-import { logout } from "@/store/Slices/AuthSlice/authSlice";
+
 import CommonWrapper from "@/common/CommonWrapper";
 import logo from "../assets/logo.png";
 
 const Navbar: React.FC = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+ 
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/login");
-  };
+  
 
   const link = (
     <>

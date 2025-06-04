@@ -31,6 +31,7 @@ const DashboardSubscription: React.FC = () => {
   const [autoRenew, setAutoRenew] = useState(true);
   const [paymentEmail, setPaymentEmail] = useState(true);
   const [billingReminders, setBillingReminders] = useState(true);
+  const [showCancelModal, setShowCancelModal] = useState(false);
 
   const pricingPlans: PricingPlan[] = [
     {
@@ -72,7 +73,8 @@ const DashboardSubscription: React.FC = () => {
         "Email support",
       ],
       buttonText: "Upgrade",
-      buttonStyle: "rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-T-100 font-bold",
+      buttonStyle:
+        "rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-T-100 font-bold",
     },
   ];
 
@@ -115,12 +117,14 @@ const DashboardSubscription: React.FC = () => {
   }> = ({ checked, onChange }) => (
     <button
       onClick={() => onChange(!checked)}
-      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${checked ? "bg-blue-600" : "bg-gray-300"
-        }`}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+        checked ? "bg-blue-600" : "bg-gray-300"
+      }`}
     >
       <span
-        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${checked ? "translate-x-6" : "translate-x-1"
-          }`}
+        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+          checked ? "translate-x-6" : "translate-x-1"
+        }`}
       />
     </button>
   );
@@ -148,7 +152,9 @@ const DashboardSubscription: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-start justify-between mt-2 gap-6">
           <div className="flex-1">
             <div className="flex items-center space-x-2">
-              <span className="text-lg font-medium text-gray-900">Pro Plan</span>
+              <span className="text-lg font-medium text-gray-900">
+                Pro Plan
+              </span>
               <span className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-3xl">
                 ACTIVE
               </span>
@@ -160,7 +166,10 @@ const DashboardSubscription: React.FC = () => {
                 "Advanced analytics and reports",
                 "Email & chat support",
               ].map((item, idx) => (
-                <div key={idx} className="flex items-center text-lg text-gray-600">
+                <div
+                  key={idx}
+                  className="flex items-center text-lg text-gray-600"
+                >
                   <FaCheck className="w-3 h-3 text-[#FF8818] mr-2" />
                   {item}
                 </div>
@@ -178,7 +187,10 @@ const DashboardSubscription: React.FC = () => {
               <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-T-100 font-bold">
                 Change Plan
               </button>
-              <button className="bg-white border border-blue-600 text-blue-600 px-4 py-2 text-sm font-medium cursor-pointer rounded-3xl">
+              <button
+                onClick={() => setShowCancelModal(true)}
+                className="bg-white border border-blue-600 text-blue-600 px-4 py-2 text-sm font-medium cursor-pointer rounded-3xl"
+              >
                 Cancel Subscription
               </button>
             </div>
@@ -194,8 +206,9 @@ const DashboardSubscription: React.FC = () => {
           {pricingPlans.map((plan, index) => (
             <div
               key={index}
-              className={`flex flex-col justify-between border rounded-lg p-6 relative bg-T-300 h-full ${plan.popular ? "border-purple-500" : "border-gray-200"
-                }`}
+              className={`flex flex-col justify-between border rounded-lg p-6 relative bg-T-300 h-full ${
+                plan.popular ? "border-purple-500" : "border-gray-200"
+              }`}
             >
               {plan.popular && (
                 <div className="absolute -top-[-6px] right-[-50px] transform -translate-x-1/2">
@@ -379,6 +392,45 @@ const DashboardSubscription: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {showCancelModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 bg-opacity-50">
+          <div className="bg-white rounded-lg p-6 max-w-lg w-full shadow-lg">
+            <h2 className="text-lg font-semibold text-gray-900 mb-2">
+              Cancel Subscription
+            </h2>
+            <p className="text-sm text-gray-700 mb-4">
+              Are you sure you want to cancel your <strong>Pro Plan</strong>{" "}
+              subscription? Here are the benefits you'll lose:
+            </p>
+
+            <ul className="list-disc list-inside text-gray-600 mb-4 space-y-1">
+              <li>Up to 10 members</li>
+              <li>50 Marketing Campaigns per month</li>
+              <li>Advanced analytics and reports</li>
+              <li>Email & chat support</li>
+            </ul>
+
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={() => setShowCancelModal(false)}
+                className="px-4 py-2 text-sm rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100"
+              >
+                Go Back
+              </button>
+              <button
+                onClick={() => {
+                  setShowCancelModal(false);
+                  // Add your cancellation logic here
+                }}
+                className="px-4 py-2 text-sm rounded-md bg-red-600 text-white hover:bg-red-700"
+              >
+                Confirm Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

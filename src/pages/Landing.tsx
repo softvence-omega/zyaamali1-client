@@ -29,7 +29,7 @@ function Landing() {
         <img
           src={bannerImg} // Use the image as a fallback or for additional styling
           alt="Banner Background"
-          className="absolute top-8 -right-[45%] w-full h-full object-contain  " // Adjust opacity as needed
+          className="absolute top-8 -right-[50%] md:-right-[45%] w-full h-full object-contain  " // Adjust opacity as needed
         />
 
 

@@ -36,7 +36,7 @@ const ChangePassword: React.FC = () => {
                     <input
                         type="password"
                         id="currentPassword"
-                        className={`mt-1 block w-full px-2 py-1.5 sm:px-3 sm:py-2 border ${errors.currentPassword ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm`}
+                        className={`mt-1 block w-full px-2 py-1.5 sm:px-3 sm:py-2 border bg-white ${errors.currentPassword ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm`}
                         {...register('currentPassword', { required: 'Current password is required' })}
                     />
                     {errors.currentPassword && <p className="text-red-500 text-xs mt-1">{errors.currentPassword.message}</p>}
@@ -48,7 +48,7 @@ const ChangePassword: React.FC = () => {
                     <input
                         type="password"
                         id="newPassword"
-                        className={`mt-1 block w-full px-2 py-1.5 sm:px-3 sm:py-2 border ${errors.newPassword ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm`}
+                        className={`mt-1 block w-full px-2 py-1.5 sm:px-3 sm:py-2 border bg-white ${errors.newPassword ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm`}
                         {...register('newPassword', {
                             required: 'New password is required',
                             minLength: {
@@ -66,7 +66,7 @@ const ChangePassword: React.FC = () => {
                     <input
                         type="password"
                         id="confirmNewPassword"
-                        className={`mt-1 block w-full px-2 py-1.5 sm:px-3 sm:py-2 border ${errors.confirmNewPassword ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm`}
+                        className={`mt-1 block w-full px-2 py-1.5 sm:px-3 sm:py-2 border bg-white ${errors.confirmNewPassword ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm`}
                         {...register('confirmNewPassword', {
                             required: 'Please confirm your new password',
                             validate: (value) => value === newPassword || 'Passwords do not match',
