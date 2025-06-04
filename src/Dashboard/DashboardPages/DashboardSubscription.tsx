@@ -9,6 +9,7 @@ import {
   FaHeadset,
   FaChevronRight,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 interface PricingPlan {
   name: string;
@@ -386,10 +387,10 @@ const DashboardSubscription: React.FC = () => {
               </div>
             </div>
           </div>
-          <button className="flex items-center text-purple-600 text-sm font-medium hover:text-purple-700 mt-2">
+          <Link to={"/dashboard/help"} className="flex items-center text-purple-600 text-sm font-medium hover:text-purple-700 mt-2">
             Go to Contact Us Page
             <FaChevronRight className="w-3 h-3 ml-1" />
-          </button>
+          </Link>
         </div>
       </div>
 
