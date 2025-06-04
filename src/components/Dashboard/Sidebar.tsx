@@ -44,11 +44,11 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div onClick={handleprof} className="mt-auto pt-8">
+      <div onClick={handleprof} className="mt-auto pt-4 md:pt-8">
         <img
           src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"
           alt="User Avatar"
-          className="rounded-full w-[30px] h-[24px] md:w-[50px] md:h-[50px] border-2"
+          className="rounded-full w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 border-2 border-gray-600 hover:border-white transition-colors duration-200"
         />
       </div>
     </div>

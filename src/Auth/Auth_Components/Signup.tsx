@@ -1,4 +1,3 @@
-
 import { FcGoogle } from "react-icons/fc";
 import { RiAppleLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -80,7 +79,7 @@ export default function SignupForm() {
                 Password
               </label>
               <input
-                type="password"
+                type="text"
                 placeholder="Enter your password"
                 className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white text-sm"
               />
@@ -91,7 +90,7 @@ export default function SignupForm() {
                 Confirm Password
               </label>
               <input
-                type="password"
+                type="text"
                 placeholder="Re-enter your password"
                 className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white text-sm"
               />

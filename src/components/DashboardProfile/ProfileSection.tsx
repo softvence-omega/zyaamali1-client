@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
-import { FaEdit } from 'react-icons/fa';
+import React, { useState } from "react";
+import { FaEdit } from "react-icons/fa";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 const ProfileSection: React.FC = () => {
   const [editMode, setEditMode] = useState<{ [key: string]: boolean }>({});
@@ -10,9 +17,25 @@ const ProfileSection: React.FC = () => {
     country: "Canada",
   });
 
+  const countries = [
+    "United States",
+    "Canada",
+    "United Kingdom",
+    "Australia",
+    "Germany",
+    "France",
+    "Japan",
+    "India",
+    "Brazil",
+    "South Africa",
+    // Add more countries as needed
+  ];
+
   return (
     <div className="py-6 px-6 border-b bg-gray-100 rounded-3xl border-gray-200">
-      <h2 className="text-xl font-semibold text-gray-800 mb-6">Personal Information</h2>
+      <h2 className="text-xl font-semibold text-gray-800 mb-6">
+        Personal Information
+      </h2>
       <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
         <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
           <img
@@ -25,7 +48,10 @@ const ProfileSection: React.FC = () => {
           {/* Full Name */}
           <div>
             <div className="flex items-center justify-between">
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="fullName"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Full Name
               </label>
               <FaEdit
@@ -43,15 +69,19 @@ const ProfileSection: React.FC = () => {
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, fullName: e.target.value }))
               }
-              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${editMode.fullName ? "bg-white" : "bg-gray-50"
-                }`}
+              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${
+                editMode.fullName ? "bg-white" : "bg-gray-50"
+              }`}
             />
           </div>
 
           {/* Email - not editable */}
           <div>
             <div className="flex items-center justify-between">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Email
               </label>
               <FaEdit className="w-4 h-4 text-gray-300 cursor-not-allowed" />
@@ -68,12 +98,18 @@ const ProfileSection: React.FC = () => {
           {/* Company Name */}
           <div>
             <div className="flex items-center justify-between">
-              <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="companyName"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Company Name
               </label>
               <FaEdit
                 onClick={() =>
-                  setEditMode((prev) => ({ ...prev, companyName: !prev.companyName }))
+                  setEditMode((prev) => ({
+                    ...prev,
+                    companyName: !prev.companyName,
+                  }))
                 }
                 className="w-4 h-4 text-gray-500 cursor-pointer"
               />
@@ -84,17 +120,24 @@ const ProfileSection: React.FC = () => {
               value={formData.companyName}
               readOnly={!editMode.companyName}
               onChange={(e) =>
-                setFormData((prev) => ({ ...prev, companyName: e.target.value }))
+                setFormData((prev) => ({
+                  ...prev,
+                  companyName: e.target.value,
+                }))
               }
-              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${editMode.companyName ? "bg-white" : "bg-gray-50"
-                }`}
+              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${
+                editMode.companyName ? "bg-white" : "bg-gray-50"
+              }`}
             />
           </div>
 
-          {/* Country */}
+          {/* Country - Now a dropdown */}
           <div>
             <div className="flex items-center justify-between">
-              <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="country"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Country
               </label>
               <FaEdit
@@ -104,17 +147,33 @@ const ProfileSection: React.FC = () => {
                 className="w-4 h-4 text-gray-500 cursor-pointer"
               />
             </div>
-            <input
-              type="text"
-              id="country"
-              value={formData.country}
-              readOnly={!editMode.country}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, country: e.target.value }))
-              }
-              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${editMode.country ? "bg-white" : "bg-gray-50"
-                }`}
-            />
+            {editMode.country ? (
+              <Select
+                value={formData.country}
+                onValueChange={(value) =>
+                  setFormData((prev) => ({ ...prev, country: value }))
+                }
+              >
+                <SelectTrigger className="w-full mt-1">
+                  <SelectValue placeholder="Select country" />
+                </SelectTrigger>
+                <SelectContent className="bg-T-300">
+                  {countries.map((country) => (
+                    <SelectItem key={country} value={country}>
+                      {country}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            ) : (
+              <input
+                type="text"
+                id="country"
+                value={formData.country}
+                readOnly
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm bg-gray-50"
+              />
+            )}
           </div>
         </div>
       </div>

@@ -40,11 +40,7 @@ const DashboardHelp = () => {
 
       <div className="mt-12 relative bg-[#010610]  overflow-hidden rounded-2xl">
         {/* Positioned Ellipse Image */}
-        <img
-          src={elipse}
-          alt=""
-          className="absolute left-0  object-contain"
-        />
+        <img src={elipse} alt="" className="absolute left-0  object-contain" />
 
         <h2 className="text-xl font-semibold mb-4 text-center text-white sm:text-4xl lg:text-7xl mt-24">
           Need More Help?
@@ -88,7 +84,7 @@ const DashboardHelp = () => {
 
             <button
               type="submit"
-              className="bg-gradient-to-r from-[#4D2DB7] to-[#8D4EF4] text-white px-6 py-2 rounded-md text-sm font-medium hover:opacity-90 transition"
+              className="h-[52px] my-2 lg:my-0 rounded-[48px] lg:px-[40px] py-[10px] text-white bg-gradient-to-r from-[#654FAE] via-[#A891FB] to-[#8E6EFF] flex items-center justify-center gap-[10px] hover:opacity-90 transition-all duration-200"
             >
               Submit Request
             </button>

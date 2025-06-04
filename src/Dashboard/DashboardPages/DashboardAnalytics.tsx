@@ -325,7 +325,7 @@ const DashboardAnalytics = () => {
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Business" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-T-300">
               <SelectItem value="All Business">All Business</SelectItem>
               <SelectItem value="AI Business">AI Business</SelectItem>
               <SelectItem value="FaceBook Business">
@@ -341,7 +341,7 @@ const DashboardAnalytics = () => {
             <SelectTrigger className="w-full">
               <SelectValue placeholder="All Platforms" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-T-300">
               <SelectItem value="Facebook">Facebook</SelectItem>
               <SelectItem value="Instragram">Instragram</SelectItem>
               <SelectItem value="Google">Google</SelectItem>
@@ -355,7 +355,7 @@ const DashboardAnalytics = () => {
             <SelectTrigger className="w-full">
               <SelectValue placeholder="All Champign" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-T-300">
               <SelectItem value="Holiday special">Holiday special</SelectItem>
               <SelectItem value="Eid Special">Eid Special</SelectItem>
               <SelectItem value="Brand Awareness">Brand Awareness</SelectItem>
@@ -369,7 +369,7 @@ const DashboardAnalytics = () => {
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Last 30 days" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-T-300">
               <SelectItem value="LastWeek">Last Week</SelectItem>
               <SelectItem value="LastMonth">Last Month</SelectItem>
               <SelectItem value="LastYear">Last Year</SelectItem>
@@ -621,7 +621,11 @@ const DashboardAnalytics = () => {
               className="flex  gap-4 rounded-md my-5 p-3 mx-5 bg-blue-300 "
             >
               <div>
-                <img src={item.icon} alt={item.title} className=" max-w-6 max-h-6" />
+                <img
+                  src={item.icon}
+                  alt={item.title}
+                  className=" max-w-6 max-h-6"
+                />
               </div>
               <div>
                 <h1 className="text-[20px] text-white">{item.title}</h1>

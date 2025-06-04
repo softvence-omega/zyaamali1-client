@@ -53,7 +53,7 @@ const SidebarExpand = () => {
   };
 
   return (
-    <div className="bg-[#020817] rounded-[40px] p-6 flex flex-col items-center justify-between w-full lg:w-60 h-full lg:min-h-[600px] shadow-lg">
+    <div className="bg-[#020817] sticky top-8 rounded-[40px] p-6 flex flex-col items-center justify-between w-full lg:w-60 h-full lg:min-h-[600px] shadow-lg">
       <div className="flex flex-col items-start w-full">
         {/* Logo/Header */}
         <Link to="/">
