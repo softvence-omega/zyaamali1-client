@@ -27,13 +27,6 @@ import { FaPeopleGroup } from "react-icons/fa6";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 import CampaignSubHeader from "@/components/Dashboard/campaign/CampaignSubHeader";
 import PrimaryButton from "@/components/ui/PrimaryButton";
@@ -155,12 +148,20 @@ const DashboardCampaignCreate = () => {
               <select
                 value={businessInfo}
                 onChange={(e) => setBusinessInfo(e.target.value)}
-                className="appearance-none w-full py-3 px-4 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white"
+                className="appearance-none w-full py-3 px-4 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-800"
               >
-                <option className="" value="">Select Business</option>
-                <option className="" value="Acme Sportswear">Acme Sportswear</option>
-                <option className="" value="Target Audience">Target Audience</option>
-                <option className="" value="Primary Goals">Primary Goals</option>
+                <option className="bg-white text-gray-700" value="">
+                  Select Business
+                </option>
+                <option className="" value="Acme Sportswear">
+                  Acme Sportswear
+                </option>
+                <option className="" value="Target Audience">
+                  Target Audience
+                </option>
+                <option className="" value="Primary Goals">
+                  Primary Goals
+                </option>
               </select>
 
               {/* Custom dropdown arrow (SVG) */}
@@ -189,6 +190,7 @@ const DashboardCampaignCreate = () => {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
               />
             </div>
           </div>
@@ -202,10 +204,11 @@ const DashboardCampaignCreate = () => {
               {objectives.map((objective, index) => (
                 <div
                   key={index}
-                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${selectedObjective === objective.value
-                    ? "bg-purple-100 border-purple-600"
-                    : "bg-[#E6E6E8] border-gray-200"
-                    } hover:bg-[#F4F1FF]`}
+                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${
+                    selectedObjective === objective.value
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8] border-gray-200"
+                  } hover:bg-[#F4F1FF]`}
                   onClick={() => setSelectedObjective(objective.value)}
                 >
                   <objective.icon className="text-xl" />
@@ -226,10 +229,11 @@ const DashboardCampaignCreate = () => {
               {platforms.map((platform, index) => (
                 <div
                   key={index}
-                  className={`${selectedPlatform === platform.value
-                    ? "bg-purple-100 border-purple-600"
-                    : "bg-[#E6E6E8]"
-                    } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
+                  className={`${
+                    selectedPlatform === platform.value
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8]"
+                  } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
                   onClick={() => setSelectedPlatform(platform.value)}
                 >
                   <platform.icon className={`text-2xl ${platform.color}`} />
@@ -246,10 +250,11 @@ const DashboardCampaignCreate = () => {
               {adTypes.map((adType, index) => (
                 <div
                   key={index}
-                  className={`flex items-center p-3 gap-2 rounded-lg border  border-gray-200 cursor-pointer hover:bg-gray-50 ${selectedAdType === adType.value
-                    ? "bg-purple-100 border-purple-600"
-                    : "bg-[#E6E6E8]"
-                    }`}
+                  className={`flex items-center p-3 gap-2 rounded-lg border  border-gray-200 cursor-pointer hover:bg-gray-50 ${
+                    selectedAdType === adType.value
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8]"
+                  }`}
                   onClick={() => setSelectedAdType(adType.value)}
                 >
                   <adType.icon className="text-lg text-gray-600" />
@@ -266,11 +271,11 @@ const DashboardCampaignCreate = () => {
             <CampaignSubHeader text=" Target Audience" />
             {/* Location */}
             <div>
-              <p className="text-sm">Location</p>
+              <p className="text-sm mb-1">Location</p>
               <select
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm"
+                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
               >
                 <option value="">Select Location</option>
                 <option value="united-states">United States</option>
@@ -286,7 +291,7 @@ const DashboardCampaignCreate = () => {
                 <select
                   value={ageFrom}
                   onChange={(e) => setAgeFrom(e.target.value)}
-                  className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm"
+                  className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 >
                   <option value="">From</option>
                   <option value="18">18</option>
@@ -297,7 +302,7 @@ const DashboardCampaignCreate = () => {
                 <select
                   value={ageTo}
                   onChange={(e) => setAgeTo(e.target.value)}
-                  className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm"
+                  className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 >
                   <option value="">To</option>
                   <option value="18">18</option>
@@ -366,7 +371,7 @@ const DashboardCampaignCreate = () => {
               <select
                 value={dailyBudget}
                 onChange={(e) => setDailyBudget(e.target.value)}
-                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm"
+                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
               >
                 <option value="">Select Daily Budget</option>
                 <option value="50">$50</option>
@@ -381,7 +386,7 @@ const DashboardCampaignCreate = () => {
               <select
                 value={totalBudget}
                 onChange={(e) => setTotalBudget(e.target.value)}
-                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm"
+                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
               >
                 <option value="">Select Total Budget</option>
                 <option value="500">$500</option>
@@ -398,6 +403,7 @@ const DashboardCampaignCreate = () => {
                   type="date"
                   onChange={(e) => setStartDate(e.target.value)}
                   value={startDate}
+                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 />
               </div>
               <div className="flex-1">
@@ -406,6 +412,7 @@ const DashboardCampaignCreate = () => {
                   type="date"
                   onChange={(e) => setEndDate(e.target.value)}
                   value={endDate}
+                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 />
               </div>
             </div>
@@ -473,14 +480,11 @@ const DashboardCampaignCreate = () => {
           <div className="flex items-center w-full p-3 rounded-full bg-[#f5f3ff] shadow-sm">
             {/* Dropdown */}
             <div className="relative text-blue-500">
-              <select
-                className="w-[100px] py-4 px-2 border border-gray-300 rounded-md text-sm bg-white"
-              >
+              <select className="w-[100px] py-4 px-2 border border-gray-300 rounded-md text-sm bg-white">
                 <option value="image">Image</option>
                 <option value="text">Text</option>
               </select>
             </div>
-
 
             {/* Input field */}
             <input
@@ -501,19 +505,21 @@ const DashboardCampaignCreate = () => {
               <div className="inline-flex items-center bg-white border border-gray-300 rounded-full overflow-hidden text-sm font-medium">
                 <button
                   onClick={() => setSelected("mobile")}
-                  className={`px-4 py-3 transition-colors duration-200 ${selected === "mobile"
-                    ? "bg-purple-500 text-white"
-                    : "text-black"
-                    }`}
+                  className={`px-4 py-3 transition-colors duration-200 ${
+                    selected === "mobile"
+                      ? "bg-purple-500 text-white"
+                      : "text-black"
+                  }`}
                 >
                   Mobile
                 </button>
                 <button
                   onClick={() => setSelected("desktop")}
-                  className={`px-4 py-3 transition-colors duration-200 ${selected === "desktop"
-                    ? "bg-purple-500 text-white"
-                    : "text-black"
-                    }`}
+                  className={`px-4 py-3 transition-colors duration-200 ${
+                    selected === "desktop"
+                      ? "bg-purple-500 text-white"
+                      : "text-black"
+                  }`}
                 >
                   Desktop
                 </button>
