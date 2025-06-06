@@ -13,7 +13,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="bg-[#020817] rounded-[40px] p-4 flex flex-col items-center justify-between w-full lg:w-24 h-full lg:min-h-[600px] shadow-lg">
+    <div className="bg-[#020817] rounded-[40px] p-4 flex flex-col items-center justify-between w-14  h-fit  shadow-lg">
       <div className="flex flex-col items-center w-full">
         <Link to="/">
           <div className="mb-8 p-3 shadow-lg">
@@ -48,7 +48,7 @@ const Sidebar = () => {
         <img
           src={user}
           alt="User Avatar"
-          className="rounded-full w-6 h-6 md:w-10 md:h-10 lg:w-12 lg:h-12 border-2 border-gray-600 hover:border-white transition-colors duration-200"
+          className="rounded-full w-6 h-6   border-2 border-gray-600 hover:border-white transition-colors duration-200"
         />
       </div>
     </div>
