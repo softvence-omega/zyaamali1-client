@@ -29,7 +29,7 @@ export const Marketing = () => {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
                   1.2M+
                 </h1>
-                <p className="text-black/40 text-end sm:text-right">
+                <p className="text-black/40 text-start">
                   AI Prompts <br className="sm:hidden" /> Run
                 </p>
               </div>
@@ -49,7 +49,7 @@ export const Marketing = () => {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
                   500,000+
                 </h1>
-                <p className="text-black/40 text-end sm:text-right">
+                <p className="text-black/40 text-start">
                   Feedback <br className="sm:hidden" /> Loops
                 </p>
               </div>
