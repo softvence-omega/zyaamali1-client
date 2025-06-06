@@ -30,7 +30,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="relative z-20 px-4 sm:px-6">
         <h1 className="text-2xl sm:text-4xl md:text-7xl font-bold text-center">
           <span
-            className="bg-clip-text text-transparent block"
+            className="bg-clip-text text-transparent "
             style={{
               backgroundImage: `linear-gradient(to bottom, ${gradientFrom}, ${gradientTo})`,
               WebkitBackgroundClip: 'text',
