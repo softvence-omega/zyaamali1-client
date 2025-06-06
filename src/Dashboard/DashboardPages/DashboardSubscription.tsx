@@ -190,7 +190,7 @@ const DashboardSubscription: React.FC = () => {
               </button>
               <button
                 onClick={() => setShowCancelModal(true)}
-                className="bg-white border border-blue-600 text-blue-600 px-4 py-2 text-sm font-medium cursor-pointer rounded-3xl"
+                className="bg-white hidden border border-blue-600 text-blue-600 px-4 py-2 text-sm font-medium cursor-pointer rounded-3xl"
               >
                 Cancel Subscription
               </button>
@@ -212,8 +212,8 @@ const DashboardSubscription: React.FC = () => {
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-[-6px] right-[-50px] transform -translate-x-1/2">
-                  <span className="bg-blue-600 text-white px-3 py-3 rounded-xl text-xs font-medium">
+                <div className="absolute -top-[-6px] right-[-46px] transform -translate-x-1/2">
+                  <span className="bg-blue-600 text-white px-3 py-3 rounded-lg text-xs font-medium">
                     Current Plan
                   </span>
                 </div>

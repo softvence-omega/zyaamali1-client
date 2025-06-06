@@ -92,3 +92,7 @@ html {
     /* @apply bg-background text-foreground; */
   }
 }
+
+.pop {
+  font-family: "Poppins", sans-serif;
+}
