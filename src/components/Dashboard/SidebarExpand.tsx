@@ -96,7 +96,7 @@ const SidebarExpand = () => {
           alt="User Avatar"
           className="rounded-full h-10 w-10 border-2"
         />
-        <p className="text-sm font-medium text-white">Sohag</p>
+        <p className="text-sm font-medium text-white">Sohaggg</p>
       </div>
     </div>
   );
