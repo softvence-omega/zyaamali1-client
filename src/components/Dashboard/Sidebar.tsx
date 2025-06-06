@@ -13,7 +13,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="bg-[#020817] rounded-[40px] p-4 flex flex-col items-center justify-between w-full lg:w-24 h-full lg:min-h-[600px] shadow-lg">
+    <div className="bg-[#020817] rounded-[40px] p-4 flex flex-col items-center justify-between w-14  h-full lg:min-h-[600px] shadow-lg">
       <div className="flex flex-col items-center w-full">
         <Link to="/">
           <div className="mb-8 p-3 shadow-lg">
