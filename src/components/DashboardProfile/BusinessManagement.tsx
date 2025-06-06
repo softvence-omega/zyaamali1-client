@@ -71,7 +71,7 @@ const BusinessManagement: React.FC = () => {
       {(isAddModalOpen || isEditModalOpen) && (
         <div className="fixed inset-0 bg-black/70 z-30"></div>
       )}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col  md:flex-row justify-between items-start md:items-center mb-6">
         <h2 className="text-xl font-semibold text-gray-800">
           Business Management
         </h2>
