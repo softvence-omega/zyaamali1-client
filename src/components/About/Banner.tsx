@@ -13,7 +13,7 @@ const Banner = () => {
           {/* Foreground text */}
           <div className="relative z-20 px-4 sm:px-6">
             <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold text-center">
-              <span className="bg-gradient-to-b from-[#8E6EFF] to-[#000000] bg-clip-text text-transparent block">
+              <span className="bg-gradient-to-b from-[#8E6EFF] to-[#000000] bg-clip-text text-transparent  mb-4">
                 Sterling Chatbot
               </span>
               <span className="text-black block mt-2">Assistant</span>
