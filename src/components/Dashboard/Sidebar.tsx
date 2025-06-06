@@ -48,7 +48,7 @@ const Sidebar = () => {
         <img
           src={user}
           alt="User Avatar"
-          className="rounded-full w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 border-2 border-gray-600 hover:border-white transition-colors duration-200"
+          className="rounded-full w-6 h-6 md:w-10 md:h-10 lg:w-12 lg:h-12 border-2 border-gray-600 hover:border-white transition-colors duration-200"
         />
       </div>
     </div>
