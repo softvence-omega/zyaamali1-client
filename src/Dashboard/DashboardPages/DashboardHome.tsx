@@ -41,7 +41,7 @@ function DashboardHome() {
         </div>
       </div>
       {/* cards  */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-8 md:my-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-4 my-8 md:my-16">
         {usersCards.map((card, idx) => (
           <DashboardCard key={idx} {...card} />
         ))}

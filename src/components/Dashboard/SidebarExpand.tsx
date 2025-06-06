@@ -6,7 +6,7 @@ import { MdMessage, MdVideoLibrary } from "react-icons/md";
 import dashboardHeader from "../../assets/dashboard-header.png";
 import { LuLayoutGrid } from "react-icons/lu";
 import { BiWallet } from "react-icons/bi";
-
+import user from "../../assets/user.png";
 const SidebarExpand = () => {
   const [activeItem, setActiveItem] = useState("Dashboard");
   const navigate = useNavigate();
@@ -92,11 +92,11 @@ const SidebarExpand = () => {
         className="flex items-center gap-3 cursor-pointer hover:text-white text-gray-400 transition-colors duration-200 mt-8 w-full"
       >
         <img
-          src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"
+          src={user}
           alt="User Avatar"
           className="rounded-full h-10 w-10 border-2"
         />
-        <p className="text-sm font-medium text-white">Sohag</p>
+        <p className="text-sm font-medium text-white">Sohaggg</p>
       </div>
     </div>
   );
