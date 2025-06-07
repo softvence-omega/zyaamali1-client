@@ -1,14 +1,14 @@
 import React from "react";
-import { Link, NavLink} from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 import CommonWrapper from "@/common/CommonWrapper";
-import logo from "../assets/logoo.svg";
+import logo from "../assets/Adelo_black.svg";
 
 const Navbar: React.FC = () => {
- 
 
-  
+
+
 
   const link = (
     <>
@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
           Contact
         </NavLink>
       </li>
-     
+
     </>
   );
 
@@ -144,7 +144,7 @@ const Navbar: React.FC = () => {
           Contact
         </NavLink>
       </li>
-      
+
     </>
   );
 
@@ -179,8 +179,7 @@ const Navbar: React.FC = () => {
                 </ul>
               </div>
               <Link to={"/"} className="text-xl flex flex-row items-center gap-2 ">
-                <img src={logo} className="w-[20px] h-[20px] cursor-pointer" alt="Logo" />
-                <h1 className="font-bold pop">adelo</h1>
+                <img src={logo} className="h-18 w-18" alt="" />
               </Link>
             </div>
 

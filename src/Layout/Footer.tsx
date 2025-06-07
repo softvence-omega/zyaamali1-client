@@ -1,6 +1,6 @@
 import React from "react";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
-import logo from "../assets/logoo.svg";
+import logo from "../assets/Adelo_black.svg";
 import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
@@ -8,16 +8,15 @@ const Footer: React.FC = () => {
     <footer className="bg-[#f8f9fb] text-gray-700 px-6 md:px-16 pt-12 pb-12">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10 text-sm">
         {/* Logo and Description */}
-        <div className="space-y-4">
-          <Link to={"/"} className="text-xl flex flex-row items-center gap-2 ">
+        <div className="">
+          <Link to={"/"} className="    ">
             <img
               src={logo}
-              className="w-[20px] h-[20px] cursor-pointer"
+              className=" w-24 cursor-pointer "
               alt="Logo"
             />
-            <h1 className="font-bold pop">adelo</h1>
           </Link>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-500 -mt-4 mb-2">
             Smarter, faster marketing — powered by AI. Automate ad campaigns,
             generate content, and optimize performance with ease.
           </p>
