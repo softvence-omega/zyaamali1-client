@@ -9,14 +9,14 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10 text-sm">
         {/* Logo and Description */}
         <div className="">
-          <Link to={"/"} className="    ">
+          <Link to={"/"} className="mb-12">
             <img
               src={logo}
               className=" w-24 cursor-pointer "
               alt="Logo"
             />
           </Link>
-          <p className="text-sm text-gray-500 -mt-4 mb-2">
+          <p className="text-sm text-gray-500  mb-2">
             Smarter, faster marketing — powered by AI. Automate ad campaigns,
             generate content, and optimize performance with ease.
           </p>

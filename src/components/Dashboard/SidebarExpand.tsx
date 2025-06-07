@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaChartBar } from "react-icons/fa";
 import { RiMegaphoneFill } from "react-icons/ri";
 import { MdMessage, MdVideoLibrary } from "react-icons/md";
-import dashboardHeader from "../../assets/dashboard-header.png";
+import dashboardHeader from "../../assets/Adelo_triangle only.svg";
 import { LuLayoutGrid } from "react-icons/lu";
 import { BiWallet } from "react-icons/bi";
 import user from "../../assets/user.png";

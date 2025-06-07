@@ -1,7 +1,7 @@
 import { FaChartBar } from "react-icons/fa";
 import { RiMegaphoneFill } from "react-icons/ri";
 import { MdMessage, MdVideoLibrary } from "react-icons/md";
-import dashboardHeader from "../../assets/dashboard-header.png";
+import dashboardHeader from "../../assets/Adelo_triangle only.svg";
 import { LuLayoutGrid } from "react-icons/lu";
 import { BiWallet } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,8 +16,8 @@ const Sidebar = () => {
     <div className="bg-[#020817] rounded-[40px] p-4 flex flex-col items-center justify-between w-14  h-fit  shadow-lg">
       <div className="flex flex-col items-center w-full">
         <Link to="/">
-          <div className="mb-8 p-3 shadow-lg">
-            <img src={dashboardHeader} alt="" />
+          <div className="mb-2  shadow-lg">
+            <img src={dashboardHeader} className="h-16 w-16" alt="" />
           </div>
         </Link>
 
