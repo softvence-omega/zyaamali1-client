@@ -59,7 +59,7 @@ export const Pricing = () => {
     },
   ];
   return (
-    <div className="max-w-[1400px] mx-auto my-auto ">
+    <div className="max-w-[1400px] mx-auto my-auto" id="pricing">
       <div className="bg-white px-14">
         <h2 className="text-xl font-medium text-T-900 mb-6 ">Pricing Plans</h2>
 

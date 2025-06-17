@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaInstagram, FaLinkedin } from "react-icons/fa";
 import logo from "../assets/Adelo_black.svg";
 import { Link } from "react-router-dom";
 
@@ -11,22 +11,13 @@ const Footer: React.FC = () => {
 
         <div className="space-y-4">
           <img src={logo} alt="Footer Logo" className="w-24 h-auto" />
-          <p className="text-sm text-gray-500">
-            <p><span className="font-bold">Instagram:</span> <span className="text-blue-950">@adelo.ai</span> </p>
-            <p><span className="font-bold">Linkedin:</span> <span className="text-blue-950">https://www.linkedin.com/company/adeloai/</span></p>
-
-          </p>
+          <p className="text-sm">Smarter, faster marketing — powered by AI. Automate ad campaigns, generate content, and optimize performance with ease.</p>
           <div className="flex gap-4 pt-2 text-xl text-[#6c63ff]">
-            <a href="#" className="hover:text-black">
-              <FaFacebook />
-            </a>
-            <a href="#" className="hover:text-black">
-              <FaTwitter />
-            </a>
-            <a href="#" className="hover:text-black">
+
+            <a href="https://www.instagram.com/adelo.ai?igsh=MTQzejVsamVrZmt4ZQ==" className="hover:text-black text-4xl" target="_blank">
               <FaInstagram />
             </a>
-            <a href="#" className="hover:text-black">
+            <a href="https://www.linkedin.com/company/adeloai/" className="hover:text-black text-4xl" target="_blank">
               <FaLinkedin />
             </a>
           </div>
@@ -37,19 +28,19 @@ const Footer: React.FC = () => {
           <h6 className="font-semibold mb-3 text-gray-800">Platform</h6>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="hover:text-black">
+              <Link to="/#how-it-works" className="hover:text-black">
                 How It Works
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-black">
-                Features
-              </a>
+              <Link to='/services/campaign' className="hover:text-black">
+                Services
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-black">
+              <Link to='/#pricing' className="hover:text-black">
                 Pricing
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -59,9 +50,9 @@ const Footer: React.FC = () => {
           <h6 className="font-semibold mb-3 text-gray-800">Resources</h6>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="hover:text-black">
+              <Link to='/dashboard/help' className="hover:text-black">
                 Help Center
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -71,15 +62,10 @@ const Footer: React.FC = () => {
           <h6 className="font-semibold mb-3 text-gray-800">Company</h6>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="hover:text-black">
-                About Us
-              </a>
+              <Link to='/about' className="hover:text-black">About Us</Link>
             </li>
-
             <li>
-              <a href="#" className="hover:text-black">
-                Contact
-              </a>
+              <Link to='/contact' className="hover:text-black">Contact</Link>
             </li>
           </ul>
         </div>

@@ -49,7 +49,6 @@ const Services2 = () => {
         <div className="container mx-auto flex flex-col gap-6 py-8 px-4 sm:px-6 items-start justify-start">
           <h1 className="text-5xl sm:text-3xl font-bold">About This Service</h1>
           <p className="text-T-500 w-full md:w-[70%] text-base sm:text-lg">
-            <span className="font-bold"> Ad Campaign service about:</span> <br />
             Launch full AI-powered automated ad campaigns in minutes. Adelo handles audience targeting,
             budget allocations, performance optimization, and strategy adjustment, so you don’t have to.
           </p>

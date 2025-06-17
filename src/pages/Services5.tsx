@@ -17,8 +17,6 @@ platform, to streamline your creative process.
 const Services5 = () => {
   return (
     <div>
-
-     
       <HeroSection
           backgroundImage={serviceBack}
           titleTop="Marketing Template"
@@ -26,20 +24,11 @@ const Services5 = () => {
           description="Our expansive Marketing Template Library provides professionally designed, customizable templates for every type of campaign. Whether you need social media graphics, email newsletters, or ad copy templates, you’ll find ready-made layouts and messaging frameworks tailored to your industry and marketing goals."
         />
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="md:w-2/3 mb-10">
-        <h1 className="text-4xl font-semibold">Marketing Template Library</h1>
-        <p className="mt-5">Our expansive Marketing Template Library provides professionally designed, customizable templates for every type of campaign. Whether you need social media graphics, email newsletters, or ad copy templates, you’ll find ready-made layouts and messaging frameworks tailored to your industry and marketing goals.</p>
-       </div>
-
-        
-       
-
         {/* SectionBlock */}
         <SectionBlock
           img={img}
           title="About This Service"
           description={longDescription}
-          subTitle="Templates about:"
         />
 
 
