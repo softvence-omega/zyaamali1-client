@@ -10,8 +10,22 @@ import { HowWorks } from "@/components/LandingPage/HowWorks";
 import { Inspiration } from "@/components/LandingPage/Inspiration";
 import { Review } from "@/components/LandingPage/Review";
 import { Pricing } from "@/components/LandingPage/Pricing";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 function Landing() {
+   const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100); // Delay for smooth scroll after page loads
+      }
+    }
+  }, [location]);
   return (
     <div>
       <div className=" bg-T-400 relative overflow-hidden pb-20"> {/* Added relative and overflow-hidden */}

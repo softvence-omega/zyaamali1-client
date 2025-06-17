@@ -24,7 +24,7 @@ export const HowWorks = () => {
         }
     ];
     return (
-        <div className="bg-[#010610]  relative  ">
+        <div className="bg-[#010610]  relative" id="how-it-works">
             <img src={elipse} alt="" className="absolute right-0" />
             <div className="max-w-[1400px] mx-auto my-auto">
                 <div className="max-w-[1400px] mx-auto my-auto">

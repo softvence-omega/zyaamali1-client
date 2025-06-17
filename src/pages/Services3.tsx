@@ -31,7 +31,6 @@ function Services3() {
           img={img}
           title="About This Service"
           description={longDescription}
-          subTitle="Content Generation about:"
         />
 
  <div className="   py-12">

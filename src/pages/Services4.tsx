@@ -32,7 +32,6 @@ const Services4 = () => {
           img={img}
           title="About This Service"
           description={longDescription}
-          subTitle="  AI Feedback about:"
         />
 
 
