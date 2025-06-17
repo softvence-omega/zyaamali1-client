@@ -1,19 +1,14 @@
 import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
-import { useAppDispatch } from "@/hooks/useRedux";
-import { logout } from "@/store/Slices/AuthSlice/authSlice";
+
 import CommonWrapper from "@/common/CommonWrapper";
-import logo from "../assets/logo.png";
+import logo from "../assets/Adelo_black.svg";
 
 const Navbar: React.FC = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/login");
-  };
+
+
 
   const link = (
     <>
@@ -101,7 +96,7 @@ const Navbar: React.FC = () => {
           Contact
         </NavLink>
       </li>
-     
+
     </>
   );
 
@@ -149,7 +144,7 @@ const Navbar: React.FC = () => {
           Contact
         </NavLink>
       </li>
-      
+
     </>
   );
 
@@ -183,8 +178,8 @@ const Navbar: React.FC = () => {
                   {mobileLinks}
                 </ul>
               </div>
-              <Link to={"/"} className="text-xl">
-                <img src={logo} className="w-28 h-12 cursor-pointer" alt="Logo" />
+              <Link to={"/"} className="text-xl flex flex-row items-center gap-2 ">
+                <img src={logo} className="h-18 w-18" alt="" />
               </Link>
             </div>
 
@@ -193,7 +188,7 @@ const Navbar: React.FC = () => {
             </div>
 
             <div className="navbar-end">
-              <Link to={"/auth/login"} className="cursor-pointer">
+              <Link to={"/auth/login"} className="cursor-pointer ">
                 <button className="px-4 py-2 rounded-4xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] hover:brightness-110 transition text-white font-bold">
                   Sign In
                 </button>

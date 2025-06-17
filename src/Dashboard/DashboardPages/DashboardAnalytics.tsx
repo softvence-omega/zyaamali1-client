@@ -270,7 +270,7 @@ const items = [
 
 const DashboardAnalytics = () => {
   return (
-    <div className=" ">
+    <div className="overflow-x-hidden px-4 sm:px-6 lg:px-8 py-6">
       {/* title */}
 
       <h2 className=" text-4xl font-bold">
@@ -285,7 +285,7 @@ const DashboardAnalytics = () => {
       </p>
 
       {/* card */}
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-5 lg:gap-6 mt-4 sm:mt-6">
         {statItems.map(({ title, icon, amount, percentage }, index) => {
           const numericValue = parseFloat(percentage.replace(/[+ - %]/g, ""));
           const isTrulyPositive =
@@ -297,12 +297,17 @@ const DashboardAnalytics = () => {
             : "text-red-400";
 
           return (
-            <div key={index} className="bg-T-200 rounded-xl p-5">
-              <div className="flex justify-between items-center mb-2">
-                <h4 className="capitalize  text-T-400">{title}</h4>
-                <div className="text-blue-400">{icon}</div>
+            <div
+              key={index}
+              className="bg-T-200 rounded-xl p-4 sm:p-5 shadow-sm transition hover:shadow-md"
+            >
+              <div className="flex justify-between items-center mb-1 sm:mb-2">
+                <h4 className="capitalize text-sm sm:text-base text-T-400">
+                  {title}
+                </h4>
+                <div className="text-blue-400 text-base sm:text-lg">{icon}</div>
               </div>
-              <h1 className="text-2xl bg-[linear-gradient(to_right,_#000000_10%,_#4F3FBF_20%,_#8E6EFF_80%)] bg-clip-text text-transparent mb-2">
+              <h1 className="text-xl sm:text-2xl bg-[linear-gradient(to_right,_#000000_10%,_#4F3FBF_20%,_#8E6EFF_80%)] bg-clip-text text-transparent mb-1 sm:mb-2">
                 {amount}
               </h1>
               <div
@@ -318,14 +323,14 @@ const DashboardAnalytics = () => {
 
       {/* Filtering */}
 
-      <div className="  flex flex-col md:flex-row gap-5 mt-5">
+      <div className="  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
         <div className="flex-1 min-w-[200px] text-T-400 ">
           <h1 className="text-T-500">Business</h1>
           <Select>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Business" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-T-300">
               <SelectItem value="All Business">All Business</SelectItem>
               <SelectItem value="AI Business">AI Business</SelectItem>
               <SelectItem value="FaceBook Business">
@@ -341,7 +346,7 @@ const DashboardAnalytics = () => {
             <SelectTrigger className="w-full">
               <SelectValue placeholder="All Platforms" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-T-300">
               <SelectItem value="Facebook">Facebook</SelectItem>
               <SelectItem value="Instragram">Instragram</SelectItem>
               <SelectItem value="Google">Google</SelectItem>
@@ -355,7 +360,7 @@ const DashboardAnalytics = () => {
             <SelectTrigger className="w-full">
               <SelectValue placeholder="All Champign" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-T-300">
               <SelectItem value="Holiday special">Holiday special</SelectItem>
               <SelectItem value="Eid Special">Eid Special</SelectItem>
               <SelectItem value="Brand Awareness">Brand Awareness</SelectItem>
@@ -369,7 +374,7 @@ const DashboardAnalytics = () => {
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Last 30 days" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-T-300">
               <SelectItem value="LastWeek">Last Week</SelectItem>
               <SelectItem value="LastMonth">Last Month</SelectItem>
               <SelectItem value="LastYear">Last Year</SelectItem>
@@ -511,8 +516,8 @@ const DashboardAnalytics = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-between px-5 md:px-10 pb-2 text-sm text-gray-500">
-                    <div>
+                  <div className="flex justify-between pl-5 md:pl-10 pb-2 text-sm text-gray-500">
+                    <div className="pl-5 md:pl-0">
                       <p>Impression</p>
                       <p className="text-gray-700">{p.impression}</p>
                     </div>
@@ -520,7 +525,7 @@ const DashboardAnalytics = () => {
                       <p>Clicks</p>
                       <p className="text-gray-700">{p.clicks}</p>
                     </div>
-                    <div>
+                    <div className="flex flex-col items-center pr-2">
                       <p>ROAS</p>
                       <p className={`font-semibold ${p.roasColor}`}>{p.roas}</p>
                     </div>
@@ -545,16 +550,16 @@ const DashboardAnalytics = () => {
               <TableRow className="text-T-400 text-sm md:text-[16px]">
                 <TableHead>Campaign Name</TableHead>
                 <TableHead>Platform</TableHead>
-                <TableHead className="hidden md:table-cell">Status</TableHead>
+                <TableHead>Status</TableHead>
                 <TableHead>Budget</TableHead>
-                <TableHead className="hidden md:table-cell">
+                <TableHead className="hidden lg:table-cell">
                   Impressions
                 </TableHead>
-                <TableHead className="hidden md:table-cell">Clicks</TableHead>
-                <TableHead className="hidden md:table-cell">
+                <TableHead className="hidden lg:table-cell">Clicks</TableHead>
+                <TableHead className="hidden lg:table-cell">
                   Conversions
                 </TableHead>
-                <TableHead className="hidden md:table-cell">ROAS</TableHead>
+                <TableHead className="hidden lg:table-cell">ROAS</TableHead>
               </TableRow>
             </TableHeader>
 
@@ -584,16 +589,16 @@ const DashboardAnalytics = () => {
 
                   <TableCell>${campaign.budget}</TableCell>
 
-                  <TableCell className="hidden md:table-cell">
+                  <TableCell className="hidden lg:table-cell">
                     {campaign.impressions}
                   </TableCell>
-                  <TableCell className="hidden md:table-cell">
+                  <TableCell className="hidden lg:table-cell">
                     {campaign.clicks}
                   </TableCell>
-                  <TableCell className="hidden md:table-cell">
+                  <TableCell className="hidden lg:table-cell">
                     {campaign.conversions}
                   </TableCell>
-                  <TableCell className="hidden md:table-cell text-green-300">
+                  <TableCell className="hidden lg:table-cell text-green-300">
                     {campaign.roas}
                   </TableCell>
                 </TableRow>
@@ -621,7 +626,11 @@ const DashboardAnalytics = () => {
               className="flex  gap-4 rounded-md my-5 p-3 mx-5 bg-blue-300 "
             >
               <div>
-                <img src={item.icon} alt={item.title} className=" w-6 h-6" />
+                <img
+                  src={item.icon}
+                  alt={item.title}
+                  className=" max-w-6 max-h-6"
+                />
               </div>
               <div>
                 <h1 className="text-[20px] text-white">{item.title}</h1>

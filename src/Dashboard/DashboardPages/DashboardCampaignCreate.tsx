@@ -27,13 +27,6 @@ import { FaPeopleGroup } from "react-icons/fa6";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 import CampaignSubHeader from "@/components/Dashboard/campaign/CampaignSubHeader";
 import PrimaryButton from "@/components/ui/PrimaryButton";
@@ -90,7 +83,7 @@ const adTypes = [
 
 const DashboardCampaignCreate = () => {
   const [selected, setSelected] = useState("mobile");
- const navigate = useNavigate()
+  const navigate = useNavigate();
   const [interests, setInterests] = useState([
     "Fitness",
     "Running",
@@ -115,10 +108,9 @@ const DashboardCampaignCreate = () => {
   const [totalBudget, setTotalBudget] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const handlegenerate =() =>{
-
-    navigate("/dashboard/campaign/preview")
-  } 
+  const handlegenerate = () => {
+    navigate("/dashboard/campaign/preview");
+  };
   const handleSubmit = () => {
     const data = {
       businessInfo,
@@ -152,26 +144,44 @@ const DashboardCampaignCreate = () => {
           {/* business information section */}
           <div>
             <CampaignSubHeader text="Business Information" />
-            <div>
-              <Select
-                onValueChange={(value) => setBusinessInfo(value)}
+            <div className="relative w-full">
+              <select
                 value={businessInfo}
+                onChange={(e) => setBusinessInfo(e.target.value)}
+                className="appearance-none w-full py-3 px-4 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-800"
               >
-                <SelectTrigger className="w-full py-2">
-                  <SelectValue placeholder="Acme Sportswear" />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="Acme Sportswear">
-                    Acme Sportswear
-                  </SelectItem>
-                  <SelectItem value="Target Audience">
-                    Target Audience
-                  </SelectItem>
-                  <SelectItem value="Primary Goals">Primary Goals</SelectItem>
-                </SelectContent>
-              </Select>
+                <option className="bg-white text-gray-700" value="">
+                  Select Business
+                </option>
+                <option className="" value="Acme Sportswear">
+                  Acme Sportswear
+                </option>
+                <option className="" value="Target Audience">
+                  Target Audience
+                </option>
+                <option className="" value="Primary Goals">
+                  Primary Goals
+                </option>
+              </select>
+
+              {/* Custom dropdown arrow (SVG) */}
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
+                <svg
+                  className="h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 14a1 1 0 01-.7-.3l-4-4a1 1 0 111.4-1.4L10 11.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-.7.3z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
+
           {/* title add section */}
           <div>
             <CampaignSubHeader text="Add Title" />
@@ -180,6 +190,7 @@ const DashboardCampaignCreate = () => {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
               />
             </div>
           </div>
@@ -260,55 +271,47 @@ const DashboardCampaignCreate = () => {
             <CampaignSubHeader text=" Target Audience" />
             {/* Location */}
             <div>
-              <p className="text-sm">Location</p>
-
-              <Select
-                onValueChange={(value) => setLocation(value)}
+              <p className="text-sm mb-1">Location</p>
+              <select
                 value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
               >
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="united-states">United States</SelectItem>
-                  <SelectItem value="canada">Canada</SelectItem>
-                  <SelectItem value="uk">United Kingdom</SelectItem>
-                </SelectContent>
-              </Select>
+                <option value="">Select Location</option>
+                <option value="united-states">United States</option>
+                <option value="canada">Canada</option>
+                <option value="uk">United Kingdom</option>
+              </select>
             </div>
+
             {/* Age range */}
             <div>
               <p className="text-sm">Age range</p>
               <div className="flex items-center gap-2">
-                <Select
-                  onValueChange={(value) => setAgeFrom(value)}
+                <select
                   value={ageFrom}
+                  onChange={(e) => setAgeFrom(e.target.value)}
+                  className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 >
-                  <SelectTrigger className="w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white">
-                    <SelectItem value="united-states">18</SelectItem>
-                    <SelectItem value="canada">19</SelectItem>
-                    <SelectItem value="uk">20</SelectItem>
-                  </SelectContent>
-                </Select>
+                  <option value="">From</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                </select>
                 <p>To</p>
-                <Select
-                  onValueChange={(value) => setAgeTo(value)}
+                <select
                   value={ageTo}
+                  onChange={(e) => setAgeTo(e.target.value)}
+                  className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 >
-                  <SelectTrigger className="w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white">
-                    <SelectItem value="united-states">18</SelectItem>
-                    <SelectItem value="canada">19</SelectItem>
-                    <SelectItem value="uk">20</SelectItem>
-                  </SelectContent>
-                </Select>
+                  <option value="">To</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                </select>
               </div>
             </div>
+
             {/* Gender */}
             <div>
               <CampaignSubHeader text="Gender" />
@@ -365,39 +368,33 @@ const DashboardCampaignCreate = () => {
             {/* Daily Budget */}
             <div>
               <p className="text-sm">Daily Budget</p>
-
-              <Select
-                onValueChange={(value) => setDailyBudget(value)}
+              <select
                 value={dailyBudget}
+                onChange={(e) => setDailyBudget(e.target.value)}
+                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
               >
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="50">$50</SelectItem>
-                  <SelectItem value="100">$100</SelectItem>
-                  <SelectItem value="150">$150</SelectItem>
-                </SelectContent>
-              </Select>
+                <option value="">Select Daily Budget</option>
+                <option value="50">$50</option>
+                <option value="100">$100</option>
+                <option value="150">$150</option>
+              </select>
             </div>
+
             {/* Total Budget */}
             <div>
               <p className="text-sm">Total Budget</p>
-
-              <Select
-                onValueChange={(value) => setTotalBudget(value)}
+              <select
                 value={totalBudget}
+                onChange={(e) => setTotalBudget(e.target.value)}
+                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
               >
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="500">$500</SelectItem>
-                  <SelectItem value="1000">$1000</SelectItem>
-                  <SelectItem value="1500">$1500</SelectItem>
-                </SelectContent>
-              </Select>
+                <option value="">Select Total Budget</option>
+                <option value="500">$500</option>
+                <option value="1000">$1000</option>
+                <option value="1500">$1500</option>
+              </select>
             </div>
+
             {/* date */}
             <div className="flex gap-4">
               <div className="flex-1">
@@ -406,6 +403,7 @@ const DashboardCampaignCreate = () => {
                   type="date"
                   onChange={(e) => setStartDate(e.target.value)}
                   value={startDate}
+                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 />
               </div>
               <div className="flex-1">
@@ -414,6 +412,7 @@ const DashboardCampaignCreate = () => {
                   type="date"
                   onChange={(e) => setEndDate(e.target.value)}
                   value={endDate}
+                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 />
               </div>
             </div>
@@ -480,17 +479,11 @@ const DashboardCampaignCreate = () => {
           {/* ------------write prompt section--------- */}
           <div className="flex items-center w-full p-3 rounded-full bg-[#f5f3ff] shadow-sm">
             {/* Dropdown */}
-            <div className="relative text-blue-500 ">
-              <Select>
-                <SelectTrigger className="w-[100px]">
-                  <SelectValue placeholder="Image" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="light">Image</SelectItem>
-                  <SelectItem value="dark">Text</SelectItem>
-                </SelectContent>
-              </Select>
-              {/* Dropdown options can be added here */}
+            <div className="relative text-blue-500">
+              <select className="w-[100px] py-4 px-2 border border-gray-300 rounded-md text-sm bg-white">
+                <option value="image">Image</option>
+                <option value="text">Text</option>
+              </select>
             </div>
 
             {/* Input field */}
@@ -536,8 +529,11 @@ const DashboardCampaignCreate = () => {
               <img src="/src/assets/mobilepreview.jpg" />
             </div>
             <div className="flex justify-end mt-5">
-              <button onClick={handlegenerate} className="px-3 py-2 text-white
-               rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-md cursor-pointer">
+              <button
+                onClick={handlegenerate}
+                className="px-3 py-2 text-white
+               rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-md cursor-pointer"
+              >
                 Get AI Optimize Suggestions
                 <FaWandMagicSparkles className="text-white ml-2" />
               </button>
@@ -550,3 +546,4 @@ const DashboardCampaignCreate = () => {
 };
 
 export default DashboardCampaignCreate;
+// okay

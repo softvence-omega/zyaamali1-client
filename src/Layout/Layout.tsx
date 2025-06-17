@@ -6,7 +6,7 @@ const Layout: React.FC = () => {
   return (
     <div>
 
-      <div className="w-full sticky top-0 z-50 bg-white"><Navbar /></div>
+      <div className="w-full  top-0 z-50 bg-white"><Navbar /></div>
 
 
       <main >

@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaChartBar } from "react-icons/fa";
 import { RiMegaphoneFill } from "react-icons/ri";
 import { MdMessage, MdVideoLibrary } from "react-icons/md";
 import dashboardHeader from "../../assets/dashboard-header.png";
 import { LuLayoutGrid } from "react-icons/lu";
 import { BiWallet } from "react-icons/bi";
+import user from "../../assets/user.png";
 
 const SidebarExpand = () => {
   const [activeItem, setActiveItem] = useState("Dashboard");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // New state to handle mobile sidebar toggle
   const navigate = useNavigate();
 
   const navItems = [
@@ -35,12 +37,12 @@ const SidebarExpand = () => {
     {
       icon: <BiWallet className="h-6 w-6" />,
       label: "Billing & Subscription",
-      path: "/dashboard/subscription", // You might need to create this route if not present
+      path: "/dashboard/subscription",
     },
     {
       icon: <MdMessage className="h-6 w-6" />,
       label: "Help & Support",
-      path: "/dashboard/help", // You might need to create this route if not present
+      path: "/dashboard/help",
     },
   ];
 
@@ -48,22 +50,30 @@ const SidebarExpand = () => {
     setActiveItem(label);
     navigate(path);
   };
+
   const handleprof = () => {
     navigate("/dashboard/userprofile");
   };
 
+  // Toggle Sidebar for Mobile
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <div className="bg-[#020817] rounded-[40px] p-6 flex flex-col items-center justify-between w-full lg:w-60 h-full lg:min-h-[600px] shadow-lg">
+    <div className={`bg-[#020817] sticky top-8 rounded-[40px] p-6 flex flex-col items-center justify-between w-full lg:w-60 h-full lg:min-h-[600px] shadow-lg ${isSidebarOpen ? 'block' : 'hidden'}`}>
       <div className="flex flex-col items-start w-full">
         {/* Logo/Header */}
-        <div className="mb-8 p-3 shadow-lg flex items-center gap-3 w-full">
-          <img
-            src={dashboardHeader}
-            alt="Dashboard Logo"
-            className="h-10 w-10"
-          />
-          <h1 className="text-2xl font-bold text-white">ADELO</h1>
-        </div>
+        <Link to="/">
+          <div className="mb-8 p-3 shadow-lg flex items-center gap-3 w-full">
+            <img
+              src={dashboardHeader}
+              alt="Dashboard Logo"
+              className="h-10 w-10"
+            />
+            <h1 className="text-2xl font-bold text-white">ADELO</h1>
+          </div>
+        </Link>
 
         {/* Navigation Items */}
         <div className="flex flex-col gap-6 w-full text-white">
@@ -71,14 +81,14 @@ const SidebarExpand = () => {
             <div
               key={label}
               onClick={() => handleNavClick(label, path)}
-              className={`flex items-center gap-3 cursor-pointer transition-colors duration-200 ${
-                activeItem === label
-                  ? "text-white"
-                  : "text-gray-400 hover:text-white"
-              }`}
+              className={`flex items-center gap-3 cursor-pointer transition-colors duration-200 ${activeItem === label
+                ? "text-white"
+                : "text-gray-400 hover:text-white"
+                }`}
             >
               {icon}
-              <p className="text-sm font-medium">{label}</p>
+              {/* On mobile hide the text, only show icon */}
+              <p className="hidden lg:block text-sm font-medium">{label}</p>
             </div>
           ))}
         </div>
@@ -90,12 +100,21 @@ const SidebarExpand = () => {
         className="flex items-center gap-3 cursor-pointer hover:text-white text-gray-400 transition-colors duration-200 mt-8 w-full"
       >
         <img
-          src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"
+          src={user}
           alt="User Avatar"
-          className="rounded-full h-10 w-10 border-2"
+          className="rounded-full w-8 h-8 border-2"
         />
-        <p className="text-sm font-medium text-white">Sohag</p>
+        {/* On mobile hide text */}
+        <p className="hidden lg:block text-sm font-medium text-white">Sohaggg</p>
       </div>
+
+      {/* Sidebar toggle button for mobile */}
+      <button
+        className="lg:hidden absolute top-4 right-4 bg-[#020817] p-2 rounded-full text-white shadow-lg"
+        onClick={toggleSidebar}
+      >
+        {isSidebarOpen ? 'Close' : 'Open'}
+      </button>
     </div>
   );
 };

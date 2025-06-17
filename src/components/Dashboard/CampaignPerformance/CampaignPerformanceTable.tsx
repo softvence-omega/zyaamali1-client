@@ -116,13 +116,61 @@ const CampaignPerformanceTable = () => {
   ];
 
   const [campaigns, setCampaigns] = useState(initialData);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [campaignToDelete, setCampaignToDelete] = useState<number | null>(null);
 
-  const handleDeleteCampaign = (id: number) => {
-    setCampaigns(campaigns.filter((campaign) => campaign.id !== id));
+  const handleDeleteClick = (id: number) => {
+    setCampaignToDelete(id);
+    setDeleteModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (campaignToDelete) {
+      setCampaigns(
+        campaigns.filter((campaign) => campaign.id !== campaignToDelete)
+      );
+      setDeleteModalOpen(false);
+      setCampaignToDelete(null);
+    }
+  };
+
+  const cancelDelete = () => {
+    setDeleteModalOpen(false);
+    setCampaignToDelete(null);
   };
 
   return (
     <div className="border border-Foundation-text-T-75/30 rounded-lg p-4 bg-white">
+      {deleteModalOpen && (
+        <>
+          <div className="fixed inset-0 bg-black/60 z-40"></div>
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
+              <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
+              <p className="mb-6">
+                Are you sure you want to delete this campaign? This action
+                cannot be undone.
+              </p>
+              <div className="flex justify-end space-x-3">
+                <Button
+                  variant="outline"
+                  onClick={cancelDelete}
+                  className="px-4 py-2"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={confirmDelete}
+                  className="px-4 py-2 bg-red-500 hover:bg-red-700"
+                >
+                  Delete
+                </Button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Campaign Performance</h2>
         <div className="space-x-2">
@@ -188,7 +236,7 @@ const CampaignPerformanceTable = () => {
                   <button className="text-blue-500 underline">Details</button>
                   <button
                     className="text-red-500 underline"
-                    onClick={() => handleDeleteCampaign(campaign.id)}
+                    onClick={() => handleDeleteClick(campaign.id)}
                   >
                     Delete
                   </button>
@@ -216,7 +264,7 @@ const CampaignPerformanceTable = () => {
                 </button>
                 <button
                   className="text-red-500 text-sm underline"
-                  onClick={() => handleDeleteCampaign(campaign.id)}
+                  onClick={() => handleDeleteClick(campaign.id)}
                 >
                   Delete
                 </button>

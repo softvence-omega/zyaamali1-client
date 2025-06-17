@@ -4,14 +4,14 @@ import { Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
   return (
-    <div className="flex px-4 py-8 gap-x-6 min-h-screen">
-      <div className="block lg:hidden h-fit">
+    <div className="grid grid-cols-12  px-4 py-8  min-h-screen">
+      <div className="col-span-2 block 2xl:hidden h-fit sticky top-8">
         <Sidebar />
       </div>
-      <div className="hidden lg:block h-fit sticky top-8">
+      <div className="hidden col-span-2 2xl:block h-fit sticky top-8">
         <SidebarExpand />
       </div>
-      <div className="flex-1">
+      <div className="flex-1 col-span-10 2xl:col-span-10">
         <Outlet />
       </div>
     </div>

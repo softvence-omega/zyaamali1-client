@@ -1,6 +1,6 @@
 import CommonWrapper from "@/common/CommonWrapper";
 import bannerVid from "../assets/bannerVid.mp4";
-import bannerImg from "../assets/bgbannerImg.png"; // Import the image if needed
+
 import { Banner } from "@/components/LandingPage/Banner";
 import { Rating } from "@/components/LandingPage/Rating";
 import { Services } from "@/components/LandingPage/Services";
@@ -26,11 +26,7 @@ function Landing() {
           Your browser does not support the video tag.
         </video>
 
-        <img
-          src={bannerImg} // Use the image as a fallback or for additional styling
-          alt="Banner Background"
-          className="absolute top-8 -right-[45%] w-full h-full object-contain  " // Adjust opacity as needed
-        />
+        
 
 
         <CommonWrapper>

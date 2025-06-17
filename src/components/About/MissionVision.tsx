@@ -1,5 +1,5 @@
 import andImg from '../../assets/&.png';
-import vissionImg from '../../assets/Vector 6.png';
+import vissionImg from '../../assets/Adelo_triangle only.svg';
 
 const MissionVision = () => {
   return (
@@ -8,7 +8,7 @@ const MissionVision = () => {
       <div className="flex flex-col md:flex-row min-h-screen font-sans">
         {/* Left Side */}
         <div className="bg-[#F6F3FF] flex-1 flex items-center justify-center p-10 w-full">
-          <img src={vissionImg} alt="Vision Illustration" className="w-75" />
+          <img src={vissionImg} alt="Vision Illustration" className="" />
         </div>
 
         {/* Right Side */}

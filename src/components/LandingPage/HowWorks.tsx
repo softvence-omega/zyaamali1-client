@@ -31,7 +31,7 @@ export const HowWorks = () => {
                     <div className="flex flex-col gap-10 p-10">
 
                         <div className="flex flex-col md:flex-row gap-10 justify-between items-center pb-8 ">
-                            <div className="flex-1"><h1 className="text-9xl text-white  w-2/4 font-bold">How <span className="outline-text text-transparent bg-clip-text  ">ADELO</span> Works</h1> </div>
+                            <div className="flex-1"><h1 className="text-6xl md:text-5xl 2xl:text-9xl text-white  w-2/4 font-bold">How <span className="outline-text text-transparent bg-clip-text  ">ADELO</span> Works</h1> </div>
                             <div className="max-w-6xl mx-auto grid grid-cols-1    gap-6">
                                 {processSteps.map((step) => (
                                     <div
