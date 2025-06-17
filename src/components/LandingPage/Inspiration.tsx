@@ -30,7 +30,8 @@ export const Inspiration = () => {
                         Get Inspiration
                     </h1>
                     <p className="max-w-2xl text-black/50">
-                        Lorem ipsum dolor sit amet consectetur. Nulla ornare erat mauris vulputate id ullamcorper mauris ante molestie. Vestibulum amet nibh eget eu.
+                        Explore real campaigns powered by Adelo AI, from local brands to global creators. See what’s
+                        working, adapt it to your voice, and launch your next winning ad faster.
                     </p>
                 </div>
 

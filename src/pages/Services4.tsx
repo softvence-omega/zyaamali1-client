@@ -9,11 +9,8 @@ import feed3 from "../assets/feed-3.png";
 import feed4 from "../assets/feed4.png";
 
 const longDescription = `
-  Lorem ipsum dolor sit amet consectetur. In fringilla fames facilisis vulputate gravida blandit leo habitant.
-  Ullamcorper justo adipiscing amet consequat ut metus aliquam eget sed. Nulla nunc velit lacinia ultricies.
-  Aenean amet venenatis cursus egestas non odio. Tellus morbi tempus eu pharetra libero felis euismod vitae.
-  Venenatis id sagittis in in vulputate. Nisi cras aenean neque lacus odio. Sed hendrerit tristique nullam sit
-  amet pharetra cursus dictum. Neque nec iaculis sit elementum leo.
+Our AI reviews your ads, strategy, and campaigns and offers instant feedback on visuals, tone, 
+and call-to-action effectiveness, helping you improve performance before you publish.
 `;
 
 
@@ -35,6 +32,7 @@ const Services4 = () => {
           img={img}
           title="About This Service"
           description={longDescription}
+          subTitle="  AI Feedback about:"
         />
 
 

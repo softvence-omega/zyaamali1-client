@@ -8,12 +8,9 @@ import marketing2 from "../assets/marketing-2.png";
 import marketing3 from "../assets/marketing-3.png";
 import marketing4 from "../assets/marketing-4.png";
 
-const longDescription = `
-  Lorem ipsum dolor sit amet consectetur. In fringilla fames facilisis vulputate gravida blandit leo habitant.
-  Ullamcorper justo adipiscing amet consequat ut metus aliquam eget sed. Nulla nunc velit lacinia ultricies.
-  Aenean amet venenatis cursus egestas non odio. Tellus morbi tempus eu pharetra libero felis euismod vitae.
-  Venenatis id sagittis in in vulputate. Nisi cras aenean neque lacus odio. Sed hendrerit tristique nullam sit
-  amet pharetra cursus dictum. Neque nec iaculis sit elementum leo.
+const longDescription = `  
+Access a growing library of ready-to-use ad templates, customizable by industry, goal, and 
+platform, to streamline your creative process.
 `;
 
 
@@ -42,6 +39,7 @@ const Services5 = () => {
           img={img}
           title="About This Service"
           description={longDescription}
+          subTitle="Templates about:"
         />
 
 

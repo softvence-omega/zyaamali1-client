@@ -6,7 +6,8 @@ const JoinTeam = () => {
                     Join the Team
                 </h1>
                 <p className="mb-6 text-gray-700 text-sm md:text-base text-center lg:text-left">
-                    Lorem ipsum dolor sit amet consectetur. Cursus vel amet nunc velit nisl. Cras duis sit turpis feugiat pellentesque. Accumsan lectus interdum eu pellentesque pellentesque. Vitae neque nulla ornare duis felis.
+                    We’re building the future of marketing. Smarter, faster, and more accessible. If you’re excited by
+                    innovation and love helping businesses grow, we’d love to hear from you.
                 </p>
 
                 {/* Full-width input and button stacked on small screens */}

@@ -3,9 +3,10 @@ interface SectionBlockProps {
   title: string;
   description?: string;
   children?: React.ReactNode;
+  subTitle?:string;
 }
 
-const SectionBlock:React.FC<SectionBlockProps> = ({ img, title, description }) => {
+const SectionBlock:React.FC<SectionBlockProps> = ({ img, title, description,subTitle }) => {
   return (
     <div className=" my-5">
       {img && (
@@ -17,6 +18,7 @@ const SectionBlock:React.FC<SectionBlockProps> = ({ img, title, description }) =
         <h1 className="text-2xl font-semibold">
           {title}
         </h1>
+        <p className="font-bold">{subTitle}</p>
         <p>{description}</p>
       </div>
     </div>
