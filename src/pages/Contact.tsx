@@ -8,7 +8,7 @@ const faqs = [
   {
     question: "What is ADELO?",
     answer:
-      "Lorem ipsum dolor sit amet consectetur. In fringilla fames facilisis vulputate gravida blandit leo habitant. Ullamcorper justo adipiscing amet consequat ut metus aliquam eget sed. Nulla nunc velit lacinia ultricies.",
+      "Adelo is an AI-powered marketing platform that helps businesses create, launch, and optimizead campaigns across channels automatically. It’s like having a full marketing team, without the costs.",
   },
   {
     question: "Can I integrate Adelo with my social media accounts?",
@@ -83,8 +83,8 @@ const Contact = () => {
               </span>
             </h1>
             <p className="text-T-600 mt-4 sm:text-lg max-w-xl mx-auto">
-              Lorem ipsum dolor sit amet consectetur. Cras dapibus faucibus
-              tellus ultrices. Ac porta in ut mi tortor nunc lectus.
+              Have questions or need help getting started? Reach out to our team. We’re here to support you
+              with anything from onboarding to campaign strategy.
             </p>
           </div>
         </div>

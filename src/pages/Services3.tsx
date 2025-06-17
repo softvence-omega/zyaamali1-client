@@ -8,11 +8,8 @@ import img2 from "../assets/img-2.png";
 import img3 from "../assets/Frame 350.png";
 
 const longDescription = `
-  Lorem ipsum dolor sit amet consectetur. In fringilla fames facilisis vulputate gravida blandit leo habitant.
-  Ullamcorper justo adipiscing amet consequat ut metus aliquam eget sed. Nulla nunc velit lacinia ultricies.
-  Aenean amet venenatis cursus egestas non odio. Tellus morbi tempus eu pharetra libero felis euismod vitae.
-  Venenatis id sagittis in in vulputate. Nisi cras aenean neque lacus odio. Sed hendrerit tristique nullam sit
-  amet pharetra cursus dictum. Neque nec iaculis sit elementum leo.
+Generate scroll-stopping videos, images, and ad copy tailored to your business and 
+audience—all driven by AI and refined through your brand voice. 
 `;
 
 function Services3() {
@@ -34,6 +31,7 @@ function Services3() {
           img={img}
           title="About This Service"
           description={longDescription}
+          subTitle="Content Generation about:"
         />
 
  <div className="   py-12">

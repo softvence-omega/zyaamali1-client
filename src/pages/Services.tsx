@@ -48,22 +48,9 @@ const Services = () => {
         <div className="container mx-auto flex flex-col gap-6 py-8 px-4 sm:px-6 items-start justify-start">
           <h1 className="text-3xl font-bold">About This Service</h1>
           <p className="text-T-500 w-full md:w-[70%]">
-            Lorem ipsum dolor sit amet consectetur. In fringilla fames facilisis
-            vulputate gravida blandit leo habitant. Ullamcorper justo adipiscing
-            amet consequat ut metus aliquam eget sed. Nulla nunc velit lacinia
-            ultricies. Aenean amet venenatis cursus egestas non odio. Tellus
-            morbi tempus eu pharetra libero felis euismod vitae. Venenatis id
-            sagittis in in vulputate. Nisi cras aenean neque lacus odio. Sed
-            hendrerit tristique nullam sit amet pharetra cursus dictum. Neque
-            nec iaculis sit elementum leo. Lorem ipsum dolor sit amet
-            consectetur. In fringilla fames facilisis vulputate gravida blandit
-            leo habitant. Ullamcorper justo adipiscing amet consequat ut metus
-            aliquam eget sed. Nulla nunc velit lacinia ultricies. Aenean amet
-            venenatis cursus egestas non odio. Tellus morbi tempus eu pharetra
-            libero felis euismod vitae. Venenatis id sagittis in in vulputate.
-            Nisi cras aenean neque lacus odio. Sed hendrerit tristique nullam
-            sit amet pharetra cursus dictum. Neque nec iaculis sit elementum
-            leo.
+            <span className="font-bold"> Ad Campaign service about:</span> <br />
+            Launch full AI-powered automated ad campaigns in minutes. Adelo handles audience targeting,
+            budget allocations, performance optimization, and strategy adjustment, so you don’t have to.
             {/* Truncated for brevity */}
           </p>
         </div>
