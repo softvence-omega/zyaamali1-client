@@ -8,10 +8,15 @@ import c4 from "../../assets/c4.png";
 import c5 from "../../assets/c5.png";
 import c6 from "../../assets/c6.svg";
 import c7 from "../../assets/c7.svg";
+import c8 from '../../assets/alibaba-logo.png'
+import c9 from '../../assets/walmart-logo2.png'
+import c10 from '../../assets/ebay-logo.png'
+import c11 from '../../assets/airnb-logo.png'
+import c12 from '../../assets/uber-logo.png'
 import { useEffect, useState } from "react";
 
 const MyCarousel = () => {
-    const images = [c1, c2, c3, c4, c5, c6, c7];
+    const images = [c1, c2, c3, c4, c5, c6, c7,c8,c9,c10,c11,c12];
     const [slidePercentage, setSlidePercentage] = useState(20);
 
 
@@ -29,14 +34,14 @@ const MyCarousel = () => {
     }, []);
 
     return (
-        <div className="w-full max-w-full mx-auto px-2">
+        <div className="w-full max-w-full mx-auto px-2 pb-20">
             <Carousel
                 autoPlay
                 infiniteLoop
                 showThumbs={false}
                 showStatus={false}
                 transitionTime={700}
-                interval={3000}
+                interval={1500}
                 emulateTouch
                 swipeable
                 stopOnHover
@@ -45,6 +50,8 @@ const MyCarousel = () => {
                 centerSlidePercentage={slidePercentage}
                 showArrows={false}
                 swipeScrollTolerance={5}
+                showIndicators={false}
+
             >
                 {images.map((img, index) => (
                     <div key={index} className="px-2">

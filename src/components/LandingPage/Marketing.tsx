@@ -65,8 +65,8 @@ export const Marketing = () => {
           </div>
         </div>
 
-        <div className="flex justify-center py-10 px-2 text-center">
-          <h1 className="text-2xl sm:text-3xl">
+        <div className="flex justify-center px-2 text-center font-bold">
+          <h1 className="text-2xl sm:text-4xl mt-20">
             Companies currently using AI for marketing
           </h1>
         </div>
