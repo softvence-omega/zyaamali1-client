@@ -29,6 +29,7 @@ import DashboardProfile from "@/Dashboard/DashboardPages/DashboardProfile";
 import DashboardHelp from "@/Dashboard/DashboardPages/DashboardHelp";
 import Services5 from "@/pages/Services5";
 import DashboardGenerateContent from "@/Dashboard/DashboardPages/DashboardGenerateContent";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
 
 const routes = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const routes = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: '/privacy-policy',
+        element: <PrivacyPolicy />
       },
       {
         path: "/services",
