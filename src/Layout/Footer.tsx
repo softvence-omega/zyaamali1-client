@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-black">
+              <a href="/privacy-policy" className="hover:text-black">
                 Privacy Policy
               </a>
             </li>
