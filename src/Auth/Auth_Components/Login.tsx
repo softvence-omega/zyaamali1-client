@@ -4,6 +4,7 @@ import { RiAppleLine } from "react-icons/ri";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import video from "../../assets/6676845_Gradient_Banner_1920x1080.mp4";
+import { AiFillTikTok } from "react-icons/ai";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -86,6 +87,11 @@ export default function LoginForm() {
           </div>
 
           <div className="space-y-3">
+            <button className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 text-sm rounded-full">
+              <AiFillTikTok className="w-5 h-5" />
+              Continue With Tiktok
+            </button>
+
             <button className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 text-sm rounded-full">
               <FcGoogle className="w-5 h-5" />
               Continue With Google
