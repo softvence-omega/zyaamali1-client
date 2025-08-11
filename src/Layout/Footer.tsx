@@ -75,7 +75,7 @@ const Footer: React.FC = () => {
           <h6 className="font-semibold mb-3 text-gray-800">Legal</h6>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="hover:text-black">
+              <a href="/terms-of-service" className="hover:text-black">
                 Terms of Service
               </a>
             </li>

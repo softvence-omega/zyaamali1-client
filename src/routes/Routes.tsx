@@ -30,6 +30,8 @@ import DashboardHelp from "@/Dashboard/DashboardPages/DashboardHelp";
 import Services5 from "@/pages/Services5";
 import DashboardGenerateContent from "@/Dashboard/DashboardPages/DashboardGenerateContent";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import TermsOfService from "@/pages/TermsOfService";
+import DataDeletionPage from "@/pages/DataDeletation";
 
 const routes = createBrowserRouter([
   {
@@ -45,8 +47,16 @@ const routes = createBrowserRouter([
         element: <About />,
       },
       {
-        path: '/privacy-policy',
-        element: <PrivacyPolicy />
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "/terms-of-service",
+        element: <TermsOfService />,
+      },
+      {
+        path: "/data-deletion",
+        element: <DataDeletionPage />,
       },
       {
         path: "/services",
