@@ -25,6 +25,7 @@ export default function SignupForm() {
   const navigate = useNavigate();
 
   const onSubmit = async (data: SignupInputs) => {
+    console.log(data)
 
     try {
       const response = await fetch(
