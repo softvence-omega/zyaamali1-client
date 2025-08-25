@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { fetchSocialAccounts } from "@/utils/FetchSocialAccount";
 import React, { useEffect, useState, useCallback } from "react";
 import { FaCheckCircle, FaEdit } from "react-icons/fa";
 
@@ -14,32 +15,15 @@ const ConnectedAdAccounts: React.FC = () => {
   const [socialAccounts, setSocialAccounts] = useState<AdAccount[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Reusable fetch function
-  const fetchSocialAccounts = useCallback(async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(
-        "http://localhost:5000/api/v1/connect/get-All-Data"
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch: ${response.status} ${response.statusText}`
-        );
-      }
-
-      const data = await response.json();
-      setSocialAccounts(data?.data);
-    } catch (error) {
-      console.error("❌ Error fetching social accounts:", error);
-    } finally {
-      setLoading(false);
-    }
+  // ✅ Wrap in useCallback so dependency stays stable
+  const loadAccounts = useCallback(() => {
+    fetchSocialAccounts(setLoading, setSocialAccounts);
   }, []);
 
   useEffect(() => {
-    fetchSocialAccounts();
-  }, [fetchSocialAccounts]);
+    loadAccounts();
+  }, [loadAccounts]);
+
 
   const handleEdit = async (name: string) => {
     try {
@@ -63,7 +47,7 @@ const ConnectedAdAccounts: React.FC = () => {
       console.log("✅ Updated successfully:", result);
 
       // ✅ Refetch after update
-      fetchSocialAccounts();
+      fetchSocialAccounts(setLoading, setSocialAccounts);
     } catch (error) {
       console.error("❌ Error updating account:", error);
     }
@@ -75,9 +59,7 @@ const ConnectedAdAccounts: React.FC = () => {
         Connected Ad Accounts
       </h2>
 
-      {loading ? (
-        <p className="text-center text-gray-500">Loading...</p>
-      ) : (
+      {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {socialAccounts.length > 0 ? (
             socialAccounts
@@ -123,7 +105,7 @@ const ConnectedAdAccounts: React.FC = () => {
             </p>
           )}
         </div>
-      )}
+      }
     </div>
   );
 };

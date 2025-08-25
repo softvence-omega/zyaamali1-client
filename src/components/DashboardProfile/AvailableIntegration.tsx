@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // src/components/DashboardProfile/AvailableIntegration.tsx
+import { fetchSocialAccounts } from "@/utils/FetchSocialAccount";
 import React, { useCallback, useEffect, useState } from "react";
 
 interface AdAccount {
@@ -14,35 +15,41 @@ const AvailableIntegration: React.FC = () => {
   const [socialAccounts, setSocialAccounts] = useState<AdAccount[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchSocialAccounts = useCallback(async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(
-        "http://localhost:5000/api/v1/connect/get-All-Data"
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch: ${response.status} ${response.statusText}`
-        );
-      }
-
-      const data = await response.json();
-      setSocialAccounts(data?.data);
-    } catch (error) {
-      console.error("❌ Error fetching social accounts:", error);
-    } finally {
-      setLoading(false);
-    }
+  // ✅ Wrap in useCallback so dependency stays stable
+  const loadAccounts = useCallback(() => {
+    fetchSocialAccounts(setLoading, setSocialAccounts);
   }, []);
 
-  // ✅ Call function on mount
   useEffect(() => {
-    fetchSocialAccounts();
-  }, [fetchSocialAccounts]);
-  
-  const handleConnect = (id: string) => {
-    console.log(`Connect to integration with ID: ${id}`);
+    loadAccounts();
+  }, [loadAccounts, loading]);
+
+  const integrationApis: Record<string, string> = {
+    "Meta Ads": "http://localhost:5000/api/v1/connect/facebook-auth",
+    "TikTok Ads": "http://localhost:5000/api/v1/connect/tiktok-auth",
+    "LinkedIn Ads": "http://localhost:5000/api/v1/connect/linkedin-auth",
+    "Google Ads": "http://localhost:5000/api/v1/connect/google-auth",
+  };
+
+  const handleConnect = (name: string) => {
+    try {
+      const apiUrl = integrationApis[name]; // 👈 your map of integration URLs
+      console.log("🌐 Starting OAuth for:", name, apiUrl);
+
+      if (!apiUrl) {
+        console.warn(`❌ No API configured for integration: ${name}`);
+        return;
+      }
+
+      // ✅ Open OAuth in new window (recommended for integrations)
+      const result = window.open(apiUrl, "_blank", "width=600,height=700");
+      console.log(result);
+
+      // ⚠️ Don't use fetch for OAuth flows, CORS will block it
+      // ✅ For non-OAuth APIs (like a direct REST call), you can still use fetch
+    } catch (error) {
+      console.error(`❌ Error connecting to ${name}:`, error);
+    }
   };
 
   return (
@@ -74,7 +81,7 @@ const AvailableIntegration: React.FC = () => {
                 {integration.name}
               </p>
               <button
-                onClick={() => handleConnect(integration._id)}
+                onClick={() => handleConnect(integration.name)}
                 className="cursor-pointer px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm border border-blue-500 text-blue-500 rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 flex-shrink-0 whitespace-nowrap" // Adjusted padding/font size for button, whitespace-nowrap
               >
                 Connect
