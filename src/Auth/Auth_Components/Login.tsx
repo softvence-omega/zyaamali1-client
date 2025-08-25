@@ -9,6 +9,7 @@ import { AiFillTikTok } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { login } from "@/store/Slices/AuthSlice/authSlice";
 import Cookies from "js-cookie";
+import { verifyToken } from "@/utils/verifyToken";
 
 type LoginInputs = {
   email: string;
@@ -37,19 +38,21 @@ export default function LoginForm() {
       if (!response.ok) throw new Error("Login failed");
 
       const result = await response.json();
-      console.log(result.user);
+
+      const user = verifyToken(result?.data?.accessToken);
+      console.log(user);
 
       // assuming API returns { user, token }
-      dispatch(login(result.user));
+      dispatch(login({ user: user, token: result?.data?.accessToken }));
 
       // ✅ store token in cookies (expires in 7 days, secure for HTTPS)
-      Cookies.set("token", result.token, {
+      Cookies.set("accessToken", result?.data?.accessToken, {
         expires: 7,
         secure: true,
         sameSite: "strict",
       });
 
-      navigate("/dashboard");
+      navigate("/dashboard/userprofile");
     } catch (error) {
       console.error(error);
       alert("Login failed. Please try again.");

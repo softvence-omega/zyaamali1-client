@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export type TUser = {
   role?: string;
@@ -6,8 +6,8 @@ export type TUser = {
 };
 
 type TAuthState = {
-  user: null | TUser;
-  token: null | string;
+  user: TUser | null;
+  token: string | null;
 };
 
 const initialState: TAuthState = {
@@ -19,8 +19,9 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<TUser>) => {
-      state.user = action.payload;
+    login: (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
     },
     logout: (state) => {
       state.user = null;
