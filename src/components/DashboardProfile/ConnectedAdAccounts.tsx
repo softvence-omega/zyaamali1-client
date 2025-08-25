@@ -22,7 +22,7 @@ const ConnectedAdAccounts: React.FC = () => {
 
   useEffect(() => {
     loadAccounts();
-  }, [loadAccounts]);
+  }, [loadAccounts,loading]);
 
 
   const handleEdit = async (name: string) => {
