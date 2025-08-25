@@ -21,6 +21,7 @@ export default function LoginForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<LoginInputs>();
   const navigate = useNavigate();
@@ -33,11 +34,13 @@ export default function LoginForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
+        credentials: "include",
       });
 
       if (!response.ok) throw new Error("Login failed");
 
       const result = await response.json();
+      reset();
 
       const user = verifyToken(result?.data?.accessToken);
       console.log(user);

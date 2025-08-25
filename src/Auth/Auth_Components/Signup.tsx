@@ -18,6 +18,7 @@ export default function SignupForm() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<SignupInputs>();
 
@@ -39,20 +40,17 @@ export default function SignupForm() {
       console.log(result)
 
       if (!response.ok) {
-        // ✅ Check if API returned a custom error message
         const errorMessage =
           result?.message || "Signup failed. Please try again.";
         throw new Error(errorMessage);
       }
 
       console.log("Signup success:", result);
-
-      // After signup, redirect to login
+      reset()
       navigate("/auth/login");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Signup error:", error);
-
-      // Show error to user
       alert(error.message || "Signup failed. Please try again.");
     }
   };
