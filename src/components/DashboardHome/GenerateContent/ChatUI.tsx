@@ -4,6 +4,7 @@ import {
   useGetAllChatQuery,
 } from "@/store/Features/chatBot/chatBotApi";
 import { RootState } from "@/store/store";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
@@ -39,12 +40,13 @@ const ChatUI = () => {
   const [postChat] = usePostChatMutation();
 
   // ✅ Fetch all chat history
-const { data: chatHistory, isLoading } = useGetAllChatQuery({
-  userId: user?.userId
-});
-
-
-
+  const {
+    data: chatHistory,
+    isLoading,
+    refetch,
+  } = useGetAllChatQuery({
+    userId: user?.userId,
+  });
 
   console.log("all chat here", chatHistory);
 
@@ -71,17 +73,22 @@ const { data: chatHistory, isLoading } = useGetAllChatQuery({
     setMessages((prev) => [...prev, newUserMessage]);
 
     try {
-      const data: any = await postChat({
-        prompt: input,
-        userId: user?.userId,
-      }).unwrap();
-
+      const res = await axios.post(
+        "https://ads-ai-71ic.onrender.com/chatting/chat",
+        null, // no body
+        {
+          params: {
+            userId: user?.userId,
+            prompt: input,
+          },
+        }
+      );
       const newAssistantMessage: {
         role: "admin" | "creator" | "assistant";
         message: string;
       } = {
         role: "assistant",
-        message: data.answer || "No response from server.",
+        message: res.data.answer || "No response from server.",
       };
       setMessages((prev) => [...prev, newAssistantMessage]);
     } catch (error) {
