@@ -50,8 +50,7 @@ import { TbBrandEdge } from "react-icons/tb";
 import { CiText } from "react-icons/ci";
 
 import { GiCometSpark } from "react-icons/gi";
-
-
+import { countries } from "@/utils/Countries";
 
 const objectives = [
   {
@@ -814,31 +813,28 @@ const DashboardCampaignCreate = () => {
           )}
 
           {/* Target Audience */}
-      <div className="space-y-4">
-      <CampaignSubHeader text="Target Audience" />
-
-      {/* Location */}
-      <div>
-        <p className="text-sm mb-1">Location</p>
-        <select
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-          required
-        >
-          <option value="">Select Location</option>
-          {countries.map((c) => (
-            <option key={c.code} value={c.code}>
-              {c.name}
-            </option>
-          ))}
-        </select>
-
-        {errors.location && (
-          <p className="text-red-500 text-xs mt-1">{errors.location}</p>
-        )}
-      </div>
-    </div>
+          <div className="space-y-4">
+            <CampaignSubHeader text=" Target Audience" />
+            {/* Location */}
+            <div>
+              <p className="text-sm mb-1">Location</p>
+              <select
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                required
+              >
+                <option value="">Select Location</option>
+                {countries.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+              {errors.location && (
+                <p className="text-red-500 text-xs mt-1">{errors.location}</p>
+              )}
+            </div>
 
             {/* Age range */}
             <div>
