@@ -1,7 +1,7 @@
 import CommonForm from "@/common/CommonForm";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { fieldsB } from "@/lib/demoForm";
-import { submitForm } from "@/store/Slices/FormSlice/FormSlice";
+import { submitForm } from "@/store/Features/FormSlice/FormSlice";
 import { generateZodSchema } from "@/utils/generateZodSchema";
 import { useEffect } from "react";
 

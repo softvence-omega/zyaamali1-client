@@ -4,7 +4,7 @@ import CommonWrapper from "@/common/CommonWrapper";
 import logo from "../assets/Adelo_black.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
-import { logout } from "@/store/Slices/AuthSlice/authSlice";
+import { logout } from "@/store/Features/Auth/authSlice";
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

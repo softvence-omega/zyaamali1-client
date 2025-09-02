@@ -1,11 +1,20 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage
-import { persistReducer, persistStore } from "redux-persist";
-
-import counterReducer from "./Slices/counterSlice/counterSlice";
-import authReducer from "./Slices/AuthSlice/authSlice";
-import formReducer from "./Slices/FormSlice/FormSlice";
-import businessReducer from "./Slices/BusinessSlice/ businessSlice"; // fixed space
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import counterReducer from "./Features/counterSlice/counterSlice";
+import authReducer from "./Features/Auth/authSlice";
+import formReducer from "./Features/FormSlice/FormSlice";
+import businessReducer from "./Features/BusinessSlice/ businessSlice"; // fixed space
+import { baseApi } from "./api/baseApi";
 
 // persist config
 const persistConfig = {
@@ -28,8 +37,10 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // needed for redux-persist
-    }),
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(baseApi.middleware) as any,
 });
 
 export const persistor = persistStore(store);

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Business } from "../../store/Slices//BusinessSlice/ businessSlice";
+import { Business } from "../../store/Features/BusinessSlice/ businessSlice";
 
 interface AddBusinessFormInputs {
   name: string;
@@ -73,8 +73,9 @@ const AddBusinessModal: React.FC<AddBusinessModalProps> = ({
             <input
               type="text"
               id="businessName"
-              className={`mt-1 block w-full px-3 py-2 border ${errors.name ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+              className={`mt-1 block w-full px-3 py-2 border ${
+                errors.name ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
               {...register("name", { required: "Business Name is required" })}
             />
             {errors.name && (
@@ -93,8 +94,9 @@ const AddBusinessModal: React.FC<AddBusinessModalProps> = ({
               id="businessDescription"
               rows={3}
               maxLength={maxChars}
-              className={`mt-1 block w-full px-3 py-2 border ${errors.description ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+              className={`mt-1 block w-full px-3 py-2 border ${
+                errors.description ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
               {...register("description", {
                 required: "Description is required",
                 maxLength: {
@@ -124,8 +126,9 @@ const AddBusinessModal: React.FC<AddBusinessModalProps> = ({
               id="businessGoal"
               rows={2}
               maxLength={maxChars}
-              className={`mt-1 block w-full px-3 py-2 border ${errors.goal ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+              className={`mt-1 block w-full px-3 py-2 border ${
+                errors.goal ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
               {...register("goal", {
                 required: "Goal is required",
                 maxLength: {

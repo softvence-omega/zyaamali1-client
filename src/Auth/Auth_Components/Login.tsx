@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import video from "../../assets/6676845_Gradient_Banner_1920x1080.mp4";
 import { AiFillTikTok } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { login } from "@/store/Slices/AuthSlice/authSlice";
+import { login } from "@/store/Features/Auth/authSlice";
 import Cookies from "js-cookie";
 import { verifyToken } from "@/utils/verifyToken";
 
