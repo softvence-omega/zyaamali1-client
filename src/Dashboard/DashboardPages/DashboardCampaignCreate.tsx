@@ -115,7 +115,7 @@ const googleAdsTypes = [
     label: "App Campaigns",
     value: "APP_CAMPAIGNS",
   },
-  { icon: Telescope, label: "Discovery Ads", value: "DISCOVERY" },
+  { icon: Telescope, label: "Performance Max", value: "PERFORMANCE" },
   { icon: MdLocalActivity, label: "Local Ads", value: "LOCAL_ADS" },
 ];
 const TiktokAdsTypes = [
