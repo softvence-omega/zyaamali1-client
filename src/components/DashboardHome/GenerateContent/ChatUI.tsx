@@ -1,4 +1,6 @@
+import { RootState } from "@/store/store";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 type MessageBubbleProps = {
   role: string;
@@ -6,7 +8,7 @@ type MessageBubbleProps = {
 };
 
 const MessageBubble = ({ role, message }: MessageBubbleProps) => {
-  const isadmin = role === "admin";
+  const isadmin = role === "admin" || role === "creator";
 
   return (
     <div
@@ -28,36 +30,39 @@ const MessageBubble = ({ role, message }: MessageBubbleProps) => {
 };
 
 const ChatUI = () => {
+  const user = useSelector((state: RootState) => state.auth.user);
+
   const [messages, setMessages] = useState<
-    { role: "admin" | "assistant"; message: string }[]
+    { role: "admin" | "creator" | "assistant"; message: string }[]
   >([
     {
       role: "assistant",
       message: "Hi! How can I help you today?",
     },
-    {
-      role: "admin",
-      message: "tell me about you?",
-    },
   ]);
   const [input, setInput] = useState("");
-  console.log(input)
 
   // Send message to backend
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    // Add admin message to chat
-    const newadminMessage = { role: "admin" as const, message: input };
-    setMessages((prev) => [...prev, newadminMessage]);
+    // Determine role from logged-in user (default to admin if not set)
+    const userRole: "admin" | "creator" = user?.role === "creator" ? "creator" : "admin";
+
+    // Add user message to chat
+    const newUserMessage = { role: userRole, message: input };
+    setMessages((prev) => [...prev, newUserMessage]);
 
     try {
       // Call your backend API
-      const response = await fetch("https://ads-ai-71ic.onrender.com/chatting/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
-      });
+      const response = await fetch(
+        "https://ads-ai-71ic.onrender.com/chatting/chat",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: input, userId: user?._id }),
+        }
+      );
 
       const data = await response.json();
 
@@ -110,7 +115,12 @@ const ChatUI = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </button>
         </div>
