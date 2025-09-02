@@ -5,13 +5,8 @@ const chatBotApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
 
     getAllChat: builder.query({
-      query: (args?) => {
-        // console.log("get all chat params", args);
-        // const queryParams = args
-        //   ? new URLSearchParams(
-        //       Object.entries(args as Record<string, any>).map(([k, v]) => [k, String(v)])
-        //     ).toString()
-        //   : "";
+      query: (args) => {
+        console.log(args)
 
         return {
           url: `/chatbot-history/get-single-history?userId=${args?.userId}`, 

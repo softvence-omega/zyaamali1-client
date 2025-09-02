@@ -37,30 +37,54 @@ const MessageBubble = ({ role, message }: MessageBubbleProps) => {
 
 const ChatUI = () => {
   const user = useSelector((state: RootState) => state.auth.user);
-  const [postChat] = usePostChatMutation();
-
-  // ✅ Fetch all chat history
-  const {
-    data: chatHistory,
-    isLoading,
-    refetch,
-  } = useGetAllChatQuery({
-    userId: user?.userId,
-  });
-
-  console.log("all chat here", chatHistory);
-
   const [messages, setMessages] = useState<
     { role: "admin" | "creator" | "assistant"; message: string }[]
   >([]);
   const [input, setInput] = useState("");
+  const [postChat] = usePostChatMutation();
 
-  // ✅ Populate messages from backend on mount or when chatHistory updates
+  // ✅ Fetch all chat history
+
+  // const {
+  //   data: chatHistory,
+  //   isLoading,
+  //   refetch,
+  // } = useGetAllChatQuery({ userId: user?.userId }, { skip: !user?.userId });
+
+  // console.log("all chat here", chatHistory);
+
+    // ✅ Populate messages from backend on mount or when chatHistory updates
+  // useEffect(() => {
+  //   if (chatHistory) {
+  //     setMessages(chatHistory); // no .data
+  //   }
+  // }, [chatHistory]);
+
   useEffect(() => {
-    if (chatHistory) {
-      setMessages(chatHistory); // no .data
-    }
-  }, [chatHistory]);
+    const fetchChatHistory = async () => {
+      if (!user?.userId) return; // ⛔ stop until we have userId
+
+      setIsLoading(true);
+      try {
+        const res = await axios.get(
+          `https://ads-ai-71ic.onrender.com/chatbot-history/get-single-history`,
+          {
+            params: { userId: user.userId }, // ✅ send as query params
+          }
+        );
+        console.log("all chat here", res.data);
+        setChatHistory(res.data);
+      } catch (error) {
+        console.error("❌ Error fetching chat history:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchChatHistory();
+  }, [user?.userId]);
+
+
 
   // Send message to backend
   const handleSend = async () => {
