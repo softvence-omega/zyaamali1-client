@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { usePostChatMutation } from "@/store/Features/chatBot/chatBotApi";
 import { RootState } from "@/store/store";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -31,7 +33,7 @@ const MessageBubble = ({ role, message }: MessageBubbleProps) => {
 
 const ChatUI = () => {
   const user = useSelector((state: RootState) => state.auth.user);
-
+  const [postChat] = usePostChatMutation();
   const [messages, setMessages] = useState<
     { role: "admin" | "creator" | "assistant"; message: string }[]
   >([
@@ -47,33 +49,27 @@ const ChatUI = () => {
     if (!input.trim()) return;
 
     // Determine role from logged-in user (default to admin if not set)
-    const userRole: "admin" | "creator" = user?.role === "creator" ? "creator" : "admin";
+    const userRole: "admin" | "creator" =
+      user?.role === "creator" ? "creator" : "admin";
 
-    // Add user message to chat
+    // Add user message to chat (optimistic UI)
     const newUserMessage = { role: userRole, message: input };
     setMessages((prev) => [...prev, newUserMessage]);
 
-    console.log({message: input, userId: user?.userId
-})
     try {
-      // Call your backend API
-      const response = await fetch(
-        "https://ads-ai-71ic.onrender.com/chatting/chat",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: input, userId: user?.userId
- }),
-        }
-      );
+      // ✅ Call your backend via RTK Query mutation
+ 
+      const data: any = await postChat({
+        message: input,
+        userId: user?.userId,
+      }).unwrap();
 
-      const data = await response.json();
-      console.log('message response ',data)
+      console.log("message response ", data);
 
       // Add assistant response
       const newAssistantMessage = {
         role: "assistant" as const,
-        message: data.reply || "No response from server.",
+        message: data.aiAnswer || "No response from server.",
       };
       setMessages((prev) => [...prev, newAssistantMessage]);
     } catch (error) {

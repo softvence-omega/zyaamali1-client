@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "@/store/api/baseApi";
 
 const chatBotApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
 
-    getAllbooks: builder.query({
+    getAllChat: builder.query({
       query: (args?) => {
         console.log(args);
         const params = new URLSearchParams();
@@ -14,21 +15,23 @@ const chatBotApi = baseApi.injectEndpoints({
           });
         }
         return {
-          url: "/books/get-all-books",
+          url: "/chatbot-history/get-all",
           method: "GET",
           params: params,
         };
       },
-      providesTags: ["Books"],
+      providesTags: ["chats"],
     }),
-    
-    createBook: builder.mutation({
+
+    postChat: builder.mutation({
+
       query: (data) => ({
-        url: "/books/create-new-book",
+      
+        url: "/chatting/chat",
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Books"],
+      invalidatesTags: ["chats"],
     }),
 
    
@@ -36,6 +39,6 @@ const chatBotApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useGetAllbooksQuery,
-  useCreateBookMutation
+    useGetAllChatQuery,
+    usePostChatMutation
 } = chatBotApi;
