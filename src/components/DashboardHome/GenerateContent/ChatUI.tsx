@@ -65,6 +65,7 @@ const ChatUI = () => {
       );
 
       const data = await response.json();
+      console.log('message response ',data)
 
       // Add assistant response
       const newAssistantMessage = {
