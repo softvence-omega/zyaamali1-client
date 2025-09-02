@@ -51,6 +51,8 @@ import { CiText } from "react-icons/ci";
 
 import { GiCometSpark } from "react-icons/gi";
 
+
+
 const objectives = [
   {
     icon: ImBullhorn,
@@ -410,7 +412,7 @@ const DashboardCampaignCreate = () => {
     }
 
     try {
-      console.log(payload)
+      console.log(payload);
       const res = await axios.post(
         `http://localhost:5000/api/v1/ads/${endpoint}/create-ad`,
         payload
@@ -812,31 +814,37 @@ const DashboardCampaignCreate = () => {
           )}
 
           {/* Target Audience */}
-          <div className="space-y-4">
-            <CampaignSubHeader text=" Target Audience" />
-            {/* Location */}
-            <div>
-              <p className="text-sm mb-1">Location</p>
-              <select
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                required
-              >
-                <option value="">Select Location</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="UK">United Kingdom</option>
-              </select>
-              {errors.location && (
-                <p className="text-red-500 text-xs mt-1">{errors.location}</p>
-              )}
-            </div>
+      <div className="space-y-4">
+      <CampaignSubHeader text="Target Audience" />
+
+      {/* Location */}
+      <div>
+        <p className="text-sm mb-1">Location</p>
+        <select
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+          required
+        >
+          <option value="">Select Location</option>
+          {countries.map((c) => (
+            <option key={c.code} value={c.code}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+
+        {errors.location && (
+          <p className="text-red-500 text-xs mt-1">{errors.location}</p>
+        )}
+      </div>
+    </div>
 
             {/* Age range */}
             <div>
               <p className="text-sm">Age range</p>
               <div className="flex items-center gap-2">
+                {/* From Age */}
                 <select
                   value={ageFrom}
                   onChange={(e) => setAgeFrom(e.target.value)}
@@ -844,11 +852,16 @@ const DashboardCampaignCreate = () => {
                   required
                 >
                   <option value="">From</option>
-                  <option value="18">18</option>
-                  <option value="19">19</option>
-                  <option value="20">20</option>
+                  {Array.from({ length: 43 }, (_, i) => 18 + i).map((age) => (
+                    <option key={age} value={age}>
+                      {age}
+                    </option>
+                  ))}
                 </select>
+
                 <p>To</p>
+
+                {/* To Age */}
                 <select
                   value={ageTo}
                   onChange={(e) => setAgeTo(e.target.value)}
@@ -856,11 +869,15 @@ const DashboardCampaignCreate = () => {
                   required
                 >
                   <option value="">To</option>
-                  <option value="18">18</option>
-                  <option value="19">19</option>
-                  <option value="20">20</option>
+                  {Array.from({ length: 43 }, (_, i) => 18 + i).map((age) => (
+                    <option key={age} value={age}>
+                      {age}
+                    </option>
+                  ))}
+                  <option value="60+">60+</option>
                 </select>
               </div>
+
               {(errors.ageFrom || errors.ageTo) && (
                 <p className="text-red-500 text-xs mt-1">
                   {errors.ageFrom || errors.ageTo}

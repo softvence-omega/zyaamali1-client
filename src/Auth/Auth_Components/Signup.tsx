@@ -85,7 +85,7 @@ export default function SignupForm() {
               </label>
               <input
                 type="text"
-                placeholder="your name"
+                placeholder="Enter your name"
                 {...register("fullName", { required: "Full name is required" })}
                 className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white text-sm"
               />
@@ -103,7 +103,7 @@ export default function SignupForm() {
               </label>
               <input
                 type="text"
-                placeholder="company name"
+                placeholder="Enter your company name"
                 {...register("companyName", {
                   required: "Company name is required",
                 })}
