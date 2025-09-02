@@ -3,7 +3,6 @@ import { baseApi } from "@/store/api/baseApi";
 
 const chatBotApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-
     getAllChat: builder.query({
       query: (args?) => {
         console.log(args);
@@ -24,21 +23,19 @@ const chatBotApi = baseApi.injectEndpoints({
     }),
 
     postChat: builder.mutation({
+      query: (data) => {
+        console.log(data)
+        const params = new URLSearchParams(data).toString();
+        console.log(params)
 
-      query: (data) => ({
-      
-        url: "/chatting/chat",
-        method: "POST",
-        body: data,
-      }),
+        return {
+          url: `/chatting/chat?${params}`, // send data as query string
+          method: "POST",
+        };
+      },
       invalidatesTags: ["chats"],
     }),
-
-   
   }),
 });
 
-export const {
-    useGetAllChatQuery,
-    usePostChatMutation
-} = chatBotApi;
+export const { useGetAllChatQuery, usePostChatMutation } = chatBotApi;

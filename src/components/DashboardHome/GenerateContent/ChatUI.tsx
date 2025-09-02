@@ -60,16 +60,16 @@ const ChatUI = () => {
       // ✅ Call your backend via RTK Query mutation
  
       const data: any = await postChat({
-        message: input,
+        prompt: input,
         userId: user?.userId,
       }).unwrap();
 
-      console.log("message response ", data);
+      console.log("message response ", data.answer);
 
       // Add assistant response
       const newAssistantMessage = {
         role: "assistant" as const,
-        message: data.aiAnswer || "No response from server.",
+        message: data.answer || "No response from server.",
       };
       setMessages((prev) => [...prev, newAssistantMessage]);
     } catch (error) {
