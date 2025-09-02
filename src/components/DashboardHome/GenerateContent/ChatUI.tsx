@@ -53,6 +53,8 @@ const ChatUI = () => {
     const newUserMessage = { role: userRole, message: input };
     setMessages((prev) => [...prev, newUserMessage]);
 
+    console.log({message: input, userId: user?.userId
+})
     try {
       // Call your backend API
       const response = await fetch(
@@ -60,7 +62,8 @@ const ChatUI = () => {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: input, userId: user?._id }),
+          body: JSON.stringify({ message: input, userId: user?.userId
+ }),
         }
       );
 
