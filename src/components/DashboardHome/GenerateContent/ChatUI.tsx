@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { usePostChatMutation } from "@/store/Features/chatBot/chatBotApi";
+import {
+  usePostChatMutation,
+  useGetAllChatQuery,
+} from "@/store/Features/chatBot/chatBotApi";
 import { RootState } from "@/store/store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 type MessageBubbleProps = {
@@ -34,41 +37,50 @@ const MessageBubble = ({ role, message }: MessageBubbleProps) => {
 const ChatUI = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   const [postChat] = usePostChatMutation();
+
+  // ✅ Fetch all chat history
+const { data: chatHistory, isLoading } = useGetAllChatQuery({
+  userId: user?.userId
+});
+
+
+
+
+  console.log("all chat here", chatHistory);
+
   const [messages, setMessages] = useState<
     { role: "admin" | "creator" | "assistant"; message: string }[]
-  >([
-    {
-      role: "assistant",
-      message: "Hi! How can I help you today?",
-    },
-  ]);
+  >([]);
   const [input, setInput] = useState("");
+
+  // ✅ Populate messages from backend on mount or when chatHistory updates
+  useEffect(() => {
+    if (chatHistory) {
+      setMessages(chatHistory); // no .data
+    }
+  }, [chatHistory]);
 
   // Send message to backend
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    // Determine role from logged-in user (default to admin if not set)
     const userRole: "admin" | "creator" =
       user?.role === "creator" ? "creator" : "admin";
 
-    // Add user message to chat (optimistic UI)
     const newUserMessage = { role: userRole, message: input };
     setMessages((prev) => [...prev, newUserMessage]);
 
     try {
-      // ✅ Call your backend via RTK Query mutation
- 
       const data: any = await postChat({
         prompt: input,
         userId: user?.userId,
       }).unwrap();
 
-      console.log("message response ", data.answer);
-
-      // Add assistant response
-      const newAssistantMessage = {
-        role: "assistant" as const,
+      const newAssistantMessage: {
+        role: "admin" | "creator" | "assistant";
+        message: string;
+      } = {
+        role: "assistant",
         message: data.answer || "No response from server.",
       };
       setMessages((prev) => [...prev, newAssistantMessage]);
@@ -80,7 +92,7 @@ const ChatUI = () => {
       ]);
     }
 
-    setInput(""); // clear input
+    setInput("");
   };
 
   return (
@@ -89,6 +101,14 @@ const ChatUI = () => {
 
       {/* Chat messages */}
       <div className="flex-1 overflow-y-auto space-y-2">
+        {/* {isLoading ? (
+          <p className="text-center text-gray-400">Loading chat history...</p>
+        ) : (
+          messages.map((msg, idx) => (
+            <MessageBubble key={idx} role={msg.role} message={msg.message} />
+          ))
+        )} */}
+
         {messages.map((msg, idx) => (
           <MessageBubble key={idx} role={msg.role} message={msg.message} />
         ))}
