@@ -379,7 +379,6 @@ const DashboardCampaignCreate = () => {
     }
     if (selectedPlatform === "TikTok Ads") {
       payload = {
-        adType: selectedAdType || "TRAFFIC",
         videoFile: businessInfo?.videoUrl || "", // path or URL to video
         imagePath:
           businessInfo?.logo ||
@@ -387,7 +386,8 @@ const DashboardCampaignCreate = () => {
         // postId: post_id || null, // optional
         // carouselImagePaths:
         //   carouselImagePaths.length > 0 ? carouselImagePaths : undefined, // optional
-        options: {
+        othersField: {
+          adType: selectedAdType || "TRAFFIC",
           campaign_name: campaignName,
           adgroup_name: adGroupName || "Default Ad Group",
           ad_name: adsName,
@@ -395,13 +395,13 @@ const DashboardCampaignCreate = () => {
           call_to_action: "LEARN_MORE",
           landing_page_url: businessInfo?.website || "https://adelo.ai",
           budget: Number(dailyBudget) || 100,
-          bid_price:  2,
+          bid_price: 2,
           objective_type: selectedAdType || "TRAFFIC",
           promotion_type: "WEBSITE",
           location_ids: location ? location.split(",") : ["1210997"],
         },
       };
-      console.log(payload)
+      console.log(payload);
       endpoint = "tiktok";
     }
 
