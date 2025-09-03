@@ -379,7 +379,7 @@ const DashboardCampaignCreate = () => {
     }
     if (selectedPlatform === "TikTok Ads") {
       payload = {
-        videoFile: businessInfo?.videoUrl || "", // path or URL to video
+        videoPath: businessInfo?.videoUrl || "", // path or URL to video
         imagePath:
           businessInfo?.logo ||
           "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d", // fallback image
