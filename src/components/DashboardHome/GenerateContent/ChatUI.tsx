@@ -39,66 +39,43 @@ const ChatUI = () => {
     { role: "admin" | "creator" | "assistant"; message: string }[]
   >([]);
   const [input, setInput] = useState("");
-  const [postChat] = usePostChatMutation();
-
-  // ✅ Fetch all chat history
-
-  // const {
-  //   data: chatHistory,
-  //   isLoading,
-  //   refetch,
-  // } = useGetAllChatQuery({ userId: user?.userId });
-
-  // console.log("all chat here", chatHistory);
-
-  // useEffect(() => {
-  //   if (chatHistory) {
-  //     setMessages(chatHistory); // no .data
-  //   }
-  // }, [chatHistory]);
-
-  // useEffect(() => {
-  //   const fetchChatHistory = async () => {
-  //     if (!user?.userId) return;
-
-  //     try {
-  //       const res = await axios.get(
-  //         "http://localhost:5000/api/v1/chatbot-history/get-single-history",
-  //         { params: { userId: user?.userId } }
-  //       );
-
-  //       console.log("all chat here", res.data.data);
-
-  //       // ✅ Only pick role and message
-  //       const formattedMessages =
-  //         res?.data?.data?.map((item: any) => ({
-  //           role: item.userId?.role,
-  //           message: item.aiAnswer,
-  //         })) || [];
-  //         console.log(formattedMessages)
-
-  //        setMessages((prev) => [...prev, formattedMessages]);
-  //     } catch (error) {
-  //       console.error("❌ Error fetching chat history:", error);
-  //     }
-  //   };
-
-  //   fetchChatHistory();
-  // }, [user?.userId]);
 
   const fetchChatHistory = async (userId: string) => {
     const res = await axios.get(
       "http://localhost:5000/api/v1/chatbot-history/get-single-history",
       { params: { userId } }
     );
+    console.log(res.data.data)
 
-    // ✅ Only return role + message
-    return (
-      res?.data?.data?.map((item: any) => ({
-        role: item.userId?.role,
-        message: item.aiAnswer,
-      })) || []
-    );
+    // ✅ Map each chat item into [userMessage, assistantMessage]
+    const formattedMessages = res?.data?.data?.flatMap((item: any) => {
+        const messages: {
+          role: "admin" | "creator" | "assistant";
+          message: string;
+        }[] = [];
+
+        console.log("formated message ", formattedMessages);
+
+        // User message (question)
+        if (item.prompt) {
+          messages.push({
+            role: item.userId?.role || "admin", // fallback to admin
+            message: item.prompt,
+          });
+        }
+
+        // Assistant message (answer)
+        if (item.aiAnswer) {
+          messages.push({
+            role: "assistant",
+            message: item.aiAnswer,
+          });
+        }
+
+        return messages;
+      }) || [];
+
+    return formattedMessages;
   };
 
   const {
@@ -112,9 +89,9 @@ const ChatUI = () => {
     enabled: !!user?.userId, // ⛔ stop until we have userId
   });
 
-  // ✅ Sync query data with local messages state
   useEffect(() => {
     if (chatHistory) {
+      console.log(chatHistory);
       setMessages(chatHistory);
     }
   }, [chatHistory]);
@@ -148,6 +125,7 @@ const ChatUI = () => {
         message: res.data.answer || "No response from server.",
       };
       setMessages((prev) => [...prev, newAssistantMessage]);
+      refetch();
     } catch (error) {
       console.error("❌ Error:", error);
       setMessages((prev) => [
