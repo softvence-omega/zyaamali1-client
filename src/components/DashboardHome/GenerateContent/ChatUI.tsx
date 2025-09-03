@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { usePostChatMutation } from "@/store/Features/chatBot/chatBotApi";
 import { RootState } from "@/store/store";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -47,8 +47,9 @@ const ChatUI = () => {
     );
 
     // ✅ Map each chat item into [userMessage, assistantMessage]
-    const formattedMessages =
-      res?.data?.data?.flatMap((item: any) => {
+    const formattedMessages = res?.data?.data?.flatMap((item: any) => {
+      console.log('item',item)
+
         const messages: {
           role: "admin" | "creator" | "assistant";
           message: string;
@@ -89,6 +90,7 @@ const ChatUI = () => {
 
   useEffect(() => {
     if (chatHistory) {
+      console.log(chatHistory);
       setMessages(chatHistory);
     }
   }, [chatHistory]);

@@ -46,8 +46,6 @@ const ContentHeader: React.FC = () => {
   const [prompt, setPrompt] = useState("");
   const [aspectRatio, setAspectRatio] = useState("1:1"); // For the "1:1" dropdown
 
-
-
   const handleGenerate = async () => {
     console.log("Content Type:", contentType);
     console.log("Prompt:", prompt);
@@ -56,7 +54,7 @@ const ContentHeader: React.FC = () => {
     try {
       let response;
 
-      if (contentType === "image") {
+      if (contentType === "Image") {
         response = await axios.post(
           "http://localhost:5000/api/v1/generate-image",
           {
@@ -64,7 +62,7 @@ const ContentHeader: React.FC = () => {
             aspectRatio,
           }
         );
-        console.log('image',response)
+        console.log("image", response);
       } else if (contentType === "Video") {
         response = await axios.post(
           "http://localhost:5000/api/v1/generate-video",
@@ -73,6 +71,7 @@ const ContentHeader: React.FC = () => {
             aspectRatio,
           }
         );
+        console.log("video", response);
       } else {
         console.warn("⚠️ Unsupported content type:", contentType);
         return;
