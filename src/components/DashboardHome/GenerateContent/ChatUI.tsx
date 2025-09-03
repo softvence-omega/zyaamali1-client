@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { usePostChatMutation } from "@/store/Features/chatBot/chatBotApi";
 import { RootState } from "@/store/store";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -34,6 +33,7 @@ const MessageBubble = ({ role, message }: MessageBubbleProps) => {
 };
 
 const ChatUI = () => {
+  const accessToken = useSelector((state: RootState) => state.auth.token);
   const user = useSelector((state: RootState) => state.auth.user);
   const [messages, setMessages] = useState<
     { role: "admin" | "creator" | "assistant"; message: string }[]
@@ -43,13 +43,19 @@ const ChatUI = () => {
   const fetchChatHistory = async (userId: string) => {
     const res = await axios.get(
       "http://localhost:5000/api/v1/chatbot-history/get-single-history",
-      { params: { userId } }
+      {
+        params: { userId },
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+      }
     );
+ 
 
     // ✅ Map each chat item into [userMessage, assistantMessage]
-    const formattedMessages = res?.data?.data?.flatMap((item: any) => {
-      console.log('item',item)
-
+    const formattedMessages =
+      res?.data?.data?.flatMap((item: any) => {
+       
         const messages: {
           role: "admin" | "creator" | "assistant";
           message: string;
@@ -90,7 +96,7 @@ const ChatUI = () => {
 
   useEffect(() => {
     if (chatHistory) {
-      console.log(chatHistory);
+   
       setMessages(chatHistory);
     }
   }, [chatHistory]);
