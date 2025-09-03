@@ -148,17 +148,17 @@ const ChatUI = () => {
 
       {/* Chat messages */}
       <div className="flex-1 overflow-y-auto space-y-2">
-        {/* {isLoading ? (
+        {isLoading ? (
           <p className="text-center text-gray-400">Loading chat history...</p>
         ) : (
           messages.map((msg, idx) => (
             <MessageBubble key={idx} role={msg.role} message={msg.message} />
           ))
-        )} */}
+        )}
 
-        {messages?.map((msg, idx) => (
+        {/* {messages?.map((msg, idx) => (
           <MessageBubble key={idx} role={msg.role} message={msg.message} />
-        ))}
+        ))} */}
       </div>
 
       {/* Input box */}
