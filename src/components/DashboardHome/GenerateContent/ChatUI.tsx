@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { usePostChatMutation } from "@/store/Features/chatBot/chatBotApi";
 import { RootState } from "@/store/store";
 import axios from "axios";
 import { useState, useEffect } from "react";
