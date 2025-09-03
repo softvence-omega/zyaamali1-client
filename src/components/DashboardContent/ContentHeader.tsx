@@ -48,7 +48,7 @@ const ContentHeader: React.FC = () => {
 
   const handleGenerate = async () => {
     console.log("Content Type:", contentType);
-    console.log("Prompt:", prompt);
+    console.log("Prompt:", {prompt});
     console.log("Aspect Ratio:", aspectRatio);
 
     try {
@@ -56,10 +56,9 @@ const ContentHeader: React.FC = () => {
 
       if (contentType === "Image") {
         response = await axios.post(
-          "http://localhost:5000/api/v1/generate-image",
+          "https://ads-ai-ne69.onrender.com/ads/generate/image",
           {
             prompt,
-            aspectRatio,
           }
         );
         console.log("image", response);
