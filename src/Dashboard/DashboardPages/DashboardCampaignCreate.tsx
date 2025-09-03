@@ -379,36 +379,29 @@ const DashboardCampaignCreate = () => {
     }
     if (selectedPlatform === "TikTok Ads") {
       payload = {
-        othersField: {
-          accessToken: socialAccoutAccessToken,
-          advertiserId: selectedAdAccount, // TikTok calls this "advertiser_id"
-          campaignName,
-          adGroupName: adGroupName || "Default Ad Group",
-          adName: adsName,
-          adType: selectedAdType || "TRAFFIC",
-          budget: {
-            mode: "BUDGET_MODE_DAY", // or BUDGET_MODE_TOTAL
-            amount: dailyBudget, // daily budget in your currency unit
-          },
-          targeting: {
-            geo_locations: location ? [location] : [],
-            age: { min: ageFrom, max: ageTo },
-            gender: selectedGender === "all" ? null : selectedGender,
-            placement: ["PLACEMENT_TIKTOK"], // you can also add PLACEMENT_PANGLE, etc.
-          },
-          creative: {
-            adFormat: "SINGLE_VIDEO", // or "SINGLE_IMAGE"
-            headline: headlineData[0]?.text,
-            description: title,
-            callToAction: "LEARN_MORE", // TikTok supported CTA type
-            videoUrl: businessInfo?.videoUrl || "", // for video ads
-            imageUrl:
-              businessInfo?.logo ||
-              "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d", // fallback
-            landingPageUrl: businessInfo?.website || "https://adelo.ai",
-          },
+        adType: selectedAdType || "TRAFFIC",
+        videoFile: businessInfo?.videoUrl || "", // path or URL to video
+        imagePath:
+          businessInfo?.logo ||
+          "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d", // fallback image
+        // postId: post_id || null, // optional
+        // carouselImagePaths:
+        //   carouselImagePaths.length > 0 ? carouselImagePaths : undefined, // optional
+        options: {
+          campaign_name: campaignName,
+          adgroup_name: adGroupName || "Default Ad Group",
+          ad_name: adsName,
+          ad_text: headlineData[0]?.text || title,
+          call_to_action: "LEARN_MORE",
+          landing_page_url: businessInfo?.website || "https://adelo.ai",
+          budget: Number(dailyBudget) || 100,
+          bid_price:  2,
+          objective_type: selectedAdType || "TRAFFIC",
+          promotion_type: "WEBSITE",
+          location_ids: location ? location.split(",") : ["1210997"],
         },
       };
+      console.log(payload)
       endpoint = "tiktok";
     }
 
