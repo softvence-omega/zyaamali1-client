@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  usePostChatMutation,
-  useGetAllChatQuery,
-} from "@/store/Features/chatBot/chatBotApi";
+import { usePostChatMutation } from "@/store/Features/chatBot/chatBotApi";
 import { RootState } from "@/store/store";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
 
 type MessageBubbleProps = {
   role: string;
@@ -59,25 +57,67 @@ const ChatUI = () => {
   //   }
   // }, [chatHistory]);
 
+  // useEffect(() => {
+  //   const fetchChatHistory = async () => {
+  //     if (!user?.userId) return;
+
+  //     try {
+  //       const res = await axios.get(
+  //         "http://localhost:5000/api/v1/chatbot-history/get-single-history",
+  //         { params: { userId: user?.userId } }
+  //       );
+
+  //       console.log("all chat here", res.data.data);
+
+  //       // ✅ Only pick role and message
+  //       const formattedMessages =
+  //         res?.data?.data?.map((item: any) => ({
+  //           role: item.userId?.role,
+  //           message: item.aiAnswer,
+  //         })) || [];
+  //         console.log(formattedMessages)
+
+  //        setMessages((prev) => [...prev, formattedMessages]);
+  //     } catch (error) {
+  //       console.error("❌ Error fetching chat history:", error);
+  //     }
+  //   };
+
+  //   fetchChatHistory();
+  // }, [user?.userId]);
+
+  const fetchChatHistory = async (userId: string) => {
+    const res = await axios.get(
+      "http://localhost:5000/api/v1/chatbot-history/get-single-history",
+      { params: { userId } }
+    );
+
+    // ✅ Only return role + message
+    return (
+      res?.data?.data?.map((item: any) => ({
+        role: item.userId?.role,
+        message: item.aiAnswer,
+      })) || []
+    );
+  };
+
+  const {
+    data: chatHistory,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["chatHistory", user?.userId],
+    queryFn: () => fetchChatHistory(user!.userId),
+    enabled: !!user?.userId, // ⛔ stop until we have userId
+  });
+
+  // ✅ Sync query data with local messages state
   useEffect(() => {
-    const fetchChatHistory = async () => {
-      if (!user?.userId) return; // ⛔ stop until we have userId
-
-      try {
-        const res = await axios.get(
-          `http://localhost:5000/api/v1/chatbot-history/get-single-history?userId=${user?.userId}`
-        );
-
-        console.log("all chat here", res.data.data);
-        const newUserMessage = { role: res?.data?.data?userId?.role , message: aiAnswer };
-        setMessages((prev) => [...prev, newUserMessage]);
-      } catch (error) {
-        console.error("❌ Error fetching chat history:", error);
-      }
-    };
-
-    fetchChatHistory();
-  }, [user?.userId]);
+    if (chatHistory) {
+      setMessages(chatHistory);
+    }
+  }, [chatHistory]);
 
   // Send message to backend
   const handleSend = async () => {
