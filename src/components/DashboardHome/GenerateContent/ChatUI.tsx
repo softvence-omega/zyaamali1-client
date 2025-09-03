@@ -46,7 +46,7 @@ const ChatUI = () => {
       {
         params: { userId },
         headers: {
-          Authorization: `${accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
