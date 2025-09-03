@@ -46,12 +46,16 @@ const ContentHeader: React.FC = () => {
     const [aspectRatio, setAspectRatio] = useState('1:1'); // For the "1:1" dropdown
 
     const handleGenerate = () => {
-        console.log('Generate clicked!');
         console.log('Content Type:', contentType);
         console.log('Prompt:', prompt);
         console.log('Aspect Ratio:', aspectRatio);
+
+        
+
         // Implement actual generation logic here (e.g., API call)
-        navigate("/contentpreview")
+
+
+        // navigate("/contentpreview")
     };
     const handleGeneratew =()=>{
          navigate("/contentpreview")
