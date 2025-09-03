@@ -45,22 +45,20 @@ const ChatUI = () => {
       "http://localhost:5000/api/v1/chatbot-history/get-single-history",
       { params: { userId } }
     );
-    console.log(res.data.data)
 
     // ✅ Map each chat item into [userMessage, assistantMessage]
     const formattedMessages = res?.data?.data?.flatMap((item: any) => {
+  
         const messages: {
           role: "admin" | "creator" | "assistant";
           message: string;
         }[] = [];
 
-        console.log("formated message ", formattedMessages);
-
         // User message (question)
-        if (item.prompt) {
+        if (item.userQuestion) {
           messages.push({
             role: item.userId?.role || "admin", // fallback to admin
-            message: item.prompt,
+            message: item.userQuestion,
           });
         }
 
@@ -91,7 +89,6 @@ const ChatUI = () => {
 
   useEffect(() => {
     if (chatHistory) {
-      console.log(chatHistory);
       setMessages(chatHistory);
     }
   }, [chatHistory]);
