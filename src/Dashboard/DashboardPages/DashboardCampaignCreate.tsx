@@ -379,32 +379,34 @@ const DashboardCampaignCreate = () => {
     }
     if (selectedPlatform === "TikTok Ads") {
       payload = {
-        accessToken: socialAccoutAccessToken,
-        advertiserId: selectedAdAccount, // TikTok calls this "advertiser_id"
-        campaignName,
-        adGroupName: adGroupName || "Default Ad Group",
-        adName: adsName,
-        adType: selectedAdType || "TRAFFIC",
-        budget: {
-          mode: "BUDGET_MODE_DAY", // or BUDGET_MODE_TOTAL
-          amount: dailyBudget, // daily budget in your currency unit
-        },
-        targeting: {
-          geo_locations: location ? [location] : [],
-          age: { min: ageFrom, max: ageTo },
-          gender: selectedGender === "all" ? null : selectedGender,
-          placement: ["PLACEMENT_TIKTOK"], // you can also add PLACEMENT_PANGLE, etc.
-        },
-        creative: {
-          adFormat: "SINGLE_VIDEO", // or "SINGLE_IMAGE"
-          headline: headlineData[0]?.text,
-          description: title,
-          callToAction: "LEARN_MORE", // TikTok supported CTA type
-          videoUrl: businessInfo?.videoUrl || "", // for video ads
-          imageUrl:
-            businessInfo?.logo ||
-            "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d", // fallback
-          landingPageUrl: businessInfo?.website || "https://adelo.ai",
+        othersField: {
+          accessToken: socialAccoutAccessToken,
+          advertiserId: selectedAdAccount, // TikTok calls this "advertiser_id"
+          campaignName,
+          adGroupName: adGroupName || "Default Ad Group",
+          adName: adsName,
+          adType: selectedAdType || "TRAFFIC",
+          budget: {
+            mode: "BUDGET_MODE_DAY", // or BUDGET_MODE_TOTAL
+            amount: dailyBudget, // daily budget in your currency unit
+          },
+          targeting: {
+            geo_locations: location ? [location] : [],
+            age: { min: ageFrom, max: ageTo },
+            gender: selectedGender === "all" ? null : selectedGender,
+            placement: ["PLACEMENT_TIKTOK"], // you can also add PLACEMENT_PANGLE, etc.
+          },
+          creative: {
+            adFormat: "SINGLE_VIDEO", // or "SINGLE_IMAGE"
+            headline: headlineData[0]?.text,
+            description: title,
+            callToAction: "LEARN_MORE", // TikTok supported CTA type
+            videoUrl: businessInfo?.videoUrl || "", // for video ads
+            imageUrl:
+              businessInfo?.logo ||
+              "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d", // fallback
+            landingPageUrl: businessInfo?.website || "https://adelo.ai",
+          },
         },
       };
       endpoint = "tiktok";
