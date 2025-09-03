@@ -49,11 +49,10 @@ const ChatUI = () => {
   //   data: chatHistory,
   //   isLoading,
   //   refetch,
-  // } = useGetAllChatQuery({ userId: user?.userId }, { skip: !user?.userId });
+  // } = useGetAllChatQuery({ userId: user?.userId });
 
   // console.log("all chat here", chatHistory);
 
-    // ✅ Populate messages from backend on mount or when chatHistory updates
   // useEffect(() => {
   //   if (chatHistory) {
   //     setMessages(chatHistory); // no .data
@@ -64,27 +63,21 @@ const ChatUI = () => {
     const fetchChatHistory = async () => {
       if (!user?.userId) return; // ⛔ stop until we have userId
 
-      setIsLoading(true);
       try {
         const res = await axios.get(
-          `https://ads-ai-71ic.onrender.com/chatbot-history/get-single-history`,
-          {
-            params: { userId: user.userId }, // ✅ send as query params
-          }
+          `http://localhost:5000/api/v1/chatbot-history/get-single-history?userId=${user?.userId}`
         );
-        console.log("all chat here", res.data);
-        setChatHistory(res.data);
+
+        console.log("all chat here", res.data.data);
+        const newUserMessage = { role: res?.data?.data?userId?.role , message: aiAnswer };
+        setMessages((prev) => [...prev, newUserMessage]);
       } catch (error) {
         console.error("❌ Error fetching chat history:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchChatHistory();
   }, [user?.userId]);
-
-
 
   // Send message to backend
   const handleSend = async () => {
@@ -140,7 +133,7 @@ const ChatUI = () => {
           ))
         )} */}
 
-        {messages.map((msg, idx) => (
+        {messages?.map((msg, idx) => (
           <MessageBubble key={idx} role={msg.role} message={msg.message} />
         ))}
       </div>
