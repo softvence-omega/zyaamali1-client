@@ -47,8 +47,8 @@ const ChatUI = () => {
     );
 
     // ✅ Map each chat item into [userMessage, assistantMessage]
-    const formattedMessages = res?.data?.data?.flatMap((item: any) => {
-  
+    const formattedMessages =
+      res?.data?.data?.flatMap((item: any) => {
         const messages: {
           role: "admin" | "creator" | "assistant";
           message: string;
