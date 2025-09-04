@@ -208,6 +208,9 @@ const DashboardCampaignCreate = () => {
 
 
 
+
+  console.log('always ',locationCode,locationId)
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
@@ -335,7 +338,7 @@ const DashboardCampaignCreate = () => {
     let endpoint = "";
 
     if (selectedPlatform === "Meta Ads") {
-      console.log('inside meta',locationCode,locationId)
+      console.log("inside meta", locationCode, locationId);
       payload = {
         accessToken: socialAccoutAccessToken,
         adAccountId: selectedAdAccount,
@@ -352,11 +355,12 @@ const DashboardCampaignCreate = () => {
           publisher_platforms: ["facebook"],
           facebook_positions: ["feed"],
         },
-        link:  "https://adelo.ai",
+        link: "https://adelo.ai",
         message: title,
         callToActionType: "LEARN_MORE",
         videoId: "4035143386752067",
-        imageUrl: "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d",
+        imageUrl:
+          "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d",
       };
       endpoint = "facebook";
     }
@@ -855,21 +859,25 @@ const DashboardCampaignCreate = () => {
             <div>
               <p className="text-sm mb-1">Location</p>
               <select
-                value={locationId}
+                value={locationCode}
                 onChange={(e) => {
-              
                   const selectedCountry = countries.find(
-                    (c) => (c.id || c.name) === e.target.value
+                    (c) => c.code === e.target.value
                   );
-                  setLocationId(e.target.value);
-                  setLocationCode(selectedCountry ? selectedCountry.code : "");
+                  if (selectedCountry) {
+                    setLocationId(String(selectedCountry.id));
+                    setLocationCode(selectedCountry.code);
+                  } else {
+                    setLocationId("");
+                    setLocationCode("");
+                  }
                 }}
                 className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 required
               >
                 <option value="">Select Location</option>
                 {countries.map((c) => (
-                  <option key={c.id || c.name} value={c.id || c.name}>
+                  <option key={c.id || c.name} value={c.code}>
                     {c.name}
                   </option>
                 ))}
