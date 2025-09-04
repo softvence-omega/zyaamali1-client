@@ -291,6 +291,7 @@ const DashboardCampaignCreate = () => {
     } catch (err: any) {
       console.log(err);
       setErrors(err.message)
+      toast.error(err.message)
     }
   };
 
@@ -309,6 +310,7 @@ const DashboardCampaignCreate = () => {
   const socialAccoutAccessToken = platformTokens[selectedPlatform];
 
   const handleSubmit = async () => {
+  
     // const formData = new FormData();
 
     // if (video) {
@@ -326,12 +328,14 @@ const DashboardCampaignCreate = () => {
     // console.log("form data ", video, image);
 
     if (!validateForm()) {
-      alert("Select required field");
+       toast.error("Select required field")
+      // alert("Select required field");
       return;
     }
 
     if (!headline || headline.length === 0) {
-      alert("At least 1 Headline is required");
+      
+      toast.error("At least 1 Headline is required")
       throw new Error("At least 1 Headline is required");
     }
 
@@ -447,8 +451,8 @@ const DashboardCampaignCreate = () => {
         alert("TikTok Ad created successfully!");
       } catch (err: any) {
         console.error("TikTok error:", err.response?.data || err.message);
-        setErrors(err.message)
-        alert("TikTok Ad creation failed");
+       toast.error(err.message)
+        // alert("TikTok Ad creation failed");
       }
 
       return; // 👈 prevent falling through to JSON logic
@@ -467,13 +471,13 @@ const DashboardCampaignCreate = () => {
         "Error creating ad:",
         error.response?.data || error.message
       );
-      setErrors(error.message)
+     toast.error(error.message)
       // alert("Failed to create ad");
     }
   };
 
 
-console.log('error --------------------------',errors)
+
 
   return (
     <div>
