@@ -170,6 +170,7 @@ const DashboardCampaignCreate = () => {
   };
 
   // state for getting all the value
+  const [error , setError ] =useState('')
   const [businessInfo, setBusinessInfo] = useState("");
   const [title, setTitle] = useState("");
   const [selectedObjective, setSelectedObjective] = useState("brand-awareness");
@@ -444,6 +445,7 @@ const DashboardCampaignCreate = () => {
         alert("TikTok Ad created successfully!");
       } catch (err: any) {
         console.error("TikTok error:", err.response?.data || err.message);
+        setError(err.message)
         alert("TikTok Ad creation failed");
       }
 
@@ -463,7 +465,8 @@ const DashboardCampaignCreate = () => {
         "Error creating ad:",
         error.response?.data || error.message
       );
-      alert("Failed to create ad");
+      setError(error.message)
+      // alert("Failed to create ad");
     }
   };
 
