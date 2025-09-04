@@ -207,6 +207,7 @@ const DashboardCampaignCreate = () => {
   const [video, setVideo] = useState<File | null>(null);
   const [image, setImage] = useState<File | null>(null);
   const [carousel, setCarousel] = useState<FileList | null>(null);
+  const [loading, setLoading] = useState(false);
 
   console.log("always ", locationCode, locationId);
 
@@ -336,6 +337,8 @@ const DashboardCampaignCreate = () => {
 
     const headlineData = headline.map((item) => ({ text: item }));
 
+    setLoading(true);
+
     let payload: any = {};
     let endpoint = "";
 
@@ -443,7 +446,8 @@ const DashboardCampaignCreate = () => {
           }
         );
         console.log("TikTok response:", res.data);
-        alert("TikTok Ad created successfully!");
+        toast.success('TikTok Ad created successfully!')
+        // alert("TikTok Ad created successfully!");
       } catch (err: any) {
         console.error("TikTok error:", err.response?.data || err.message);
         toast.error(err.response.data.error);
@@ -470,8 +474,15 @@ const DashboardCampaignCreate = () => {
       );
       toast.error(error);
       // alert("Failed to create ad");
+    } finally {
+      setLoading(false); // ✅ Stop loading
     }
   };
+
+
+  if(loading){
+    <p className="text-center">loading..... </p>
+  }
 
   return (
     <div>
