@@ -18,7 +18,7 @@ import {
   FaShoppingCart,
   FaTimes,
 } from "react-icons/fa";
-import toast from 'react-hot-toast'
+import toast from "react-hot-toast";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { ImBullhorn } from "react-icons/im";
 import { IoMagnetSharp } from "react-icons/io5";
@@ -208,10 +208,7 @@ const DashboardCampaignCreate = () => {
   const [image, setImage] = useState<File | null>(null);
   const [carousel, setCarousel] = useState<FileList | null>(null);
 
-
-
-
-  console.log('always ',locationCode,locationId)
+  console.log("always ", locationCode, locationId);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -290,8 +287,8 @@ const DashboardCampaignCreate = () => {
       setPlatformTokens(tokenMap);
     } catch (err: any) {
       console.log(err);
-      setErrors(err.message)
-      toast.error(err.message)
+      setErrors(err.message);
+      toast.error(err.message);
     }
   };
 
@@ -310,7 +307,6 @@ const DashboardCampaignCreate = () => {
   const socialAccoutAccessToken = platformTokens[selectedPlatform];
 
   const handleSubmit = async () => {
-  
     // const formData = new FormData();
 
     // if (video) {
@@ -328,14 +324,13 @@ const DashboardCampaignCreate = () => {
     // console.log("form data ", video, image);
 
     if (!validateForm()) {
-       toast.error("Select required field")
+      toast.error("Select required field");
       // alert("Select required field");
       return;
     }
 
     if (!headline || headline.length === 0) {
-      
-      toast.error("At least 1 Headline is required")
+      toast.error("At least 1 Headline is required");
       throw new Error("At least 1 Headline is required");
     }
 
@@ -451,7 +446,7 @@ const DashboardCampaignCreate = () => {
         alert("TikTok Ad created successfully!");
       } catch (err: any) {
         console.error("TikTok error:", err.response?.data || err.message);
-       toast.error(err.message)
+        toast.error(err.response.data.error);
         // alert("TikTok Ad creation failed");
       }
 
@@ -465,19 +460,18 @@ const DashboardCampaignCreate = () => {
         payload
       );
       console.log("API Response:", res.data);
-      alert("Ad created successfully!");
+      toast.success("Ad created successfully ");
+      // alert("Ad created successfully!");
     } catch (error: any) {
+      console.log(error);
       console.error(
         "Error creating ad:",
         error.response?.data || error.message
       );
-     toast.error(error.message)
+      toast.error(error);
       // alert("Failed to create ad");
     }
   };
-
-
-
 
   return (
     <div>
