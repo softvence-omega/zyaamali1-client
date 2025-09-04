@@ -446,7 +446,7 @@ const DashboardCampaignCreate = () => {
           }
         );
         console.log("TikTok response:", res.data);
-        toast.success('TikTok Ad created successfully!')
+        toast.success("TikTok Ad created successfully!");
         // alert("TikTok Ad created successfully!");
       } catch (err: any) {
         console.error("TikTok error:", err.response?.data || err.message);
@@ -465,6 +465,7 @@ const DashboardCampaignCreate = () => {
       );
       console.log("API Response:", res.data);
       toast.success("Ad created successfully ");
+      setLoading(false);
       // alert("Ad created successfully!");
     } catch (error: any) {
       console.log(error);
@@ -473,16 +474,16 @@ const DashboardCampaignCreate = () => {
         error.response?.data || error.message
       );
       toast.error(error);
+      setLoading(false);
       // alert("Failed to create ad");
-    } finally {
-      setLoading(false); // ✅ Stop loading
     }
   };
 
-
-  if(loading){
-    <p className="text-center">loading..... </p>
+  if (loading) {
+    <p className="text-center">loading..... </p>;
   }
+
+  console.log("state of loading", loading);
 
   return (
     <div>
@@ -1090,7 +1091,8 @@ const DashboardCampaignCreate = () => {
           <div className="flex justify-end items-center gap-5">
             <OutlineButton>Save Draft</OutlineButton>
             <PrimaryButton onClick={handleSubmit}>
-              Launch Campaign
+              {/* Launch Campaign */}
+              {loading ? "Launching Campaign.... " : "Launch Campaign"}
             </PrimaryButton>
           </div>
           <div className="border border-gray-300 my-3" />
