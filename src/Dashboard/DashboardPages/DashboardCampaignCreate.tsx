@@ -335,6 +335,7 @@ const DashboardCampaignCreate = () => {
     let endpoint = "";
 
     if (selectedPlatform === "Meta Ads") {
+      console.log('inside meta',locationCode,locationId)
       payload = {
         accessToken: socialAccoutAccessToken,
         adAccountId: selectedAdAccount,
@@ -351,13 +352,11 @@ const DashboardCampaignCreate = () => {
           publisher_platforms: ["facebook"],
           facebook_positions: ["feed"],
         },
-        link: businessInfo?.website || "https://adelo.ai",
+        link:  "https://adelo.ai",
         message: title,
         callToActionType: "LEARN_MORE",
         videoId: "4035143386752067",
-        imageUrl:
-          businessInfo?.logo ||
-          "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d",
+        imageUrl: "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d",
       };
       endpoint = "facebook";
     }
@@ -412,8 +411,6 @@ const DashboardCampaignCreate = () => {
           fd.append("carouselImages", carousel[i]);
         }
       }
-
-      console.log(typeof locationId);
 
       // Attach non-file fields (your "othersField")
       fd.append("adType", selectedAdType || "TRAFFIC");
@@ -860,6 +857,7 @@ const DashboardCampaignCreate = () => {
               <select
                 value={locationId}
                 onChange={(e) => {
+              
                   const selectedCountry = countries.find(
                     (c) => (c.id || c.name) === e.target.value
                   );
