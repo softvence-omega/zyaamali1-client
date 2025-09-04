@@ -325,10 +325,10 @@ const DashboardCampaignCreate = () => {
 
     // console.log("form data ", video, image);
 
-    // if (!validateForm()) {
-    //   alert("Select required field");
-    //   return;
-    // }
+    if (!validateForm()) {
+      alert("Select required field");
+      return;
+    }
 
     if (!headline || headline.length === 0) {
       alert("At least 1 Headline is required");
@@ -473,7 +473,7 @@ const DashboardCampaignCreate = () => {
   };
 
 
-
+console.log('error --------------------------',errors)
 
   return (
     <div>

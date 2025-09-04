@@ -84,7 +84,7 @@ const ChatUI = () => {
   const {
     data: chatHistory,
     isLoading,
-    isError,
+    // isError,
     refetch,
   } = useQuery({
     queryKey: ["chatHistory", user?.userId],
@@ -110,7 +110,7 @@ const ChatUI = () => {
 
     try {
       const res = await axios.post(
-        "https://ads-ai-71ic.onrender.com/chatting/chat",
+        "https://ads-ai-m3e5.onrender.com/chatting/chat",
 
         {
           userId: user?.userId,
