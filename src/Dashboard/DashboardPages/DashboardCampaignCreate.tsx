@@ -201,6 +201,9 @@ const DashboardCampaignCreate = () => {
   const [adsName, setAdsName] = useState("");
   const [adGroupName, setAdGroupName] = useState("");
   const [headline, setHeadLine] = useState(["", "", ""]); // 3 headlines
+  const [video, setVideo] = useState<File | null>(null);
+  const [image, setImage] = useState<File | null>(null);
+  const [carousel, setCarousel] = useState<FileList | null>(null);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -295,6 +298,22 @@ const DashboardCampaignCreate = () => {
   const socialAccoutAccessToken = platformTokens[selectedPlatform];
 
   const handleSubmit = async () => {
+    // const formData = new FormData();
+
+    // if (video) {
+    //   formData.append("videoPath", video); // 👈 must match backend
+    // }
+    // if (image) {
+    //   formData.append("imagePath", image); // 👈 must match backend
+    // }
+    // if (carousel) {
+    //   for (let i = 0; i < carousel.length; i++) {
+    //     formData.append("carouselImages", carousel[i]); // 👈 must match backend
+    //   }
+    // }
+
+    // console.log("form data ", video, image);
+
     if (!validateForm()) {
       alert("Select required field");
       return;
@@ -377,33 +396,55 @@ const DashboardCampaignCreate = () => {
       };
       endpoint = "linkedin";
     }
-    if (selectedPlatform === "TikTok Ads") {
-      payload = {
-        videoPath: businessInfo?.videoUrl || "", // path or URL to video
-        imagePath:
-          businessInfo?.logo ||
-          "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d", // fallback image
-        // postId: post_id || null, // optional
-        // carouselImagePaths:
-        //   carouselImagePaths.length > 0 ? carouselImagePaths : undefined, // optional
-        othersField: {
-          adType: selectedAdType || "TRAFFIC",
-          campaign_name: campaignName,
-          adgroup_name: adGroupName || "Default Ad Group",
-          ad_name: adsName,
-          ad_text: headlineData[0]?.text || title,
-          call_to_action: "LEARN_MORE",
-          landing_page_url: businessInfo?.website || "https://adelo.ai",
-          budget: Number(dailyBudget) || 100,
-          bid_price: 2,
-          objective_type: selectedAdType || "TRAFFIC",
-          promotion_type: "WEBSITE",
-          location_ids: location ? location.split(",") : ["1210997"],
-        },
-      };
-      console.log(payload);
-      endpoint = "tiktok";
+  if (selectedPlatform === "TikTok Ads") {
+  const fd = new FormData();
+
+  // Files must match backend field names
+  if (video) fd.append("videoPath", video);
+  if (image) fd.append("imagePath", image);
+  if (carousel) {
+    for (let i = 0; i < carousel.length; i++) {
+      fd.append("carouselImages", carousel[i]);
     }
+  }
+
+  console.log(typeof(location))
+
+  // Attach non-file fields (your "othersField")
+  fd.append("adType", selectedAdType || "TRAFFIC");
+  fd.append("campaign_name", campaignName);
+  fd.append("adgroup_name", adGroupName || "Default Ad Group");
+  fd.append("ad_name", adsName);
+  fd.append("ad_text", headlineData[0]?.text || title);
+  fd.append("call_to_action", "LEARN_MORE");
+  fd.append("landing_page_url", "https://adelo.ai");
+  fd.append("budget", String(Number(dailyBudget) || 100));
+  fd.append("bid_price", "2");
+  fd.append("objective_type", "TRAFFIC");
+  fd.append("promotion_type", "WEBSITE");
+  fd.append("location_ids", JSON.stringify([location]));
+
+
+  try {
+    const res = await axios.post(
+      "http://localhost:5000/api/v1/ads/tiktok/create-ad",
+      fd,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data", // 👈 required
+        },
+      }
+    );
+    console.log("TikTok response:", res.data);
+    alert("TikTok Ad created successfully!");
+  } catch (err: any) {
+    console.error("TikTok error:", err.response?.data || err.message);
+    alert("TikTok Ad creation failed");
+  }
+
+  return; // 👈 prevent falling through to JSON logic
+}
+
 
     try {
       console.log(payload);
@@ -815,13 +856,15 @@ const DashboardCampaignCreate = () => {
               <p className="text-sm mb-1">Location</p>
               <select
                 value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                onChange={(e) => {
+                  setLocation(e.target.value);
+                }}
                 className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 required
               >
                 <option value="">Select Location</option>
                 {countries.map((c) => (
-                  <option key={c.code} value={c.code}>
+                  <option key={c.id || c.name} value={c.id || c.name}>
                     {c.name}
                   </option>
                 ))}
@@ -1056,14 +1099,34 @@ const DashboardCampaignCreate = () => {
           {/* media section */}
           <div className="mt-5">
             <CampaignSubHeader text="Ad Media" />
-            <div className="bg-black rounded-md flex justify-center items-center gap-2 h-64 mx-6">
+            {/* <div className="bg-black rounded-md flex justify-center items-center gap-2 h-64 mx-6">
               <button className="px-4 py-2 rounded-3xl border border-[#8E6EFF] cursor-pointer text-[#8E6EFF] font-bold">
                 Save Draft
               </button>
               <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-white font-bold">
                 Browse Templates
               </button>
+            </div> */}
+
+            <div>
+              <input
+                type="file"
+                accept="video/*"
+                onChange={(e) => setVideo(e.target.files?.[0] || null)}
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files?.[0] || null)}
+              />
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={(e) => setCarousel(e.target.files)}
+              />
             </div>
+
             <div className="flex justify-center items-center py-3">
               <button className="px-4 py-2 rounded-md border cursor-pointer font-bold">
                 Add Media +

@@ -50,12 +50,10 @@ const ChatUI = () => {
         },
       }
     );
- 
 
     // ✅ Map each chat item into [userMessage, assistantMessage]
     const formattedMessages =
       res?.data?.data?.flatMap((item: any) => {
-       
         const messages: {
           role: "admin" | "creator" | "assistant";
           message: string;
@@ -96,7 +94,6 @@ const ChatUI = () => {
 
   useEffect(() => {
     if (chatHistory) {
-   
       setMessages(chatHistory);
     }
   }, [chatHistory]);
@@ -114,12 +111,11 @@ const ChatUI = () => {
     try {
       const res = await axios.post(
         "https://ads-ai-71ic.onrender.com/chatting/chat",
-        null, // no body
+
         {
-          params: {
-            userId: user?.userId,
-            prompt: input,
-          },
+          userId: user?.userId,
+          prompt: input,
+          token: accessToken,
         }
       );
       const newAssistantMessage: {
