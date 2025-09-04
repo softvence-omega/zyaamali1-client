@@ -340,8 +340,7 @@ const DashboardCampaignCreate = () => {
     let payload: any = {};
     let endpoint = "";
 
-
-      setLoading(true);
+    setLoading(true);
 
     if (selectedPlatform === "Meta Ads") {
       console.log("inside meta", locationCode, locationId);
@@ -437,6 +436,7 @@ const DashboardCampaignCreate = () => {
       fd.append("location_ids", JSON.stringify([locationId]));
 
       try {
+        setLoading(true);
         const res = await axios.post(
           "http://localhost:5000/api/v1/ads/tiktok/create-ad",
           fd,
@@ -448,7 +448,7 @@ const DashboardCampaignCreate = () => {
         );
         console.log("TikTok response:", res.data);
         toast.success("TikTok Ad created successfully!");
-        setLoading(false)
+        setLoading(false);
         // alert("TikTok Ad created successfully!");
       } catch (err: any) {
         console.error("TikTok error:", err.response?.data || err.message);
@@ -460,6 +460,7 @@ const DashboardCampaignCreate = () => {
     }
 
     try {
+      setLoading(true);
       console.log(payload);
       const res = await axios.post(
         `http://localhost:5000/api/v1/ads/${endpoint}/create-ad`,
@@ -467,7 +468,7 @@ const DashboardCampaignCreate = () => {
       );
       console.log("API Response:", res.data);
       toast.success("Ad created successfully ");
-
+      setLoading(false);
       // alert("Ad created successfully!");
     } catch (error: any) {
       console.log(error);
@@ -478,8 +479,6 @@ const DashboardCampaignCreate = () => {
       toast.error(error);
 
       // alert("Failed to create ad");
-    } finally {
-      setLoading(false); // ✅ always stop loading
     }
   };
 
@@ -1090,11 +1089,37 @@ const DashboardCampaignCreate = () => {
         <div className="flex-1">
           <div className="flex justify-end items-center gap-5">
             <OutlineButton>Save Draft</OutlineButton>
-            <PrimaryButton onClick={handleSubmit}>
-              {/* Launch Campaign */}
-              {loading ? "Launching Campaign.... " : "Launch Campaign"}
+            <PrimaryButton
+              onClick={handleSubmit}
+             
+              className="flex items-center gap-2"
+            >
+              {loading && (
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  />
+                </svg>
+              )}
+              {loading ? "Launching Campaign..." : "Launch Campaign"}
             </PrimaryButton>
           </div>
+
           <div className="border border-gray-300 my-3" />
           {/* prompt section */}
           <div className="flex-1 bg-[#F3F4F6] rounded-[20px] p-4">
