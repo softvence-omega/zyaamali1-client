@@ -337,10 +337,11 @@ const DashboardCampaignCreate = () => {
 
     const headlineData = headline.map((item) => ({ text: item }));
 
-    setLoading(true);
-
     let payload: any = {};
     let endpoint = "";
+
+
+      setLoading(true);
 
     if (selectedPlatform === "Meta Ads") {
       console.log("inside meta", locationCode, locationId);
@@ -447,6 +448,7 @@ const DashboardCampaignCreate = () => {
         );
         console.log("TikTok response:", res.data);
         toast.success("TikTok Ad created successfully!");
+        setLoading(false)
         // alert("TikTok Ad created successfully!");
       } catch (err: any) {
         console.error("TikTok error:", err.response?.data || err.message);
@@ -465,7 +467,7 @@ const DashboardCampaignCreate = () => {
       );
       console.log("API Response:", res.data);
       toast.success("Ad created successfully ");
-      setLoading(false);
+
       // alert("Ad created successfully!");
     } catch (error: any) {
       console.log(error);
@@ -474,14 +476,12 @@ const DashboardCampaignCreate = () => {
         error.response?.data || error.message
       );
       toast.error(error);
-      setLoading(false);
+
       // alert("Failed to create ad");
+    } finally {
+      setLoading(false); // ✅ always stop loading
     }
   };
-
-  if (loading) {
-    <p className="text-center">loading..... </p>;
-  }
 
   console.log("state of loading", loading);
 
