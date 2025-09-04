@@ -18,6 +18,7 @@ import {
   FaShoppingCart,
   FaTimes,
 } from "react-icons/fa";
+import toast from 'react-hot-toast'
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { ImBullhorn } from "react-icons/im";
 import { IoMagnetSharp } from "react-icons/io5";
@@ -170,7 +171,7 @@ const DashboardCampaignCreate = () => {
   };
 
   // state for getting all the value
-  const [error , setError ] =useState('')
+
   const [businessInfo, setBusinessInfo] = useState("");
   const [title, setTitle] = useState("");
   const [selectedObjective, setSelectedObjective] = useState("brand-awareness");
@@ -289,6 +290,7 @@ const DashboardCampaignCreate = () => {
       setPlatformTokens(tokenMap);
     } catch (err: any) {
       console.log(err);
+      setErrors(err.message)
     }
   };
 
@@ -445,7 +447,7 @@ const DashboardCampaignCreate = () => {
         alert("TikTok Ad created successfully!");
       } catch (err: any) {
         console.error("TikTok error:", err.response?.data || err.message);
-        setError(err.message)
+        setErrors(err.message)
         alert("TikTok Ad creation failed");
       }
 
@@ -465,10 +467,13 @@ const DashboardCampaignCreate = () => {
         "Error creating ad:",
         error.response?.data || error.message
       );
-      setError(error.message)
+      setErrors(error.message)
       // alert("Failed to create ad");
     }
   };
+
+
+
 
   return (
     <div>
