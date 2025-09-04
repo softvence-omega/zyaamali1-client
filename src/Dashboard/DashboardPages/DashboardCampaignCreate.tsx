@@ -176,7 +176,8 @@ const DashboardCampaignCreate = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [selectedPlatform, setSelectedPlatform] = useState("Meta Ads");
   const [selectedAdType, setSelectedAdType] = useState("REACH");
-  const [location, setLocation] = useState("");
+  const [locationId, setLocationId] = useState("");
+  const [locationCode, setLocationCode] = useState("");
   const [ageFrom, setAgeFrom] = useState("");
   const [ageTo, setAgeTo] = useState("");
   const [selectedGender, setSelectedGender] = useState("All");
@@ -205,6 +206,8 @@ const DashboardCampaignCreate = () => {
   const [image, setImage] = useState<File | null>(null);
   const [carousel, setCarousel] = useState<FileList | null>(null);
 
+
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
@@ -215,7 +218,9 @@ const DashboardCampaignCreate = () => {
       newErrors.selectedObjective = "Objective is required";
     if (!selectedPlatform) newErrors.selectedPlatform = "Platform is required";
     if (!selectedAdType) newErrors.selectedAdType = "Ad type is required";
-    if (!location) newErrors.location = "Location is required";
+    if (!locationId) newErrors.locationId = "Location id is required";
+    if (!locationCode) newErrors.locationCode = "location Code is required";
+
     if (!ageFrom) newErrors.ageFrom = "Age from is required";
     if (!ageTo) newErrors.ageTo = "Age to is required";
     if (!selectedGender) newErrors.selectedGender = "Gender is required";
@@ -314,10 +319,10 @@ const DashboardCampaignCreate = () => {
 
     // console.log("form data ", video, image);
 
-    if (!validateForm()) {
-      alert("Select required field");
-      return;
-    }
+    // if (!validateForm()) {
+    //   alert("Select required field");
+    //   return;
+    // }
 
     if (!headline || headline.length === 0) {
       alert("At least 1 Headline is required");
@@ -340,7 +345,7 @@ const DashboardCampaignCreate = () => {
         adName: adsName,
         dailyBudget,
         targeting: {
-          geo_locations: { countries: location ? [location] : [] },
+          geo_locations: { countries: locationCode ? [locationCode] : [] },
           age_min: ageFrom,
           age_max: ageTo,
           publisher_platforms: ["facebook"],
@@ -396,55 +401,53 @@ const DashboardCampaignCreate = () => {
       };
       endpoint = "linkedin";
     }
-  if (selectedPlatform === "TikTok Ads") {
-  const fd = new FormData();
+    if (selectedPlatform === "TikTok Ads") {
+      const fd = new FormData();
 
-  // Files must match backend field names
-  if (video) fd.append("videoPath", video);
-  if (image) fd.append("imagePath", image);
-  if (carousel) {
-    for (let i = 0; i < carousel.length; i++) {
-      fd.append("carouselImages", carousel[i]);
-    }
-  }
-
-  console.log(typeof(location))
-
-  // Attach non-file fields (your "othersField")
-  fd.append("adType", selectedAdType || "TRAFFIC");
-  fd.append("campaign_name", campaignName);
-  fd.append("adgroup_name", adGroupName || "Default Ad Group");
-  fd.append("ad_name", adsName);
-  fd.append("ad_text", headlineData[0]?.text || title);
-  fd.append("call_to_action", "LEARN_MORE");
-  fd.append("landing_page_url", "https://adelo.ai");
-  fd.append("budget", String(Number(dailyBudget) || 100));
-  fd.append("bid_price", "2");
-  fd.append("objective_type", "TRAFFIC");
-  fd.append("promotion_type", "WEBSITE");
-  fd.append("location_ids", JSON.stringify([location]));
-
-
-  try {
-    const res = await axios.post(
-      "http://localhost:5000/api/v1/ads/tiktok/create-ad",
-      fd,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data", // 👈 required
-        },
+      // Files must match backend field names
+      if (video) fd.append("videoPath", video);
+      if (image) fd.append("imagePath", image);
+      if (carousel) {
+        for (let i = 0; i < carousel.length; i++) {
+          fd.append("carouselImages", carousel[i]);
+        }
       }
-    );
-    console.log("TikTok response:", res.data);
-    alert("TikTok Ad created successfully!");
-  } catch (err: any) {
-    console.error("TikTok error:", err.response?.data || err.message);
-    alert("TikTok Ad creation failed");
-  }
 
-  return; // 👈 prevent falling through to JSON logic
-}
+      console.log(typeof locationId);
 
+      // Attach non-file fields (your "othersField")
+      fd.append("adType", selectedAdType || "TRAFFIC");
+      fd.append("campaign_name", campaignName);
+      fd.append("adgroup_name", adGroupName || "Default Ad Group");
+      fd.append("ad_name", adsName);
+      fd.append("ad_text", headlineData[0]?.text || title);
+      fd.append("call_to_action", "LEARN_MORE");
+      fd.append("landing_page_url", "https://adelo.ai");
+      fd.append("budget", String(Number(dailyBudget) || 100));
+      fd.append("bid_price", "2");
+      fd.append("objective_type", "TRAFFIC");
+      fd.append("promotion_type", "WEBSITE");
+      fd.append("location_ids", JSON.stringify([locationId]));
+
+      try {
+        const res = await axios.post(
+          "http://localhost:5000/api/v1/ads/tiktok/create-ad",
+          fd,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data", // 👈 required
+            },
+          }
+        );
+        console.log("TikTok response:", res.data);
+        alert("TikTok Ad created successfully!");
+      } catch (err: any) {
+        console.error("TikTok error:", err.response?.data || err.message);
+        alert("TikTok Ad creation failed");
+      }
+
+      return; // 👈 prevent falling through to JSON logic
+    }
 
     try {
       console.log(payload);
@@ -855,9 +858,13 @@ const DashboardCampaignCreate = () => {
             <div>
               <p className="text-sm mb-1">Location</p>
               <select
-                value={location}
+                value={locationId}
                 onChange={(e) => {
-                  setLocation(e.target.value);
+                  const selectedCountry = countries.find(
+                    (c) => (c.id || c.name) === e.target.value
+                  );
+                  setLocationId(e.target.value);
+                  setLocationCode(selectedCountry ? selectedCountry.code : "");
                 }}
                 className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 required
@@ -869,8 +876,8 @@ const DashboardCampaignCreate = () => {
                   </option>
                 ))}
               </select>
-              {errors.location && (
-                <p className="text-red-500 text-xs mt-1">{errors.location}</p>
+              {errors.locationId && (
+                <p className="text-red-500 text-xs mt-1">{errors.locationId}</p>
               )}
             </div>
 
