@@ -1,94 +1,112 @@
-// src/components/ContentLibrary/ContentHeader.tsx
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa"; // Assuming react-icons
 import img from "../../assets/dash-content.png"; // Make sure this path is correct
-import img1 from "../../assets/11.png";
-import img2 from "../../assets/12.png";
-import img3 from "../../assets/13.png";
-import img4 from "../../assets/14.png";
-import img5 from "../../assets/15.png";
-import img6 from "../../assets/16.png";
-import img7 from "../../assets/17.png";
-import img8 from "../../assets/18.png";
-import img9 from "../../assets/19.png";
-import img10 from "../../assets/20.png";
-import img11 from "../../assets/21.png";
-import img12 from "../../assets/22.png";
-import img13 from "../../assets/23.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-const ContentHeader: React.FC = () => {
-  const navigate = useNavigate();
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
-  const inspirationImages = [
-    { id: 1, src: img1, alt: "Inspiration Image 1" },
-    { id: 2, src: img2, alt: "Inspiration Image 2" },
-    { id: 3, src: img3, alt: "Inspiration Image 3" },
-    { id: 4, src: img4, alt: "Inspiration Image 4" },
-    { id: 5, src: img5, alt: "Inspiration Image 5" },
-    { id: 6, src: img6, alt: "Inspiration Image 6" },
-    { id: 7, src: img7, alt: "Inspiration Image 7" },
-    { id: 8, src: img8, alt: "Inspiration Image 8" },
-    { id: 9, src: img9, alt: "Inspiration Image 9" },
-    { id: 10, src: img10, alt: "Inspiration Image 9" },
-    { id: 11, src: img11, alt: "Inspiration Image 9" },
-    { id: 12, src: img12, alt: "Inspiration Image 9" },
-    { id: 13, src: img13, alt: "Inspiration Image 9" },
-    { id: 14, src: img12, alt: "Inspiration Image 9" },
-    { id: 15, src: img1, alt: "Inspiration Image 9" },
-    { id: 16, src: img12, alt: "Inspiration Image 9" },
-    { id: 17, src: img9, alt: "Inspiration Image 9" },
-    { id: 18, src: img8, alt: "Inspiration Image 9" },
-    { id: 19, src: img4, alt: "Inspiration Image 9" },
-    { id: 20, src: img1, alt: "Inspiration Image 9" },
-  ];
-  const [contentType, setContentType] = useState("Image");
+const ContentHeader: React.FC<{
+  templateType: string;
+  selectedPlatforms: string[];
+  searchTerm: string;
+}> = ({ templateType, selectedPlatforms, searchTerm }) => {
+  const navigate = useNavigate();
+  const accessToken = useSelector((state: any) => state.auth.token);
+
+  const [contentType, setContentType] = useState("image");
   const [prompt, setPrompt] = useState("");
-  const [aspectRatio, setAspectRatio] = useState("1:1"); // For the "1:1" dropdown
+  const [aspectRatio, setAspectRatio] = useState("1:1");
+  const [platfrom, setPlatform] = useState("google");
+  const [allContent, setAllContent] = useState<any[]>([]);
 
   const handleGenerate = async () => {
-    console.log("Content Type:", contentType);
-    console.log("Prompt:", {prompt});
-    console.log("Aspect Ratio:", aspectRatio);
-
     try {
       let response;
+      if (contentType === "image") {
+        response = await axios.post(
+          "https://ads-ai-m3e5.onrender.com/ads/generate/image",
+          { prompt }
+        );
+        console.log("image  ", response.data);
+      } else if (contentType === "video") {
+        response = await axios.post(
+          `https://ads-ai-m3e5.onrender.com/ads/generate/vedio?prompt=${prompt}`
+        );
 
-      if (contentType === "Image") {
-        response = await axios.post(
-          "https://ads-ai-ne69.onrender.com/ads/generate/image",
-          {
-            prompt,
-          }
-        );
-        console.log("image", response);
-      } else if (contentType === "Video") {
-        response = await axios.post(
-          "http://localhost:5000/api/v1/generate-video",
-          {
-            prompt,
-            aspectRatio,
-          }
-        );
-        console.log("video", response);
+        console.log("video ", response.data);
       } else {
         console.warn("⚠️ Unsupported content type:", contentType);
         return;
       }
 
-      console.log("✅ API Response:", response.data);
-
-      // Example: navigate to preview page with response
-      // navigate("/contentpreview", { state: { data: response.data } });
+      if (response.data) {
+        const result = await axios.post(
+          "http://localhost:5000/api/v1/content/post-generated-content",
+          {
+            type: contentType,
+            platform: platfrom,
+            ratio: aspectRatio,
+            link: response.data.video_urls || response.data.image_urls,
+            source: "generated",
+            prompt,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (result.data) toast.success("The content generated successfully");
+      }
     } catch (error: any) {
       console.error("❌ Error generating content:", error);
     }
   };
 
-  const handleGeneratew = () => {
-    navigate("/contentpreview");
+  const handleGeneratew = (id: string) => {
+    navigate(`/contentpreview?contentId=${id}`);
   };
 
+  useEffect(() => {
+    const getAllContent = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost:5000/api/v1/content/get-all-content",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await res.json();
+        setAllContent(data.data.result || []);
+      } catch (error) {
+        console.error("Error fetching content:", error);
+      }
+    };
+    getAllContent();
+  }, [accessToken]);
+
+  // 🔹 Filter content dynamically
+  const filteredContent = allContent.filter((item) => {
+    const matchesType = templateType ? item.type === templateType : true;
+    const matchesPlatform =
+      selectedPlatforms.length === 0 ||
+      selectedPlatforms.includes(item.platform.toLowerCase());
+    const matchesSearch =
+      !searchTerm ||
+      item.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.prompt?.toLowerCase().includes(searchTerm.toLowerCase());
+
+    return matchesType && matchesPlatform && matchesSearch;
+  });
+
+  console.log(filteredContent);
   return (
     <div className="relative mb-8 w-full">
       {/* Background Image */}
@@ -98,23 +116,23 @@ const ContentHeader: React.FC = () => {
         alt="Content Library Background"
       />
 
-      {/* Overlay to darken image slightly and make text more readable */}
-      <div className="absolute inset-0  opacity-40 z-0 rounded-b-3xl"></div>
+      {/* Overlay */}
+      <div className="absolute inset-0 opacity-40 z-0 rounded-b-3xl"></div>
 
-      {/* Content for the header (title and input bar) */}
+      {/* Header Content */}
       <div className="relative z-10 h-full p-4 pb-12 sm:p-6 sm:pb-16 md:p-8 md:pb-20">
         <div className="flex justify-center">
           <h1
             className="bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] bg-clip-text                       
-          text-transparent                      
-          inline-block text-4xl md:text-6xl text-center"
+            text-transparent                      
+            inline-block text-4xl md:text-6xl text-center"
           >
             Content Library
           </h1>
         </div>
 
-        {/* Main input and buttons row */}
-        <div className=" bg-opacity-20  p-4 rounded-full flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4">
+        {/* Main input row */}
+        <div className="bg-opacity-20 p-4 rounded-full flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4">
           {/* Content Type Dropdown */}
           <div className="relative flex-shrink-0 w-full sm:w-auto">
             <select
@@ -122,17 +140,17 @@ const ContentHeader: React.FC = () => {
               value={contentType}
               onChange={(e) => setContentType(e.target.value)}
             >
-              <option value="Image" className="bg-gray-800 text-white">
+              <option value="image" className="bg-gray-800 text-white">
                 Image
               </option>
-              <option value="Video" className="bg-gray-800 text-white">
+              <option value="video" className="bg-gray-800 text-white">
                 Video
               </option>
             </select>
             <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white pointer-events-none" />
           </div>
 
-          {/* Prompt Input with Search Icon INSIDE */}
+          {/* Prompt Input */}
           <div className="relative flex-grow w-full">
             <input
               type="text"
@@ -152,12 +170,10 @@ const ContentHeader: React.FC = () => {
           </button>
         </div>
 
-        {/* Aspect Ratio Dropdown - Moved BELOW the main row */}
+        {/* Aspect Ratio Dropdown */}
         <div className="relative inline-block sm:w-auto mt-4 ml-2">
-          {" "}
-          {/* Added margin-top for spacing and ml for slight indent */}
           <select
-            className="appearance-none  bg-opacity-20 backdrop-filter backdrop-blur-lg border border-white border-opacity-50 text-white py-2 px-4 pr-8 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 w-40 sm:w-48" // Reduced width
+            className="appearance-none bg-opacity-20 backdrop-filter backdrop-blur-lg border border-white border-opacity-50 text-white py-2 px-4 pr-8 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 w-40 sm:w-48"
             value={aspectRatio}
             onChange={(e) => setAspectRatio(e.target.value)}
           >
@@ -173,27 +189,75 @@ const ContentHeader: React.FC = () => {
           </select>
           <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white pointer-events-none" />
         </div>
+
+        {/* Platform Dropdown */}
+        <div className="relative inline-block sm:w-auto mt-4 ml-4">
+          <select
+            className="appearance-none bg-opacity-20 backdrop-filter backdrop-blur-lg border border-white border-opacity-50 text-white py-2 px-4 pr-8 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 w-40 sm:w-48"
+            value={platfrom}
+            onChange={(e) => setPlatform(e.target.value)}
+          >
+            <option value="facebook" className="bg-gray-800 text-white">
+              Facebook
+            </option>
+            <option value="google" className="bg-gray-800 text-white">
+              Google
+            </option>
+            <option value="linkedin" className="bg-gray-800 text-white">
+              Linkedin
+            </option>
+            <option value="tiktok" className="bg-gray-800 text-white">
+              Tik Tok
+            </option>
+            <option value="instagram" className="bg-gray-800 text-white">
+              Instagram
+            </option>
+          </select>
+          <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white pointer-events-none" />
+        </div>
+
+        {/* Content Grid */}
         <div className="px-4 py-12">
           <div className="max-w-[1400px] mx-auto">
-            {/* Heading */}
-
-            {/* Masonry Grid */}
             <div className="columns-1 sm:columns-2 md:columns-4 gap-4 space-y-4 mt-12">
-              {inspirationImages.map((img) => (
+              {filteredContent.map((img) => (
                 <div
-                  onClick={handleGeneratew}
-                  key={img.id}
-                  className="cursor-pointer break-inside-avoid overflow-hidden rounded-2xl shadow-md  transition-transform duration-300"
+                  onClick={() => handleGeneratew(img._id)}
+                  key={img._id}
+                  className="cursor-pointer break-inside-avoid overflow-hidden rounded-2xl shadow-md h-40 transition-transform duration-300 relative group"
                 >
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    className="w-full h-auto object-cover rounded-2xl"
-                  />
+                  {img.type === "image" ? (
+                    <img
+                      src={img.link}
+                      alt={img.title || "content"}
+                      className="object-cover rounded-2xl w-full h-full"
+                    />
+                  ) : (
+                    <div className="relative w-full h-full">
+                      <video
+                        src={img.link}
+                        className="object-cover rounded-2xl w-full h-full"
+                      />
+                      {/* Overlay Play Icon */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-10 h-10 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
+
+              {filteredContent.length === 0 && (
+                <p className="text-gray-500">No results found.</p>
+              )}
             </div>
-            <div className="flex justify-center items-center py-6"></div>
           </div>
         </div>
       </div>

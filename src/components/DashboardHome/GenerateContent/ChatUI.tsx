@@ -118,6 +118,8 @@ const ChatUI = () => {
           token: accessToken,
         }
       );
+
+      console.log('reqly ',res.data)
       const newAssistantMessage: {
         role: "admin" | "creator" | "assistant";
         message: string;
