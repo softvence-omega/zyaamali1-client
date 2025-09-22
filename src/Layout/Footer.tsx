@@ -1,113 +1,95 @@
 import React from "react";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaInstagram, FaLinkedin } from "react-icons/fa";
+import logo from "../assets/Adelo_black.svg";
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#212a31] text-white py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* About Section */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">About Us</h3>
-            <p className="text-sm">
-              We are a team of passionate developers building amazing web
-              applications with modern technologies.
-            </p>
-          </div>
+    <footer className="bg-[#f8f9fb] text-gray-700 px-6 md:px-16 pt-12 pb-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10 text-sm">
+        {/* Logo and Description */}
 
-          {/* Quick Links Section */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="/" className="hover:text-gray-300">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="/about" className="hover:text-gray-300">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="/services" className="hover:text-gray-300">
-                  Services
-                </a>
-              </li>
-              <li>
-                <a href="/contact" className="hover:text-gray-300">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
+        <div className="space-y-4">
+          <img src={logo} alt="Footer Logo" className="w-24 h-auto" />
+          <p className="text-sm">Smarter, faster marketing — powered by AI. Automate ad campaigns, generate content, and optimize performance with ease.</p>
+          <div className="flex gap-4 pt-2 text-xl text-[#6c63ff]">
 
-          {/* Social Media Section */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Follow Us</h3>
-            <div className="flex space-x-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-gray-300"
-              >
-                <FaFacebook size={24} />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-gray-300"
-              >
-                <FaTwitter size={24} />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-gray-300"
-              >
-                <FaInstagram size={24} />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-gray-300"
-              >
-                <FaLinkedin size={24} />
-              </a>
-            </div>
-          </div>
-
-          {/* Newsletter Section */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Newsletter</h3>
-            <p className="text-sm mb-4">
-              Subscribe to our newsletter to get the latest updates.
-            </p>
-            <form className="flex">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="p-2 mr-2 rounded-md border-1 border-white  text-white focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-[#124e66] text-[#d3d9d4] px-4 rounded-md hover:bg-[#124e66]/50"
-              >
-                Subscribe
-              </button>
-            </form>
+            <a href="https://www.instagram.com/adelo.ai?igsh=MTQzejVsamVrZmt4ZQ==" className="hover:text-black text-4xl" target="_blank">
+              <FaInstagram />
+            </a>
+            <a href="https://www.linkedin.com/company/adeloai/" className="hover:text-black text-4xl" target="_blank">
+              <FaLinkedin />
+            </a>
           </div>
         </div>
 
-        {/* Copyright Section */}
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-          <p className="text-sm">
-            &copy; {new Date().getFullYear()} Sazzad Mahim. All rights reserved.
-          </p>
+        {/* Platform */}
+        <div>
+          <h6 className="font-semibold mb-3 text-gray-800">Platform</h6>
+          <ul className="space-y-2">
+            <li>
+              <Link to="/#how-it-works" className="hover:text-black">
+                How It Works
+              </Link>
+            </li>
+            <li>
+              <Link to='/services/campaign' className="hover:text-black">
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link to='/#pricing' className="hover:text-black">
+                Pricing
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Resources */}
+        <div>
+          <h6 className="font-semibold mb-3 text-gray-800">Resources</h6>
+          <ul className="space-y-2">
+            <li>
+              <Link to='/dashboard/help' className="hover:text-black">
+                Help Center
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Company */}
+        <div>
+          <h6 className="font-semibold mb-3 text-gray-800">Company</h6>
+          <ul className="space-y-2">
+            <li>
+              <Link to='/about' className="hover:text-black">About Us</Link>
+            </li>
+            <li>
+              <Link to='/contact' className="hover:text-black">Contact</Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Legal */}
+        <div>
+          <h6 className="font-semibold mb-3 text-gray-800">Legal</h6>
+          <ul className="space-y-2">
+            <li>
+              <a href="/terms-of-service" className="hover:text-black">
+                Terms of Service
+              </a>
+            </li>
+            <li>
+              <a href="/privacy-policy" className="hover:text-black">
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-black">
+                Cookie Preferences
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>
