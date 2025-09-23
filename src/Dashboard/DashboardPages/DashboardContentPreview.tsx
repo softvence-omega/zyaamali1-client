@@ -1,16 +1,90 @@
 "use client";
 import { FiDownload, FiShare, FiChevronDown } from "react-icons/fi";
 import { IoArrowBack } from "react-icons/io5";
+import { useRef } from "react";
 
-import orange from "../../assets/Orange.png";
-import media1 from "../../assets/media-1.png";
-import media2 from "../../assets/media-2.png";
-import media3 from "../../assets/media-3.png";
-import media4 from "../../assets/media-4.png";
+
 import group from "../../assets/Group.png";
 import picicon from "../../assets/picicon.png";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+
 
 export default function DashboardContentPreview() {
+  const accessToken = useSelector((state) => state.auth.token);
+
+  const [allContent, setAllContent] = useState([]); // For the "1:1" dropdown
+  const [singleContent, setSingleContent] = useState([]);
+  console.log(singleContent);
+
+  const queryParams = new URLSearchParams(window.location.search);
+  const contentId = queryParams.get("contentId"); // "123"
+
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handlePlay = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  console.log('all content', allContent)
+  console.log('single content ', singleContent)
+
+
+
+
+  useEffect(() => {
+    const getAllContent = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:5000/api/v1/content/get-single-content/${contentId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`, // attach access token
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const data = await res.json();
+
+        setSingleContent(data.data);
+      } catch (error) {
+        console.error("Error fetching occasions:", error);
+      }
+    };
+    getAllContent();
+  }, [contentId]);
+
+  useEffect(() => {
+    const getAllContent = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost:5000/api/v1/content/get-all-content",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`, // attach access token
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const data = await res.json();
+
+        setAllContent(data.data.result || []);
+      } catch (error) {
+        console.error("Error fetching occasions:", error);
+      }
+    };
+    getAllContent();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Header */}
@@ -98,121 +172,95 @@ export default function DashboardContentPreview() {
         <section className="lg:col-span-8 flex flex-col w-full px-4 sm:px-8 lg:px-12">
           {/* Canvas */}
           <div className="flex items-center justify-center px-4 sm:px-8 py-8 sm:py-12 bg-[#020817]">
-            <img
-              src={orange}
-              alt="Orange Banner"
-              className="max-w-full h-auto"
-            />
+            {singleContent.type === "image" ? (
+              <img
+                src={singleContent.link}
+                alt={singleContent.title || "content"}
+                className="object-cover rounded-2xl w-full h-full"
+              />
+            ) : (
+              <div className="relative w-full h-full">
+                <video
+                  ref={videoRef}
+                  src={singleContent.link}
+                  className="object-cover rounded-2xl w-full h-full"
+                  controls={isPlaying}
+                />
+                {!isPlaying && (
+                  <div
+                    onClick={handlePlay}
+                    className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/50 transition cursor-pointer rounded-2xl"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-12 h-12 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
-          {/* My Media Section */}
           <div className="bg-gray-900 p-4 sm:p-6 w-full overflow-x-auto">
             <h2 className="text-white text-xl font-semibold mb-4">My Media</h2>
             <div className="flex flex-col gap-4">
-              {/* Row 1 */}
-              <div className="grid grid-cols-6 gap-2 sm:gap-4 w-full min-w-[300px]">
-                {/* First 3 normal images */}
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-1">
-                  <img
-                    src={media1}
-                    alt="Media 1"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-1">
-                  <img
-                    src={media2}
-                    alt="Media 2"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-1">
-                  <img
-                    src={media3}
-                    alt="Media 3"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+              {allContent.map((item, index) => (
+                <div
+                  key={item._id || index}
+                  className="grid grid-cols-6 gap-2 sm:gap-4 w-full min-w-[300px]"
+                >
+                  {/* First 3 images */}
+                  {allContent
+                    .slice(index * 4, index * 4 + 3)
+                    .map((content, i) => (
+                      <div
+                        key={content._id || i}
+                        className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-1"
+                      >
+                        {content.type === "image" ? (
+                          <img
+                            src={content.link}
+                            alt={content.title || "content"}
+                            className="object-cover rounded-2xl w-full h-full"
+                          />
+                        ) : (
+                          <div className="relative w-full h-full">
+                            <video
+                              src={content.link}
+                              className="object-cover rounded-2xl w-full h-full"
+                            />
+                            {/* Overlay Play Icon */}
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-10 h-10 text-white"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
 
-                {/* Last image: fill the rest of the width, same height */}
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-3">
-                  <img
-                    src={media4}
-                    alt="Media 4"
-                    className="w-full h-full object-cover"
-                  />
+                  {/* 4th image spans 3 columns */}
+                  {allContent[index * 4 + 3] && (
+                    <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-3">
+                      <img
+                        src={allContent[index * 4 + 3].link}
+                        alt={allContent[index * 4 + 3].title || "Media"}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
                 </div>
-              </div>
-
-              {/* Row 2 */}
-              <div className="grid grid-cols-6 gap-2 sm:gap-4 w-full min-w-[300px]">
-                {/* First 3 normal images */}
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-1">
-                  <img
-                    src={media1}
-                    alt="Media 1"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-1">
-                  <img
-                    src={media2}
-                    alt="Media 2"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-1">
-                  <img
-                    src={media3}
-                    alt="Media 3"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Last image: fill the rest of the width, same height */}
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-3">
-                  <img
-                    src={media4}
-                    alt="Media 4"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-
-              {/* Row 3 */}
-              <div className="grid grid-cols-6 gap-2 sm:gap-4 w-full min-w-[300px]">
-                {/* First 3 normal images */}
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-1">
-                  <img
-                    src={media1}
-                    alt="Media 1"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-1">
-                  <img
-                    src={media2}
-                    alt="Media 2"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-1">
-                  <img
-                    src={media3}
-                    alt="Media 3"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Last image: fill the rest of the width, same height */}
-                <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-3">
-                  <img
-                    src={media4}
-                    alt="Media 4"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>

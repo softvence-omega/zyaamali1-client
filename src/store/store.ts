@@ -1,18 +1,50 @@
-import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./Slices/counterSlice/counterSlice";
-import authReducer from "./Slices/AuthSlice/authSlice";
-import formReducer from "./Slices/FormSlice/FormSlice";
-import businessReducer from "./Slices/BusinessSlice/ businessSlice"
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import counterReducer from "./Features/counterSlice/counterSlice";
+import authReducer from "./Features/Auth/authSlice";
+import formReducer from "./Features/FormSlice/FormSlice";
+import businessReducer from "./Features/BusinessSlice/ businessSlice"; // fixed space
+import { baseApi } from "./api/baseApi";
+
+// persist config
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["auth"], // only persist auth slice
+};
+
+// combine all reducers
+const rootReducer = combineReducers({
+  counter: counterReducer,
+  auth: authReducer,
+  business: businessReducer,
+  form: formReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-    auth: authReducer,
-    business: businessReducer,
-    form: formReducer,
-
-  },
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }).concat(baseApi.middleware) as any,
 });
+
+export const persistor = persistStore(store);
 
 // Define RootState and AppDispatch types
 export type RootState = ReturnType<typeof store.getState>;

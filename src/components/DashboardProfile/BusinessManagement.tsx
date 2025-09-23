@@ -15,7 +15,7 @@ import {
   updateBusiness,
   deleteBusiness,
   Business,
-} from "../../store/Slices/BusinessSlice/ businessSlice"; // Adjust path based on your project structure
+} from "../../store/Features/BusinessSlice/ businessSlice"; // Adjust path based on your project structure
 
 // Import modal components
 import AddBusinessModal from "./AddBusinessModal";

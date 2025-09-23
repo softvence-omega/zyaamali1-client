@@ -1,103 +1,119 @@
 // src/components/DashboardProfile/ConnectedAdAccounts.tsx
-import React from "react";
-import { FaCheckCircle, FaEdit } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaCheckCircle } from "react-icons/fa";
+import { MdRemoveCircle } from "react-icons/md";
 
 interface AdAccount {
-  id: string;
+  _id: string;
   name: string;
   company: string;
   icon: string;
   isSynced: boolean;
 }
 
-const adAccounts: AdAccount[] = [
-  {
-    id: "1",
-    name: "Facebook Ads",
-    company: "ABC Company",
-    icon: "https://img.icons8.com/color/48/000000/facebook--v1.png",
-    isSynced: true,
-  },
-  {
-    id: "2",
-    name: "Google Ads",
-    company: "ABC Company",
-    icon: "https://img.icons8.com/color/48/000000/google-ads.png",
-    isSynced: true,
-  },
-  {
-    id: "3",
-    name: "TikTok Ads",
-    company: "ABC Company",
-    icon: "https://img.icons8.com/fluency/48/000000/tiktok.png",
-    isSynced: true,
-  },
-];
+interface ConnectedAdAccountsProps {
+  socialAccounts: AdAccount[];
+  loading: boolean;
+  onAccountDisconnected: (accountName: string) => void;
+  onReloadAccounts: () => void;
+}
 
-const ConnectedAdAccounts: React.FC = () => {
-  const handleEdit = (id: string) => {
-    console.log(`Edit ad account with ID: ${id}`);
+const ConnectedAdAccounts: React.FC<ConnectedAdAccountsProps> = ({
+  socialAccounts,
+  
+  onAccountDisconnected,
+  onReloadAccounts
+}) => {
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const handleDelete = async (id: string, name: string) => {
+    setDeletingId(id);
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/v1/connect/update-Data?name=${name}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to update: ${response.status} ${response.statusText}`
+        );
+      }
+
+      const result = await response.json();
+      console.log("✅ Updated successfully:", result);
+      
+      // Notify parent component that account was disconnected
+      onAccountDisconnected(name);
+      
+      // Reload accounts to ensure we have the latest data
+      onReloadAccounts();
+    } catch (error) {
+      console.error("❌ Error updating account:", error);
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   return (
     <div className="py-4 sm:py-6 border-b border-gray-200">
-      {" "}
-      {/* Adjusted padding */}
       <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4 sm:mb-6">
         Connected Ad Accounts
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-        {" "}
-        {/* Adjusted grid and gap */}
-        {adAccounts.length > 0 ? (
-          adAccounts.map((account) => (
-            <div
-              key={account.id}
-              className="border border-gray-200 rounded-lg p-3 sm:p-4 flex flex-col lg:flex-row lg:items-center justify-center lg:justify-between bg-white shadow-sm"
-            >
-              {" "}
-              {/* Adjusted padding */}
-              <div className="flex items-center min-w-0">
-                {" "}
-                {/* Added min-w-0 */}
-                <img
-                  src={account.icon}
-                  alt={account.name}
-                  className="w-7 h-7 sm:w-8 sm:h-8 mr-2 sm:mr-3 flex-shrink-0"
-                />{" "}
-                {/* Adjusted icon size */}
-                <div>
-                  <p className="font-medium text-sm sm:text-base text-gray-800 truncate">
-                    {account.name}
-                  </p>{" "}
-                  {/* Truncate and adjust size */}
-                  <p className="text-xs sm:text-sm text-gray-500 truncate">
-                    {account.company}
-                  </p>{" "}
-                  {/* Truncate and adjust size */}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+        {socialAccounts.filter((account) => account.isSynced).length > 0 ? (
+          socialAccounts
+            .filter((account) => account.isSynced)
+            .map((account) => (
+              <div
+                key={account._id}
+                className="border border-gray-200 rounded-lg p-3 sm:p-4 flex flex-col lg:flex-row lg:items-center justify-center lg:justify-between bg-white shadow-sm"
+              >
+                <div className="flex items-center min-w-0">
+                  <img
+                    src={account.icon}
+                    alt={account.name}
+                    className="w-7 h-7 sm:w-8 sm:h-8 mr-2 sm:mr-3 flex-shrink-0"
+                  />
+                  <div>
+                    <p className="font-medium text-sm sm:text-base text-gray-800 truncate">
+                      {account.name}
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-500 truncate">
+                      {account?.name || "No Ad Account Company"}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
-                {" "}
-                {/* Adjusted spacing */}
-                {account.isSynced && (
+
+                <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
                   <span className="flex items-center text-green-600 text-xs sm:text-sm whitespace-nowrap pl-[34px]">
-                    {" "}
-                    {/* Adjusted text size, whitespace */}
-                    <FaCheckCircle className="mr-0.5 sm:mr-1 text-xs sm:text-sm" />{" "}
+                    <FaCheckCircle className="mr-0.5 sm:mr-1 text-xs sm:text-sm" />
                     Synced
                   </span>
-                )}
-                <button
-                  onClick={() => handleEdit(account.id)}
-                  className="p-1.5 sm:p-2 text-gray-500 hover:text-blue-600 rounded-full hover:bg-gray-100 transition-colors duration-200"
-                  aria-label="Edit"
-                >
-                  <FaEdit className="text-sm sm:text-base" />
-                </button>
+
+                  {deletingId === account._id ? (
+                    <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+                  ) : (
+                    <button
+                      onClick={() => handleDelete(account._id, account.name)}
+                      className="p-1.5 sm:p-2 text-gray-500 hover:text-blue-600 rounded-full hover:bg-gray-100 transition-colors duration-200"
+                      aria-label="Delete"
+                    >
+                      <MdRemoveCircle
+                        size={20}
+                        className="text-sm cursor-pointer sm:text-base"
+                      />
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
-          ))
+            ))
         ) : (
           <p className="col-span-full text-center text-gray-500 text-sm sm:text-base">
             No ad accounts connected yet.

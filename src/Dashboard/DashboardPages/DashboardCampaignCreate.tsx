@@ -1,37 +1,57 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import axios from "axios";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FaFacebookF,
   FaGoogle,
   FaLinkedinIn,
   FaTwitter,
   FaTiktok,
-  FaYoutube,
   FaImage,
   FaMousePointer,
   FaImages,
-  FaPlay,
-  FaFont,
   FaCog,
   FaVideo,
   FaInstagram,
   FaShoppingCart,
   FaTimes,
 } from "react-icons/fa";
+import toast from "react-hot-toast";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { ImBullhorn } from "react-icons/im";
 import { IoMagnetSharp } from "react-icons/io5";
 import { BsFillBarChartLineFill } from "react-icons/bs";
 import { FaPeopleGroup } from "react-icons/fa6";
+import { MdOutlineLeaderboard } from "react-icons/md";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { SiSpotlight } from "react-icons/si";
 
 import CampaignSubHeader from "@/components/Dashboard/campaign/CampaignSubHeader";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import OutlineButton from "@/components/ui/OutlineButton";
 import { useNavigate } from "react-router-dom";
+import { GiEngagementRing } from "react-icons/gi";
+import { PiSlideshowFill } from "react-icons/pi";
+import { PiTrafficConeFill } from "react-icons/pi";
+import { MdOutlineInstallMobile } from "react-icons/md";
+import { ImDisplay } from "react-icons/im";
+import { CiSearch } from "react-icons/ci";
+import { MdOutlineAppRegistration } from "react-icons/md";
+import { MdLocalActivity } from "react-icons/md";
+import { RiMessage3Fill } from "react-icons/ri";
+
+import { Telescope } from "lucide-react";
+import { MdOutlineDynamicFeed } from "react-icons/md";
+import { MdViewModule } from "react-icons/md";
+import { TbBrandEdge } from "react-icons/tb";
+import { CiText } from "react-icons/ci";
+
+import { GiCometSpark } from "react-icons/gi";
+import { countries } from "@/utils/Countries";
 
 const objectives = [
   {
@@ -61,25 +81,81 @@ const objectives = [
 ];
 
 const platforms = [
-  { icon: FaFacebookF, color: "text-blue-600", value: "facebook" },
-  { icon: FaGoogle, color: "text-red-500", value: "google" },
-  { icon: FaLinkedinIn, color: "text-blue-700", value: "linkedin" },
-  { icon: FaTwitter, color: "text-black", value: "twitter" },
-  { icon: FaTiktok, color: "text-black", value: "tiktok" },
-  { icon: FaYoutube, color: "text-red-600", value: "youtube" },
+  { icon: FaFacebookF, color: "text-blue-600", value: "Meta Ads" },
+  { icon: FaGoogle, color: "text-red-500", value: "Google Ads" },
+  { icon: FaTiktok, color: "text-black", value: "TikTok Ads" },
+  { icon: FaLinkedinIn, color: "text-blue-700", value: "LinkedIn Ads" },
+  { icon: FaTwitter, color: "text-black", value: "Twitter Ads" },
 ];
 
-const adTypes = [
-  { icon: FaImage, label: "Image Ads", value: "image-ads" },
-  { icon: FaMousePointer, label: "Interactive Ads", value: "interactive-ads" },
+const facebookAdTypes = [
+  { icon: ImBullhorn, label: "Brand Awareness", value: "BRAND_AWARENESS" },
+  { icon: FaMousePointer, label: "Reach", value: "REACH" },
   { icon: FaImages, label: "Carousel Ads", value: "carousel-ads" },
-  { icon: FaPlay, label: "Slideshow Ads", value: "slideshow-ads" },
-  { icon: FaFont, label: "Text Ads", value: "text-ads" },
+  { icon: PiSlideshowFill, label: "Slideshow Ads", value: "slideshow-ads" },
+  { icon: GiEngagementRing, label: "Engagement", value: "ENGAGEMENT" },
   { icon: FaCog, label: "Dynamic Ads", value: "dynamic-ads" },
-  { icon: FaVideo, label: "Video Ads", value: "video-ads" },
+  { icon: FaVideo, label: "Video Ads", value: "VIDEO_VIEWS" },
   { icon: FaInstagram, label: "Story Ads", value: "story-ads" },
   { icon: FaShoppingCart, label: "Shopping Ads", value: "shopping-ads" },
+  { icon: RiMessage3Fill, label: "Messages", value: "MESSAGES" },
+  { icon: PiTrafficConeFill, label: "Trafic", value: "TRAFFIC" },
+  { icon: RiMessage3Fill, label: "Conversions", value: "CONVERSIONS" },
+  {
+    icon: MdOutlineInstallMobile,
+    label: "App Installs",
+    value: "APP_INSTALLS",
+  },
 ];
+const googleAdsTypes = [
+  { icon: ImDisplay, label: "Display Ads", value: "DISPLAY" },
+  { icon: CiSearch, label: "Search Ads", value: "SEARCH" },
+  { icon: FaVideo, label: "Video Ads", value: "VIDEO" },
+  { icon: FaShoppingCart, label: "Shopping Ads", value: "SHOPPING" },
+  {
+    icon: MdOutlineAppRegistration,
+    label: "App Campaigns",
+    value: "APP_CAMPAIGNS",
+  },
+  { icon: Telescope, label: "Performance Max", value: "PERFORMANCE" },
+  { icon: MdLocalActivity, label: "Local Ads", value: "LOCAL_ADS" },
+];
+const TiktokAdsTypes = [
+  { icon: MdOutlineDynamicFeed, label: "In-Feed Ads", value: "SINGLE_VIDEO" },
+  { icon: MdViewModule, label: "TopView Ads", value: "Topview" },
+  {
+    icon: ImBullhorn,
+    label: "Branded Hashtag Challenges",
+    value: "BRANDED_HASHTAG",
+  },
+  { icon: GiCometSpark, label: "Spark Ads", value: "SPARK_AD" },
+  {
+    icon: MdOutlineLeaderboard,
+    label: "Lead Generation Ads",
+    value: "LEAD_GENERATION",
+  },
+  { icon: TbBrandEdge, label: "Branded Effects", value: "BRANDED_EFFECTS" },
+];
+const LinkedinAdsTypes = [
+  { icon: FaImage, label: "Sponsored Content", value: "SPONSORED" },
+  { icon: RiMessage3Fill, label: "Message Ads", value: "MESSAGE " },
+  { icon: CiText, label: "Text Ads", value: "TEXT" },
+  { icon: RiMessage3Fill, label: "Conversation Ads", value: "CONVERSATION" },
+  {
+    icon: MdOutlineLeaderboard,
+    label: " Lead Gen Forms",
+    value: "LEAD_GENERATION",
+  },
+  { icon: SiSpotlight, label: " Spotlight & Job Ads", value: "SPOTLIGHT_JOB" },
+];
+
+const adTypesMap: Record<string, typeof facebookAdTypes> = {
+  "Meta Ads": facebookAdTypes, // no trailing space here
+  "Google Ads": googleAdsTypes,
+  "LinkedIn Ads": LinkedinAdsTypes,
+  "Twitter Ads": [],
+  "TikTok Ads": TiktokAdsTypes,
+};
 
 const DashboardCampaignCreate = () => {
   const [selected, setSelected] = useState("mobile");
@@ -95,12 +171,15 @@ const DashboardCampaignCreate = () => {
   };
 
   // state for getting all the value
+
   const [businessInfo, setBusinessInfo] = useState("");
   const [title, setTitle] = useState("");
   const [selectedObjective, setSelectedObjective] = useState("brand-awareness");
-  const [selectedPlatform, setSelectedPlatform] = useState("facebook");
-  const [selectedAdType, setSelectedAdType] = useState("");
-  const [location, setLocation] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [selectedPlatform, setSelectedPlatform] = useState("Meta Ads");
+  const [selectedAdType, setSelectedAdType] = useState("REACH");
+  const [locationId, setLocationId] = useState("");
+  const [locationCode, setLocationCode] = useState("");
   const [ageFrom, setAgeFrom] = useState("");
   const [ageTo, setAgeTo] = useState("");
   const [selectedGender, setSelectedGender] = useState("All");
@@ -108,27 +187,302 @@ const DashboardCampaignCreate = () => {
   const [totalBudget, setTotalBudget] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [selectedAdAccount, setSelectedAdAccount] = useState("");
+  const [adsAccounts, setAdsAccounts] = useState<
+    Record<string, { id: string; name: string }[]>
+  >({});
+  const [selectedPage, setSelectedPage] = useState("");
+  const [page, setPage] = useState<
+    Record<string, { pageId: string; pageAccessToken: string }[]>
+  >({});
+  const [platformTokens, setPlatformTokens] = useState<Record<string, string>>(
+    {}
+  );
+
+  const [adsetName, setAdsetName] = useState("");
+  const [campaignName, setCampaignName] = useState("");
+  const [adsName, setAdsName] = useState("");
+  const [adGroupName, setAdGroupName] = useState("");
+  const [headline, setHeadLine] = useState(["", "", ""]); // 3 headlines
+  const [video, setVideo] = useState<File | null>(null);
+  const [image, setImage] = useState<File | null>(null);
+  const [carousel, setCarousel] = useState<FileList | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  // console.log("always ", locationCode, locationId);
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!businessInfo)
+      newErrors.businessInfo = "Business information is required";
+    if (!title) newErrors.title = "Title is required";
+    if (!selectedObjective)
+      newErrors.selectedObjective = "Objective is required";
+    if (!selectedPlatform) newErrors.selectedPlatform = "Platform is required";
+    if (!selectedAdType) newErrors.selectedAdType = "Ad type is required";
+    if (!locationId) newErrors.locationId = "Location id is required";
+    if (!locationCode) newErrors.locationCode = "location Code is required";
+
+    if (!ageFrom) newErrors.ageFrom = "Age from is required";
+    if (!ageTo) newErrors.ageTo = "Age to is required";
+    if (!selectedGender) newErrors.selectedGender = "Gender is required";
+    if (interests.length === 0)
+      newErrors.interests = "At least one interest is required";
+    if (!dailyBudget) newErrors.dailyBudget = "Daily budget is required";
+    if (!totalBudget) newErrors.totalBudget = "Total budget is required";
+    if (!startDate) newErrors.startDate = "Start date is required";
+    if (!endDate) newErrors.endDate = "End date is required";
+    if (!selectedAdAccount)
+      newErrors.selectedAdAccount = "Ad account is required";
+    if (!campaignName) newErrors.campaignName = "Campaign name is required";
+
+    if (selectedPlatform === "Meta Ads") {
+      if (!adsetName) newErrors.adsetName = "adsetName is required";
+      if (!adsName) newErrors.adsName = "adsName is required";
+      if (!selectedPage) newErrors.selectedPage = "page is required";
+    }
+    if (selectedPlatform === "Google Ads") {
+      if (!adGroupName) newErrors.adGroupName = "adGroupName  is required";
+      if (!headline) newErrors.headline = "headline is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Fetch all social accounts from your backend
+  const fetchSocialAccounts = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/v1/connect/get-All-Data"
+      );
+      if (!response.ok) throw new Error("Failed to fetch social accounts");
+
+      const data = await response.json();
+      // Convert your data into platform-wise object
+      const platformMap: Record<string, { id: string; name: string }[]> = {};
+      const pageMap: Record<
+        string,
+        { pageId: string; pageAccessToken: string }[]
+      > = {};
+      const tokenMap: Record<string, string> = {}; // store access tokens per platform
+
+      data?.data?.forEach((account: any) => {
+        platformMap[account.name] =
+          account.adAccount?.map((ad: any) => ({
+            id: ad.id, // use 'id' from adAccount
+            name: ad.name, // use 'name' from adAccount
+          })) || [];
+
+        pageMap[account.name] =
+          account.pages?.map((page: any) => ({
+            pageId: page.pageId, // use 'id' from adAccount
+            pageAccessToken: page.pageAccessToken, // use 'name' from adAccount
+          })) || [];
+
+        tokenMap[account.name] = account.accessToken;
+      });
+      setPage(pageMap);
+      setAdsAccounts(platformMap);
+      setPlatformTokens(tokenMap);
+    } catch (err: any) {
+      console.log(err);
+      setErrors(err.message);
+      toast.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchSocialAccounts();
+  }, []);
+
   const handlegenerate = () => {
     navigate("/dashboard/campaign/preview");
   };
-  const handleSubmit = () => {
-    const data = {
-      businessInfo,
-      title,
-      selectedObjective,
-      selectedPlatform,
-      selectedAdType,
-      location,
-      ageFrom,
-      ageTo,
-      selectedGender,
-      dailyBudget,
-      totalBudget,
-      startDate,
-      endDate,
-    };
-    console.log("Form Data:", data);
+
+  const handlePlatformChange = (platform: string) => {
+    setSelectedPlatform(platform);
+    setSelectedAdType(""); // reset
   };
+  const socialAccoutAccessToken = platformTokens[selectedPlatform];
+
+  const handleSubmit = async () => {
+    // const formData = new FormData();
+
+    // if (video) {
+    //   formData.append("videoPath", video); // 👈 must match backend
+    // }
+    // if (image) {
+    //   formData.append("imagePath", image); // 👈 must match backend
+    // }
+    // if (carousel) {
+    //   for (let i = 0; i < carousel.length; i++) {
+    //     formData.append("carouselImages", carousel[i]); // 👈 must match backend
+    //   }
+    // }
+
+    // console.log("form data ", video, image);
+
+    if (!validateForm()) {
+      toast.error("Select required field");
+      // alert("Select required field");
+      return;
+    }
+
+    if (!headline || headline.length === 0) {
+      toast.error("At least 1 Headline is required");
+      throw new Error("At least 1 Headline is required");
+    }
+
+    const headlineData = headline.map((item) => ({ text: item }));
+
+    let payload: any = {};
+    let endpoint = "";
+
+    setLoading(true);
+
+    if (selectedPlatform === "Meta Ads") {
+      console.log("inside meta", locationCode, locationId);
+      payload = {
+        accessToken: socialAccoutAccessToken,
+        adAccountId: selectedAdAccount,
+        pageId: selectedPage,
+        adType: selectedAdType,
+        campaignName,
+        adSetName: adsetName,
+        adName: adsName,
+        dailyBudget,
+        targeting: {
+          geo_locations: { countries: locationCode ? [locationCode] : [] },
+          age_min: ageFrom,
+          age_max: ageTo,
+          publisher_platforms: ["facebook"],
+          facebook_positions: ["feed"],
+        },
+        link: "https://adelo.ai",
+        message: title,
+        callToActionType: "LEARN_MORE",
+        videoId: "4035143386752067",
+        imageUrl:
+          "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d",
+      };
+      endpoint = "facebook";
+    }
+
+    if (selectedPlatform === "Google Ads") {
+      payload = {
+        refreshToken:
+          "1//0gyFnzETMVPfBCgYIARAAGBASNwF-L9Irnr7JSvDaZBW_pCeQdDU0fUVNt5qnGP9jx7_scipp6Siip929an3TV5rKsQGADmG54cc",
+        customerId: selectedAdAccount,
+        campaignName,
+        adGroupName,
+        adType: selectedAdType,
+        budgetAmountMicros: 2500000,
+        cpcBidMicros: 800000,
+        headlines: headlineData,
+        description: title,
+        finalUrl: businessInfo?.website || "https://adelo.ai",
+      };
+      endpoint = "google";
+      console.log("headline", headlineData);
+      console.log("google payload", payload);
+    }
+
+    if (selectedPlatform === "LinkedIn Ads") {
+      payload = {
+        accessToken: socialAccoutAccessToken,
+        accountId: selectedAdAccount,
+        campaignName,
+        adName: adsName,
+        dailyBudget,
+        creatives: {
+          headline: headlineData[0]?.text,
+          description: title,
+          landingPageUrl: businessInfo?.website,
+        },
+        targeting: {
+          location,
+          age: { from: ageFrom, to: ageTo },
+          gender: selectedGender,
+        },
+      };
+      endpoint = "linkedin";
+    }
+    if (selectedPlatform === "TikTok Ads") {
+      const fd = new FormData();
+
+      // Files must match backend field names
+      if (video) fd.append("videoPath", video);
+      if (image) fd.append("imagePath", image);
+      if (carousel) {
+        for (let i = 0; i < carousel.length; i++) {
+          fd.append("carouselImages", carousel[i]);
+        }
+      }
+
+      // Attach non-file fields (your "othersField")
+      fd.append("adType", selectedAdType || "TRAFFIC");
+      fd.append("campaign_name", campaignName);
+      fd.append("adgroup_name", adGroupName || "Default Ad Group");
+      fd.append("ad_name", adsName);
+      fd.append("ad_text", headlineData[0]?.text || title);
+      fd.append("call_to_action", "LEARN_MORE");
+      fd.append("landing_page_url", "https://adelo.ai");
+      fd.append("budget", String(Number(dailyBudget) || 100));
+      fd.append("bid_price", "2");
+      fd.append("objective_type", "TRAFFIC");
+      fd.append("promotion_type", "WEBSITE");
+      fd.append("location_ids", JSON.stringify([locationId]));
+
+      try {
+        setLoading(true);
+        const res = await axios.post(
+          "http://localhost:5000/api/v1/ads/tiktok/create-ad",
+          fd,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data", // 👈 required
+            },
+          }
+        );
+        console.log("TikTok response:", res.data);
+        toast.success("TikTok Ad created successfully!");
+        setLoading(false);
+        // alert("TikTok Ad created successfully!");
+      } catch (err: any) {
+        console.error("TikTok error:", err.response?.data || err.message);
+        toast.error(err.response.data.error);
+        // alert("TikTok Ad creation failed");
+      }
+
+      return; // 👈 prevent falling through to JSON logic
+    }
+
+    try {
+      setLoading(true);
+      console.log(payload);
+      const res = await axios.post(
+        `http://localhost:5000/api/v1/ads/${endpoint}/create-ad`,
+        payload
+      );
+      console.log("API Response:", res.data);
+      toast.success("Ad created successfully ");
+      setLoading(false);
+      // alert("Ad created successfully!");
+    } catch (error: any) {
+      console.log(error);
+      console.error(
+        "Error creating ad:",
+        error.response?.data || error.message
+      );
+      toast.error(error);
+
+      // alert("Failed to create ad");
+    }
+  };
+
+  // console.log("state of loading", loading);
 
   return (
     <div>
@@ -149,6 +503,7 @@ const DashboardCampaignCreate = () => {
                 value={businessInfo}
                 onChange={(e) => setBusinessInfo(e.target.value)}
                 className="appearance-none w-full py-3 px-4 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-800"
+                required
               >
                 <option className="bg-white text-gray-700" value="">
                   Select Business
@@ -163,6 +518,11 @@ const DashboardCampaignCreate = () => {
                   Primary Goals
                 </option>
               </select>
+              {errors.businessInfo && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.businessInfo}
+                </p>
+              )}
 
               {/* Custom dropdown arrow (SVG) */}
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
@@ -191,14 +551,22 @@ const DashboardCampaignCreate = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                required
               />
+              {errors.title && (
+                <p className="text-red-500 text-xs mt-1">{errors.title}</p>
+              )}
             </div>
           </div>
 
           {/* Ad Objective */}
-
           <div>
             <CampaignSubHeader text="Ad Objective" />
+            {errors.selectedObjective && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.selectedObjective}
+              </p>
+            )}
 
             <div className="grid grid-cols-2 gap-3">
               {objectives.map((objective, index) => (
@@ -224,6 +592,11 @@ const DashboardCampaignCreate = () => {
 
           <div>
             <CampaignSubHeader text="Platform Selection" />
+            {errors.selectedPlatform && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.selectedPlatform}
+              </p>
+            )}
 
             <div className="flex justify-between">
               {platforms.map((platform, index) => (
@@ -234,7 +607,7 @@ const DashboardCampaignCreate = () => {
                       ? "bg-purple-100 border-purple-600"
                       : "bg-[#E6E6E8]"
                   } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
-                  onClick={() => setSelectedPlatform(platform.value)}
+                  onClick={() => handlePlatformChange(platform.value)}
                 >
                   <platform.icon className={`text-2xl ${platform.color}`} />
                 </div>
@@ -246,11 +619,17 @@ const DashboardCampaignCreate = () => {
 
           <div>
             <CampaignSubHeader text="Ad Type" />
+            {errors.selectedAdType && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.selectedAdType}
+              </p>
+            )}
+
             <div className="grid grid-cols-3 gap-3">
-              {adTypes.map((adType, index) => (
+              {(adTypesMap[selectedPlatform] || []).map((adType, index) => (
                 <div
                   key={index}
-                  className={`flex items-center p-3 gap-2 rounded-lg border  border-gray-200 cursor-pointer hover:bg-gray-50 ${
+                  className={`flex items-center p-3 gap-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 ${
                     selectedAdType === adType.value
                       ? "bg-purple-100 border-purple-600"
                       : "bg-[#E6E6E8]"
@@ -266,6 +645,230 @@ const DashboardCampaignCreate = () => {
             </div>
           </div>
 
+          {/* select ads account  */}
+          <div>
+            <CampaignSubHeader text="Ads Account" />
+            {errors.selectedAdAccount && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.selectedAdAccount}
+              </p>
+            )}
+            <div className="relative w-full">
+              <select
+                value={selectedAdAccount}
+                onChange={(e) => {
+                  const accountId = e.target.value.replace(/^act_/, "");
+                  setSelectedAdAccount(accountId);
+                }}
+                className="appearance-none w-full py-3 px-4 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-800"
+                required
+              >
+                {/* Default placeholder option */}
+                <option value="" disabled>
+                  Select your Ads Account
+                </option>
+
+                {/* List accounts if available */}
+                {selectedPlatform &&
+                (adsAccounts[selectedPlatform]?.length || 0) > 0
+                  ? adsAccounts[selectedPlatform].map((account) => (
+                      <option key={account.id} value={account.id}>
+                        {account.name} ({account.id})
+                      </option>
+                    ))
+                  : selectedPlatform && (
+                      <option value="" disabled>
+                        You don't have any Ads Account
+                      </option>
+                    )}
+              </select>
+
+              {/* Custom dropdown arrow */}
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
+                <svg
+                  className="h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 14a1 1 0 01-.7-.3l-4-4a1 1 0 111.4-1.4L10 11.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-.7.3z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* select page  */}
+          {selectedPlatform === "Meta Ads" && (
+            <div>
+              <CampaignSubHeader text="Select page" />
+              {errors.selectedPage && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.selectedPage}
+                </p>
+              )}
+              <div className="relative w-full">
+                <select
+                  value={selectedPage}
+                  onChange={(e) => {
+                    const pageId = e.target.value.replace(/^act_/, "");
+                    setSelectedPage(pageId);
+                  }}
+                  className="appearance-none w-full py-3 px-4 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-800"
+                  required
+                >
+                  {/* Default placeholder option */}
+                  <option value="" disabled>
+                    Select page
+                  </option>
+
+                  {/* List accounts if available */}
+                  {selectedPlatform && (page[selectedPlatform]?.length || 0) > 0
+                    ? page[selectedPlatform].map((page) => (
+                        <option key={page.pageId} value={page.pageId}>
+                          ({page.pageId})
+                        </option>
+                      ))
+                    : selectedPlatform && (
+                        <option value="" disabled>
+                          You don't have any Ads Account
+                        </option>
+                      )}
+                </select>
+
+                {/* Custom dropdown arrow */}
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
+                  <svg
+                    className="h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 14a1 1 0 01-.7-.3l-4-4a1 1 0 111.4-1.4L10 11.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-.7.3z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          )}
+          {/* Campaign Name */}
+          <div>
+            <CampaignSubHeader text="Campaign Name" />
+            {errors.campaignName && (
+              <p className="text-red-500 text-xs mt-1">{errors.campaignName}</p>
+            )}
+            <div>
+              <Input
+                type="text"
+                value={campaignName}
+                required
+                onChange={(e) => setCampaignName(e.target.value)}
+                className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                placeholder="Enter campaign name"
+              />
+            </div>
+          </div>
+
+          {/* Adset Name */}
+          {selectedPlatform === "Meta Ads" && (
+            <div>
+              <CampaignSubHeader text="Adset Name" />
+              {errors.adsetName && (
+                <p className="text-red-500 text-xs mt-1">{errors.adsetName}</p>
+              )}
+              <div>
+                <Input
+                  type="text"
+                  value={adsetName}
+                  required
+                  onChange={(e) => setAdsetName(e.target.value)}
+                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="Enter adset name"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Ads Name */}
+          {selectedPlatform === "Meta Ads" && (
+            <div>
+              <CampaignSubHeader text="Ads Name" />
+              {errors.adsName && (
+                <p className="text-red-500 text-xs mt-1">{errors.adsName}</p>
+              )}
+              <div>
+                <Input
+                  type="text"
+                  value={adsName}
+                  required
+                  onChange={(e) => setAdsName(e.target.value)}
+                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="Enter ads name"
+                />
+              </div>
+            </div>
+          )}
+          {/* Ads Group name  */}
+          {selectedPlatform === "Google Ads" && (
+            <div>
+              <CampaignSubHeader text="Ads Group Name " />
+              {errors.adGroupName && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.adGroupName}
+                </p>
+              )}
+              <div>
+                <Input
+                  type="text"
+                  value={adGroupName}
+                  required
+                  onChange={(e) => setAdGroupName(e.target.value)}
+                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="Enter Ads Group Name"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* google ads headline   */}
+          {selectedPlatform === "Google Ads" && (
+            <div>
+              <CampaignSubHeader text="HeadLines " />
+              {errors.headline && (
+                <p className="text-red-500 text-xs mt-1">{errors.headline}</p>
+              )}
+              <div className="space-y-2">
+                {headline.map((value, index) => (
+                  <div key={index}>
+                    <Input
+                      type="text"
+                      value={value}
+                      required
+                      onChange={(e) => {
+                        const newHeadlines = [...headline];
+                        newHeadlines[index] = e.target.value;
+                        setHeadLine(newHeadlines);
+                      }}
+                      placeholder={`Enter Headline ${index + 1}`}
+                      className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    />
+                    {errors.headline?.[index] && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.headline[index]}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Target Audience */}
           <div className="space-y-4">
             <CampaignSubHeader text=" Target Audience" />
@@ -273,48 +876,87 @@ const DashboardCampaignCreate = () => {
             <div>
               <p className="text-sm mb-1">Location</p>
               <select
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                value={locationCode}
+                onChange={(e) => {
+                  const selectedCountry = countries.find(
+                    (c) => c.code === e.target.value
+                  );
+                  if (selectedCountry) {
+                    setLocationId(String(selectedCountry.id));
+                    setLocationCode(selectedCountry.code);
+                  } else {
+                    setLocationId("");
+                    setLocationCode("");
+                  }
+                }}
                 className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                required
               >
                 <option value="">Select Location</option>
-                <option value="united-states">United States</option>
-                <option value="canada">Canada</option>
-                <option value="uk">United Kingdom</option>
+                {countries.map((c) => (
+                  <option key={c.id || c.name} value={c.code}>
+                    {c.name}
+                  </option>
+                ))}
               </select>
+              {errors.locationId && (
+                <p className="text-red-500 text-xs mt-1">{errors.locationId}</p>
+              )}
             </div>
 
             {/* Age range */}
             <div>
               <p className="text-sm">Age range</p>
               <div className="flex items-center gap-2">
+                {/* From Age */}
                 <select
                   value={ageFrom}
                   onChange={(e) => setAgeFrom(e.target.value)}
                   className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
                 >
                   <option value="">From</option>
-                  <option value="18">18</option>
-                  <option value="19">19</option>
-                  <option value="20">20</option>
+                  {Array.from({ length: 43 }, (_, i) => 18 + i).map((age) => (
+                    <option key={age} value={age}>
+                      {age}
+                    </option>
+                  ))}
                 </select>
+
                 <p>To</p>
+
+                {/* To Age */}
                 <select
                   value={ageTo}
                   onChange={(e) => setAgeTo(e.target.value)}
                   className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
                 >
                   <option value="">To</option>
-                  <option value="18">18</option>
-                  <option value="19">19</option>
-                  <option value="20">20</option>
+                  {Array.from({ length: 43 }, (_, i) => 18 + i).map((age) => (
+                    <option key={age} value={age}>
+                      {age}
+                    </option>
+                  ))}
+                  <option value="60+">60+</option>
                 </select>
               </div>
+
+              {(errors.ageFrom || errors.ageTo) && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.ageFrom || errors.ageTo}
+                </p>
+              )}
             </div>
 
             {/* Gender */}
             <div>
               <CampaignSubHeader text="Gender" />
+              {errors.selectedGender && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.selectedGender}
+                </p>
+              )}
               <div className="flex space-x-2">
                 {["All", "Male", "Female"].map((gender) => (
                   <Button
@@ -336,6 +978,9 @@ const DashboardCampaignCreate = () => {
             {/* Interest */}
             <div>
               <CampaignSubHeader text="Interest" />
+              {errors.interests && (
+                <p className="text-red-500 text-xs mt-1">{errors.interests}</p>
+              )}
               <div className="flex flex-wrap gap-2">
                 {interests.map((interest) => (
                   <div
@@ -372,12 +1017,18 @@ const DashboardCampaignCreate = () => {
                 value={dailyBudget}
                 onChange={(e) => setDailyBudget(e.target.value)}
                 className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                required
               >
                 <option value="">Select Daily Budget</option>
                 <option value="50">$50</option>
                 <option value="100">$100</option>
                 <option value="150">$150</option>
               </select>
+              {errors.dailyBudget && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.dailyBudget}
+                </p>
+              )}
             </div>
 
             {/* Total Budget */}
@@ -387,12 +1038,18 @@ const DashboardCampaignCreate = () => {
                 value={totalBudget}
                 onChange={(e) => setTotalBudget(e.target.value)}
                 className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                required
               >
                 <option value="">Select Total Budget</option>
                 <option value="500">$500</option>
                 <option value="1000">$1000</option>
                 <option value="1500">$1500</option>
               </select>
+              {errors.totalBudget && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.totalBudget}
+                </p>
+              )}
             </div>
 
             {/* date */}
@@ -404,7 +1061,13 @@ const DashboardCampaignCreate = () => {
                   onChange={(e) => setStartDate(e.target.value)}
                   value={startDate}
                   className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
                 />
+                {errors.startDate && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.startDate}
+                  </p>
+                )}
               </div>
               <div className="flex-1">
                 <p className="text-sm">End Date</p>
@@ -413,7 +1076,11 @@ const DashboardCampaignCreate = () => {
                   onChange={(e) => setEndDate(e.target.value)}
                   value={endDate}
                   className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
                 />
+                {errors.endDate && (
+                  <p className="text-red-500 text-xs mt-1">{errors.endDate}</p>
+                )}
               </div>
             </div>
           </div>
@@ -422,10 +1089,37 @@ const DashboardCampaignCreate = () => {
         <div className="flex-1">
           <div className="flex justify-end items-center gap-5">
             <OutlineButton>Save Draft</OutlineButton>
-            <PrimaryButton onClick={handleSubmit}>
-              Launch Campaign
+            <PrimaryButton
+              onClick={handleSubmit}
+            >
+              <span className="flex items-center gap-2">
+                {loading && (
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    />
+                  </svg>
+                )}
+                {loading ? "Launching Campaign..." : "Launch Campaign"}
+              </span>
             </PrimaryButton>
           </div>
+
           <div className="border border-gray-300 my-3" />
           {/* prompt section */}
           <div className="flex-1 bg-[#F3F4F6] rounded-[20px] p-4">
@@ -437,7 +1131,7 @@ const DashboardCampaignCreate = () => {
                   name="prompt"
                   id=""
                   className="border-[1px] border-[979AA0] w-full rounded-xl px-1 py-2 text-sm"
-                  value={
+                  defaultValue={
                     "Create an engaging ad copy for a summer sale offering 40% off"
                   }
                 ></textarea>
@@ -451,7 +1145,7 @@ const DashboardCampaignCreate = () => {
                   name="prompt"
                   id=""
                   className="border-[1px] border-[979AA0] w-full rounded-xl px-1 py-2 text-sm"
-                  value={
+                  defaultValue={
                     "Lorem ipsum dolor sit amet consectetur. Id feugiat magna lobortis gravida rhoncus neque vehicula. Euismod nullam tincidunt nunc faucibus viverra elit."
                   }
                   rows={4}
@@ -462,14 +1156,34 @@ const DashboardCampaignCreate = () => {
           {/* media section */}
           <div className="mt-5">
             <CampaignSubHeader text="Ad Media" />
-            <div className="bg-black rounded-md flex justify-center items-center gap-2 h-64 mx-6">
+            {/* <div className="bg-black rounded-md flex justify-center items-center gap-2 h-64 mx-6">
               <button className="px-4 py-2 rounded-3xl border border-[#8E6EFF] cursor-pointer text-[#8E6EFF] font-bold">
                 Save Draft
               </button>
               <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-white font-bold">
                 Browse Templates
               </button>
+            </div> */}
+
+            <div>
+              <input
+                type="file"
+                accept="video/*"
+                onChange={(e) => setVideo(e.target.files?.[0] || null)}
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files?.[0] || null)}
+              />
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={(e) => setCarousel(e.target.files)}
+              />
             </div>
+
             <div className="flex justify-center items-center py-3">
               <button className="px-4 py-2 rounded-md border cursor-pointer font-bold">
                 Add Media +
