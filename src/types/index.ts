@@ -34,3 +34,50 @@ export interface User {
     pages?: IPages[] | null;
     isSynced: boolean;
   }
+
+
+
+
+  // Audience details
+interface Audience {
+  age_range: string;
+  gender: string;
+  interests: string[];
+  location: string;
+}
+
+// Budget details
+interface BudgetSchedule {
+  campaign_duration: number;
+  daily_budget: number;
+  total_budget: number;
+}
+
+// Ads features
+interface AdsFeatures {
+  ad_type: string;
+  audience: Audience;
+  budget_schedule: BudgetSchedule;
+  objective: string;
+  platform: string;
+  title: string;
+}
+
+// Google shopping ad details
+interface GoogleShoppingAd {
+  ad_description: string;
+  campaign_objective: string;
+  product_name: string;
+  target_audience: string;
+}
+
+// Text ads
+interface TextAds {
+  google_shopping_ad: GoogleShoppingAd;
+}
+
+// Final object type
+export interface AdsData {
+  ads_features: AdsFeatures;
+  text_ads: TextAds;
+}

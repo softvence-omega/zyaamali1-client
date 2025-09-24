@@ -52,6 +52,7 @@ import { CiText } from "react-icons/ci";
 
 import { GiCometSpark } from "react-icons/gi";
 import { countries } from "@/utils/Countries";
+import { AdsData } from "@/types";
 
 const objectives = [
   {
@@ -208,6 +209,14 @@ const DashboardCampaignCreate = () => {
   const [image, setImage] = useState<File | null>(null);
   const [carousel, setCarousel] = useState<FileList | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const [company, setCompany] = useState("");
+  const [platform, setPlatform] = useState("");
+  const [prompt, setPrompt] = useState(
+    "Create an engaging ad copy for a summer sale offering 40% off"
+  );
+
+    const [adsData, setAdsData] = useState<AdsData>();
 
   // console.log("always ", locationCode, locationId);
 
@@ -482,7 +491,71 @@ const DashboardCampaignCreate = () => {
     }
   };
 
-  // console.log("state of loading", loading);
+
+
+  // const fakeAdsData: AdsData = {
+  //   ads_features: {
+  //     ad_type: "Shopping Ad",
+  //     audience: {
+  //       age_range: "18-55",
+  //       gender: "All",
+  //       interests: [
+  //         "Reading",
+  //         "Books",
+  //         "Literature",
+  //         "Online Shopping",
+  //         "Education",
+  //       ],
+  //       location: "Bangladesh",
+  //     },
+  //     budget_schedule: {
+  //       campaign_duration: 30,
+  //       daily_budget: 7,
+  //       total_budget: 210,
+  //     },
+  //     objective: "Sales",
+  //     platform: "Google",
+  //     title:
+  //       "Discover Bestselling Books - Shop Now for Fast Delivery in Bangladesh!",
+  //   },
+  //   text_ads: {
+  //     google_shopping_ad: {
+  //       ad_description:
+  //         "Elevate Your Mind! Dive into essential knowledge for success. From captivating literature to vital education, 'Business' fuels your growth. Shop online now, Bangladesh (18-55)! Your next chapter starts here.",
+  //       campaign_objective: "Sales",
+  //       product_name: "Business",
+  //       target_audience:
+  //         "Bangladesh, Aged 18-55, interested in Reading, Books, Literature, Online Shopping, Education",
+  //     },
+  //   },
+  // };
+
+  const handleGenerateAdsData = async () => {
+    const data = {
+      company_info: company,
+      platform,
+      prompt: prompt,
+    };
+
+    console.log("Request Data:", data);
+
+    try {
+      const res = await axios.post(
+        "https://20c12d8fb0af.ngrok-free.app/ads/generate",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setAdsData(res.data.dat);
+      console.log("API Response:", res.data);
+    } catch (err) {
+      console.error("API Error:", err);
+    }
+  };
 
   return (
     <div>
@@ -572,10 +645,11 @@ const DashboardCampaignCreate = () => {
               {objectives.map((objective, index) => (
                 <div
                   key={index}
-                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${selectedObjective === objective.value
-                    ? "bg-purple-100 border-purple-600"
-                    : "bg-[#E6E6E8] border-gray-200"
-                    } hover:bg-[#F4F1FF]`}
+                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${
+                    selectedObjective === objective.value
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8] border-gray-200"
+                  } hover:bg-[#F4F1FF]`}
                   onClick={() => setSelectedObjective(objective.value)}
                 >
                   <objective.icon className="text-xl" />
@@ -601,10 +675,11 @@ const DashboardCampaignCreate = () => {
               {platforms.map((platform, index) => (
                 <div
                   key={index}
-                  className={`${selectedPlatform === platform.value
-                    ? "bg-purple-100 border-purple-600"
-                    : "bg-[#E6E6E8]"
-                    } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
+                  className={`${
+                    selectedPlatform === platform.value
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8]"
+                  } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
                   onClick={() => handlePlatformChange(platform.value)}
                 >
                   <platform.icon className={`text-2xl ${platform.color}`} />
@@ -627,10 +702,11 @@ const DashboardCampaignCreate = () => {
               {(adTypesMap[selectedPlatform] || []).map((adType, index) => (
                 <div
                   key={index}
-                  className={`flex items-center p-3 gap-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 ${selectedAdType === adType.value
-                    ? "bg-purple-100 border-purple-600"
-                    : "bg-[#E6E6E8]"
-                    }`}
+                  className={`flex items-center p-3 gap-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 ${
+                    selectedAdType === adType.value
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8]"
+                  }`}
                   onClick={() => setSelectedAdType(adType.value)}
                 >
                   <adType.icon className="text-lg text-gray-600" />
@@ -667,17 +743,17 @@ const DashboardCampaignCreate = () => {
 
                 {/* List accounts if available */}
                 {selectedPlatform &&
-                  (adsAccounts[selectedPlatform]?.length || 0) > 0
+                (adsAccounts[selectedPlatform]?.length || 0) > 0
                   ? adsAccounts[selectedPlatform].map((account) => (
-                    <option key={account.id} value={account.id}>
-                      {account.name} ({account.id})
-                    </option>
-                  ))
+                      <option key={account.id} value={account.id}>
+                        {account.name} ({account.id})
+                      </option>
+                    ))
                   : selectedPlatform && (
-                    <option value="" disabled>
-                      You don't have any Ads Account
-                    </option>
-                  )}
+                      <option value="" disabled>
+                        You don't have any Ads Account
+                      </option>
+                    )}
               </select>
 
               {/* Custom dropdown arrow */}
@@ -725,15 +801,15 @@ const DashboardCampaignCreate = () => {
                   {/* List accounts if available */}
                   {selectedPlatform && (page[selectedPlatform]?.length || 0) > 0
                     ? page[selectedPlatform].map((page) => (
-                      <option key={page.pageId} value={page.pageId}>
-                        ({page.pageId})
-                      </option>
-                    ))
+                        <option key={page.pageId} value={page.pageId}>
+                          ({page.pageId})
+                        </option>
+                      ))
                     : selectedPlatform && (
-                      <option value="" disabled>
-                        You don't have any Ads Account
-                      </option>
-                    )}
+                        <option value="" disabled>
+                          You don't have any Ads Account
+                        </option>
+                      )}
                 </select>
 
                 {/* Custom dropdown arrow */}
@@ -1086,9 +1162,7 @@ const DashboardCampaignCreate = () => {
         <div className="flex-1">
           <div className="flex justify-end items-center gap-5">
             <OutlineButton>Save Draft</OutlineButton>
-            <PrimaryButton
-              onClick={handleSubmit}
-            >
+            <PrimaryButton onClick={handleSubmit}>
               <span className="flex items-center gap-2">
                 {loading && (
                   <svg
@@ -1119,67 +1193,73 @@ const DashboardCampaignCreate = () => {
 
           <div className="border border-gray-300 my-3" />
           {/* prompt section */}
-          <div className="flex-1 bg-[#F3F4F6] rounded-[20px] p-4">
-            <CampaignSubHeader text="Ad Copy" />
-            <div>
-              <div>
-                <div className="mb-2 mt-5">
-                  <label htmlFor="bt" className="font-bold">Company Info</label>
-                  <input id="bt" type="text" className="border border-gray-200 rounded-lg w-full py-2 px-3 mt-2" />
-                </div>
-                <div className="mb-2 mt-5 flex flex-col">
-                  <label htmlFor="bt" className="font-bold">Platform</label>
-                  <select className="py-2 px-2 border border-gray-200 rounded-lg mt-2">
-                    <option value="">Select Platform</option>
-                    <option value="facebook">Facebook</option>
-                    <option>Google</option>
-                    <option>Tiktok</option>
-                    <option>LinkedIn</option>
-                    <option>Instagram</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="font-bold" htmlFor="prompt">Prompt</label>
-                  <textarea
-                    name="prompt"
-                    id="prompt"
-                    className="border-[1px] border-[979AA0] w-full rounded-xl px-3 py-2 text-sm mt-2"
-                    defaultValue={
-                      "Create an engaging ad copy for a summer sale offering 40% off"
-                    }
-                  ></textarea>
-                </div>
-                <button className="px-4 py-2 rounded-3xl bg-[#654FAE] cursor-pointer text-white font-bold">
-                  Generate
-                </button>
-              </div>
-              <div>
-                <p className="mt-5 text-sm text-T-200">Generated Text</p>
-                <textarea
-                  name="prompt"
-                  id=""
-                  className="border-[1px] border-[979AA0] w-full rounded-xl px-1 py-2 text-sm"
-                  defaultValue={
-                    "Lorem ipsum dolor sit amet consectetur. Id feugiat magna lobortis gravida rhoncus neque vehicula. Euismod nullam tincidunt nunc faucibus viverra elit."
-                  }
-                  rows={4}
-                ></textarea>
-              </div>
+          <div>
+            <CampaignSubHeader text={"Ad Copy"}></CampaignSubHeader>
+            <div className="mb-2 mt-5">
+              <label htmlFor="bt" className="font-bold">
+                Company Info
+              </label>
+              <input
+                id="bt"
+                type="text"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                className="border border-gray-200 rounded-lg w-full py-2 px-3 mt-2"
+              />
             </div>
+
+            <div className="mb-2 mt-5 flex flex-col">
+              <label htmlFor="platform" className="font-bold">
+                Platform
+              </label>
+              <select
+                id="platform"
+                value={platform}
+                onChange={(e) => setPlatform(e.target.value)}
+                className="py-2 px-2 border border-gray-200 rounded-lg mt-2"
+              >
+                <option value="">Select Platform</option>
+                <option value="facebook">Facebook</option>
+                <option value="google">Google</option>
+                <option value="tiktok">Tiktok</option>
+                <option value="linkedin">LinkedIn</option>
+                <option value="instagram">Instagram</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="font-bold" htmlFor="prompt">
+                Prompt
+              </label>
+              <textarea
+                name="prompt"
+                id="prompt"
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                className="border-[1px] border-gray-200 w-full rounded-xl px-3 py-2 text-sm mt-2"
+              />
+            </div>
+
+            <button
+              onClick={handleGenerateAdsData}
+              className="px-4 py-2 mt-4 rounded-3xl bg-[#654FAE] cursor-pointer text-white font-bold"
+            >
+              Generate
+            </button>
           </div>
           {/* media section */}
           <div className="mt-5">
             <CampaignSubHeader text="Ad Media" />
-            {/* <div className="bg-black rounded-md flex justify-center items-center gap-2 h-64 mx-6">
+            <div className="bg-black rounded-md flex justify-center items-center gap-2 h-64 mx-6">
               <button className="px-4 py-2 rounded-3xl border border-[#8E6EFF] cursor-pointer text-[#8E6EFF] font-bold">
                 Save Draft
               </button>
               <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-white font-bold">
                 Browse Templates
               </button>
-            </div> */}
+            </div>
 
-            <div>
+            {/* <div>
               <input
                 type="file"
                 accept="video/*"
@@ -1196,7 +1276,7 @@ const DashboardCampaignCreate = () => {
                 multiple
                 onChange={(e) => setCarousel(e.target.files)}
               />
-            </div>
+            </div> */}
 
             <div className="flex justify-center items-center py-3">
               <button className="px-4 py-2 rounded-md border cursor-pointer font-bold">
@@ -1233,19 +1313,21 @@ const DashboardCampaignCreate = () => {
               <div className="inline-flex items-center bg-white border border-gray-300 rounded-full overflow-hidden text-sm font-medium">
                 <button
                   onClick={() => setSelected("mobile")}
-                  className={`px-4 py-3 transition-colors duration-200 ${selected === "mobile"
-                    ? "bg-purple-500 text-white"
-                    : "text-black"
-                    }`}
+                  className={`px-4 py-3 transition-colors duration-200 ${
+                    selected === "mobile"
+                      ? "bg-purple-500 text-white"
+                      : "text-black"
+                  }`}
                 >
                   Mobile
                 </button>
                 <button
                   onClick={() => setSelected("desktop")}
-                  className={`px-4 py-3 transition-colors duration-200 ${selected === "desktop"
-                    ? "bg-purple-500 text-white"
-                    : "text-black"
-                    }`}
+                  className={`px-4 py-3 transition-colors duration-200 ${
+                    selected === "desktop"
+                      ? "bg-purple-500 text-white"
+                      : "text-black"
+                  }`}
                 >
                   Desktop
                 </button>
