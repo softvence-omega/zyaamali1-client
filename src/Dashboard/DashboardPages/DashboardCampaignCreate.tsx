@@ -493,7 +493,7 @@ const DashboardCampaignCreate = () => {
 
   const [adsData, setAdsData] = useState<AdsData>();
 
-  const fakeAdsData : AdsData = {
+  const fakeAdsData: AdsData = {
     ads_features: {
       ad_type: "Shopping Ad",
       audience: {
@@ -550,9 +550,7 @@ const DashboardCampaignCreate = () => {
         }
       );
 
-
-
-
+      setAdsData(res.data.dat);
       console.log("API Response:", res.data);
     } catch (err) {
       console.error("API Error:", err);
