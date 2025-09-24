@@ -11,6 +11,7 @@ type MessageBubbleProps = {
 };
 
 const MessageBubble = ({ role, message }: MessageBubbleProps) => {
+  console.log('message bubbles', message)
   const isadmin = role === "admin" || role === "creator";
 
   return (
@@ -118,7 +119,7 @@ const ChatUI = (sessionIdForChat ) => {
         {
           prompt: input,
           token: token,
-          sessionId: "68d377b9180e7ac4370339c5"
+          sessionId: sessionIdForChat.sessionIdForChat
         }
       );
 

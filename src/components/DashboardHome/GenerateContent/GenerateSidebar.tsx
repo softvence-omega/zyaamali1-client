@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { useSelector } from "react-redux";
 
-const GenerateSidebar = ({setSessionIdForChat}) => {
+const GenerateSidebar = ({setSessionIdForChat }) => {
 
   const token = useSelector((state: RootState) => state.auth.token);
 
@@ -76,6 +76,7 @@ const GenerateSidebar = ({setSessionIdForChat}) => {
 
           {chatbotHistory?.map((item) => (
             <button
+            key={item._id}
               className=" text-Foundation-gray-bg p-2 text-sm rounded-lg hover:bg-[#6C7078] hover:text-white capitalize text-left"
               onClick={() => setSessionIdForChat(item.sessionId)}
             >
