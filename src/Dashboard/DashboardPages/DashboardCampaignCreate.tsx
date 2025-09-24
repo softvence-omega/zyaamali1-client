@@ -491,7 +491,7 @@ const DashboardCampaignCreate = () => {
 
   // console.log("state of loading", loading);
 
-  const [adsData, setAdsData] = useState<>();
+  const [adsData, setAdsData] = useState<AdsData>();
 
   const fakeAdsData : AdsData = {
     ads_features: {
