@@ -26,7 +26,7 @@ const ContentHeader: React.FC<{
       let response;
       if (contentType === "image") {
         response = await axios.post(
-          "https://9509ead9e3f3.ngrok-free.app/ads/generate/image",
+          "https://9509ead9e3f3.ngrok-free.app/library/generate/image-content",
           {
             prompt,
             ads_features: {
@@ -37,7 +37,7 @@ const ContentHeader: React.FC<{
         console.log("image  ", response.data);
       } else if (contentType === "video") {
         response = await axios.post(
-          `https://9509ead9e3f3.ngrok-free.app/ads/generate/video`,
+          `https://9509ead9e3f3.ngrok-free.app/library/generate/video-content`,
           {
             prompt,
             title: "Back to School Sale 2025",
