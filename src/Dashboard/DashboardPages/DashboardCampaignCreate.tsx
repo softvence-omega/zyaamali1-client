@@ -216,6 +216,8 @@ const DashboardCampaignCreate = () => {
     "Create an engaging ad copy for a summer sale offering 40% off"
   );
 
+    const [adsData, setAdsData] = useState<AdsData>();
+
   // console.log("always ", locationCode, locationId);
 
   const validateForm = () => {
@@ -489,46 +491,44 @@ const DashboardCampaignCreate = () => {
     }
   };
 
-  // console.log("state of loading", loading);
 
-  const [adsData, setAdsData] = useState<AdsData>();
 
-  const fakeAdsData: AdsData = {
-    ads_features: {
-      ad_type: "Shopping Ad",
-      audience: {
-        age_range: "18-55",
-        gender: "All",
-        interests: [
-          "Reading",
-          "Books",
-          "Literature",
-          "Online Shopping",
-          "Education",
-        ],
-        location: "Bangladesh",
-      },
-      budget_schedule: {
-        campaign_duration: 30,
-        daily_budget: 7,
-        total_budget: 210,
-      },
-      objective: "Sales",
-      platform: "Google",
-      title:
-        "Discover Bestselling Books - Shop Now for Fast Delivery in Bangladesh!",
-    },
-    text_ads: {
-      google_shopping_ad: {
-        ad_description:
-          "Elevate Your Mind! Dive into essential knowledge for success. From captivating literature to vital education, 'Business' fuels your growth. Shop online now, Bangladesh (18-55)! Your next chapter starts here.",
-        campaign_objective: "Sales",
-        product_name: "Business",
-        target_audience:
-          "Bangladesh, Aged 18-55, interested in Reading, Books, Literature, Online Shopping, Education",
-      },
-    },
-  };
+  // const fakeAdsData: AdsData = {
+  //   ads_features: {
+  //     ad_type: "Shopping Ad",
+  //     audience: {
+  //       age_range: "18-55",
+  //       gender: "All",
+  //       interests: [
+  //         "Reading",
+  //         "Books",
+  //         "Literature",
+  //         "Online Shopping",
+  //         "Education",
+  //       ],
+  //       location: "Bangladesh",
+  //     },
+  //     budget_schedule: {
+  //       campaign_duration: 30,
+  //       daily_budget: 7,
+  //       total_budget: 210,
+  //     },
+  //     objective: "Sales",
+  //     platform: "Google",
+  //     title:
+  //       "Discover Bestselling Books - Shop Now for Fast Delivery in Bangladesh!",
+  //   },
+  //   text_ads: {
+  //     google_shopping_ad: {
+  //       ad_description:
+  //         "Elevate Your Mind! Dive into essential knowledge for success. From captivating literature to vital education, 'Business' fuels your growth. Shop online now, Bangladesh (18-55)! Your next chapter starts here.",
+  //       campaign_objective: "Sales",
+  //       product_name: "Business",
+  //       target_audience:
+  //         "Bangladesh, Aged 18-55, interested in Reading, Books, Literature, Online Shopping, Education",
+  //     },
+  //   },
+  // };
 
   const handleGenerateAdsData = async () => {
     const data = {
