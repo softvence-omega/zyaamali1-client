@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { RootState } from "@/store/store";
 import axios from "axios";
@@ -33,7 +34,7 @@ const MessageBubble = ({ role, message }: MessageBubbleProps) => {
   );
 };
 
-const ChatUI = (sessionIdForChat ) => {
+const ChatUI = (sessionIdForChat: any ) => {
   const accessToken = useSelector((state: RootState) => state.auth.token);
   const user = useSelector((state: RootState) => state.auth.user);
   const [messages, setMessages] = useState<
@@ -42,7 +43,7 @@ const ChatUI = (sessionIdForChat ) => {
   const [input, setInput] = useState("");
   const token = useSelector((state: RootState) => state.auth.token);
   console.log("From CHATUI", sessionIdForChat.sessionIdForChat)
-  const fetchChatHistory = async (userId: string) => {
+  const fetchChatHistory = async () => {
     const res = await axios.get(
       `http://localhost:5000/api/v1/chatbot/get-single?sessionId=${sessionIdForChat.sessionIdForChat}`,
       {
@@ -92,7 +93,7 @@ const ChatUI = (sessionIdForChat ) => {
     refetch,
   } = useQuery({
     queryKey: ["chatHistory", user?.userId],
-    queryFn: () => fetchChatHistory(user!.userId),
+    queryFn: () => fetchChatHistory(),
     enabled: !!user?.userId, // ⛔ stop until we have userId
   });
 

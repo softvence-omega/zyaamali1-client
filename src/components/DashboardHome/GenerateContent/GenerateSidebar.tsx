@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { useSelector } from "react-redux";
 
+
 const GenerateSidebar = ({ setSessionIdForChat }: {setSessionIdForChat : any}) => {
+
   const token = useSelector((state: RootState) => state.auth.token);
 
   const [chatbotHistory, setChatbotHistory] = useState<any[]>([]);

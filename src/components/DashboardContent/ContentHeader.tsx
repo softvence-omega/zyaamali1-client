@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa"; // Assuming react-icons
@@ -17,7 +18,7 @@ const ContentHeader: React.FC<{
 
   const [contentType, setContentType] = useState("image");
   const [prompt, setPrompt] = useState("");
-  const [aspectRatio, setAspectRatio] = useState("1:1");
+  const [aspectRatio] = useState("1:1");
   const [platfrom, setPlatform] = useState("google");
   const [allContent, setAllContent] = useState<any[]>([]);
 
