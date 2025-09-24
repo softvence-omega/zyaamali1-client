@@ -7,12 +7,9 @@ import {
   FaFacebookF,
   FaGoogle,
   FaLinkedinIn,
-  FaTwitter,
   FaTiktok,
   FaImage,
   FaMousePointer,
-  FaImages,
-  FaCog,
   FaVideo,
   FaInstagram,
   FaShoppingCart,
@@ -35,7 +32,6 @@ import PrimaryButton from "@/components/ui/PrimaryButton";
 import OutlineButton from "@/components/ui/OutlineButton";
 import { useNavigate } from "react-router-dom";
 import { GiEngagementRing } from "react-icons/gi";
-import { PiSlideshowFill } from "react-icons/pi";
 import { PiTrafficConeFill } from "react-icons/pi";
 import { MdOutlineInstallMobile } from "react-icons/md";
 import { ImDisplay } from "react-icons/im";
@@ -86,19 +82,15 @@ const platforms = [
   { icon: FaGoogle, color: "text-red-500", value: "Google Ads" },
   { icon: FaTiktok, color: "text-black", value: "TikTok Ads" },
   { icon: FaLinkedinIn, color: "text-blue-700", value: "LinkedIn Ads" },
-  { icon: FaTwitter, color: "text-black", value: "Twitter Ads" },
+  { icon: FaInstagram, color: "text-black", value: "Instagram Ads" },
 ];
 
 const facebookAdTypes = [
   { icon: ImBullhorn, label: "Brand Awareness", value: "BRAND_AWARENESS" },
   { icon: FaMousePointer, label: "Reach", value: "REACH" },
-  { icon: FaImages, label: "Carousel Ads", value: "carousel-ads" },
-  { icon: PiSlideshowFill, label: "Slideshow Ads", value: "slideshow-ads" },
   { icon: GiEngagementRing, label: "Engagement", value: "ENGAGEMENT" },
-  { icon: FaCog, label: "Dynamic Ads", value: "dynamic-ads" },
-  { icon: FaVideo, label: "Video Ads", value: "VIDEO_VIEWS" },
-  { icon: FaInstagram, label: "Story Ads", value: "story-ads" },
-  { icon: FaShoppingCart, label: "Shopping Ads", value: "shopping-ads" },
+  { icon: FaVideo, label: "Video Ad", value: "VIDEO_VIEWS" },
+  { icon: FaShoppingCart, label: "Shopping Ad", value: "shopping-ads" },
   { icon: RiMessage3Fill, label: "Messages", value: "MESSAGES" },
   { icon: PiTrafficConeFill, label: "Trafic", value: "TRAFFIC" },
   { icon: RiMessage3Fill, label: "Conversions", value: "CONVERSIONS" },
@@ -178,14 +170,14 @@ const DashboardCampaignCreate = () => {
   const [selectedObjective, setSelectedObjective] = useState("brand-awareness");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [selectedPlatform, setSelectedPlatform] = useState("Meta Ads");
-  const [selectedAdType, setSelectedAdType] = useState("REACH");
+  const [selectedAdType, setSelectedAdType] = useState("CAROUSEL ADS");
   const [locationId, setLocationId] = useState("");
   const [locationCode, setLocationCode] = useState("");
   const [ageFrom, setAgeFrom] = useState("");
   const [ageTo, setAgeTo] = useState("");
   const [selectedGender, setSelectedGender] = useState("All");
-  const [dailyBudget, setDailyBudget] = useState("");
-  const [totalBudget, setTotalBudget] = useState("");
+  const [dailyBudget, setDailyBudget] = useState("$");
+  const [totalBudget, setTotalBudget] = useState("$");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [selectedAdAccount, setSelectedAdAccount] = useState("");
@@ -216,7 +208,7 @@ const DashboardCampaignCreate = () => {
     "Create an engaging ad copy for a summer sale offering 40% off"
   );
 
-    const [adsData, setAdsData] = useState<AdsData>();
+  const [adsData, setAdsData] = useState<AdsData>();
 
   // console.log("always ", locationCode, locationId);
 
@@ -541,7 +533,7 @@ const DashboardCampaignCreate = () => {
 
     try {
       const res = await axios.post(
-        "https://20c12d8fb0af.ngrok-free.app/ads/generate",
+        "http://74.118.168.229:8000/ads/generate",
         data,
         {
           headers: {
@@ -551,6 +543,34 @@ const DashboardCampaignCreate = () => {
       );
 
       setAdsData(res.data.dat);
+      setTitle(res.data.ads_features.title);
+      setSelectedObjective(res.data.ads_features.objective)
+      setPlatform(res.data.ads_features.platform)
+      setSelectedAdType(res.data.ads_features.ad_type)
+      setLocationCode(res.data.ads_features.audience.location.country_code_alpha_2)
+      setLocationId(res.data.ads_features.audience.location.country_id)
+      const startingAge = res.data.ads_features.audience.age_range.split("-")[0];
+      const endAge = res.data.ads_features.audience.age_range.split("-")[1];
+      setAgeFrom(startingAge)
+      setAgeTo(endAge)
+      setSelectedGender(res.data.ads_features.audience.gender)
+      setInterests(res.data.ads_features.audience.interests)
+      setDailyBudget(String(res.data.ads_features.budget_schedule.daily_budget))
+      setTotalBudget(String(res.data.ads_features.budget_schedule.total_budget))
+      const today = new Date();
+
+      // format as YYYY-MM-DD
+      const formattedStart = today.toISOString().split("T")[0];
+      setStartDate(formattedStart);
+
+      // add duration days
+      const end = new Date();
+      end.setDate(today.getDate() + res.data.ads_features.budget_schedule.campaign_duration);
+      const formattedEnd = end.toISOString().split("T")[0];
+      setEndDate(formattedEnd);
+
+
+
       console.log("API Response:", res.data);
     } catch (err) {
       console.error("API Error:", err);
@@ -645,12 +665,11 @@ const DashboardCampaignCreate = () => {
               {objectives.map((objective, index) => (
                 <div
                   key={index}
-                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${
-                    selectedObjective === objective.value
-                      ? "bg-purple-100 border-purple-600"
-                      : "bg-[#E6E6E8] border-gray-200"
-                  } hover:bg-[#F4F1FF]`}
-                  onClick={() => setSelectedObjective(objective.value)}
+                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${selectedObjective === objective.label
+                    ? "bg-purple-100 border-purple-600"
+                    : "bg-[#E6E6E8] border-gray-200"
+                    } hover:bg-[#F4F1FF]`}
+                  onClick={() => setSelectedObjective(objective.label)}
                 >
                   <objective.icon className="text-xl" />
                   <span className="text-sm font-medium text-center">
@@ -675,11 +694,10 @@ const DashboardCampaignCreate = () => {
               {platforms.map((platform, index) => (
                 <div
                   key={index}
-                  className={`${
-                    selectedPlatform === platform.value
-                      ? "bg-purple-100 border-purple-600"
-                      : "bg-[#E6E6E8]"
-                  } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
+                  className={`${selectedPlatform === platform.value
+                    ? "bg-purple-100 border-purple-600"
+                    : "bg-[#E6E6E8]"
+                    } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
                   onClick={() => handlePlatformChange(platform.value)}
                 >
                   <platform.icon className={`text-2xl ${platform.color}`} />
@@ -702,12 +720,11 @@ const DashboardCampaignCreate = () => {
               {(adTypesMap[selectedPlatform] || []).map((adType, index) => (
                 <div
                   key={index}
-                  className={`flex items-center p-3 gap-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 ${
-                    selectedAdType === adType.value
-                      ? "bg-purple-100 border-purple-600"
-                      : "bg-[#E6E6E8]"
-                  }`}
-                  onClick={() => setSelectedAdType(adType.value)}
+                  className={`flex items-center p-3 gap-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 ${selectedAdType === adType.label
+                    ? "bg-purple-100 border-purple-600"
+                    : "bg-[#E6E6E8]"
+                    }`}
+                  onClick={() => setSelectedAdType(adType.label)}
                 >
                   <adType.icon className="text-lg text-gray-600" />
                   <span className="text-xs text-center text-gray-700">
@@ -743,17 +760,17 @@ const DashboardCampaignCreate = () => {
 
                 {/* List accounts if available */}
                 {selectedPlatform &&
-                (adsAccounts[selectedPlatform]?.length || 0) > 0
+                  (adsAccounts[selectedPlatform]?.length || 0) > 0
                   ? adsAccounts[selectedPlatform].map((account) => (
-                      <option key={account.id} value={account.id}>
-                        {account.name} ({account.id})
-                      </option>
-                    ))
+                    <option key={account.id} value={account.id}>
+                      {account.name} ({account.id})
+                    </option>
+                  ))
                   : selectedPlatform && (
-                      <option value="" disabled>
-                        You don't have any Ads Account
-                      </option>
-                    )}
+                    <option value="" disabled>
+                      You don't have any Ads Account
+                    </option>
+                  )}
               </select>
 
               {/* Custom dropdown arrow */}
@@ -801,15 +818,15 @@ const DashboardCampaignCreate = () => {
                   {/* List accounts if available */}
                   {selectedPlatform && (page[selectedPlatform]?.length || 0) > 0
                     ? page[selectedPlatform].map((page) => (
-                        <option key={page.pageId} value={page.pageId}>
-                          ({page.pageId})
-                        </option>
-                      ))
+                      <option key={page.pageId} value={page.pageId}>
+                        ({page.pageId})
+                      </option>
+                    ))
                     : selectedPlatform && (
-                        <option value="" disabled>
-                          You don't have any Ads Account
-                        </option>
-                      )}
+                      <option value="" disabled>
+                        You don't have any Ads Account
+                      </option>
+                    )}
                 </select>
 
                 {/* Custom dropdown arrow */}
@@ -977,6 +994,38 @@ const DashboardCampaignCreate = () => {
               )}
             </div>
 
+            {/* <div>
+              <p className="text-sm mb-1">Location</p>
+              <select
+                value={locationCode} // this will now hold the country name
+                onChange={(e) => {
+                  const selectedCountry = countries.find(
+                    (c) => c.name === e.target.value
+                  );
+                  if (selectedCountry) {
+                    setLocationId(String(selectedCountry.id));
+                    setLocationCode(selectedCountry.name); // store name instead of code
+                  } else {
+                    setLocationId("");
+                    setLocationCode("");
+                  }
+                }}
+                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                required
+              >
+                <option value="">Select Location</option>
+                {countries.map((c) => (
+                  <option key={c.id || c.name} value={c.name}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+              {errors.locationId && (
+                <p className="text-red-500 text-xs mt-1">{errors.locationId}</p>
+              )}
+            </div> */}
+
+
             {/* Age range */}
             <div>
               <p className="text-sm">Age range</p>
@@ -1086,7 +1135,7 @@ const DashboardCampaignCreate = () => {
             {/* Daily Budget */}
             <div>
               <p className="text-sm">Daily Budget</p>
-              <select
+              {/* <select
                 value={dailyBudget}
                 onChange={(e) => setDailyBudget(e.target.value)}
                 className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
@@ -1096,7 +1145,15 @@ const DashboardCampaignCreate = () => {
                 <option value="50">$50</option>
                 <option value="100">$100</option>
                 <option value="150">$150</option>
-              </select>
+              </select> */}
+              <Input
+                type="text"
+                value={dailyBudget}
+                required
+                onChange={(e) => setDailyBudget(e.target.value)}
+                placeholder={`Select Total Budget`}
+                className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+              />
               {errors.dailyBudget && (
                 <p className="text-red-500 text-xs mt-1">
                   {errors.dailyBudget}
@@ -1107,7 +1164,7 @@ const DashboardCampaignCreate = () => {
             {/* Total Budget */}
             <div>
               <p className="text-sm">Total Budget</p>
-              <select
+              {/* <select
                 value={totalBudget}
                 onChange={(e) => setTotalBudget(e.target.value)}
                 className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
@@ -1117,7 +1174,15 @@ const DashboardCampaignCreate = () => {
                 <option value="500">$500</option>
                 <option value="1000">$1000</option>
                 <option value="1500">$1500</option>
-              </select>
+              </select> */}
+              <Input
+                type="text"
+                value={totalBudget}
+                required
+                onChange={(e) => setTotalBudget(e.target.value)}
+                placeholder={`Select Total Budget`}
+                className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+              />
               {errors.totalBudget && (
                 <p className="text-red-500 text-xs mt-1">
                   {errors.totalBudget}
@@ -1313,21 +1378,19 @@ const DashboardCampaignCreate = () => {
               <div className="inline-flex items-center bg-white border border-gray-300 rounded-full overflow-hidden text-sm font-medium">
                 <button
                   onClick={() => setSelected("mobile")}
-                  className={`px-4 py-3 transition-colors duration-200 ${
-                    selected === "mobile"
-                      ? "bg-purple-500 text-white"
-                      : "text-black"
-                  }`}
+                  className={`px-4 py-3 transition-colors duration-200 ${selected === "mobile"
+                    ? "bg-purple-500 text-white"
+                    : "text-black"
+                    }`}
                 >
                   Mobile
                 </button>
                 <button
                   onClick={() => setSelected("desktop")}
-                  className={`px-4 py-3 transition-colors duration-200 ${
-                    selected === "desktop"
-                      ? "bg-purple-500 text-white"
-                      : "text-black"
-                  }`}
+                  className={`px-4 py-3 transition-colors duration-200 ${selected === "desktop"
+                    ? "bg-purple-500 text-white"
+                    : "text-black"
+                    }`}
                 >
                   Desktop
                 </button>
