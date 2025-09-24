@@ -26,33 +26,19 @@ const ContentHeader: React.FC<{
       let response;
       if (contentType === "image") {
         response = await axios.post(
-          "https://9509ead9e3f3.ngrok-free.app/library/generate/image-content",
+          "http://74.118.168.229:8000/library/generate/image-content",
           {
             prompt,
-            ads_features: {
-              additionalProp1: {},
-            },
+            platform:platfrom
           }
         );
         console.log("image  ", response.data);
       } else if (contentType === "video") {
         response = await axios.post(
-          `https://9509ead9e3f3.ngrok-free.app/library/generate/video-content`,
+          `http://74.118.168.229:8000library/generate/video-content`,
           {
-            prompt,
-            title: "Back to School Sale 2025",
-            objective: "Increase Website Traffic",
-            platform: "Facebook",
-            ad_type: "Image",
-            location: "New York, USA",
-            campaign_duration: 14,
-            daily_budget: 50.0,
-            total_budget: 700.0,
-            age_range: "18-35",
-            gender: "All",
-            interests: "Education, Technology, Online Shopping",
-            product_image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA",
-            logo_image: "data:image/png;base64,ABCD1234EFGH5678IJKL",
+            prompt, 
+            platform: platfrom
           }
         );
 
@@ -128,8 +114,6 @@ const ContentHeader: React.FC<{
 
     return matchesType && matchesPlatform && matchesSearch;
   });
-
-  console.log(filteredContent);
   return (
     <div className="relative mb-8 w-full">
       {/* Background Image */}
@@ -194,7 +178,7 @@ const ContentHeader: React.FC<{
         </div>
 
         {/* Aspect Ratio Dropdown */}
-        <div className="relative inline-block sm:w-auto mt-4 ml-2">
+        {/* <div className="relative inline-block sm:w-auto mt-4 ml-2">
           <select
             className="appearance-none bg-opacity-20 backdrop-filter backdrop-blur-lg border border-white border-opacity-50 text-white py-2 px-4 pr-8 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 w-40 sm:w-48"
             value={aspectRatio}
@@ -211,7 +195,7 @@ const ContentHeader: React.FC<{
             </option>
           </select>
           <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white pointer-events-none" />
-        </div>
+        </div> */}
 
         {/* Platform Dropdown */}
         <div className="relative inline-block sm:w-auto mt-4 ml-4">

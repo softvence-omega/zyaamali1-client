@@ -1,10 +1,55 @@
 import GeminiIcon from "@/assets/CustomIcon/GeminiIcon";
+import { RootState } from "@/store/store";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
-import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const GenerateSidebar = () => {
+const GenerateSidebar = ({setSessionIdForChat}) => {
+
+  const token = useSelector((state: RootState) => state.auth.token);
+
+  const [chatbotHistory, setChatbotHistory] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const res = await axios.get(
+          "https://zyaamali1-backend.onrender.com/api/v1/chatbot-history/get-all",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (res.data.success) {
+          setChatbotHistory(res.data.data);
+        }
+      } catch (err) {
+        console.error("Error fetching history:", err);
+      }
+    };
+
+    fetchHistory();
+  }, [token]);
+
+  console.log(chatbotHistory)
+
+  // const res = axios.get(
+  //   "https://zyaamali1-backend.onrender.com/api/v1/chatbot-history/get-all",
+  //   {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`, // replace accessToken with your variable
+  //       "Content-Type": "application/json",
+  //     },
+  //   }
+  // );
+  // console.log(res.data)
+
   return (
-    <div className="lg:w-[360px] h-screen bg-Foundation-text-T-50 rounded-l-2xl">
+    <div className="lg:w-[360px] h-screen bg-Foundation-text-T-50 rounded-l-2xl overflow-hidden">
       <div className="flex items-center justify-center gap-5 my-5">
         <div>
           <GeminiIcon />
@@ -24,35 +69,22 @@ const GenerateSidebar = () => {
         </div>
       </div>
       <div className="mt-10 px-4">
-        <span className="text-blue-500 text-sm">Today</span>
+        <button className="btn bg-blue-900 text-white rounded-4xl font-bold cursor-pointer">New Chat +</button>
+      </div>
+      <div className="mt-3 px-4">
         <div className="mt-3 flex flex-col gap-1">
-          <NavLink
-            className="bg-[#6C7078] text-white p-2 text-sm rounded-lg"
-            to="#"
-          >
-            New Ad Campaign For Online
-          </NavLink>
-          <NavLink
-            className=" text-Foundation-gray-bg p-2 text-sm rounded-lg hover:bg-[#6C7078] hover:text-white"
-            to="#"
-          >
-            New Social Media Strategy
-          </NavLink>
-          <NavLink
-            className=" text-Foundation-gray-bg p-2 text-sm rounded-lg hover:bg-[#6C7078] hover:text-white"
-            to="#"
-          >
-            New Ad Campaign For Online
-          </NavLink>
-          <NavLink
-            className=" text-Foundation-gray-bg p-2 text-sm rounded-lg hover:bg-[#6C7078] hover:text-white"
-            to="#"
-          >
-            Website Redesign Feedback
-          </NavLink>
+
+          {chatbotHistory?.map((item) => (
+            <button
+              className=" text-Foundation-gray-bg p-2 text-sm rounded-lg hover:bg-[#6C7078] hover:text-white capitalize text-left"
+              onClick={() => setSessionIdForChat(item.sessionId)}
+            >
+              {item.title}
+            </button>
+          ))}
         </div>
       </div>
-      <div className="mt-5 px-4">
+      {/* <div className="mt-5 px-4">
         <span className="text-blue-500 text-sm">Yesterday</span>
         <div className="mt-3 flex flex-col gap-1">
           <NavLink
@@ -109,7 +141,7 @@ const GenerateSidebar = () => {
             Website Redesign Feedback
           </NavLink>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
