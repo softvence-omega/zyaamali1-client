@@ -43,7 +43,7 @@ const ChatUI = (sessionIdForChat: any ) => {
   const [input, setInput] = useState("");
   const token = useSelector((state: RootState) => state.auth.token);
   console.log("From CHATUI", sessionIdForChat.sessionIdForChat)
-  const fetchChatHistory = async (userId: string) => {
+  const fetchChatHistory = async () => {
     const res = await axios.get(
       `http://localhost:5000/api/v1/chatbot/get-single?sessionId=${sessionIdForChat.sessionIdForChat}`,
       {
@@ -93,7 +93,7 @@ const ChatUI = (sessionIdForChat: any ) => {
     refetch,
   } = useQuery({
     queryKey: ["chatHistory", user?.userId],
-    queryFn: () => fetchChatHistory(user!.userId),
+    queryFn: () => fetchChatHistory(),
     enabled: !!user?.userId, // ⛔ stop until we have userId
   });
 
