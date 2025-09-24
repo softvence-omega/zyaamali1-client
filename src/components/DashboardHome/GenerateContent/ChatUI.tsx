@@ -32,24 +32,27 @@ const MessageBubble = ({ role, message }: MessageBubbleProps) => {
   );
 };
 
-const ChatUI = () => {
+const ChatUI = (sessionIdForChat ) => {
   const accessToken = useSelector((state: RootState) => state.auth.token);
   const user = useSelector((state: RootState) => state.auth.user);
   const [messages, setMessages] = useState<
     { role: "admin" | "creator" | "assistant"; message: string }[]
   >([]);
   const [input, setInput] = useState("");
-
+  const token = useSelector((state: RootState) => state.auth.token);
+  console.log("From CHATUI", sessionIdForChat.sessionIdForChat)
   const fetchChatHistory = async (userId: string) => {
     const res = await axios.get(
-      "http://localhost:5000/api/v1/chatbot-history/get-single-history",
+      `http://localhost:5000/api/v1/chatbot/get-single?sessionId=${sessionIdForChat.sessionIdForChat}`,
       {
-        params: { userId },
+          
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       }
     );
+
+    console.log('form chat get ', res.data.data)
 
     // ✅ Map each chat item into [userMessage, assistantMessage]
     const formattedMessages =
@@ -110,12 +113,12 @@ const ChatUI = () => {
 
     try {
       const res = await axios.post(
-        "https://ads-ai-m3e5.onrender.com/chatting/chat",
+        "http://74.118.168.229:8000/chatting/chat",
 
         {
-          userId: user?.userId,
           prompt: input,
-          token: accessToken,
+          token: token,
+          sessionId: "68d377b9180e7ac4370339c5"
         }
       );
 
