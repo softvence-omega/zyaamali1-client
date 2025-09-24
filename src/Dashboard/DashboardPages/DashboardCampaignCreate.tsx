@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import axios from "axios";
@@ -391,7 +392,7 @@ const DashboardCampaignCreate = () => {
         cpcBidMicros: 800000,
         headlines: headlineData,
         description: title,
-        finalUrl: businessInfo?.website || "https://adelo.ai",
+        finalUrl:  "https://adelo.ai",
       };
       endpoint = "google";
       console.log("headline", headlineData);
@@ -408,7 +409,7 @@ const DashboardCampaignCreate = () => {
         creatives: {
           headline: headlineData[0]?.text,
           description: title,
-          landingPageUrl: businessInfo?.website,
+          landingPageUrl: "https://adelo.ai",
         },
         targeting: {
           location,

@@ -21,7 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const platforms = ["facebook", "google", "amazon", "linkedin", "tiktok", "youtube"];
 
   const handlePlatformChange = (platform: string) => {
-    setSelectedPlatforms((prev) =>
+    setSelectedPlatforms((prev : any) =>
       prev.includes(platform)
         ? prev.filter((p) => p !== platform)
         : [...prev, platform]

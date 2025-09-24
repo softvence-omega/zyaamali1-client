@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { RootState } from "@/store/store";
 import axios from "axios";
@@ -33,7 +34,7 @@ const MessageBubble = ({ role, message }: MessageBubbleProps) => {
   );
 };
 
-const ChatUI = (sessionIdForChat ) => {
+const ChatUI = (sessionIdForChat: any ) => {
   const accessToken = useSelector((state: RootState) => state.auth.token);
   const user = useSelector((state: RootState) => state.auth.user);
   const [messages, setMessages] = useState<
