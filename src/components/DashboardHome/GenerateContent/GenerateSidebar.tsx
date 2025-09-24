@@ -25,8 +25,11 @@ const GenerateSidebar = ({setSessionIdForChat }: {setSessionIdForChat: any}) => 
           }
         );
 
+
+
         if (res.data.success) {
           setChatbotHistory(res.data.data);
+            
         }
       } catch (err) {
         console.error("Error fetching history:", err);
@@ -36,7 +39,7 @@ const GenerateSidebar = ({setSessionIdForChat }: {setSessionIdForChat: any}) => 
     fetchHistory();
   }, [token]);
 
-  console.log(chatbotHistory)
+  console.log('chatbot history ',chatbotHistory)
 
   // const res = axios.get(
   //   "https://zyaamali1-backend.onrender.com/api/v1/chatbot-history/get-all",
@@ -70,7 +73,7 @@ const GenerateSidebar = ({setSessionIdForChat }: {setSessionIdForChat: any}) => 
         </div>
       </div>
       <div className="mt-10 px-4">
-        <button className="btn bg-blue-900 text-white rounded-4xl font-bold cursor-pointer">New Chat +</button>
+        <button  onClick={() => setSessionIdForChat()} className="btn bg-blue-900 text-white rounded-4xl font-bold cursor-pointer">New Chat +</button>
       </div>
       <div className="mt-3 px-4">
         <div className="mt-3 flex flex-col gap-1">
