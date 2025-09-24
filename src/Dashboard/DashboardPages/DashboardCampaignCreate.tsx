@@ -1156,16 +1156,16 @@ const DashboardCampaignCreate = () => {
           {/* media section */}
           <div className="mt-5">
             <CampaignSubHeader text="Ad Media" />
-            {/* <div className="bg-black rounded-md flex justify-center items-center gap-2 h-64 mx-6">
+            <div className="bg-black rounded-md flex justify-center items-center gap-2 h-64 mx-6">
               <button className="px-4 py-2 rounded-3xl border border-[#8E6EFF] cursor-pointer text-[#8E6EFF] font-bold">
                 Save Draft
               </button>
               <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-white font-bold">
                 Browse Templates
               </button>
-            </div> */}
+            </div>
 
-            <div>
+            {/* <div>
               <input
                 type="file"
                 accept="video/*"
@@ -1182,7 +1182,7 @@ const DashboardCampaignCreate = () => {
                 multiple
                 onChange={(e) => setCarousel(e.target.files)}
               />
-            </div>
+            </div> */}
 
             <div className="flex justify-center items-center py-3">
               <button className="px-4 py-2 rounded-md border cursor-pointer font-bold">
