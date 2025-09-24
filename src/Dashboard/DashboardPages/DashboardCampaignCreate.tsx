@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import axios from "axios";
@@ -205,9 +206,9 @@ const DashboardCampaignCreate = () => {
   const [adsName, setAdsName] = useState("");
   const [adGroupName, setAdGroupName] = useState("");
   const [headline, setHeadLine] = useState(["", "", ""]); // 3 headlines
-  const [video, setVideo] = useState<File | null>(null);
-  const [image, setImage] = useState<File | null>(null);
-  const [carousel, setCarousel] = useState<FileList | null>(null);
+  const [video] = useState<File | null>(null);
+  const [image] = useState<File | null>(null);
+  const [carousel] = useState<FileList | null>(null);
   const [loading, setLoading] = useState(false);
 
   const [company, setCompany] = useState("");
@@ -217,6 +218,7 @@ const DashboardCampaignCreate = () => {
   );
 
     const [adsData, setAdsData] = useState<AdsData>();
+    console.log(adsData)
 
   // console.log("always ", locationCode, locationId);
 
@@ -391,7 +393,7 @@ const DashboardCampaignCreate = () => {
         cpcBidMicros: 800000,
         headlines: headlineData,
         description: title,
-        finalUrl: businessInfo?.website || "https://adelo.ai",
+        finalUrl:  "https://adelo.ai",
       };
       endpoint = "google";
       console.log("headline", headlineData);
@@ -408,7 +410,7 @@ const DashboardCampaignCreate = () => {
         creatives: {
           headline: headlineData[0]?.text,
           description: title,
-          landingPageUrl: businessInfo?.website,
+          landingPageUrl: "https://adelo.ai",
         },
         targeting: {
           location,
