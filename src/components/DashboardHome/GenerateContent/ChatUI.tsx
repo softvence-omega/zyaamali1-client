@@ -113,6 +113,12 @@ const ChatUI = (sessionIdForChat: any ) => {
     const newUserMessage = { role: userRole, message: input };
     setMessages((prev) => [...prev, newUserMessage]);
 
+    console.log('payload chat ',{
+          prompt: input,
+          token: token,
+          sessionId: sessionIdForChat.sessionIdForChat
+        })
+
     try {
       const res = await axios.post(
         "http://74.118.168.229:8000/chatting/chat",

@@ -73,7 +73,7 @@ const GenerateSidebar = ({setSessionIdForChat }: {setSessionIdForChat: any}) => 
         </div>
       </div>
       <div className="mt-10 px-4">
-        <button  onClick={() => setSessionIdForChat()} className="btn bg-blue-900 text-white rounded-4xl font-bold cursor-pointer">New Chat +</button>
+        <button   className="btn bg-blue-900 text-white rounded-4xl font-bold cursor-pointer">New Chat +</button>
       </div>
       <div className="mt-3 px-4">
         <div className="mt-3 flex flex-col gap-1">
