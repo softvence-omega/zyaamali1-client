@@ -52,6 +52,7 @@ import { CiText } from "react-icons/ci";
 
 import { GiCometSpark } from "react-icons/gi";
 import { countries } from "@/utils/Countries";
+import { AdsData } from "@/types";
 
 const objectives = [
   {
@@ -490,6 +491,45 @@ const DashboardCampaignCreate = () => {
 
   // console.log("state of loading", loading);
 
+  const [adsData, setAdsData] = useState<>();
+
+  const fakeAdsData : AdsData = {
+    ads_features: {
+      ad_type: "Shopping Ad",
+      audience: {
+        age_range: "18-55",
+        gender: "All",
+        interests: [
+          "Reading",
+          "Books",
+          "Literature",
+          "Online Shopping",
+          "Education",
+        ],
+        location: "Bangladesh",
+      },
+      budget_schedule: {
+        campaign_duration: 30,
+        daily_budget: 7,
+        total_budget: 210,
+      },
+      objective: "Sales",
+      platform: "Google",
+      title:
+        "Discover Bestselling Books - Shop Now for Fast Delivery in Bangladesh!",
+    },
+    text_ads: {
+      google_shopping_ad: {
+        ad_description:
+          "Elevate Your Mind! Dive into essential knowledge for success. From captivating literature to vital education, 'Business' fuels your growth. Shop online now, Bangladesh (18-55)! Your next chapter starts here.",
+        campaign_objective: "Sales",
+        product_name: "Business",
+        target_audience:
+          "Bangladesh, Aged 18-55, interested in Reading, Books, Literature, Online Shopping, Education",
+      },
+    },
+  };
+
   const handleGenerateAdsData = async () => {
     const data = {
       company_info: company,
@@ -509,6 +549,9 @@ const DashboardCampaignCreate = () => {
           },
         }
       );
+
+
+
 
       console.log("API Response:", res.data);
     } catch (err) {
