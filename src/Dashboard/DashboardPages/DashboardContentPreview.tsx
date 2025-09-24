@@ -3,15 +3,13 @@ import { FiDownload, FiShare, FiChevronDown } from "react-icons/fi";
 import { IoArrowBack } from "react-icons/io5";
 import { useRef } from "react";
 
-import orange from "../../assets/Orange.png";
-import media1 from "../../assets/media-1.png";
-import media2 from "../../assets/media-2.png";
-import media3 from "../../assets/media-3.png";
-import media4 from "../../assets/media-4.png";
+
 import group from "../../assets/Group.png";
 import picicon from "../../assets/picicon.png";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+
+
 
 export default function DashboardContentPreview() {
   const accessToken = useSelector((state) => state.auth.token);
@@ -32,6 +30,12 @@ export default function DashboardContentPreview() {
       setIsPlaying(true);
     }
   };
+
+  console.log('all content', allContent)
+  console.log('single content ', singleContent)
+
+
+
 
   useEffect(() => {
     const getAllContent = async () => {

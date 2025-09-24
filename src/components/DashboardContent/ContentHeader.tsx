@@ -26,13 +26,34 @@ const ContentHeader: React.FC<{
       let response;
       if (contentType === "image") {
         response = await axios.post(
-          "https://ads-ai-m3e5.onrender.com/ads/generate/image",
-          { prompt }
+          "https://9509ead9e3f3.ngrok-free.app/library/generate/image-content",
+          {
+            prompt,
+            ads_features: {
+              additionalProp1: {},
+            },
+          }
         );
         console.log("image  ", response.data);
       } else if (contentType === "video") {
         response = await axios.post(
-          `https://ads-ai-m3e5.onrender.com/ads/generate/vedio?prompt=${prompt}`
+          `https://9509ead9e3f3.ngrok-free.app/library/generate/video-content`,
+          {
+            prompt,
+            title: "Back to School Sale 2025",
+            objective: "Increase Website Traffic",
+            platform: "Facebook",
+            ad_type: "Image",
+            location: "New York, USA",
+            campaign_duration: 14,
+            daily_budget: 50.0,
+            total_budget: 700.0,
+            age_range: "18-35",
+            gender: "All",
+            interests: "Education, Technology, Online Shopping",
+            product_image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA",
+            logo_image: "data:image/png;base64,ABCD1234EFGH5678IJKL",
+          }
         );
 
         console.log("video ", response.data);
@@ -83,7 +104,9 @@ const ContentHeader: React.FC<{
             },
           }
         );
+
         const data = await res.json();
+        console.log(data.data.result);
         setAllContent(data.data.result || []);
       } catch (error) {
         console.error("Error fetching content:", error);

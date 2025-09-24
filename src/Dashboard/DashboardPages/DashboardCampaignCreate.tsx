@@ -572,11 +572,10 @@ const DashboardCampaignCreate = () => {
               {objectives.map((objective, index) => (
                 <div
                   key={index}
-                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${
-                    selectedObjective === objective.value
-                      ? "bg-purple-100 border-purple-600"
-                      : "bg-[#E6E6E8] border-gray-200"
-                  } hover:bg-[#F4F1FF]`}
+                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${selectedObjective === objective.value
+                    ? "bg-purple-100 border-purple-600"
+                    : "bg-[#E6E6E8] border-gray-200"
+                    } hover:bg-[#F4F1FF]`}
                   onClick={() => setSelectedObjective(objective.value)}
                 >
                   <objective.icon className="text-xl" />
@@ -602,11 +601,10 @@ const DashboardCampaignCreate = () => {
               {platforms.map((platform, index) => (
                 <div
                   key={index}
-                  className={`${
-                    selectedPlatform === platform.value
-                      ? "bg-purple-100 border-purple-600"
-                      : "bg-[#E6E6E8]"
-                  } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
+                  className={`${selectedPlatform === platform.value
+                    ? "bg-purple-100 border-purple-600"
+                    : "bg-[#E6E6E8]"
+                    } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
                   onClick={() => handlePlatformChange(platform.value)}
                 >
                   <platform.icon className={`text-2xl ${platform.color}`} />
@@ -629,11 +627,10 @@ const DashboardCampaignCreate = () => {
               {(adTypesMap[selectedPlatform] || []).map((adType, index) => (
                 <div
                   key={index}
-                  className={`flex items-center p-3 gap-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 ${
-                    selectedAdType === adType.value
-                      ? "bg-purple-100 border-purple-600"
-                      : "bg-[#E6E6E8]"
-                  }`}
+                  className={`flex items-center p-3 gap-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 ${selectedAdType === adType.value
+                    ? "bg-purple-100 border-purple-600"
+                    : "bg-[#E6E6E8]"
+                    }`}
                   onClick={() => setSelectedAdType(adType.value)}
                 >
                   <adType.icon className="text-lg text-gray-600" />
@@ -670,17 +667,17 @@ const DashboardCampaignCreate = () => {
 
                 {/* List accounts if available */}
                 {selectedPlatform &&
-                (adsAccounts[selectedPlatform]?.length || 0) > 0
+                  (adsAccounts[selectedPlatform]?.length || 0) > 0
                   ? adsAccounts[selectedPlatform].map((account) => (
-                      <option key={account.id} value={account.id}>
-                        {account.name} ({account.id})
-                      </option>
-                    ))
+                    <option key={account.id} value={account.id}>
+                      {account.name} ({account.id})
+                    </option>
+                  ))
                   : selectedPlatform && (
-                      <option value="" disabled>
-                        You don't have any Ads Account
-                      </option>
-                    )}
+                    <option value="" disabled>
+                      You don't have any Ads Account
+                    </option>
+                  )}
               </select>
 
               {/* Custom dropdown arrow */}
@@ -728,15 +725,15 @@ const DashboardCampaignCreate = () => {
                   {/* List accounts if available */}
                   {selectedPlatform && (page[selectedPlatform]?.length || 0) > 0
                     ? page[selectedPlatform].map((page) => (
-                        <option key={page.pageId} value={page.pageId}>
-                          ({page.pageId})
-                        </option>
-                      ))
+                      <option key={page.pageId} value={page.pageId}>
+                        ({page.pageId})
+                      </option>
+                    ))
                     : selectedPlatform && (
-                        <option value="" disabled>
-                          You don't have any Ads Account
-                        </option>
-                      )}
+                      <option value="" disabled>
+                        You don't have any Ads Account
+                      </option>
+                    )}
                 </select>
 
                 {/* Custom dropdown arrow */}
@@ -1126,15 +1123,32 @@ const DashboardCampaignCreate = () => {
             <CampaignSubHeader text="Ad Copy" />
             <div>
               <div>
-                <p className="mt-5 text-sm text-T-200">Prompt</p>
-                <textarea
-                  name="prompt"
-                  id=""
-                  className="border-[1px] border-[979AA0] w-full rounded-xl px-1 py-2 text-sm"
-                  defaultValue={
-                    "Create an engaging ad copy for a summer sale offering 40% off"
-                  }
-                ></textarea>
+                <div className="mb-2 mt-5">
+                  <label htmlFor="bt" className="font-bold">Company Info</label>
+                  <input id="bt" type="text" className="border border-gray-200 rounded-lg w-full py-2 px-3 mt-2" />
+                </div>
+                <div className="mb-2 mt-5 flex flex-col">
+                  <label htmlFor="bt" className="font-bold">Platform</label>
+                  <select className="py-2 px-2 border border-gray-200 rounded-lg mt-2">
+                    <option value="">Select Platform</option>
+                    <option value="facebook">Facebook</option>
+                    <option>Google</option>
+                    <option>Tiktok</option>
+                    <option>LinkedIn</option>
+                    <option>Instagram</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="font-bold" htmlFor="prompt">Prompt</label>
+                  <textarea
+                    name="prompt"
+                    id="prompt"
+                    className="border-[1px] border-[979AA0] w-full rounded-xl px-3 py-2 text-sm mt-2"
+                    defaultValue={
+                      "Create an engaging ad copy for a summer sale offering 40% off"
+                    }
+                  ></textarea>
+                </div>
                 <button className="px-4 py-2 rounded-3xl bg-[#654FAE] cursor-pointer text-white font-bold">
                   Generate
                 </button>
@@ -1219,21 +1233,19 @@ const DashboardCampaignCreate = () => {
               <div className="inline-flex items-center bg-white border border-gray-300 rounded-full overflow-hidden text-sm font-medium">
                 <button
                   onClick={() => setSelected("mobile")}
-                  className={`px-4 py-3 transition-colors duration-200 ${
-                    selected === "mobile"
-                      ? "bg-purple-500 text-white"
-                      : "text-black"
-                  }`}
+                  className={`px-4 py-3 transition-colors duration-200 ${selected === "mobile"
+                    ? "bg-purple-500 text-white"
+                    : "text-black"
+                    }`}
                 >
                   Mobile
                 </button>
                 <button
                   onClick={() => setSelected("desktop")}
-                  className={`px-4 py-3 transition-colors duration-200 ${
-                    selected === "desktop"
-                      ? "bg-purple-500 text-white"
-                      : "text-black"
-                  }`}
+                  className={`px-4 py-3 transition-colors duration-200 ${selected === "desktop"
+                    ? "bg-purple-500 text-white"
+                    : "text-black"
+                    }`}
                 >
                   Desktop
                 </button>
