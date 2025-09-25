@@ -15,7 +15,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   templateType,
   setTemplateType,
   selectedPlatforms,
-  // setSelectedPlatforms,
+  setSelectedPlatforms,
   searchTerm,
   setSearchTerm,
 }) => {
@@ -28,20 +28,20 @@ const Sidebar: React.FC<SidebarProps> = ({
     "youtube",
   ];
 
-  // const handlePlatformChange = (platform: any) => {
-  //   setSelectedPlatforms((prev) => {
-  //     const platformSet = new Set(prev); // create a Set for easy add/remove
-  //     if (platformSet.has(platform)) {
-  //       platformSet.delete(platform); // remove if already selected
-  //     } else {
-  //       platformSet.add(platform); // add if not selected
-  //     }
-  //     return Array.from(platformSet); // convert back to array
-  //   });
-  // };
+  const handlePlatformChange = (platform: any) => {
+    setSelectedPlatforms((prev) => {
+      const platformSet = new Set(prev); // create a Set for easy add/remove
+      if (platformSet.has(platform)) {
+        platformSet.delete(platform); // remove if already selected
+      } else {
+        platformSet.add(platform); // add if not selected
+      }
+      return Array.from(platformSet); // convert back to array
+    });
+  };
 
   return (
-    <div className="p-4 md:p-6 w-full md:w-64 lg:w-72 flex-shrink-0 rounded-lg bg-white shadow-md">
+    <div className="p-4  md:p-6 w-full md:w-64 lg:w-72 flex-shrink-0 rounded-lg bg-white shadow-md">
       {/* 🔍 Search */}
       <div className="relative mb-6">
         <input
@@ -96,7 +96,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             <input
               type="checkbox"
               checked={selectedPlatforms.includes(platform)}
-              // onChange={() => handlePlatformChange(platform)}
+              onChange={() => handlePlatformChange(platform)}
               className="form-checkbox h-4 w-4 text-blue-600 rounded"
             />
             {platform.charAt(0).toUpperCase() + platform.slice(1)}

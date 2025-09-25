@@ -79,76 +79,80 @@ const objectives = [
 ];
 
 const platforms = [
-  { icon: FaFacebookF, color: "text-blue-600", value: "Meta Ads" },
-  { icon: FaGoogle, color: "text-red-500", value: "Google Ads" },
-  { icon: FaTiktok, color: "text-black", value: "TikTok Ads" },
-  { icon: FaLinkedinIn, color: "text-blue-700", value: "LinkedIn Ads" },
-  { icon: FaInstagram, color: "text-black", value: "Instagram Ads" },
+  { icon: FaFacebookF, color: "text-blue-600", value: "Facebook" },
+  { icon: FaGoogle, color: "text-red-500", value: "Google" },
+  { icon: FaTiktok, color: "text-black", value: "Tiktok" },
+  { icon: FaLinkedinIn, color: "text-blue-700", value: "LinkedIn" },
+  { icon: FaInstagram, color: "text-black", value: "Instagram" },
 ];
 
+//  Facebook: ["Reach", "Brand Awareness", "Traffic Ads", "Messages"],
 const facebookAdTypes = [
   { icon: ImBullhorn, label: "Brand Awareness", value: "BRAND_AWARENESS" },
   { icon: FaMousePointer, label: "Reach", value: "REACH" },
-  { icon: GiEngagementRing, label: "Engagement", value: "ENGAGEMENT" },
-  { icon: FaVideo, label: "Video Ad", value: "VIDEO_VIEWS" },
-  { icon: FaShoppingCart, label: "Shopping Ad", value: "shopping-ads" },
+  // { icon: GiEngagementRing, label: "Engagement", value: "ENGAGEMENT" },
+  // { icon: FaVideo, label: "Video", value: "VIDEO_VIEWS" },
+  // { icon: FaShoppingCart, label: "Shopping", value: "shopping-ads" },
   { icon: RiMessage3Fill, label: "Messages", value: "MESSAGES" },
-  { icon: PiTrafficConeFill, label: "Trafic", value: "TRAFFIC" },
-  { icon: RiMessage3Fill, label: "Conversions", value: "CONVERSIONS" },
+  { icon: PiTrafficConeFill, label: "Traffic Ads", value: "TRAFFIC" },
+  // { icon: RiMessage3Fill, label: "Conversions", value: "CONVERSIONS" },
   {
     icon: MdOutlineInstallMobile,
     label: "App Installs",
     value: "APP_INSTALLS",
   },
 ];
+
 const googleAdsTypes = [
-  { icon: ImDisplay, label: "Display Ads", value: "DISPLAY" },
-  { icon: CiSearch, label: "Search Ads", value: "SEARCH" },
-  { icon: FaVideo, label: "Video Ads", value: "VIDEO" },
-  { icon: FaShoppingCart, label: "Shopping Ads", value: "SHOPPING" },
+  { icon: ImDisplay, label: "Display Ad", value: "DISPLAY" },
+  { icon: CiSearch, label: "Search Ad", value: "SEARCH" },
+  { icon: FaVideo, label: "Video Ad", value: "VIDEO" },
+  { icon: FaShoppingCart, label: "Shopping Ad", value: "SHOPPING" },
   {
     icon: MdOutlineAppRegistration,
     label: "App Campaigns",
     value: "APP_CAMPAIGNS",
   },
   { icon: Telescope, label: "Performance Max", value: "PERFORMANCE" },
-  { icon: MdLocalActivity, label: "Local Ads", value: "LOCAL_ADS" },
+  { icon: MdLocalActivity, label: "Local Ad", value: "LOCAL_ADS" },
 ];
 const TiktokAdsTypes = [
-  { icon: MdOutlineDynamicFeed, label: "In-Feed Ads", value: "SINGLE_VIDEO" },
-  { icon: MdViewModule, label: "TopView Ads", value: "Topview" },
+  { icon: MdOutlineDynamicFeed, label: "In-Feed Ad", value: "SINGLE_VIDEO" },
+  { icon: MdViewModule, label: "TopView Ad", value: "Topview" },
   {
     icon: ImBullhorn,
     label: "Branded Hashtag Challenges",
     value: "BRANDED_HASHTAG",
   },
-  { icon: GiCometSpark, label: "Spark Ads", value: "SPARK_AD" },
+  { icon: GiCometSpark, label: "Spark Ad", value: "SPARK_AD" },
   {
     icon: MdOutlineLeaderboard,
-    label: "Lead Generation Ads",
+    label: "Lead Generation Ad",
     value: "LEAD_GENERATION",
   },
   { icon: TbBrandEdge, label: "Branded Effects", value: "BRANDED_EFFECTS" },
 ];
 const LinkedinAdsTypes = [
-  { icon: FaImage, label: "Sponsored Content", value: "SPONSORED" },
+  { icon: FaImage, label: "Sponsored Content Ads", value: "SPONSORED" },
   { icon: RiMessage3Fill, label: "Message Ads", value: "MESSAGE " },
   { icon: CiText, label: "Text Ads", value: "TEXT" },
-  { icon: RiMessage3Fill, label: "Conversation Ads", value: "CONVERSATION" },
-  {
-    icon: MdOutlineLeaderboard,
-    label: " Lead Gen Forms",
-    value: "LEAD_GENERATION",
-  },
-  { icon: SiSpotlight, label: " Spotlight & Job Ads", value: "SPOTLIGHT_JOB" },
+  // { icon: RiMessage3Fill, label: "Conversation Ads", value: "CONVERSATION" },
+  // {
+  //   icon: MdOutlineLeaderboard,
+  //   label: " Lead Gen Forms",
+  //   value: "LEAD_GENERATION",
+  // },
+  { icon: SiSpotlight, label: "Job Ads", value: "SPOTLIGHT_JOB" },
+  { icon: SiSpotlight, label: "Video Ads", value: "VIDEO" },
+  { icon: SiSpotlight, label: "Job Ads", value: "SPOTLIGHT_JOB" },
 ];
 
 const adTypesMap: Record<string, typeof facebookAdTypes> = {
-  "Meta Ads": facebookAdTypes, // no trailing space here
-  "Google Ads": googleAdsTypes,
-  "LinkedIn Ads": LinkedinAdsTypes,
-  "Twitter Ads": [],
-  "TikTok Ads": TiktokAdsTypes,
+  Facebook: facebookAdTypes, // no trailing space here
+  Google: googleAdsTypes,
+  LinkedIn: LinkedinAdsTypes,
+  Instagram: [],
+  Tiktok: TiktokAdsTypes,
 };
 
 const DashboardCampaignCreate = () => {
@@ -170,7 +174,7 @@ const DashboardCampaignCreate = () => {
   const [title, setTitle] = useState("");
   const [selectedObjective, setSelectedObjective] = useState("brand-awareness");
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [selectedPlatform, setSelectedPlatform] = useState("Meta Ads");
+  const [selectedPlatform, setSelectedPlatform] = useState("Facebook");
   const [selectedAdType, setSelectedAdType] = useState("CAROUSEL ADS");
   const [locationId, setLocationId] = useState("");
   const [locationCode, setLocationCode] = useState("");
@@ -211,8 +215,7 @@ const DashboardCampaignCreate = () => {
 
   const [adsData, setAdsData] = useState<AdsData>();
 
-
-  // console.log("always ", locationCode, locationId);
+  //  console.log("always ", locationCode, locationId);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -240,12 +243,12 @@ const DashboardCampaignCreate = () => {
       newErrors.selectedAdAccount = "Ad account is required";
     if (!campaignName) newErrors.campaignName = "Campaign name is required";
 
-    if (selectedPlatform === "Meta Ads") {
+    if (selectedPlatform === "Facebook") {
       if (!adsetName) newErrors.adsetName = "adsetName is required";
       if (!adsName) newErrors.adsName = "adsName is required";
       if (!selectedPage) newErrors.selectedPage = "page is required";
     }
-    if (selectedPlatform === "Google Ads") {
+    if (selectedPlatform === "Google") {
       if (!adGroupName) newErrors.adGroupName = "adGroupName  is required";
       if (!headline) newErrors.headline = "headline is required";
     }
@@ -345,8 +348,8 @@ const DashboardCampaignCreate = () => {
 
     setLoading(true);
 
-    if (selectedPlatform === "Meta Ads") {
-      console.log("inside meta", locationCode, locationId);
+    if (selectedPlatform === "Facebook") {
+      console.log("inside Facebook", locationCode, locationId);
       payload = {
         accessToken: socialAccoutAccessToken,
         adAccountId: selectedAdAccount,
@@ -373,7 +376,7 @@ const DashboardCampaignCreate = () => {
       endpoint = "facebook";
     }
 
-    if (selectedPlatform === "Google Ads") {
+    if (selectedPlatform === "Google") {
       payload = {
         refreshToken:
           "1//0gyFnzETMVPfBCgYIARAAGBASNwF-L9Irnr7JSvDaZBW_pCeQdDU0fUVNt5qnGP9jx7_scipp6Siip929an3TV5rKsQGADmG54cc",
@@ -385,14 +388,14 @@ const DashboardCampaignCreate = () => {
         cpcBidMicros: 800000,
         headlines: headlineData,
         description: title,
-        finalUrl:  "https://adelo.ai",
+        finalUrl: "https://adelo.ai",
       };
       endpoint = "google";
       console.log("headline", headlineData);
       console.log("google payload", payload);
     }
 
-    if (selectedPlatform === "LinkedIn Ads") {
+    if (selectedPlatform === "LinkedIn") {
       payload = {
         accessToken: socialAccoutAccessToken,
         accountId: selectedAdAccount,
@@ -412,7 +415,7 @@ const DashboardCampaignCreate = () => {
       };
       endpoint = "linkedin";
     }
-    if (selectedPlatform === "TikTok Ads") {
+    if (selectedPlatform === "Tiktok") {
       const fd = new FormData();
 
       // Files must match backend field names
@@ -485,8 +488,6 @@ const DashboardCampaignCreate = () => {
     }
   };
 
-
-
   // const fakeAdsData: AdsData = {
   //   ads_features: {
   //     ad_type: "Shopping Ad",
@@ -524,6 +525,7 @@ const DashboardCampaignCreate = () => {
   //   },
   // };
 
+  console.log("selected platform from generated  ", selectedPlatform);
   const handleGenerateAdsData = async () => {
     const data = {
       company_info: company,
@@ -546,19 +548,51 @@ const DashboardCampaignCreate = () => {
 
       setAdsData(res.data.dat);
       setTitle(res.data.ads_features.title);
-      setSelectedObjective(res.data.ads_features.objective)
-      setPlatform(res.data.ads_features.platform)
-      setSelectedAdType(res.data.ads_features.ad_type)
-      setLocationCode(res.data.ads_features.audience.location.country_code_alpha_2)
-      setLocationId(res.data.ads_features.audience.location.country_id)
-      const startingAge = res.data.ads_features.audience.age_range.split("-")[0];
+      setSelectedObjective(res.data.ads_features.objective);
+      setSelectedPlatform(res.data.ads_features.platform);
+
+      const adTypesByPlatform: Record<string, string[]> = {
+        Facebook: ["Reach", "Brand Awareness", "Traffic Ads", "Messages"],
+        Google: ["Search Ad", "App Campaigns", "Shopping Ad"],
+        Tiktok: [
+          "In-Feed Ad",
+          "Branded Effects Ad",
+          "Branded Hashtag Challenge",
+        ],
+        LinkedIn: [
+          "Sponsored Content Ads",
+          "Message Ads",
+          "Text Ads",
+          "Job Ads",
+          "Video Ads",
+        ],
+      };
+
+      const availableAdTypes =
+        adTypesByPlatform[res.data.ads_features.platform] || [];
+      if (availableAdTypes.includes(res.data.ads_features.ad_type)) {
+        setSelectedAdType(res.data.ads_features.ad_type);
+      } else {
+        setSelectedAdType(availableAdTypes[0] || ""); // fallback
+      }
+
+      setLocationCode(
+        res.data.ads_features.audience.location.country_code_alpha_2
+      );
+      setLocationId(res.data.ads_features.audience.location.country_id);
+      const startingAge =
+        res.data.ads_features.audience.age_range.split("-")[0];
       const endAge = res.data.ads_features.audience.age_range.split("-")[1];
-      setAgeFrom(startingAge)
-      setAgeTo(endAge)
-      setSelectedGender(res.data.ads_features.audience.gender)
-      setInterests(res.data.ads_features.audience.interests)
-      setDailyBudget(String(res.data.ads_features.budget_schedule.daily_budget))
-      setTotalBudget(String(res.data.ads_features.budget_schedule.total_budget))
+      setAgeFrom(startingAge);
+      setAgeTo(endAge);
+      setSelectedGender(res.data.ads_features.audience.gender);
+      setInterests(res.data.ads_features.audience.interests);
+      setDailyBudget(
+        String(res.data.ads_features.budget_schedule.daily_budget)
+      );
+      setTotalBudget(
+        String(res.data.ads_features.budget_schedule.total_budget)
+      );
       const today = new Date();
 
       // format as YYYY-MM-DD
@@ -567,12 +601,14 @@ const DashboardCampaignCreate = () => {
 
       // add duration days
       const end = new Date();
-      end.setDate(today.getDate() + res.data.ads_features.budget_schedule.campaign_duration);
+      end.setDate(
+        today.getDate() +
+          res.data.ads_features.budget_schedule.campaign_duration
+      );
       const formattedEnd = end.toISOString().split("T")[0];
       setEndDate(formattedEnd);
 
-
-
+      console.log("hit hit ", res.data.ads_features.platform);
       console.log("API Response:", res.data);
     } catch (err) {
       console.error("API Error:", err);
@@ -667,10 +703,11 @@ const DashboardCampaignCreate = () => {
               {objectives.map((objective, index) => (
                 <div
                   key={index}
-                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${selectedObjective === objective.label
-                    ? "bg-purple-100 border-purple-600"
-                    : "bg-[#E6E6E8] border-gray-200"
-                    } hover:bg-[#F4F1FF]`}
+                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${
+                    selectedObjective === objective.label
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8] border-gray-200"
+                  } hover:bg-[#F4F1FF]`}
                   onClick={() => setSelectedObjective(objective.label)}
                 >
                   <objective.icon className="text-xl" />
@@ -696,10 +733,11 @@ const DashboardCampaignCreate = () => {
               {platforms.map((platform, index) => (
                 <div
                   key={index}
-                  className={`${selectedPlatform === platform.value
-                    ? "bg-purple-100 border-purple-600"
-                    : "bg-[#E6E6E8]"
-                    } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
+                  className={`${
+                    selectedPlatform === platform.value
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8]"
+                  } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
                   onClick={() => handlePlatformChange(platform.value)}
                 >
                   <platform.icon className={`text-2xl ${platform.color}`} />
@@ -722,10 +760,11 @@ const DashboardCampaignCreate = () => {
               {(adTypesMap[selectedPlatform] || []).map((adType, index) => (
                 <div
                   key={index}
-                  className={`flex items-center p-3 gap-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 ${selectedAdType === adType.label
-                    ? "bg-purple-100 border-purple-600"
-                    : "bg-[#E6E6E8]"
-                    }`}
+                  className={`flex items-center p-3 gap-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 ${
+                    selectedAdType === adType.label
+                      ? "bg-purple-100 border-purple-600"
+                      : "bg-[#E6E6E8]"
+                  }`}
                   onClick={() => setSelectedAdType(adType.label)}
                 >
                   <adType.icon className="text-lg text-gray-600" />
@@ -762,17 +801,17 @@ const DashboardCampaignCreate = () => {
 
                 {/* List accounts if available */}
                 {selectedPlatform &&
-                  (adsAccounts[selectedPlatform]?.length || 0) > 0
+                (adsAccounts[selectedPlatform]?.length || 0) > 0
                   ? adsAccounts[selectedPlatform].map((account) => (
-                    <option key={account.id} value={account.id}>
-                      {account.name} ({account.id})
-                    </option>
-                  ))
+                      <option key={account.id} value={account.id}>
+                        {account.name} ({account.id})
+                      </option>
+                    ))
                   : selectedPlatform && (
-                    <option value="" disabled>
-                      You don't have any Ads Account
-                    </option>
-                  )}
+                      <option value="" disabled>
+                        You don't have any Ads Account
+                      </option>
+                    )}
               </select>
 
               {/* Custom dropdown arrow */}
@@ -794,7 +833,7 @@ const DashboardCampaignCreate = () => {
           </div>
 
           {/* select page  */}
-          {selectedPlatform === "Meta Ads" && (
+          {selectedPlatform === "Facebook" && (
             <div>
               <CampaignSubHeader text="Select page" />
               {errors.selectedPage && (
@@ -820,15 +859,15 @@ const DashboardCampaignCreate = () => {
                   {/* List accounts if available */}
                   {selectedPlatform && (page[selectedPlatform]?.length || 0) > 0
                     ? page[selectedPlatform].map((page) => (
-                      <option key={page.pageId} value={page.pageId}>
-                        ({page.pageId})
-                      </option>
-                    ))
+                        <option key={page.pageId} value={page.pageId}>
+                          ({page.pageId})
+                        </option>
+                      ))
                     : selectedPlatform && (
-                      <option value="" disabled>
-                        You don't have any Ads Account
-                      </option>
-                    )}
+                        <option value="" disabled>
+                          You don't have any Ads Account
+                        </option>
+                      )}
                 </select>
 
                 {/* Custom dropdown arrow */}
@@ -868,7 +907,7 @@ const DashboardCampaignCreate = () => {
           </div>
 
           {/* Adset Name */}
-          {selectedPlatform === "Meta Ads" && (
+          {selectedPlatform === "Facebook" && (
             <div>
               <CampaignSubHeader text="Adset Name" />
               {errors.adsetName && (
@@ -888,7 +927,7 @@ const DashboardCampaignCreate = () => {
           )}
 
           {/* Ads Name */}
-          {selectedPlatform === "Meta Ads" && (
+          {selectedPlatform === "Facebook" && (
             <div>
               <CampaignSubHeader text="Ads Name" />
               {errors.adsName && (
@@ -907,7 +946,7 @@ const DashboardCampaignCreate = () => {
             </div>
           )}
           {/* Ads Group name  */}
-          {selectedPlatform === "Google Ads" && (
+          {selectedPlatform === "Google" && (
             <div>
               <CampaignSubHeader text="Ads Group Name " />
               {errors.adGroupName && (
@@ -928,8 +967,8 @@ const DashboardCampaignCreate = () => {
             </div>
           )}
 
-          {/* google ads headline   */}
-          {selectedPlatform === "Google Ads" && (
+          {/* Google headline   */}
+          {selectedPlatform === "Google" && (
             <div>
               <CampaignSubHeader text="HeadLines " />
               {errors.headline && (
@@ -1026,7 +1065,6 @@ const DashboardCampaignCreate = () => {
                 <p className="text-red-500 text-xs mt-1">{errors.locationId}</p>
               )}
             </div> */}
-
 
             {/* Age range */}
             <div>
@@ -1286,11 +1324,11 @@ const DashboardCampaignCreate = () => {
                 className="py-2 px-2 border border-gray-200 rounded-lg mt-2"
               >
                 <option value="">Select Platform</option>
-                <option value="facebook">Facebook</option>
-                <option value="google">Google</option>
-                <option value="tiktok">Tiktok</option>
-                <option value="linkedin">LinkedIn</option>
-                <option value="instagram">Instagram</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Google">Google</option>
+                <option value="Tiktok">Tiktok</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="Instagram">Instagram</option>
               </select>
             </div>
 
@@ -1380,19 +1418,21 @@ const DashboardCampaignCreate = () => {
               <div className="inline-flex items-center bg-white border border-gray-300 rounded-full overflow-hidden text-sm font-medium">
                 <button
                   onClick={() => setSelected("mobile")}
-                  className={`px-4 py-3 transition-colors duration-200 ${selected === "mobile"
-                    ? "bg-purple-500 text-white"
-                    : "text-black"
-                    }`}
+                  className={`px-4 py-3 transition-colors duration-200 ${
+                    selected === "mobile"
+                      ? "bg-purple-500 text-white"
+                      : "text-black"
+                  }`}
                 >
                   Mobile
                 </button>
                 <button
                   onClick={() => setSelected("desktop")}
-                  className={`px-4 py-3 transition-colors duration-200 ${selected === "desktop"
-                    ? "bg-purple-500 text-white"
-                    : "text-black"
-                    }`}
+                  className={`px-4 py-3 transition-colors duration-200 ${
+                    selected === "desktop"
+                      ? "bg-purple-500 text-white"
+                      : "text-black"
+                  }`}
                 >
                   Desktop
                 </button>
