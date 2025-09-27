@@ -1,62 +1,72 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { RootState } from "@/store/store";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 
 type MessageBubbleProps = {
   role: string;
   message: string;
+  isSending: boolean;
 };
 
-const MessageBubble = ({ role, message }: MessageBubbleProps) => {
-  console.log('message bubbles', message)
-  const isadmin = role === "admin" || role === "creator";
+const MessageBubble = ({ role, message, isSending }: MessageBubbleProps) => {
+  const isAdmin = role === "admin" || role === "creator";
+  const isAssistant = role === "assistant";
 
   return (
     <div
-      className={`flex ${
-        isadmin ? "justify-end" : "justify-start"
-      } mb-4 pt-5 m-4`}
+      className={`flex ${isAdmin ? "justify-end" : "justify-start"} mb-4 px-4`}
     >
       <div
-        className={`max-w-xs md:max-w-md rounded-lg px-4 py-3 text-sm shadow-md ${
-          isadmin
+        className={`max-w-xs md:max-w-md px-5 py-3 rounded-2xl shadow-lg text-sm leading-relaxed ${
+          isAdmin
             ? "bg-blue-500 text-white rounded-br-none"
             : "bg-gray-100 text-gray-900 rounded-bl-none"
         }`}
       >
-        {message}
+        {isAssistant && isSending ? (
+          <span className="flex items-center gap-1 text-gray-500">
+            <span className="animate-bounce">●</span>
+            <span className="animate-bounce delay-150">●</span>
+            <span className="animate-bounce delay-300">●</span>
+          </span>
+        ) : (
+          message
+        )}
       </div>
     </div>
   );
 };
 
-const ChatUI = (sessionIdForChat: any ) => {
+const ChatUI = (sessionIdForChat: any, ) => {
   const accessToken = useSelector((state: RootState) => state.auth.token);
   const user = useSelector((state: RootState) => state.auth.user);
   const [messages, setMessages] = useState<
     { role: "admin" | "creator" | "assistant"; message: string }[]
   >([]);
+  const [isSending, setIsSending] = useState(false);
   const [input, setInput] = useState("");
   const token = useSelector((state: RootState) => state.auth.token);
-  console.log("From CHATUI", sessionIdForChat.sessionIdForChat)
+
+  // ✅ Ref for auto-scroll
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  // ✅ Always scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const fetchChatHistory = async () => {
     const res = await axios.get(
       `http://localhost:5000/api/v1/chatbot/get-single?sessionId=${sessionIdForChat.sessionIdForChat}`,
       {
-          
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+        headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
 
-    console.log('form chat get ', res.data.data)
-
-    // ✅ Map each chat item into [userMessage, assistantMessage]
     const formattedMessages =
       res?.data?.data?.flatMap((item: any) => {
         const messages: {
@@ -64,20 +74,15 @@ const ChatUI = (sessionIdForChat: any ) => {
           message: string;
         }[] = [];
 
-        // User message (question)
         if (item.userQuestion) {
           messages.push({
-            role: item.userId?.role || "admin", // fallback to admin
+            role: item.userId?.role || "admin",
             message: item.userQuestion,
           });
         }
 
-        // Assistant message (answer)
         if (item.aiAnswer) {
-          messages.push({
-            role: "assistant",
-            message: item.aiAnswer,
-          });
+          messages.push({ role: "assistant", message: item.aiAnswer });
         }
 
         return messages;
@@ -89,21 +94,23 @@ const ChatUI = (sessionIdForChat: any ) => {
   const {
     data: chatHistory,
     isLoading,
-    // isError,
     refetch,
   } = useQuery({
-    queryKey: ["chatHistory", user?.userId],
+    queryKey: ["chatHistory", sessionIdForChat.sessionIdForChat],
     queryFn: () => fetchChatHistory(),
-    enabled: !!user?.userId, // ⛔ stop until we have userId
+    enabled: !!sessionIdForChat.sessionIdForChat,
   });
 
   useEffect(() => {
-    if (chatHistory) {
-      setMessages(chatHistory);
-    }
+    if (chatHistory) setMessages(chatHistory);
   }, [chatHistory]);
 
-  // Send message to backend
+  useEffect(() => {
+    if (!sessionIdForChat.sessionIdForChat) {
+      setMessages([]);
+    }
+  }, [sessionIdForChat.sessionIdForChat]);
+
   const handleSend = async () => {
     if (!input.trim()) return;
 
@@ -113,29 +120,29 @@ const ChatUI = (sessionIdForChat: any ) => {
     const newUserMessage = { role: userRole, message: input };
     setMessages((prev) => [...prev, newUserMessage]);
 
+    const payload = {
+      prompt: input,
+      token: token,
+      sessionId: sessionIdForChat.sessionIdForChat,
+    };
+
     try {
+      setIsSending(true);
       const res = await axios.post(
         "http://74.118.168.229:8000/chatting/chat",
-
-        {
-          prompt: input,
-          token: token,
-          sessionId: sessionIdForChat.sessionIdForChat
-        }
+        payload
       );
 
-      console.log('reqly ',res.data)
-      const newAssistantMessage: {
-        role: "admin" | "creator" | "assistant";
-        message: string;
-      } = {
-        role: "assistant",
+      const newAssistantMessage = {
+        role: "assistant" as const,
         message: res.data.answer || "No response from server.",
       };
+
       setMessages((prev) => [...prev, newAssistantMessage]);
+      setIsSending(false);
+     
       refetch();
     } catch (error) {
-      console.error("❌ Error:", error);
       setMessages((prev) => [
         ...prev,
         { role: "assistant", message: "⚠️ Error connecting to server." },
@@ -145,38 +152,63 @@ const ChatUI = (sessionIdForChat: any ) => {
     setInput("");
   };
 
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") handleSend();
+  };
+
   return (
     <div className="flex flex-col h-screen bg-gray-900 text-white">
-      <div className="w-full h-[72px] bg-blue-900" />
+      {/* Header */}
+      <div className="w-full h-[72px] bg-blue-900 flex items-center px-6 shadow-md">
+        <h1 className="text-lg font-semibold tracking-wide">Chatbot</h1>
+      </div>
 
       {/* Chat messages */}
-      <div className="flex-1 overflow-y-auto space-y-2">
+      <div className="flex-1 overflow-y-auto px-2 py-4">
         {isLoading ? (
-          <p className="text-center text-gray-400">Loading chat history...</p>
+          <p className="text-center text-gray-400 mt-10">
+            Loading chat history...
+          </p>
         ) : (
-          messages.map((msg, idx) => (
-            <MessageBubble key={idx} role={msg.role} message={msg.message} />
-          ))
-        )}
+          <>
+            {messages.map((msg, idx) => (
+              <MessageBubble
+                key={idx}
+                role={msg.role}
+                message={msg.message}
+                isSending={
+                  msg.role === "assistant" &&
+                  isSending &&
+                  idx === messages.length - 1
+                }
+              />
+            ))}
 
-        {/* {messages?.map((msg, idx) => (
-          <MessageBubble key={idx} role={msg.role} message={msg.message} />
-        ))} */}
+            {isSending &&
+              !messages.some((m) => m.role === "assistant" && !m.message) && (
+                <MessageBubble role="assistant" message="" isSending={true} />
+              )}
+
+            {/* ✅ Invisible element for scroll reference */}
+            <div ref={messagesEndRef} />
+          </>
+        )}
       </div>
 
       {/* Input box */}
-      <div className="relative mt-12 mb-8 bg-white rounded-xl p-4 m-5">
+      <div className="bg-white rounded-2xl shadow-lg p-3 m-5">
         <div className="flex items-center gap-2">
           <input
             type="text"
             placeholder="Ask anything..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyPress}
             className="flex-1 rounded-full bg-gray-100 px-4 py-3 text-sm placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             onClick={handleSend}
-            className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2"
+            className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-md transition"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

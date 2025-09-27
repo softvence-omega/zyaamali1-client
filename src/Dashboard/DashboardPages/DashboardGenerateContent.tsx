@@ -4,8 +4,10 @@ import GenerateSidebar from "@/components/DashboardHome/GenerateContent/Generate
 import { useState } from "react";
 
 const DashboardGenerateContent = () => {
-  const [sessionIdForChat, setSessionIdForChat] = useState("");
-  console.log(sessionIdForChat)
+  const [sessionIdForChat, setSessionIdForChat] = useState('');
+
+
+  console.log( 'DashboardGenerateContent',sessionIdForChat)
   return (
     <div className="flex">
       {/* sidebar expand  */}
@@ -13,8 +15,8 @@ const DashboardGenerateContent = () => {
         <Sidebar />
       </div>
       {/* sidebar  */}
-      <GenerateSidebar setSessionIdForChat={setSessionIdForChat}/>
-      <GenerateContent sessionIdForChat={sessionIdForChat}/>
+      <GenerateSidebar setSessionIdForChat={setSessionIdForChat} />
+      <GenerateContent sessionIdForChat={sessionIdForChat} />
     </div>
   );
 };

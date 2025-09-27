@@ -15,12 +15,15 @@ const ContentHeader: React.FC<{
 }> = ({ templateType, selectedPlatforms, searchTerm }) => {
   const navigate = useNavigate();
   const accessToken = useSelector((state: any) => state.auth.token);
+  const user = useSelector((state: any) => state.auth.user);
 
   const [contentType, setContentType] = useState("image");
   const [prompt, setPrompt] = useState("");
   const [aspectRatio] = useState("1:1");
   const [platfrom, setPlatform] = useState("google");
   const [allContent, setAllContent] = useState<any[]>([]);
+
+  console.log({prompt,platfrom,contentType})
 
   const handleGenerate = async () => {
     try {
@@ -30,16 +33,18 @@ const ContentHeader: React.FC<{
           "http://74.118.168.229:8000/library/generate/image-content",
           {
             prompt,
-            platform:platfrom
+            platform: platfrom,
           }
         );
         console.log("image  ", response.data);
       } else if (contentType === "video") {
+
+  // console.log({prompt,platfrom,contentType})
         response = await axios.post(
-          `http://74.118.168.229:8000library/generate/video-content`,
+          `http://74.118.168.229:8000/library/generate/video-content`,
           {
-            prompt, 
-            platform: platfrom
+            prompt,
+            platform: platfrom,
           }
         );
 
@@ -50,6 +55,15 @@ const ContentHeader: React.FC<{
       }
 
       if (response.data) {
+        console.log('saved Generate data request ',{
+          type: contentType,
+          platform: platfrom,
+          ratio: aspectRatio,
+          link: response.data.video_urls || response.data.image_urls,
+          source: "generated",
+          prompt,
+          owner: user.userId,
+        });
         const result = await axios.post(
           "http://localhost:5000/api/v1/content/post-generated-content",
           {
@@ -59,6 +73,7 @@ const ContentHeader: React.FC<{
             link: response.data.video_urls || response.data.image_urls,
             source: "generated",
             prompt,
+            owner: user.userId,
           },
           {
             headers: {
@@ -116,7 +131,7 @@ const ContentHeader: React.FC<{
     return matchesType && matchesPlatform && matchesSearch;
   });
   return (
-    <div className="relative mb-8 w-full">
+    <div className="relative mb-8 w-full mt-10">
       {/* Background Image */}
       <img
         src={img}
@@ -227,7 +242,7 @@ const ContentHeader: React.FC<{
         {/* Content Grid */}
         <div className="px-4 py-12">
           <div className="max-w-[1400px] mx-auto">
-            <div className="columns-1 sm:columns-2 md:columns-4 gap-4 space-y-4 mt-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 space-y-4 mt-12">
               {filteredContent.map((img) => (
                 <div
                   onClick={() => handleGeneratew(img._id)}
