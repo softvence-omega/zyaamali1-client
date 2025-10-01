@@ -180,7 +180,7 @@ export default function DashboardContentPreview() {
               <img
                 src={singleContent.link}
                 alt={ "content"}
-                className="object-cover rounded-2xl w-full h-full"
+                className="object-cover h-screen rounded-2xl w-full "
               />
             ) : (
               <div className="relative w-full h-full">

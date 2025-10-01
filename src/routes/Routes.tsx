@@ -17,7 +17,6 @@ import Signup from "@/Auth/Auth_Components/Signup";
 import DashboardLayout from "@/Dashboard/DashboadLayout/DashboardLayout";
 import DashboardHome from "@/Dashboard/DashboardPages/DashboardHome";
 import DashboardCampaign from "@/Dashboard/DashboardPages/DashboardCampaign";
-import DashboardCampaignCreate from "@/Dashboard/DashboardPages/DashboardCampaignCreate";
 import DashboardCampaignPreview from "@/Dashboard/DashboardPages/DashboardCampaignPreview";
 import DashboardCampaignPerformance from "@/Dashboard/DashboardPages/DashboardCampaignPerformance";
 import DashboardContent from "@/Dashboard/DashboardPages/DashboardContent";
@@ -32,6 +31,7 @@ import DashboardGenerateContent from "@/Dashboard/DashboardPages/DashboardGenera
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import DataDeletionPage from "@/pages/DataDeletation";
+import DashboardCampaignCreateLatest from "@/Dashboard/DashboardPages/DashboardCampaignCreateLatest";
 
 const routes = createBrowserRouter([
   {
@@ -118,7 +118,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "/dashboard/campaign/create",
-        element: <DashboardCampaignCreate />,
+        element: <DashboardCampaignCreateLatest />,
       },
       {
         path: "/dashboard/campaign/preview",

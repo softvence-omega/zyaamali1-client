@@ -2,9 +2,15 @@ import { FiSearch } from "react-icons/fi";
 import icon from "../../assets/fi_2676818.png";
 import Accordion from "@/components/DashboardHelp/Accordion";
 import elipse from "../../assets/Ellipse 5.png";
+import TopBar from "@/utils/TopBar";
 const DashboardHelp = () => {
+   const breadcrumbPaths = [
+    { name: "Dashboard", link: "/dashboard" },
+    { name: "Support", link: "/dashboard/help" },
+  ];
   return (
     <div className="py-10">
+        <TopBar paths={breadcrumbPaths}></TopBar>
       {/* Heading Section */}
       <div className="mb-8 text-center lg:text-left">
         <h1 className="text-3xl sm:text-4xl font-bold text-black">

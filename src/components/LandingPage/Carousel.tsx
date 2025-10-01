@@ -19,7 +19,6 @@ const MyCarousel = () => {
     const images = [c1, c2, c3, c4, c5, c6, c7,c8,c9,c10,c11,c12];
     const [slidePercentage, setSlidePercentage] = useState(20);
 
-
     useEffect(() => {
         const handleResize = () => {
             const width = window.innerWidth;
@@ -51,11 +50,10 @@ const MyCarousel = () => {
                 showArrows={false}
                 swipeScrollTolerance={5}
                 showIndicators={false}
-
             >
                 {images.map((img, index) => (
                     <div key={index} className="px-2">
-                        <div className="bg-white px-3 border-1 py-3 rounded-xl shadow-md h-full flex items-center justify-center">
+                        <div className="bg-white dark:bg-gray-800 px-3 border-1 py-3 rounded-xl shadow-md dark:shadow-gray-700/20 h-full flex items-center justify-center">
                             <img
                                 src={img}
                                 alt={`Slide ${index + 1}`}

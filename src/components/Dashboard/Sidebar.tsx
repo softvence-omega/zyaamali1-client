@@ -1,11 +1,12 @@
 import { FaChartBar } from "react-icons/fa";
 import { RiMegaphoneFill } from "react-icons/ri";
-import { MdMessage, MdVideoLibrary } from "react-icons/md";
+import {  MdVideoLibrary } from "react-icons/md";
 import dashboardHeader from "../../assets/dashboard-header.png";
 import { LuLayoutGrid } from "react-icons/lu";
 import { BiWallet } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import user from "../../assets/user.png"
+import { MessageCircleMore } from "lucide-react";
 const Sidebar = () => {
   const navigate = useNavigate();
   const handleprof = () => {
@@ -32,15 +33,18 @@ const Sidebar = () => {
           <Link to="/dashboard/content">
             <MdVideoLibrary className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors duration-200" />
           </Link>
+          <Link to="/dashboard/generate-content">
+            <MessageCircleMore className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors duration-200" />
+          </Link>
           <Link to="/dashboard/analytics">
             <FaChartBar className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors duration-200" />
           </Link>
           <Link to="/dashboard/subscription">
             <BiWallet className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors duration-200" />
           </Link>
-          <Link to="/dashboard/help">
+          {/* <Link to="/dashboard/help">
             <MdMessage className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors duration-200" />
-          </Link>
+          </Link> */}
         </div>
       </div>
 

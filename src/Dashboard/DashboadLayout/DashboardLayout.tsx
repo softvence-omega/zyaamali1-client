@@ -1,5 +1,7 @@
 import Sidebar from "@/components/Dashboard/Sidebar";
 import SidebarExpand from "@/components/Dashboard/SidebarExpand";
+import FloatingChatButton from "@/components/FloatingChatButton/FloatingChatButton";
+import ThemeToggleButton from "@/context/ThemeToggleButton";
 import { Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
@@ -10,6 +12,10 @@ const DashboardLayout = () => {
       </div>
       <div className="hidden col-span-2 2xl:block h-fit sticky top-8">
         <SidebarExpand />
+      </div>
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-center">
+        <ThemeToggleButton />
+        <FloatingChatButton />
       </div>
       <div className="flex-1 col-span-10 2xl:col-span-10">
         <Outlet />

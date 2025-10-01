@@ -1,5 +1,6 @@
 "use client";
 
+import TopBar from "@/utils/TopBar";
 import type React from "react";
 import { useState } from "react";
 import {
@@ -130,9 +131,17 @@ const DashboardSubscription: React.FC = () => {
     </button>
   );
 
+    const breadcrumbPaths = [
+    { name: "Dashboard", link: "/dashboard" },
+    { name: "Setting", link: "" },
+    { name: " Subscription", link: "/dashboard/subscription" },
+  ];
+
+
   return (
     <div className="w-full mx-auto p-6 space-y-8">
       {/* Header */}
+       <TopBar paths={breadcrumbPaths}></TopBar>
       <div>
         <h1 className="bg-gradient-to-b from-[#8E6EFF] to-[#000000] bg-clip-text text-transparent block text-4xl font-bold">
           Billing & Subscription

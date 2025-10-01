@@ -60,45 +60,45 @@ export const Pricing = () => {
   ];
   return (
     <div className="max-w-[1400px] mx-auto my-auto" id="pricing">
-      <div className="bg-white px-14">
-        <h2 className="text-xl font-medium text-T-900 mb-6 ">Pricing Plans</h2>
+      <div className="bg-white dark:bg-gray-900  py-8">
+        <h2 className="text-xl font-medium text-T-900 dark:text-white mb-6">Pricing Plans</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {pricingPlans.map((plan, index) => (
             <div
               key={index}
-              className={`flex flex-col justify-between border rounded-lg p-6 relative bg-T-300 h-full ${
-                plan.popular ? "border-purple-500" : "border-gray-200"
+              className={`flex flex-col justify-between border rounded-lg p-6 relative bg-T-300 dark:bg-gray-800 h-full ${
+                plan.popular ? "border-purple-500 dark:border-[#8E6EFF]" : "border-gray-200 dark:border-gray-700"
               }`}
             >
               {plan.popular && (
                 <div className="absolute -top-[-6px] right-[-46px] transform -translate-x-1/2">
-                  <span className="bg-blue-600 text-white px-3 py-3 rounded-lg text-xs font-medium">
+                  <span className="bg-blue-600 dark:bg-[#8E6EFF] text-white px-3 py-3 rounded-lg text-xs font-medium">
                     Current Plan
                   </span>
                 </div>
               )}
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {plan.name}
                 </h3>
                 <div className="mt-2">
-                  <span className="text-3xl font-bold text-blue-400">
+                  <span className="text-3xl font-bold text-blue-400 dark:text-[#A891FB]">
                     {plan.price}
                   </span>
-                  <span className="text-gray-600">{plan.period}</span>
-                  <p className="text-[#6C7078] text-sm mt-3">
+                  <span className="text-gray-600 dark:text-gray-400">{plan.period}</span>
+                  <p className="text-[#6C7078] dark:text-gray-300 text-sm mt-3">
                     {plan.shortDesc}
                   </p>
                 </div>
-                <hr className="mt-6 text-T-400" />
+                <hr className="mt-6 text-T-400 dark:border-gray-700" />
 
                 <ul className="mt-6 space-y-3">
                   {plan.features.map((feature, featureIndex) => (
                     <li
                       key={featureIndex}
-                      className="flex items-center text-sm text-gray-600"
+                      className="flex items-center text-sm text-gray-600 dark:text-gray-300"
                     >
                       <FaCheck className="w-3 h-3 text-[#FF8818] mr-3 flex-shrink-0" />
                       {feature}
@@ -112,8 +112,8 @@ export const Pricing = () => {
                 className={`w-full mt-6 px-4 py-2 text-sm font-semibold rounded-lg transition duration-300 cursor-pointer
     ${
       plan.buttonText === "Current Plan"
-        ? "bg-gray-400 text-white cursor-not-allowed"
-        : "bg-blue-500 text-white hover:bg-blue-600"
+        ? "bg-gray-400 text-white cursor-not-allowed dark:bg-gray-600"
+        : "bg-blue-500 text-white hover:bg-blue-600 dark:bg-[#8E6EFF] dark:hover:bg-[#A891FB]"
     }`}
               >
                 {plan.buttonText}
@@ -123,7 +123,7 @@ export const Pricing = () => {
         </div>
       </div>
 
-      <div className="relative w-10/12 md:w-full h-[600px] sm:h-[700px] md:h-[800px] overflow-hidden mt-10 rounded-3xl mb-24 mx-auto max-w-7xl px-4 lg:px-0">
+      <div className="relative w-10/12 md:w-full h-[600px] sm:h-[700px] md:h-[800px] overflow-hidden mt-10 rounded-3xl mb-24 mx-auto max-w-[1400px] px-4 lg:px-0">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
           src={serviceVideo}
@@ -132,7 +132,7 @@ export const Pricing = () => {
           muted
           playsInline
         />
-        <div className="absolute top-0 left-0 w-full h-full bg-black/50 flex flex-col items-center justify-center text-center px-4 sm:px-8">
+        <div className="absolute top-0 left-0 w-full h-full bg-black/50 dark:bg-black/60 flex flex-col items-center justify-center text-center px-4 sm:px-8">
           <h1
             className="text-white font-bold text-center mb-12 leading-tight"
             style={{ fontSize: "clamp(1.75rem, 4vw, 4.5rem)" }}
@@ -146,7 +146,7 @@ export const Pricing = () => {
             <button className="bg-gradient-to-r from-[#654FAE] via-[#A891FB] to-[#8E6EFF] text-white px-6 py-3 rounded-2xl font-semibold hover:opacity-90 transition duration-300">
               Start Your Free Trial
             </button>
-            <button className="border border-blue-500 text-blue-500 px-6 py-3 rounded-2xl font-semibold">
+            <button className="border border-blue-500 text-blue-500 dark:border-[#A891FB] dark:text-[#A891FB] px-6 py-3 rounded-2xl font-semibold hover:bg-blue-500 hover:text-white dark:hover:bg-[#A891FB] dark:hover:text-white transition duration-300">
               Watch Demo
             </button>
           </div>

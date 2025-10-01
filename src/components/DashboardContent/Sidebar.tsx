@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
 import { FaSearch } from "react-icons/fa";
 
 type SidebarProps = {
@@ -9,6 +8,9 @@ type SidebarProps = {
   setSelectedPlatforms: (val: string[]) => void;
   searchTerm: string;
   setSearchTerm: (val: string) => void;
+  setStartDate: (date: string) => void; // New prop for start date
+  setEndDate: (date: string) => void; // New prop for end date
+  resetFilters: () => void; // Function to reset all filters
 };
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -18,14 +20,16 @@ const Sidebar: React.FC<SidebarProps> = ({
   setSelectedPlatforms,
   searchTerm,
   setSearchTerm,
+  setStartDate,
+  setEndDate,
+  resetFilters
 }) => {
   const platforms = [
     "facebook",
     "google",
-    "amazon",
     "linkedin",
     "tiktok",
-    "youtube",
+    "instagram",
   ];
 
   const handlePlatformChange = (platform: any) => {
@@ -41,7 +45,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div className="p-4  md:p-6 w-full md:w-64 lg:w-72 flex-shrink-0 rounded-lg bg-white shadow-md">
+    <div className="p-4 md:p-6 w-full md:w-64 lg:w-72 flex-shrink-0 rounded-lg bg-white shadow-md">
       {/* 🔍 Search */}
       <div className="relative mb-6">
         <input
@@ -55,9 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* 🖼 Template Type */}
-      <h3 className="text-lg font-semibold text-gray-800 mb-3">
-        Template Type
-      </h3>
+      <h3 className="text-lg font-semibold text-gray-800 mb-3">Template Type</h3>
       <div className="space-y-2">
         <label className="flex items-center gap-2 text-gray-700">
           <input
@@ -84,15 +86,10 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* 🌐 Platforms */}
-      <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
-        Platform
-      </h3>
+      <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Platform</h3>
       <div className="space-y-2">
         {platforms.map((platform) => (
-          <label
-            key={platform}
-            className="flex items-center gap-2 text-gray-700"
-          >
+          <label key={platform} className="flex items-center gap-2 text-gray-700">
             <input
               type="checkbox"
               checked={selectedPlatforms.includes(platform)}
@@ -102,6 +99,37 @@ const Sidebar: React.FC<SidebarProps> = ({
             {platform.charAt(0).toUpperCase() + platform.slice(1)}
           </label>
         ))}
+      </div>
+
+      {/* 📅 Date Filter */}
+      <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Filter by Date</h3>
+      <div className="space-y-2">
+        <div>
+          <label className="block text-gray-700">Start Date</label>
+          <input
+            type="date"
+            onChange={(e) => setStartDate(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded-md"
+          />
+        </div>
+        <div>
+          <label className="block text-gray-700">End Date</label>
+          <input
+            type="date"
+            onChange={(e) => setEndDate(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded-md"
+          />
+        </div>
+      </div>
+
+      {/* Reset Filters Button */}
+      <div className="mt-6">
+        <button
+          onClick={resetFilters} // Reset all filters
+          className="w-full p-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors duration-200"
+        >
+          Reset Filters
+        </button>
       </div>
     </div>
   );

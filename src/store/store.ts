@@ -15,12 +15,13 @@ import authReducer from "./Features/Auth/authSlice";
 import formReducer from "./Features/FormSlice/FormSlice";
 import businessReducer from "./Features/BusinessSlice/ businessSlice"; // fixed space
 import { baseApi } from "./api/baseApi";
+import sessionReducer from './Features/SessionSlice/SessionSlice';  // Import the session reducer
 
 // persist config
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"], // only persist auth slice
+  whitelist: ["auth", "session"], // persist both auth and session slices
 };
 
 // combine all reducers
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   business: businessReducer,
   form: formReducer,
+  session: sessionReducer,  // Add session reducer here
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

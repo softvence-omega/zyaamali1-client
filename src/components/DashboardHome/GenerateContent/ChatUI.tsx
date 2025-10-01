@@ -6,6 +6,9 @@ import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 type MessageBubbleProps = {
   role: string;
   message: string;
@@ -18,30 +21,132 @@ const MessageBubble = ({ role, message, isSending }: MessageBubbleProps) => {
 
   return (
     <div
-      className={`flex ${isAdmin ? "justify-end" : "justify-start"} mb-4 px-4`}
+      className={`flex ${isAdmin ? "justify-end" : "justify-start"} mb-6 px-6`}
     >
       <div
-        className={`max-w-xs md:max-w-md px-5 py-3 rounded-2xl shadow-lg text-sm leading-relaxed ${
+        className={`max-w-xl md:max-w-2xl px-6 py-4 rounded-2xl shadow-lg text-sm leading-relaxed transition-all ${
           isAdmin
-            ? "bg-blue-500 text-white rounded-br-none"
-            : "bg-gray-100 text-gray-900 rounded-bl-none"
+            ? "bg-blue-600 text-white rounded-br-none"
+            : "bg-gray-200 text-gray-900 rounded-bl-none"
         }`}
       >
         {isAssistant && isSending ? (
-          <span className="flex items-center gap-1 text-gray-500">
-            <span className="animate-bounce">●</span>
-            <span className="animate-bounce delay-150">●</span>
-            <span className="animate-bounce delay-300">●</span>
-          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="animate-bounce text-sm">●</span>
+            <span className="animate-bounce delay-150 text-sm">●</span>
+            <span className="animate-bounce delay-300 text-sm">●</span>
+          </div>
         ) : (
-          message
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              // Better paragraph spacing
+              p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
+
+              // Better list styling - FIXED NUMBERED LISTS
+              ul: ({ children }) => (
+                <ul className="mb-3 space-y-2 list-disc list-inside last:mb-0">
+                  {children}
+                </ul>
+              ),
+              ol: ({ children }) => (
+                <ol className="mb-3 space-y-2 list-decimal list-inside last:mb-0">
+                  {children}
+                </ol>
+              ),
+              li: ({ children }) => <li className="pl-1 my-1">{children}</li>,
+
+              // Better code blocks
+              code: ({ children, className }) => {
+                const isInline = !className;
+                if (isInline) {
+                  return (
+                    <code className="bg-gray-300 px-1.5 py-0.5 rounded text-sm font-mono">
+                      {children}
+                    </code>
+                  );
+                }
+                return (
+                  <code className="block bg-gray-300 text-gray-900 p-3 rounded-lg text-sm font-mono overflow-x-auto my-2">
+                    {children}
+                  </code>
+                );
+              },
+
+              // Better blockquotes
+              blockquote: ({ children }) => (
+                <blockquote className="border-l-4 border-gray-400 pl-4 my-3 text-gray-700 italic">
+                  {children}
+                </blockquote>
+              ),
+
+              // Better headings
+              h1: ({ children }) => (
+                <h1 className="text-xl font-bold mb-3 mt-4 first:mt-0">
+                  {children}
+                </h1>
+              ),
+              h2: ({ children }) => (
+                <h2 className="text-lg font-bold mb-2 mt-3 first:mt-0">
+                  {children}
+                </h2>
+              ),
+              h3: ({ children }) => (
+                <h3 className="text-base font-bold mb-2 mt-3 first:mt-0">
+                  {children}
+                </h3>
+              ),
+
+              // Better table styling
+              table: ({ children }) => (
+                <div className="overflow-x-auto my-3">
+                  <table className="min-w-full border-collapse border border-gray-400">
+                    {children}
+                  </table>
+                </div>
+              ),
+              th: ({ children }) => (
+                <th className="border border-gray-400 px-3 py-2 bg-gray-300 font-semibold">
+                  {children}
+                </th>
+              ),
+              td: ({ children }) => (
+                <td className="border border-gray-400 px-3 py-2">{children}</td>
+              ),
+
+              // Better horizontal rule
+              hr: () => <hr className="my-4 border-gray-400" />,
+
+              // Better links
+              a: ({ children, href }) => (
+                <a
+                  href={href}
+                  className="text-blue-200 hover:text-blue-100 underline break-words"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {children}
+                </a>
+              ),
+
+              // Better strong/bold
+              strong: ({ children }) => (
+                <strong className="font-semibold">{children}</strong>
+              ),
+
+              // Better emphasis/italic
+              em: ({ children }) => <em className="italic">{children}</em>,
+            }}
+          >
+            {message}
+          </ReactMarkdown>
         )}
       </div>
     </div>
   );
 };
 
-const ChatUI = (sessionIdForChat: any, ) => {
+const ChatUI = (sessionIdForChat: any) => {
   const accessToken = useSelector((state: RootState) => state.auth.token);
   const user = useSelector((state: RootState) => state.auth.user);
   const [messages, setMessages] = useState<
@@ -140,7 +245,7 @@ const ChatUI = (sessionIdForChat: any, ) => {
 
       setMessages((prev) => [...prev, newAssistantMessage]);
       setIsSending(false);
-     
+
       refetch();
     } catch (error) {
       setMessages((prev) => [
@@ -160,17 +265,37 @@ const ChatUI = (sessionIdForChat: any, ) => {
     <div className="flex flex-col h-screen bg-gray-900 text-white">
       {/* Header */}
       <div className="w-full h-[72px] bg-blue-900 flex items-center px-6 shadow-md">
-        <h1 className="text-lg font-semibold tracking-wide">Chatbot</h1>
+        <h1 className="text-lg font-semibold tracking-wide">
+          AI Marketing Assistant
+        </h1>
       </div>
 
       {/* Chat messages */}
       <div className="flex-1 overflow-y-auto px-2 py-4">
         {isLoading ? (
-          <p className="text-center text-gray-400 mt-10">
-            Loading chat history...
-          </p>
+          <div className="flex justify-center items-center h-20">
+            <div className="flex items-center gap-2 text-gray-400">
+              <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-500 border-t-transparent"></div>
+              <span>Loading chat history...</span>
+            </div>
+          </div>
         ) : (
           <>
+            {messages.length === 0 && !isLoading && (
+              <div className="flex flex-col items-center justify-center h-full ">
+                <div className="text-center max-w-md">
+                  <div className="text-4xl mb-4">🤖</div>
+                  <h3 className="text-lg font-semibold mb-2 text-gray-100">
+                    Ask Sterling: Your AI Marketing Assistant
+                  </h3>
+                  <p className="text-sm text-gray-400">
+                    Ask me anything about marketing strategies, campaigns, or
+                    analytics!
+                  </p>
+                </div>
+              </div>
+            )}
+
             {messages.map((msg, idx) => (
               <MessageBubble
                 key={idx}
@@ -189,7 +314,7 @@ const ChatUI = (sessionIdForChat: any, ) => {
                 <MessageBubble role="assistant" message="" isSending={true} />
               )}
 
-            {/* ✅ Invisible element for scroll reference */}
+            {/* Invisible element for scroll reference */}
             <div ref={messagesEndRef} />
           </>
         )}
@@ -208,7 +333,8 @@ const ChatUI = (sessionIdForChat: any, ) => {
           />
           <button
             onClick={handleSend}
-            className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-md transition"
+            disabled={!input.trim()}
+            className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-full p-3 shadow-md transition"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -226,6 +352,9 @@ const ChatUI = (sessionIdForChat: any, ) => {
             </svg>
           </button>
         </div>
+        <p className="text-xs text-gray-500 text-center mt-2">
+          Press Enter to send
+        </p>
       </div>
     </div>
   );

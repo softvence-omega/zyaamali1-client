@@ -1,6 +1,5 @@
 import CommonWrapper from "@/common/CommonWrapper";
 import bannerVid from "../assets/bannerVid.mp4";
-
 import { Banner } from "@/components/LandingPage/Banner";
 import { Rating } from "@/components/LandingPage/Rating";
 import { Services } from "@/components/LandingPage/Services";
@@ -12,9 +11,11 @@ import { Review } from "@/components/LandingPage/Review";
 import { Pricing } from "@/components/LandingPage/Pricing";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useTheme } from "@/context/ThemeContext";
 
-function Landing() {
-   const location = useLocation();
+const Landing: React.FC = () => {
+  const location = useLocation();
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     if (location.hash) {
@@ -22,56 +23,69 @@ function Landing() {
       if (el) {
         setTimeout(() => {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100); // Delay for smooth scroll after page loads
+        }, 100);
       }
     }
   }, [location]);
+
   return (
-    <div>
-      <div className=" bg-T-400 relative overflow-hidden pb-20"> {/* Added relative and overflow-hidden */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline // Recommended for better mobile compatibility
-          className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2"
-        >
-          <source src={bannerVid} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-
-        
-
+    <div className="relative bg-white dark:bg-gray-900">
+      {/* Hero Section with Background */}
+      <div className="relative min-h-screen overflow-hidden">
+        {/* Conditional background - video for light mode, dark overlay for dark mode */}
+        {!isDarkMode ? (
+          <>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2"
+            >
+              <source src={bannerVid} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            {/* Light overlay to improve text readability */}
+            <div className="absolute inset-0 dark:bg-black/20" />
+          </>
+        ) : (
+          <div className="absolute inset-0 bg-black opacity-70" />
+        )}
 
         <CommonWrapper>
-          <div className="pt-34 relative z-10 "> {/* Added relative and z-10 to ensure content is above video */}
-            {/* Your content here */}
-            <Banner></Banner>
-            <Rating></Rating>
-
+          <div className="relative z-10 pt-34 pb-18 text-white dark:text-gray-200">
+            <Banner />
+            <Rating />
           </div>
         </CommonWrapper>
+      </div>
 
-      </div>
-      <Services></Services>
-      <Marketing></Marketing>
-      <div className="mb-10">
-        <MyCarousel></MyCarousel>
-      </div>
-      <div className="mb-10">
-        <HowWorks></HowWorks>
-      </div>
-      <div className="mb-10">
-        <Inspiration></Inspiration>
-      </div>
-      <div className="mb-10">
-        <Review></Review>
-      </div>
-      <div className="mb-10">
-        <Pricing></Pricing>
+      {/* Content Sections with proper backgrounds */}
+      <div className="bg-white dark:bg-gray-900">
+        <div className="">
+          <Services />
+        </div>
+        <div className="mt-10">
+          <Marketing />
+        </div>
+        <div className="mb-10">
+          <MyCarousel />
+        </div>
+        <div className="mb-10">
+          <HowWorks />
+        </div>
+        <div className="mb-10">
+          <Inspiration />
+        </div>
+        <div className="mb-10">
+          <Review />
+        </div>
+        <div className="mb-10">
+          <Pricing />
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default Landing;

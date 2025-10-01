@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import GeminiIcon from "@/assets/CustomIcon/GeminiIcon";
+
 import { RootState } from "@/store/store";
 import axios from "axios";
 import { IoMdSearch } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 const fetchHistory = async (token: string) => {
   const res = await axios.get(
@@ -46,6 +46,8 @@ const GenerateSidebar = ({
     enabled: !!token, // only fetch if token exists
   });
 
+  console.log(chatbotHistory)
+
 
 
   const filteredHistory = chatbotHistory.filter((item: any) =>
@@ -60,12 +62,12 @@ const GenerateSidebar = ({
   return (
     <div className="lg:w-[360px] h-screen bg-Foundation-text-T-50 rounded-l-2xl flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-center gap-5 my-5">
+      {/* <div className="flex items-center justify-center gap-5 my-5">
         <GeminiIcon />
         <h1 className="text-3xl font-[700] bg-gradient-to-t from-[#000000] to-[#8E6EFF] bg-clip-text text-transparent">
           Sterling
         </h1>
-      </div>
+      </div> */}
 
       {/* Search */}
       <div className="relative mt-3 px-4">

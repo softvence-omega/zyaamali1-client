@@ -5,10 +5,17 @@ import ChangePassword from "@/components/DashboardProfile/ChangePassword";
 import ProfileSection from "@/components/DashboardProfile/ProfileSection";
 import TeamMembers from "@/components/DashboardProfile/TeamMambers";
 import SocialAccountsManager from "./SocialAccountsManager";
+import TopBar from "@/utils/TopBar";
 
 const DashboardProfile = () => {
+  const breadcrumbPaths = [
+    { name: "Dashboard", link: "/dashboard" },
+    { name: "Profile", link: "/dashboard/userprofile" },
+
+  ];
   return (
     <div className="min-h-screen p-2 md:p-8">
+        <TopBar paths={breadcrumbPaths}></TopBar>
       <div className=" md:p-6 md:space-y-8">
         <ProfileSection />
         <div className="bg-gray-100 rounded-3xl mt-4 py-6 px-6">

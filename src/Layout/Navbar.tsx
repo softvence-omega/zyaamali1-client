@@ -5,6 +5,7 @@ import logo from "../assets/Adelo_black.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { logout } from "@/store/Features/Auth/authSlice";
+import ThemeToggleButton from "@/context/ThemeToggleButton";
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -50,7 +51,7 @@ const Navbar: React.FC = () => {
           <NavLink
             to={item.to}
             onClick={() => setIsMobileMenuOpen(false)}
-            className={`font-medium py-2 rounded-md text-[#4F4D73] hover:text-[#8E6EFF] ${
+            className={`font-medium py-2 rounded-md text-[#4F4D73] hover:text-[#8E6EFF] dark:text-white dark:hover:text-[#8E6EFF] ${
               item.indent ? "pl-6" : "px-3"
             }`}
           >
@@ -74,8 +75,8 @@ const Navbar: React.FC = () => {
             className={({ isActive }) =>
               `font-medium transition-colors duration-300 ease-in-out px-3 py-2 rounded-md ${
                 isActive
-                  ? "text-[#8E6EFF] bg-[#F4F1FF]"
-                  : "text-[#4F4D73] hover:text-gray-600"
+                  ? "text-[#8E6EFF] bg-[#F4F1FF] dark:text-white dark:bg-[#3A3A3A]"
+                  : "text-[#4F4D73] hover:text-gray-600 dark:text-gray-300 dark:hover:text-white"
               }`
             }
           >
@@ -86,12 +87,12 @@ const Navbar: React.FC = () => {
 
       <li className="relative group">
         <NavLink
-          to="/services/chat"
+          to=""
           className={({ isActive }) =>
             `font-medium transition-colors duration-300 ease-in-out px-3 py-2 rounded-md ${
               isActive
-                ? "text-[#8E6EFF] bg-[#F4F1FF]"
-                : "text-[#4F4D73] hover:text-gray-600"
+                ? "text-[#8E6EFF] bg-[#F4F1FF] dark:text-white dark:bg-[#3A3A3A]"
+                : "text-[#4F4D73] hover:text-gray-600 dark:text-gray-300 dark:hover:text-white"
             }`
           }
         >
@@ -99,11 +100,11 @@ const Navbar: React.FC = () => {
         </NavLink>
 
         {/* Desktop hover dropdown */}
-        <ul className="absolute mt-8 left-0 z-20 w-48 bg-white shadow-lg rounded-md opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 ease-in-out pointer-events-none group-hover:pointer-events-auto">
+        <ul className="absolute mt-8 left-0 z-20 w-48 bg-white shadow-lg rounded-md opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 ease-in-out pointer-events-none group-hover:pointer-events-auto dark:bg-gray-800 dark:text-white">
           <li>
             <NavLink
               to="/services/campaign"
-              className="block px-4 py-2 text-sm text-[#4F4D73] hover:bg-[#F4F1FF] hover:text-[#8E6EFF]"
+              className="block px-4 py-2 text-sm text-[#4F4D73] hover:bg-[#F4F1FF] dark:text-white hover:text-[#8E6EFF] dark:hover:bg-[#3A3A3A] dark:hover:text-[#8E6EFF]"
             >
               Campaign
             </NavLink>
@@ -111,15 +112,23 @@ const Navbar: React.FC = () => {
           <li>
             <NavLink
               to="/services/copy"
-              className="block px-4 py-2 text-sm text-[#4F4D73] hover:bg-[#F4F1FF] hover:text-[#8E6EFF]"
+              className="block px-4 py-2 text-sm text-[#4F4D73] hover:bg-[#F4F1FF] dark:text-white hover:text-[#8E6EFF] dark:hover:bg-[#3A3A3A] dark:hover:text-[#8E6EFF]"
             >
               Content
             </NavLink>
           </li>
           <li>
             <NavLink
+              to="/services/chat"
+              className="block px-4 py-2 text-sm text-[#4F4D73] hover:bg-[#F4F1FF] dark:text-white hover:text-[#8E6EFF] dark:hover:bg-[#3A3A3A] dark:hover:text-[#8E6EFF]"
+            >
+              Sterling Chat
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/services/feedback"
-              className="block px-4 py-2 text-sm text-[#4F4D73] hover:bg-[#F4F1FF] hover:text-[#8E6EFF]"
+              className="block px-4 py-2 text-sm text-[#4F4D73] hover:bg-[#F4F1FF] dark:text-white hover:text-[#8E6EFF] dark:hover:bg-[#3A3A3A] dark:hover:text-[#8E6EFF]"
             >
               Feedback
             </NavLink>
@@ -127,7 +136,7 @@ const Navbar: React.FC = () => {
           <li>
             <NavLink
               to="/services/marketing"
-              className="block px-4 py-2 text-sm text-[#4F4D73] hover:bg-[#F4F1FF] hover:text-[#8E6EFF]"
+              className="block px-4 py-2 text-sm text-[#4F4D73] hover:bg-[#F4F1FF] dark:text-white hover:text-[#8E6EFF] dark:hover:bg-[#3A3A3A] dark:hover:text-[#8E6EFF]"
             >
               Template
             </NavLink>
@@ -138,7 +147,7 @@ const Navbar: React.FC = () => {
   );
 
   return (
-    <div className="absolute top-0 left-0 right-0 z-50 mt-12 shadow-md bg-white rounded-4xl max-w-6xl mx-auto">
+    <div className="absolute top-0 left-0 right-0 z-50 mt-12 shadow-md bg-white rounded-4xl max-w-6xl mx-auto dark:bg-gray-900 dark:text-white">
       <CommonWrapper>
         <div className="relative h-16">
           <div className="absolute inset-0 flex items-center px-8 rounded-4xl">
@@ -167,7 +176,7 @@ const Navbar: React.FC = () => {
 
                 {/* Mobile Dropdown */}
                 {isMobileMenuOpen && (
-                  <ul className="absolute left-0 mt-3 w-52 p-2 shadow-lg menu menu-sm dropdown-content bg-white rounded-box z-10">
+                  <ul className="absolute left-0 mt-3 w-52 p-2 shadow-lg menu menu-sm dropdown-content bg-white rounded-box z-10 dark:bg-gray-800 dark:text-white">
                     {mobileLinks}
                   </ul>
                 )}
@@ -188,12 +197,15 @@ const Navbar: React.FC = () => {
 
             {/* End */}
             <div className="navbar-end">
+              <div className="top-5 right-5 z-50">
+                <ThemeToggleButton />
+              </div>
               {user ? (
                 <div className="relative" ref={dropdownRef}>
                   {/* Profile button */}
                   <button
                     onClick={() => setIsDropdownOpen((prev) => !prev)}
-                    className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 transition"
+                    className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                   >
                     <img
                       src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
@@ -206,29 +218,28 @@ const Navbar: React.FC = () => {
 
                   {/* Dropdown */}
                   {isDropdownOpen && (
-                    <ul className="absolute right-0 mt-3 w-56 bg-white shadow-lg rounded-xl z-20">
-                      <li className="px-4 py-3 border-b border-gray-100">
-                        <p className="text-sm font-semibold text-[#4F4D73]">
+                    <ul className="absolute right-0 mt-3 w-56 bg-white shadow-lg rounded-xl z-20 dark:bg-gray-800 dark:border dark:border-gray-700">
+                      <li className="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
+                        <p className="text-sm font-semibold text-[#4F4D73] dark:text-gray-100">
                           {user?.name || "User"}
                         </p>
-                        <p className="text-xs text-gray-500 truncate">
+                        <p className="text-xs text-gray-500 truncate dark:text-gray-300">
                           {user?.email}
                         </p>
                       </li>
                       <li>
                         <Link
                           to="/dashboard"
-                          className="block px-4 py-2 text-sm text-[#4F4D73] hover:bg-[#F4F1FF] hover:text-[#8E6EFF] rounded-t-md"
+                          className="block px-4 py-2 text-sm text-[#4F4D73] hover:bg-[#F4F1FF] hover:text-[#8E6EFF] dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-[#A891FB]"
                           onClick={() => setIsDropdownOpen(false)}
                         >
                           Dashboard
                         </Link>
                       </li>
-
                       <li>
                         <button
                           onClick={handleLogout}
-                          className="w-full text-left px-4 py-2 text-sm cursor-pointer text-red-500 hover:bg-red-50 rounded-b-md"
+                          className="w-full text-left px-4 py-2 text-sm cursor-pointer text-red-500 hover:bg-red-50 rounded-b-md dark:text-red-400 dark:hover:bg-red-900/30 dark:hover:text-red-300"
                         >
                           Logout
                         </button>
