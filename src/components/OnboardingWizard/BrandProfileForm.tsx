@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller } from "react-hook-form";
 
@@ -8,7 +9,7 @@ interface BrandProfileFormProps {
   errors: FieldErrors<any>;
 }
 
-const BrandProfileForm = ({ control, errors }: BrandProfileFormProps) => {
+const BrandProfileForm = ({ control,  }: BrandProfileFormProps) => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-semibold">Brand Profile</h2>

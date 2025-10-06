@@ -1,4 +1,9 @@
-const ProgressBar = ({ step, totalSteps = 4 }) => {
+interface ProgressBarProps {
+  step: number;
+  totalSteps?: number;
+}
+
+const ProgressBar = ({ step, totalSteps = 4 }: ProgressBarProps) => {
   const progressPercentage = (step / totalSteps) * 100;
 
   return (

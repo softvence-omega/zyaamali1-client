@@ -32,7 +32,7 @@ import CampaignSubHeader from "@/components/Dashboard/campaign/CampaignSubHeader
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import OutlineButton from "@/components/ui/OutlineButton";
 import { useNavigate } from "react-router-dom";
-import { GiEngagementRing } from "react-icons/gi";
+
 import { PiTrafficConeFill } from "react-icons/pi";
 import { MdOutlineInstallMobile } from "react-icons/md";
 import { ImDisplay } from "react-icons/im";
@@ -50,7 +50,6 @@ import { CiText } from "react-icons/ci";
 import { GiCometSpark } from "react-icons/gi";
 import { countries } from "@/utils/Countries";
 import { AdsData } from "@/types";
-import TopBar from "@/utils/TopBar";
 
 const objectives = [
   {
@@ -214,7 +213,7 @@ const DashboardCampaignCreate = () => {
     "Create an engaging ad copy for a summer sale offering 40% off"
   );
 
-  const [adsData, setAdsData] = useState<AdsData>();
+  const [, setAdsData] = useState<AdsData>();
 
   //  console.log("always ", locationCode, locationId);
 

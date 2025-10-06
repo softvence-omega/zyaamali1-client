@@ -1,6 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller } from "react-hook-form";
 
-const BusinessDetailsForm = ({ control, errors }) => {
+import { Control, FieldErrors } from "react-hook-form";
+
+interface BrandProfileFormProps {
+  control: Control<any>;
+  errors: FieldErrors<any>;
+}
+
+const BusinessDetailsForm = ({ control, errors }: BrandProfileFormProps) => {
   return (
     <div className="space-y-8">
       {/* Header Section */}
@@ -20,11 +28,11 @@ const BusinessDetailsForm = ({ control, errors }) => {
             Business Name
             <span className="text-red-500 ml-1">*</span>
           </label>
-          {errors.businessName && (
+          {/* {errors.businessName && (
             <span className="text-sm text-red-500 font-medium">
-              {errors.businessName.message}
+              {errors?.businessName.message}
             </span>
-          )}
+          )} */}
         </div>
         
         <Controller
@@ -82,11 +90,11 @@ const BusinessDetailsForm = ({ control, errors }) => {
             Industry
             <span className="text-red-500 ml-1">*</span>
           </label>
-          {errors.industry && (
+          {/* {errors.industry && (
             <span className="text-sm text-red-500 font-medium">
               {errors.industry.message}
             </span>
-          )}
+          )} */}
         </div>
         
         <Controller
@@ -150,11 +158,11 @@ const BusinessDetailsForm = ({ control, errors }) => {
             Business Size
             <span className="text-gray-400 text-xs font-normal ml-1">(Optional)</span>
           </label>
-          {errors.businessSize && (
+          {/* {errors.businessSize && (
             <span className="text-sm text-red-500 font-medium">
               {errors.businessSize.message}
             </span>
-          )}
+          )} */}
         </div>
         
         <Controller
@@ -228,11 +236,11 @@ const BusinessDetailsForm = ({ control, errors }) => {
             </div>
           )}
         />
-        {errors.description && (
+        {/* {errors.description && (
           <span className="text-sm text-red-500 font-medium">
             {errors.description.message}
           </span>
-        )}
+        )} */}
         <p className="text-xs text-gray-500 dark:text-gray-400">
           This helps us provide more relevant content suggestions and personalized recommendations
         </p>

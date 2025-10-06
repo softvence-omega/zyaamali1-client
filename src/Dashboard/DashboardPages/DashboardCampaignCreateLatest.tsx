@@ -186,9 +186,9 @@ const DashboardCampaignCreateLatest = () => {
   const [adsName, setAdsName] = useState("");
   const [adGroupName, setAdGroupName] = useState("");
   const [headline, setHeadLine] = useState(["", "", ""]);
-  const [video, setVideo] = useState<File | null>(null);
-  const [image, setImage] = useState<File | null>(null);
-  const [carousel, setCarousel] = useState<FileList | null>(null);
+  const [video] = useState<File | null>(null);
+  const [image] = useState<File | null>(null);
+  const [carousel] = useState<FileList | null>(null);
   const [loading, setLoading] = useState(false);
   const [company, setCompany] = useState("");
   const [platform, setPlatform] = useState("");
@@ -216,16 +216,16 @@ const DashboardCampaignCreateLatest = () => {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
-    const files = e.target.files;
-    if (type === "video" && files && files[0]) {
-      setVideo(files[0]);
-    } else if (type === "image" && files && files[0]) {
-      setImage(files[0]);
-    } else if (type === "carousel" && files) {
-      setCarousel(files);
-    }
-  };
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
+  //   const files = e.target.files;
+  //   if (type === "video" && files && files[0]) {
+  //     setVideo(files[0]);
+  //   } else if (type === "image" && files && files[0]) {
+  //     setImage(files[0]);
+  //   } else if (type === "carousel" && files) {
+  //     setCarousel(files);
+  //   }
+  // };
 
   // const validateStep = (step: number) => {
   //   const newErrors: Record<string, string> = {};

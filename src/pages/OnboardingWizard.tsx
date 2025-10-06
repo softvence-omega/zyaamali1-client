@@ -320,7 +320,7 @@ const OnboardingWizard = () => {
                 )}
 
                 {step === 4 && (
-                  <AccountConnectionsForm control={control} errors={errors} />
+                  <AccountConnectionsForm  />
                 )}
 
                 <div className="flex justify-between items-center pt-8">
