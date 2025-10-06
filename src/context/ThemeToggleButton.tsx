@@ -27,7 +27,7 @@ const ThemeToggleButton: React.FC = () => {
         {isDarkMode ? (
           <FaMoon className="text-gray-700 text-xs" />
         ) : (
-          <FaSun className="text-amber-500 text-xs" />
+          <FaSun className="text-purple-500 text-xs" />
         )}
       </div>
     </button>

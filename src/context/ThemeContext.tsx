@@ -8,7 +8,7 @@ interface ThemeContextType {
 
 // Default value for the context
 const defaultContextValue: ThemeContextType = {
-  isDarkMode: false,
+  isDarkMode: true, // Set default theme to dark
   toggleTheme: () => {},
 };
 
@@ -21,7 +21,7 @@ interface ThemeProviderProps {
 
 // Create a ThemeProvider component to wrap the app and manage the theme
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true); // Default is dark mode
 
   // Set default theme based on localStorage or system preference
   useEffect(() => {
@@ -29,7 +29,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     if (savedTheme) {
       setIsDarkMode(savedTheme === "dark");
     } else {
-      setIsDarkMode(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      // If nothing is in localStorage, keep the default as dark mode
+      setIsDarkMode(true);
     }
   }, []);
 

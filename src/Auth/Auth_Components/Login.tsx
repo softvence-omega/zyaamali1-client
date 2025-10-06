@@ -55,7 +55,7 @@ export default function LoginForm() {
         sameSite: "strict",
       });
 
-      navigate("/dashboard");
+      navigate("/auth/onboarding");
     } catch (error) {
       console.error(error);
       alert("Login failed. Please try again.");

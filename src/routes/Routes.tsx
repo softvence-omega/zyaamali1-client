@@ -1,7 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import NotFound from "@/pages/NotFound";
-
 import App from "@/App";
 import Landing from "@/pages/Landing";
 import About from "@/pages/About";
@@ -32,6 +30,7 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import DataDeletionPage from "@/pages/DataDeletation";
 import DashboardCampaignCreateLatest from "@/Dashboard/DashboardPages/DashboardCampaignCreateLatest";
+import OnboardingWizard from "@/pages/OnboardingWizard";
 
 const routes = createBrowserRouter([
   {
@@ -88,6 +87,8 @@ const routes = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+    
+
     ],
   },
   {
@@ -101,6 +102,10 @@ const routes = createBrowserRouter([
       {
         path: "/auth/signup",
         element: <Signup />,
+      },
+        {
+        path: "/auth/onboarding",
+        element: <OnboardingWizard />,
       },
     ],
   },

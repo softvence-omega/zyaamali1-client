@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaChartBar } from "react-icons/fa";
 import { RiMegaphoneFill } from "react-icons/ri";
-import {  MdVideoLibrary } from "react-icons/md";
+import { MdVideoLibrary } from "react-icons/md";
 import dashboardHeader from "../../assets/dashboard-header.png";
 import { LuLayoutGrid } from "react-icons/lu";
 import { BiWallet } from "react-icons/bi";
@@ -33,7 +33,7 @@ const SidebarExpand = () => {
       path: "/dashboard/content",
     },
     {
-      icon: <MessageCircleMore  className="h-6 w-6" />,
+      icon: <MessageCircleMore className="h-6 w-6" />,
       label: "Sterling",
       path: "/dashboard/generate-content",
     },
@@ -42,14 +42,14 @@ const SidebarExpand = () => {
       label: "Analytics & Reports",
       path: "/dashboard/analytics",
     },
-  
+
     // {
     //   icon: <MdMessage className="h-6 w-6" />,
     //   label: "Help & Support",
     //   path: "/dashboard/help",
     // },
-      {
-      icon: <Settings  className="h-6 w-6" />,
+    {
+      icon: <Settings className="h-6 w-6" />,
       label: "Setting",
       path: "/dashboard/subscription",
       group: "Settings", // Grouping under Settings
@@ -112,14 +112,18 @@ const SidebarExpand = () => {
                     }`}
                   >
                     {icon}
-                    <p className="hidden lg:block text-sm font-medium">{label}</p>
+                    <p className="hidden lg:block text-sm font-medium">
+                      {label}
+                    </p>
                   </div>
 
                   {/* Settings Dropdown (only show when isSettingsOpen is true) */}
                   {isSettingsOpen && (
                     <div className="ml-6 mt-2">
                       <div
-                        onClick={() => handleNavClick("Billing & Subscription", path)}
+                        onClick={() =>
+                          handleNavClick("Billing & Subscription", path)
+                        }
                         className={`flex items-center gap-3 cursor-pointer transition-colors duration-200 ${
                           activeItem === "Billing & Subscription"
                             ? "text-white"
@@ -158,18 +162,24 @@ const SidebarExpand = () => {
 
       {/* User Avatar */}
       <div
-        onClick={handleprof}
-        className="flex items-center gap-3 cursor-pointer hover:text-white text-gray-400 transition-colors duration-200 mt-8 w-full"
+       
+        className="flex items-center justify-between gap-3 cursor-pointer hover:text-white text-gray-400 transition-colors duration-200 mt-8 w-full"
       >
-        <img
-          src={user}
-          alt="User Avatar"
-          className="rounded-full w-8 h-8 border-2"
-        />
-        <p className="hidden lg:block text-sm font-medium  text-white">Sohaggg</p>
+        <div  onClick={handleprof} className="flex gap-2 items-center cursor-pointer">
+          <img
+            src={user}
+            alt="User Avatar"
+            className="rounded-full w-8 h-8 border-2"
+          />
+          <p className="hidden lg:block text-sm font-medium  text-white">
+            Sohaggg
+          </p>
+        </div>
+        <div>
+          <ThemeToggleButton />
+        </div>
       </div>
 
-  
       {/* Sidebar toggle button for mobile */}
       <button
         className="lg:hidden absolute top-4 right-4 bg-[#020817] p-2 rounded-full text-white shadow-lg"

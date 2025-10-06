@@ -2,7 +2,6 @@ import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import FloatingChatButton from "@/components/FloatingChatButton/FloatingChatButton";
-import ThemeToggleButton from "@/context/ThemeToggleButton";
 
 const Layout: React.FC = () => {
   return (
@@ -18,9 +17,16 @@ const Layout: React.FC = () => {
       </main>
 
       {/* Floating Buttons - Positioned Side by Side */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-center">
-        <ThemeToggleButton />
-        <FloatingChatButton />
+      <div className="fixed bottom-6 right-6  z-50 space-y-4 sm:space-y-6 lg:space-y-8">
+        {/* Theme Toggle Button */}
+        <div>
+          <FloatingChatButton />
+        </div>
+
+        {/* Floating Chat Button */}
+        {/* <div className="fixed  right-26 bottom-7 ">
+          <ThemeToggleButton />
+        </div> */}
       </div>
 
       {/* Footer */}

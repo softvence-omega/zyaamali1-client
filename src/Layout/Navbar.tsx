@@ -196,8 +196,8 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* End */}
-            <div className="navbar-end">
-              <div className="top-5 right-5 z-50">
+            <div className="navbar-end flex  gap-4 items-center">
+              <div className="">
                 <ThemeToggleButton />
               </div>
               {user ? (
@@ -205,7 +205,7 @@ const Navbar: React.FC = () => {
                   {/* Profile button */}
                   <button
                     onClick={() => setIsDropdownOpen((prev) => !prev)}
-                    className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                    className="flex items-center gap-2  py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                   >
                     <img
                       src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
