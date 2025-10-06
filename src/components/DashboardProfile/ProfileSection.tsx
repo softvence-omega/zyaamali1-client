@@ -69,7 +69,7 @@ const ProfileSection: React.FC = () => {
     try {
       setUpdating(true);
 
-      const response = await axios.patch(
+      const response = await axios.put(
         `http://localhost:5000/api/v1/user/update-profile`,
         formData,
         {
