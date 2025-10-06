@@ -184,7 +184,7 @@ const CampaignPerformanceTable = () => {
       <div className="hidden lg:block w-full overflow-x-auto">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="border-b border-b-gray-700">
               <TableHead className="w-[180px]">Campaign Name</TableHead>
               <TableHead>Platform</TableHead>
               <TableHead>Status</TableHead>
@@ -198,7 +198,7 @@ const CampaignPerformanceTable = () => {
           </TableHeader>
           <TableBody>
             {campaigns.map((campaign) => (
-              <TableRow key={campaign.id} className="">
+              <TableRow key={campaign.id} className="dark:border-b dark:border-b-gray-600">
                 <TableCell className="font-medium py-6">
                   {campaign.campaignName}
                 </TableCell>
