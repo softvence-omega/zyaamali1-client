@@ -1,8 +1,8 @@
-import { Controller } from "react-hook-form";
 
 
 
-const AccountConnectionsForm = ({ control, errors }) => {
+
+const AccountConnectionsForm = () => {
     const platforms = [
     {
       id: "google-ads",

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 import {
@@ -11,8 +13,18 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 const ProfileSection: React.FC = () => {
-  const user = useSelector((state) => state.auth.user);
-  const token = useSelector((state) => state.auth.token);
+  interface RootState {
+    auth: {
+      user: {
+        userId: string;
+        // add other user properties if needed
+      };
+      token: string;
+    };
+  }
+
+  const user = useSelector((state: RootState) => state.auth.user);
+  const token = useSelector((state: RootState) => state.auth.token);
 
   const [editMode, setEditMode] = useState<{ [key: string]: boolean }>({});
   const [formData, setFormData] = useState({
@@ -80,6 +92,8 @@ const ProfileSection: React.FC = () => {
           withCredentials: true, // if your backend uses cookies
         }
       );
+
+      console.log(response)
 
       alert("Profile updated successfully!");
       setEditMode({});

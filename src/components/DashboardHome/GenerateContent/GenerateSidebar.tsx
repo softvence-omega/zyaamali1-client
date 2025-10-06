@@ -40,7 +40,7 @@ const GenerateSidebar = ({
   const {
     data: chatbotHistory = [],
     isLoading,
-    refetch,
+    // refetch,
   } = useQuery({
     queryKey: ["chatbotHistory"],
     queryFn: () => fetchHistory(token as string),
