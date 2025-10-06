@@ -4,7 +4,7 @@ type Props = {
 
 const CampaignSubHeader = ({ text }: Props) => {
   return (
-    <div className="text-[#020817] text-2xl font-semibold py-2">{text}</div>
+    <div className="text-[#020817] dark:text-gray-300 text-2xl font-semibold py-2">{text}</div>
   );
 };
 

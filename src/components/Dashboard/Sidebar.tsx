@@ -14,7 +14,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="bg-[#020817] rounded-[40px] p-4 flex flex-col items-center justify-between w-14  h-fit  shadow-lg">
+    <div className="bg-[#020817] dark:bg-gray-900 rounded-[40px] p-4 flex flex-col items-center justify-between w-14  h-fit  shadow-lg ">
       <div className="flex flex-col items-center w-full">
         <Link to="/">
           <div className="mb-8 p-3 shadow-lg">

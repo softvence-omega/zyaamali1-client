@@ -43,7 +43,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         </h1>
 
         {description && (
-          <p className="text-gray-300 mt-4 text-base sm:text-lg max-w-6xl mx-auto">
+          <p className="text-white dark:text-gray-300 mt-4 text-base sm:text-lg max-w-6xl mx-auto ">
             {description}
           </p>
         )}

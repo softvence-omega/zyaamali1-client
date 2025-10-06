@@ -282,7 +282,7 @@ const ChatUI = (sessionIdForChat: any) => {
         ) : (
           <>
             {messages.length === 0 && !isLoading && (
-              <div className="flex flex-col items-center justify-center h-full ">
+              <div className="flex flex-col items-center justify-center h-full">
                 <div className="text-center max-w-md">
                   <div className="text-4xl mb-4">🤖</div>
                   <h3 className="text-lg font-semibold mb-2 text-gray-100">
@@ -321,7 +321,7 @@ const ChatUI = (sessionIdForChat: any) => {
       </div>
 
       {/* Input box */}
-      <div className="bg-white rounded-2xl shadow-lg p-3 m-5">
+      <div className="bg-white dark:bg-gray-600 rounded-2xl shadow-lg p-3 m-5">
         <div className="flex items-center gap-2">
           <input
             type="text"
@@ -329,7 +329,7 @@ const ChatUI = (sessionIdForChat: any) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyPress}
-            className="flex-1 rounded-full bg-gray-100 px-4 py-3 text-sm placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 rounded-full bg-gray-100 dark:bg-gray-600 px-4 py-3 text-sm placeholder-gray-500 text-gray-900 dark:text-gray-300 dark:placeholder:text-gray-400  focus:outline-none dark:border dark:border-gray-500 focus:ring-2 focus:ring-blue-500"
           />
           <button
             onClick={handleSend}
@@ -352,7 +352,7 @@ const ChatUI = (sessionIdForChat: any) => {
             </svg>
           </button>
         </div>
-        <p className="text-xs text-gray-500 text-center mt-2">
+        <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
           Press Enter to send
         </p>
       </div>
