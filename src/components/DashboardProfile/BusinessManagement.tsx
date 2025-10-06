@@ -16,7 +16,7 @@ const BusinessManagement: React.FC = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:5000/api/v1/onboarding/get-single/${user?.userId}`,
+          `https://zyaamali1-backend.onrender.com/api/v1/onboarding/get-single/${user?.userId}`,
           { withCredentials: true }
         );
 

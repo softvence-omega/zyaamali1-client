@@ -7,7 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import video from "../../assets/6676845_Gradient_Banner_1920x1080.mp4";
 import { AiFillTikTok } from "react-icons/ai";
-import { useDispatch,  } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "@/store/Features/Auth/authSlice";
 import Cookies from "js-cookie";
 import { verifyToken } from "@/utils/verifyToken";
@@ -18,7 +18,6 @@ type LoginInputs = {
 };
 
 export default function LoginForm() {
-
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -32,12 +31,15 @@ export default function LoginForm() {
   const onSubmit = async (data: LoginInputs) => {
     console.log(data);
     try {
-      const response = await fetch("http://localhost:5000/api/v1/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-        // credentials: "include",
-      });
+      const response = await fetch(
+        "https://zyaamali1-backend.onrender.com/api/v1/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+          // credentials: "include",
+        }
+      );
 
       if (!response.ok) throw new Error("Login failed");
 
@@ -45,7 +47,6 @@ export default function LoginForm() {
       reset();
 
       const user = verifyToken(result?.data?.accessToken) as any;
-  
 
       // assuming API returns { user, token }
       dispatch(login({ user: user, token: result?.data?.accessToken }));

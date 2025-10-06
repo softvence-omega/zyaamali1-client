@@ -25,11 +25,11 @@ export default function SignupForm() {
   const navigate = useNavigate();
 
   const onSubmit = async (data: SignupInputs) => {
-    console.log(data)
+    console.log(data);
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/v1/user/register",
+        "https://zyaamali1-backend.onrender.com/api/v1/user/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -38,7 +38,7 @@ export default function SignupForm() {
       );
 
       const result = await response.json();
-      console.log(result)
+      console.log(result);
 
       if (!response.ok) {
         const errorMessage =
@@ -47,9 +47,9 @@ export default function SignupForm() {
       }
 
       console.log("Signup success:", result);
-      reset()
+      reset();
       navigate("/auth/login");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Signup error:", error);
       alert(error.message || "Signup failed. Please try again.");

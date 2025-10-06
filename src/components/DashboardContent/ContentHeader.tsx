@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 
 const ContentHeader: React.FC<{
   templateType: string;
-  selectedPlatforms: string[]
+  selectedPlatforms: string[];
   searchTerm: string;
   startDate: string;
   endDate: string;
@@ -25,18 +25,20 @@ const ContentHeader: React.FC<{
   const [allContent, setAllContent] = useState<any[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
 
-
-  console.log('all content ', allContent)
+  console.log("all content ", allContent);
   // Fetch all content initially
   const getAllContent = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/v1/content/get-all-content", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        "https://zyaamali1-backend.onrender.com/api/v1/content/get-all-content",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const data = await res.json();
       setAllContent(data.data.result || []);
@@ -118,7 +120,7 @@ const ContentHeader: React.FC<{
           owner: user.userId,
         });
         const result = await axios.post(
-          "http://localhost:5000/api/v1/content/post-generated-content",
+          "https://zyaamali1-backend.onrender.com/api/v1/content/post-generated-content",
           {
             type: contentType,
             platform: platfrom,

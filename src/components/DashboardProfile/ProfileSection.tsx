@@ -56,7 +56,7 @@ const ProfileSection: React.FC = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:5000/api/v1/user/get-single-user/${user.userId}`,
+          `https://zyaamali1-backend.onrender.com/api/v1/user/get-single-user/${user.userId}`,
           { withCredentials: true }
         );
 
@@ -82,7 +82,7 @@ const ProfileSection: React.FC = () => {
       setUpdating(true);
 
       const response = await axios.put(
-        `http://localhost:5000/api/v1/user/update-profile`,
+        `https://zyaamali1-backend.onrender.com/api/v1/user/update-profile`,
         formData,
         {
           headers: {
@@ -93,7 +93,7 @@ const ProfileSection: React.FC = () => {
         }
       );
 
-      console.log(response)
+      console.log(response);
 
       alert("Profile updated successfully!");
       setEditMode({});

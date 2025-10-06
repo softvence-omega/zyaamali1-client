@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const OnboardingWizard = () => {
-  const user = useSelector((state : RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.user);
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ const OnboardingWizard = () => {
         console.log("✅ Final Onboarding Data:", data);
 
         const response = await axios.post(
-          `http://localhost:5000/api/v1/onboarding/create`,
+          `https://zyaamali1-backend.onrender.com/api/v1/onboarding/create`,
           {
             userId: user?.userId,
             brandName: data.brandName,
@@ -319,9 +319,7 @@ const OnboardingWizard = () => {
                   <MarketingGoalsForm control={control} errors={errors} />
                 )}
 
-                {step === 4 && (
-                  <AccountConnectionsForm  />
-                )}
+                {step === 4 && <AccountConnectionsForm />}
 
                 <div className="flex justify-between items-center pt-8">
                   <div className="flex gap-3">
