@@ -1,12 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AccountConnectionsForm from "@/components/OnboardingWizard/AccountConnectionsForm";
 import BusinessDetailsForm from "@/components/OnboardingWizard/BusinessDetailsForm";
 import MarketingGoalsForm from "@/components/OnboardingWizard/MarketingGoalsForm";
+import { RootState } from "@/store/store";
+
+import axios from "axios";
 
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const OnboardingWizard = () => {
+  const user = useSelector((state : RootState) => state.auth.user);
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
 
@@ -36,13 +42,40 @@ const OnboardingWizard = () => {
     setStep(4);
   };
 
-  const onSubmit = (data: any) => {
-    console.log('Form Data:', data);
+  const onSubmit = async (data: any) => {
     if (step < 4) {
       nextStep();
     } else {
-      console.log("✅ Final Onboarding Data:", data);
-      navigate("/dashboard");
+      try {
+        console.log("✅ Final Onboarding Data:", data);
+
+        const response = await axios.post(
+          `http://localhost:5000/api/v1/onboarding/create`,
+          {
+            userId: user?.userId,
+            brandName: data.brandName,
+            marketingGoals: data.marketingGoals,
+            businessInfo: {
+              method: data.businessInfoMethod,
+              websiteUrl: data.websiteUrl,
+              businessName: data.businessName,
+              industry: data.industry,
+              businessSize: data.businessSize,
+              description: data.description,
+              buniessGoal: "nothings",
+            },
+          },
+          { withCredentials: true }
+        );
+
+        console.log("🎯 API Response:", response.data);
+        navigate("/dashboard");
+      } catch (error: any) {
+        console.error(
+          "❌ Failed to submit onboarding data:",
+          error.response?.data || error.message
+        );
+      }
     }
   };
 
@@ -146,9 +179,11 @@ const OnboardingWizard = () => {
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 text-lg transition-colors duration-200">
                   {step === 1 && "Help us personalize your Bugpie experience"}
-                  {step === 2 && "Tell us about your business to personalize your experience"}
+                  {step === 2 &&
+                    "Tell us about your business to personalize your experience"}
                   {step === 3 && "What are your primary marketing objectives?"}
-                  {step === 4 && "Link your accounts for comprehensive insights"}
+                  {step === 4 &&
+                    "Link your accounts for comprehensive insights"}
                 </p>
               </div>
 
@@ -240,7 +275,7 @@ const OnboardingWizard = () => {
                       )}
                     </div>
 
-                        <div>
+                    <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-200">
                         Website Url <span className="text-red-500">*</span>
                       </label>
@@ -269,7 +304,8 @@ const OnboardingWizard = () => {
                         Let's get your brand set up for success
                       </h3>
                       <p className="text-blue-800 dark:text-blue-300 transition-colors duration-200">
-                        We'll help you create amazing content that resonates with your audience.
+                        We'll help you create amazing content that resonates
+                        with your audience.
                       </p>
                     </div>
                   </div>
