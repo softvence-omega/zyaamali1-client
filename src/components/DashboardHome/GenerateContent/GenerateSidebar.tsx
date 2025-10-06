@@ -61,11 +61,11 @@ const GenerateSidebar = ({
   };
 
   return (
-    <div className="lg:w-[360px] h-screen bg-Foundation-text-T-50 rounded-l-2xl flex flex-col">
+    <div className="lg:w-[360px] h-screen bg-Foundation-text-T-50 rounded-l-2xl flex flex-col dark:bg-[#1e2939] dark:text-gray-300">
       {/* Header */}
       <div className="flex items-center justify-center gap-5 my-5">
         <GeminiIcon />
-        <h1 className="text-3xl font-[700] bg-gradient-to-t from-[#000000] to-[#8E6EFF] bg-clip-text text-transparent">
+        <h1 className="text-3xl font-[700] bg-gradient-to-t from-[#000000] dark:from-gray-300 to-[#8E6EFF] bg-clip-text text-transparent">
           Sterling
         </h1>
       </div>

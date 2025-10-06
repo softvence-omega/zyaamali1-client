@@ -45,7 +45,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div className="p-4 md:p-6 w-full md:w-64 lg:w-72 flex-shrink-0 rounded-lg bg-white shadow-md">
+    <div className="p-4 md:p-6 w-full md:w-64 lg:w-72 flex-shrink-0 rounded-lg bg-white shadow-md dark:bg-[#1e2939] dark:text-gray-300">
       {/* 🔍 Search */}
       <div className="relative mb-6">
         <input
@@ -59,9 +59,9 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* 🖼 Template Type */}
-      <h3 className="text-lg font-semibold text-gray-800 mb-3">Template Type</h3>
+      <h3 className="text-lg font-semibold text-gray-800 mb-3 dark:text-gray-300">Template Type</h3>
       <div className="space-y-2">
-        <label className="flex items-center gap-2 text-gray-700">
+        <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
           <input
             type="radio"
             name="templateType"
@@ -72,29 +72,29 @@ const Sidebar: React.FC<SidebarProps> = ({
           />
           Image
         </label>
-        <label className="flex items-center gap-2 text-gray-700">
+        <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
           <input
             type="radio"
             name="templateType"
             value="video"
             checked={templateType === "video"}
             onChange={() => setTemplateType("video")}
-            className="form-radio h-4 w-4 text-blue-600"
+            className="form-radio h-4 w-4 text-blue-600 dark:text-gray-300"
           />
           Video
         </label>
       </div>
 
       {/* 🌐 Platforms */}
-      <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Platform</h3>
+      <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3 dark:text-gray-300">Platform</h3>
       <div className="space-y-2">
         {platforms.map((platform) => (
-          <label key={platform} className="flex items-center gap-2 text-gray-700">
+          <label key={platform} className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
             <input
               type="checkbox"
               checked={selectedPlatforms.includes(platform)}
               onChange={() => handlePlatformChange(platform)}
-              className="form-checkbox h-4 w-4 text-blue-600 rounded"
+              className="form-checkbox h-4 w-4 text-blue-600 rounded "
             />
             {platform.charAt(0).toUpperCase() + platform.slice(1)}
           </label>
@@ -102,10 +102,10 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* 📅 Date Filter */}
-      <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Filter by Date</h3>
+      <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3 dark:text-gray-300">Filter by Date</h3>
       <div className="space-y-2">
         <div>
-          <label className="block text-gray-700">Start Date</label>
+          <label className="block text-gray-700 dark:text-gray-300">Start Date</label>
           <input
             type="date"
             onChange={(e) => setStartDate(e.target.value)}
@@ -113,7 +113,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           />
         </div>
         <div>
-          <label className="block text-gray-700">End Date</label>
+          <label className="block text-gray-700 dark:text-gray-300">End Date</label>
           <input
             type="date"
             onChange={(e) => setEndDate(e.target.value)}

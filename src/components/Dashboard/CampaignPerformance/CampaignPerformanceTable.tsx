@@ -140,7 +140,7 @@ const CampaignPerformanceTable = () => {
   };
 
   return (
-    <div className="border border-Foundation-text-T-75/30 rounded-lg p-4 bg-white">
+    <div className="border border-Foundation-text-T-75/30 rounded-lg p-4 bg-white dark:bg-Foundation-gray-bg dark:text-gray-300 mt-10">
       {deleteModalOpen && (
         <>
           <div className="fixed inset-0 bg-black/60 z-40"></div>
@@ -198,8 +198,8 @@ const CampaignPerformanceTable = () => {
           </TableHeader>
           <TableBody>
             {campaigns.map((campaign) => (
-              <TableRow key={campaign.id}>
-                <TableCell className="font-medium">
+              <TableRow key={campaign.id} className="">
+                <TableCell className="font-medium py-6">
                   {campaign.campaignName}
                 </TableCell>
                 <TableCell>
