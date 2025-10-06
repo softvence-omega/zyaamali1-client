@@ -11,8 +11,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 const ProfileSection: React.FC = () => {
+  const user = useSelector((state) => state.auth.user);
 
-  const user = useSelector((state)=> state.auth.user)
   const [editMode, setEditMode] = useState<{ [key: string]: boolean }>({});
   const [formData, setFormData] = useState({
     fullName: "",
@@ -20,10 +20,9 @@ const ProfileSection: React.FC = () => {
     companyName: "",
     country: "",
   });
-
-  console.log(formData)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [updating, setUpdating] = useState(false);
 
   const countries = [
     "United States",
@@ -36,28 +35,24 @@ const ProfileSection: React.FC = () => {
     "India",
     "Brazil",
     "South Africa",
-    // Add more countries as needed
   ];
 
+  // Fetch profile data
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:5000/api/v1/user/get-single-user/${user.userId}`, // replace with your API endpoint
+          `http://localhost:5000/api/v1/user/get-single-user/${user.userId}`,
           { withCredentials: true }
         );
 
-        // Assuming your API returns { fullName, email, companyName, country }
         setFormData({
           fullName: response.data.data.fullName || "",
           email: response.data.data.email || "",
           companyName: response.data.data.companyName || "",
           country: response.data.data.country || "",
         });
-
-        console.log(response.data.data)
-
       } catch (err: any) {
         console.error(err);
         setError("Failed to fetch profile data");
@@ -67,7 +62,26 @@ const ProfileSection: React.FC = () => {
     };
 
     fetchProfileData();
-  }, []);
+  }, [user.userId]);
+
+  const handleUpdateProfile = async () => {
+    try {
+      setUpdating(true);
+      const response = await axios.patch(
+        `http://localhost:5000/api/v1/user/update-profile`,
+        formData,
+        { withCredentials: true }
+      );
+
+      alert("Profile updated successfully!");
+      setEditMode({});
+    } catch (err: any) {
+      console.error(err);
+      alert("Failed to update profile. Please try again.");
+    } finally {
+      setUpdating(false);
+    }
+  };
 
   if (loading) return <p className="text-gray-600">Loading profile...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
@@ -77,6 +91,7 @@ const ProfileSection: React.FC = () => {
       <h2 className="text-xl font-semibold text-gray-800 mb-6">
         Personal Information
       </h2>
+
       <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
         <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
           <img
@@ -85,6 +100,7 @@ const ProfileSection: React.FC = () => {
             className="w-full h-full object-cover"
           />
         </div>
+
         <div className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
           {/* Full Name */}
           <div>
@@ -217,6 +233,17 @@ const ProfileSection: React.FC = () => {
             )}
           </div>
         </div>
+      </div>
+
+      {/* Update Button */}
+      <div className="mt-6 flex justify-end">
+        <button
+          onClick={handleUpdateProfile}
+          disabled={updating}
+          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-70"
+        >
+          {updating ? "Updating..." : "Update Profile"}
+        </button>
       </div>
     </div>
   );
