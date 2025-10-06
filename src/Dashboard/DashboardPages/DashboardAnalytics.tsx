@@ -49,6 +49,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import TopBar from "@/utils/TopBar";
 
 const data = [
   { date: "April 1", spend: 400, click: 1600 },
@@ -268,10 +269,17 @@ const items = [
   },
 ];
 
+  const breadcrumbPaths = [
+    { name: "Dashboard", link: "/dashboard" },
+    { name: "Reports", link: "/dashboard/analytics" },
+  ];
+
 const DashboardAnalytics = () => {
   return (
     <div className="overflow-x-hidden px-4 sm:px-6 lg:px-8 py-6">
       {/* title */}
+
+       <TopBar paths={breadcrumbPaths}></TopBar>
 
       <h2 className=" text-4xl font-bold">
         Report &{" "}

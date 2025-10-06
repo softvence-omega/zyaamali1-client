@@ -50,6 +50,7 @@ import { CiText } from "react-icons/ci";
 import { GiCometSpark } from "react-icons/gi";
 import { countries } from "@/utils/Countries";
 import { AdsData } from "@/types";
+import TopBar from "@/utils/TopBar";
 
 const objectives = [
   {
@@ -615,252 +616,201 @@ const DashboardCampaignCreate = () => {
     }
   };
 
+
   return (
-    <div>
-      <p className="text-lg ">
-        <span>Ad Campaign/</span>
-        <span className="ml-1 text-blue-500">Create New Ad</span>
-      </p>
-      <div className="flex flex-col md:flex-row gap-9 mt-5">
-        {/* **********left side section****************************************************************************** */}
-        <div className="flex-1 bg-[#F3F4F6] rounded-[20px] p-4 space-y-5">
-          <h5 className="text-3xl font-semibold">Create New Ad Campaign</h5>
-          <div className="border border-gray-300 my-3" />
-          {/* business information section */}
-          <div>
-            <CampaignSubHeader text="Business Information" />
-            <div className="relative w-full">
-              <select
-                value={businessInfo}
-                onChange={(e) => setBusinessInfo(e.target.value)}
-                className="appearance-none w-full py-3 px-4 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-800"
-                required
-              >
-                <option className="bg-white text-gray-700" value="">
-                  Select Business
-                </option>
-                <option className="" value="Acme Sportswear">
-                  Acme Sportswear
-                </option>
-                <option className="" value="Target Audience">
-                  Target Audience
-                </option>
-                <option className="" value="Primary Goals">
-                  Primary Goals
-                </option>
-              </select>
-              {errors.businessInfo && (
+  
+        
+      <div>
+        
+        <p className="text-lg  mt-32">
+          <span>Ad Campaign/</span>
+          <span className="ml-1 text-blue-500">Create New Ad</span>
+        </p>
+    
+        <div className="flex flex-col md:flex-row gap-9 mt-5">
+          {/* **********left side section****************************************************************************** */}
+          <div className="flex-1 bg-[#F3F4F6] rounded-[20px] p-4 space-y-5">
+            <h5 className="text-3xl font-semibold">Create New Ad Campaign</h5>
+            <div className="border border-gray-300 my-3" />
+            {/* business information section */}
+            <div>
+              <CampaignSubHeader text="Business Information" />
+              <div className="relative w-full">
+                <select
+                  value={businessInfo}
+                  onChange={(e) => setBusinessInfo(e.target.value)}
+                  className="appearance-none w-full py-3 px-4 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-800"
+                  required
+                >
+                  <option className="bg-white text-gray-700" value="">
+                    Select Business
+                  </option>
+                  <option className="" value="Acme Sportswear">
+                    Acme Sportswear
+                  </option>
+                  <option className="" value="Target Audience">
+                    Target Audience
+                  </option>
+                  <option className="" value="Primary Goals">
+                    Primary Goals
+                  </option>
+                </select>
+                {errors.businessInfo && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.businessInfo}
+                  </p>
+                )}
+
+                {/* Custom dropdown arrow (SVG) */}
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
+                  <svg
+                    className="h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 14a1 1 0 01-.7-.3l-4-4a1 1 0 111.4-1.4L10 11.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-.7.3z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* title add section */}
+            <div>
+              <CampaignSubHeader text="Add Title" />
+              <div>
+                <Input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
+                />
+                {errors.title && (
+                  <p className="text-red-500 text-xs mt-1">{errors.title}</p>
+                )}
+              </div>
+            </div>
+
+            {/* Ad Objective */}
+            <div>
+              <CampaignSubHeader text="Ad Objective" />
+              {errors.selectedObjective && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.businessInfo}
+                  {errors.selectedObjective}
                 </p>
               )}
 
-              {/* Custom dropdown arrow (SVG) */}
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
-                <svg
-                  className="h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 14a1 1 0 01-.7-.3l-4-4a1 1 0 111.4-1.4L10 11.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-.7.3z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+              <div className="grid grid-cols-2 gap-3">
+                {objectives.map((objective, index) => (
+                  <div
+                    key={index}
+                    className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${
+                      selectedObjective === objective.label
+                        ? "bg-purple-100 border-purple-600"
+                        : "bg-[#E6E6E8] border-gray-200"
+                    } hover:bg-[#F4F1FF]`}
+                    onClick={() => setSelectedObjective(objective.label)}
+                  >
+                    <objective.icon className="text-xl" />
+                    <span className="text-sm font-medium text-center">
+                      {objective.label}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
 
-          {/* title add section */}
-          <div>
-            <CampaignSubHeader text="Add Title" />
+            {/* Platform Selection */}
+
             <div>
-              <Input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                required
-              />
-              {errors.title && (
-                <p className="text-red-500 text-xs mt-1">{errors.title}</p>
-              )}
-            </div>
-          </div>
-
-          {/* Ad Objective */}
-          <div>
-            <CampaignSubHeader text="Ad Objective" />
-            {errors.selectedObjective && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.selectedObjective}
-              </p>
-            )}
-
-            <div className="grid grid-cols-2 gap-3">
-              {objectives.map((objective, index) => (
-                <div
-                  key={index}
-                  className={`flex justify-center  items-center gap-2 p-3 rounded-lg border cursor-pointer ${
-                    selectedObjective === objective.label
-                      ? "bg-purple-100 border-purple-600"
-                      : "bg-[#E6E6E8] border-gray-200"
-                  } hover:bg-[#F4F1FF]`}
-                  onClick={() => setSelectedObjective(objective.label)}
-                >
-                  <objective.icon className="text-xl" />
-                  <span className="text-sm font-medium text-center">
-                    {objective.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Platform Selection */}
-
-          <div>
-            <CampaignSubHeader text="Platform Selection" />
-            {errors.selectedPlatform && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.selectedPlatform}
-              </p>
-            )}
-
-            <div className="flex justify-between">
-              {platforms.map((platform, index) => (
-                <div
-                  key={index}
-                  className={`${
-                    selectedPlatform === platform.value
-                      ? "bg-purple-100 border-purple-600"
-                      : "bg-[#E6E6E8]"
-                  } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
-                  onClick={() => handlePlatformChange(platform.value)}
-                >
-                  <platform.icon className={`text-2xl ${platform.color}`} />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Ad Type */}
-
-          <div>
-            <CampaignSubHeader text="Ad Type" />
-            {errors.selectedAdType && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.selectedAdType}
-              </p>
-            )}
-
-            <div className="grid grid-cols-3 gap-3">
-              {(adTypesMap[selectedPlatform] || []).map((adType, index) => (
-                <div
-                  key={index}
-                  className={`flex items-center p-3 gap-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 ${
-                    selectedAdType === adType.label
-                      ? "bg-purple-100 border-purple-600"
-                      : "bg-[#E6E6E8]"
-                  }`}
-                  onClick={() => setSelectedAdType(adType.label)}
-                >
-                  <adType.icon className="text-lg text-gray-600" />
-                  <span className="text-xs text-center text-gray-700">
-                    {adType.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* select ads account  */}
-          <div>
-            <CampaignSubHeader text="Ads Account" />
-            {errors.selectedAdAccount && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.selectedAdAccount}
-              </p>
-            )}
-            <div className="relative w-full">
-              <select
-                value={selectedAdAccount}
-                onChange={(e) => {
-                  const accountId = e.target.value.replace(/^act_/, "");
-                  setSelectedAdAccount(accountId);
-                }}
-                className="appearance-none w-full py-3 px-4 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-800"
-                required
-              >
-                {/* Default placeholder option */}
-                <option value="" disabled>
-                  Select your Ads Account
-                </option>
-
-                {/* List accounts if available */}
-                {selectedPlatform &&
-                (adsAccounts[selectedPlatform]?.length || 0) > 0
-                  ? adsAccounts[selectedPlatform].map((account) => (
-                      <option key={account.id} value={account.id}>
-                        {account.name} ({account.id})
-                      </option>
-                    ))
-                  : selectedPlatform && (
-                      <option value="" disabled>
-                        You don't have any Ads Account
-                      </option>
-                    )}
-              </select>
-
-              {/* Custom dropdown arrow */}
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
-                <svg
-                  className="h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 14a1 1 0 01-.7-.3l-4-4a1 1 0 111.4-1.4L10 11.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-.7.3z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          {/* select page  */}
-          {selectedPlatform === "Facebook" && (
-            <div>
-              <CampaignSubHeader text="Select page" />
-              {errors.selectedPage && (
+              <CampaignSubHeader text="Platform Selection" />
+              {errors.selectedPlatform && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.selectedPage}
+                  {errors.selectedPlatform}
+                </p>
+              )}
+
+              <div className="flex justify-between">
+                {platforms.map((platform, index) => (
+                  <div
+                    key={index}
+                    className={`${
+                      selectedPlatform === platform.value
+                        ? "bg-purple-100 border-purple-600"
+                        : "bg-[#E6E6E8]"
+                    } px-5 py-3 rounded-lg border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#F4F1FF]`}
+                    onClick={() => handlePlatformChange(platform.value)}
+                  >
+                    <platform.icon className={`text-2xl ${platform.color}`} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Ad Type */}
+
+            <div>
+              <CampaignSubHeader text="Ad Type" />
+              {errors.selectedAdType && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.selectedAdType}
+                </p>
+              )}
+
+              <div className="grid grid-cols-3 gap-3">
+                {(adTypesMap[selectedPlatform] || []).map((adType, index) => (
+                  <div
+                    key={index}
+                    className={`flex items-center p-3 gap-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 ${
+                      selectedAdType === adType.label
+                        ? "bg-purple-100 border-purple-600"
+                        : "bg-[#E6E6E8]"
+                    }`}
+                    onClick={() => setSelectedAdType(adType.label)}
+                  >
+                    <adType.icon className="text-lg text-gray-600" />
+                    <span className="text-xs text-center text-gray-700">
+                      {adType.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* select ads account  */}
+            <div>
+              <CampaignSubHeader text="Ads Account" />
+              {errors.selectedAdAccount && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.selectedAdAccount}
                 </p>
               )}
               <div className="relative w-full">
                 <select
-                  value={selectedPage}
+                  value={selectedAdAccount}
                   onChange={(e) => {
-                    const pageId = e.target.value.replace(/^act_/, "");
-                    setSelectedPage(pageId);
+                    const accountId = e.target.value.replace(/^act_/, "");
+                    setSelectedAdAccount(accountId);
                   }}
                   className="appearance-none w-full py-3 px-4 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-800"
                   required
                 >
                   {/* Default placeholder option */}
                   <option value="" disabled>
-                    Select page
+                    Select your Ads Account
                   </option>
 
                   {/* List accounts if available */}
-                  {selectedPlatform && (page[selectedPlatform]?.length || 0) > 0
-                    ? page[selectedPlatform].map((page) => (
-                        <option key={page.pageId} value={page.pageId}>
-                          ({page.pageId})
+                  {selectedPlatform &&
+                  (adsAccounts[selectedPlatform]?.length || 0) > 0
+                    ? adsAccounts[selectedPlatform].map((account) => (
+                        <option key={account.id} value={account.id}>
+                          {account.name} ({account.id})
                         </option>
                       ))
                     : selectedPlatform && (
@@ -887,155 +837,218 @@ const DashboardCampaignCreate = () => {
                 </div>
               </div>
             </div>
-          )}
-          {/* Campaign Name */}
-          <div>
-            <CampaignSubHeader text="Campaign Name" />
-            {errors.campaignName && (
-              <p className="text-red-500 text-xs mt-1">{errors.campaignName}</p>
+
+            {/* select page  */}
+            {selectedPlatform === "Facebook" && (
+              <div>
+                <CampaignSubHeader text="Select page" />
+                {errors.selectedPage && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.selectedPage}
+                  </p>
+                )}
+                <div className="relative w-full">
+                  <select
+                    value={selectedPage}
+                    onChange={(e) => {
+                      const pageId = e.target.value.replace(/^act_/, "");
+                      setSelectedPage(pageId);
+                    }}
+                    className="appearance-none w-full py-3 px-4 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-800"
+                    required
+                  >
+                    {/* Default placeholder option */}
+                    <option value="" disabled>
+                      Select page
+                    </option>
+
+                    {/* List accounts if available */}
+                    {selectedPlatform &&
+                    (page[selectedPlatform]?.length || 0) > 0
+                      ? page[selectedPlatform].map((page) => (
+                          <option key={page.pageId} value={page.pageId}>
+                            ({page.pageId})
+                          </option>
+                        ))
+                      : selectedPlatform && (
+                          <option value="" disabled>
+                            You don't have any Ads Account
+                          </option>
+                        )}
+                  </select>
+
+                  {/* Custom dropdown arrow */}
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
+                    <svg
+                      className="h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 14a1 1 0 01-.7-.3l-4-4a1 1 0 111.4-1.4L10 11.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-.7.3z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
             )}
+            {/* Campaign Name */}
             <div>
-              <Input
-                type="text"
-                value={campaignName}
-                required
-                onChange={(e) => setCampaignName(e.target.value)}
-                className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                placeholder="Enter campaign name"
-              />
-            </div>
-          </div>
-
-          {/* Adset Name */}
-          {selectedPlatform === "Facebook" && (
-            <div>
-              <CampaignSubHeader text="Adset Name" />
-              {errors.adsetName && (
-                <p className="text-red-500 text-xs mt-1">{errors.adsetName}</p>
-              )}
-              <div>
-                <Input
-                  type="text"
-                  value={adsetName}
-                  required
-                  onChange={(e) => setAdsetName(e.target.value)}
-                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  placeholder="Enter adset name"
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Ads Name */}
-          {selectedPlatform === "Facebook" && (
-            <div>
-              <CampaignSubHeader text="Ads Name" />
-              {errors.adsName && (
-                <p className="text-red-500 text-xs mt-1">{errors.adsName}</p>
-              )}
-              <div>
-                <Input
-                  type="text"
-                  value={adsName}
-                  required
-                  onChange={(e) => setAdsName(e.target.value)}
-                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  placeholder="Enter ads name"
-                />
-              </div>
-            </div>
-          )}
-          {/* Ads Group name  */}
-          {selectedPlatform === "Google" && (
-            <div>
-              <CampaignSubHeader text="Ads Group Name " />
-              {errors.adGroupName && (
+              <CampaignSubHeader text="Campaign Name" />
+              {errors.campaignName && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.adGroupName}
+                  {errors.campaignName}
                 </p>
               )}
               <div>
                 <Input
                   type="text"
-                  value={adGroupName}
+                  value={campaignName}
                   required
-                  onChange={(e) => setAdGroupName(e.target.value)}
+                  onChange={(e) => setCampaignName(e.target.value)}
                   className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  placeholder="Enter Ads Group Name"
+                  placeholder="Enter campaign name"
                 />
               </div>
             </div>
-          )}
 
-          {/* Google headline   */}
-          {selectedPlatform === "Google" && (
-            <div>
-              <CampaignSubHeader text="HeadLines " />
-              {errors.headline && (
-                <p className="text-red-500 text-xs mt-1">{errors.headline}</p>
-              )}
-              <div className="space-y-2">
-                {headline.map((value, index) => (
-                  <div key={index}>
-                    <Input
-                      type="text"
-                      value={value}
-                      required
-                      onChange={(e) => {
-                        const newHeadlines = [...headline];
-                        newHeadlines[index] = e.target.value;
-                        setHeadLine(newHeadlines);
-                      }}
-                      placeholder={`Enter Headline ${index + 1}`}
-                      className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    />
-                    {errors.headline?.[index] && (
-                      <p className="text-red-500 text-xs mt-1">
-                        {errors.headline[index]}
-                      </p>
-                    )}
-                  </div>
-                ))}
+            {/* Adset Name */}
+            {selectedPlatform === "Facebook" && (
+              <div>
+                <CampaignSubHeader text="Adset Name" />
+                {errors.adsetName && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.adsetName}
+                  </p>
+                )}
+                <div>
+                  <Input
+                    type="text"
+                    value={adsetName}
+                    required
+                    onChange={(e) => setAdsetName(e.target.value)}
+                    className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    placeholder="Enter adset name"
+                  />
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Target Audience */}
-          <div className="space-y-4">
-            <CampaignSubHeader text=" Target Audience" />
-            {/* Location */}
-            <div>
-              <p className="text-sm mb-1">Location</p>
-              <select
-                value={locationCode}
-                onChange={(e) => {
-                  const selectedCountry = countries.find(
-                    (c) => c.code === e.target.value
-                  );
-                  if (selectedCountry) {
-                    setLocationId(String(selectedCountry.id));
-                    setLocationCode(selectedCountry.code);
-                  } else {
-                    setLocationId("");
-                    setLocationCode("");
-                  }
-                }}
-                className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                required
-              >
-                <option value="">Select Location</option>
-                {countries.map((c) => (
-                  <option key={c.id || c.name} value={c.code}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-              {errors.locationId && (
-                <p className="text-red-500 text-xs mt-1">{errors.locationId}</p>
-              )}
-            </div>
+            {/* Ads Name */}
+            {selectedPlatform === "Facebook" && (
+              <div>
+                <CampaignSubHeader text="Ads Name" />
+                {errors.adsName && (
+                  <p className="text-red-500 text-xs mt-1">{errors.adsName}</p>
+                )}
+                <div>
+                  <Input
+                    type="text"
+                    value={adsName}
+                    required
+                    onChange={(e) => setAdsName(e.target.value)}
+                    className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    placeholder="Enter ads name"
+                  />
+                </div>
+              </div>
+            )}
+            {/* Ads Group name  */}
+            {selectedPlatform === "Google" && (
+              <div>
+                <CampaignSubHeader text="Ads Group Name " />
+                {errors.adGroupName && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.adGroupName}
+                  </p>
+                )}
+                <div>
+                  <Input
+                    type="text"
+                    value={adGroupName}
+                    required
+                    onChange={(e) => setAdGroupName(e.target.value)}
+                    className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    placeholder="Enter Ads Group Name"
+                  />
+                </div>
+              </div>
+            )}
 
-            {/* <div>
+            {/* Google headline   */}
+            {selectedPlatform === "Google" && (
+              <div>
+                <CampaignSubHeader text="HeadLines " />
+                {errors.headline && (
+                  <p className="text-red-500 text-xs mt-1">{errors.headline}</p>
+                )}
+                <div className="space-y-2">
+                  {headline.map((value, index) => (
+                    <div key={index}>
+                      <Input
+                        type="text"
+                        value={value}
+                        required
+                        onChange={(e) => {
+                          const newHeadlines = [...headline];
+                          newHeadlines[index] = e.target.value;
+                          setHeadLine(newHeadlines);
+                        }}
+                        placeholder={`Enter Headline ${index + 1}`}
+                        className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                      />
+                      {errors.headline?.[index] && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.headline[index]}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Target Audience */}
+            <div className="space-y-4">
+              <CampaignSubHeader text=" Target Audience" />
+              {/* Location */}
+              <div>
+                <p className="text-sm mb-1">Location</p>
+                <select
+                  value={locationCode}
+                  onChange={(e) => {
+                    const selectedCountry = countries.find(
+                      (c) => c.code === e.target.value
+                    );
+                    if (selectedCountry) {
+                      setLocationId(String(selectedCountry.id));
+                      setLocationCode(selectedCountry.code);
+                    } else {
+                      setLocationId("");
+                      setLocationCode("");
+                    }
+                  }}
+                  className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
+                >
+                  <option value="">Select Location</option>
+                  {countries.map((c) => (
+                    <option key={c.id || c.name} value={c.code}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+                {errors.locationId && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.locationId}
+                  </p>
+                )}
+              </div>
+
+              {/* <div>
               <p className="text-sm mb-1">Location</p>
               <select
                 value={locationCode} // this will now hold the country name
@@ -1066,116 +1079,120 @@ const DashboardCampaignCreate = () => {
               )}
             </div> */}
 
-            {/* Age range */}
-            <div>
-              <p className="text-sm">Age range</p>
-              <div className="flex items-center gap-2">
-                {/* From Age */}
-                <select
-                  value={ageFrom}
-                  onChange={(e) => setAgeFrom(e.target.value)}
-                  className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  required
-                >
-                  <option value="">From</option>
-                  {Array.from({ length: 43 }, (_, i) => 18 + i).map((age) => (
-                    <option key={age} value={age}>
-                      {age}
-                    </option>
-                  ))}
-                </select>
+              {/* Age range */}
+              <div>
+                <p className="text-sm">Age range</p>
+                <div className="flex items-center gap-2">
+                  {/* From Age */}
+                  <select
+                    value={ageFrom}
+                    onChange={(e) => setAgeFrom(e.target.value)}
+                    className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    required
+                  >
+                    <option value="">From</option>
+                    {Array.from({ length: 43 }, (_, i) => 18 + i).map((age) => (
+                      <option key={age} value={age}>
+                        {age}
+                      </option>
+                    ))}
+                  </select>
 
-                <p>To</p>
+                  <p>To</p>
 
-                {/* To Age */}
-                <select
-                  value={ageTo}
-                  onChange={(e) => setAgeTo(e.target.value)}
-                  className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  required
-                >
-                  <option value="">To</option>
-                  {Array.from({ length: 43 }, (_, i) => 18 + i).map((age) => (
-                    <option key={age} value={age}>
-                      {age}
-                    </option>
-                  ))}
-                  <option value="60+">60+</option>
-                </select>
+                  {/* To Age */}
+                  <select
+                    value={ageTo}
+                    onChange={(e) => setAgeTo(e.target.value)}
+                    className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    required
+                  >
+                    <option value="">To</option>
+                    {Array.from({ length: 43 }, (_, i) => 18 + i).map((age) => (
+                      <option key={age} value={age}>
+                        {age}
+                      </option>
+                    ))}
+                    <option value="60+">60+</option>
+                  </select>
+                </div>
+
+                {(errors.ageFrom || errors.ageTo) && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.ageFrom || errors.ageTo}
+                  </p>
+                )}
               </div>
 
-              {(errors.ageFrom || errors.ageTo) && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.ageFrom || errors.ageTo}
-                </p>
-              )}
-            </div>
-
-            {/* Gender */}
-            <div>
-              <CampaignSubHeader text="Gender" />
-              {errors.selectedGender && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.selectedGender}
-                </p>
-              )}
-              <div className="flex space-x-2">
-                {["All", "Male", "Female"].map((gender) => (
-                  <Button
-                    key={gender}
-                    variant={selectedGender === gender ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedGender(gender)}
-                    className={
-                      selectedGender === gender
-                        ? "bg-purple-600 hover:bg-purple-700 text-white"
-                        : ""
-                    }
-                  >
-                    {gender}
-                  </Button>
-                ))}
-              </div>
-            </div>
-            {/* Interest */}
-            <div>
-              <CampaignSubHeader text="Interest" />
-              {errors.interests && (
-                <p className="text-red-500 text-xs mt-1">{errors.interests}</p>
-              )}
-              <div className="flex flex-wrap gap-2">
-                {interests.map((interest) => (
-                  <div
-                    key={interest}
-                    className="flex items-center bg-[#E6E6E8] text-black px-3 py-1 rounded-full text-sm"
-                  >
-                    <span>{interest}</span>
-                    <button
-                      onClick={() => removeInterest(interest)}
-                      className="ml-2 text-black hover:text-purple-700 cursor-pointer"
+              {/* Gender */}
+              <div>
+                <CampaignSubHeader text="Gender" />
+                {errors.selectedGender && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.selectedGender}
+                  </p>
+                )}
+                <div className="flex space-x-2">
+                  {["All", "Male", "Female"].map((gender) => (
+                    <Button
+                      key={gender}
+                      variant={
+                        selectedGender === gender ? "default" : "outline"
+                      }
+                      size="sm"
+                      onClick={() => setSelectedGender(gender)}
+                      className={
+                        selectedGender === gender
+                          ? "bg-purple-600 hover:bg-purple-700 text-white"
+                          : ""
+                      }
                     >
-                      <FaTimes className="text-xs" />
-                    </button>
-                  </div>
-                ))}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="rounded-full w-8 h-8 p-0 text-purple-600 border-purple-300"
-                >
-                  +
-                </Button>
+                      {gender}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+              {/* Interest */}
+              <div>
+                <CampaignSubHeader text="Interest" />
+                {errors.interests && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.interests}
+                  </p>
+                )}
+                <div className="flex flex-wrap gap-2">
+                  {interests.map((interest) => (
+                    <div
+                      key={interest}
+                      className="flex items-center bg-[#E6E6E8] text-black px-3 py-1 rounded-full text-sm"
+                    >
+                      <span>{interest}</span>
+                      <button
+                        onClick={() => removeInterest(interest)}
+                        className="ml-2 text-black hover:text-purple-700 cursor-pointer"
+                      >
+                        <FaTimes className="text-xs" />
+                      </button>
+                    </div>
+                  ))}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full w-8 h-8 p-0 text-purple-600 border-purple-300"
+                  >
+                    +
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Budget & Schedule */}
-          <div className="space-y-3">
-            <CampaignSubHeader text="Budget & Schedule" />
-            {/* Daily Budget */}
-            <div>
-              <p className="text-sm">Daily Budget</p>
-              {/* <select
+            {/* Budget & Schedule */}
+            <div className="space-y-3">
+              <CampaignSubHeader text="Budget & Schedule" />
+              {/* Daily Budget */}
+              <div>
+                <p className="text-sm">Daily Budget</p>
+                {/* <select
                 value={dailyBudget}
                 onChange={(e) => setDailyBudget(e.target.value)}
                 className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
@@ -1186,25 +1203,25 @@ const DashboardCampaignCreate = () => {
                 <option value="100">$100</option>
                 <option value="150">$150</option>
               </select> */}
-              <Input
-                type="text"
-                value={dailyBudget}
-                required
-                onChange={(e) => setDailyBudget(e.target.value)}
-                placeholder={`Select Total Budget`}
-                className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-              />
-              {errors.dailyBudget && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.dailyBudget}
-                </p>
-              )}
-            </div>
+                <Input
+                  type="text"
+                  value={dailyBudget}
+                  required
+                  onChange={(e) => setDailyBudget(e.target.value)}
+                  placeholder={`Select Total Budget`}
+                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                />
+                {errors.dailyBudget && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.dailyBudget}
+                  </p>
+                )}
+              </div>
 
-            {/* Total Budget */}
-            <div>
-              <p className="text-sm">Total Budget</p>
-              {/* <select
+              {/* Total Budget */}
+              <div>
+                <p className="text-sm">Total Budget</p>
+                {/* <select
                 value={totalBudget}
                 onChange={(e) => setTotalBudget(e.target.value)}
                 className="w-full py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
@@ -1215,156 +1232,158 @@ const DashboardCampaignCreate = () => {
                 <option value="1000">$1000</option>
                 <option value="1500">$1500</option>
               </select> */}
-              <Input
-                type="text"
-                value={totalBudget}
-                required
-                onChange={(e) => setTotalBudget(e.target.value)}
-                placeholder={`Select Total Budget`}
-                className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-              />
-              {errors.totalBudget && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.totalBudget}
-                </p>
-              )}
-            </div>
-
-            {/* date */}
-            <div className="flex gap-4">
-              <div className="flex-1">
-                <p className="text-sm">Start Date</p>
                 <Input
-                  type="date"
-                  onChange={(e) => setStartDate(e.target.value)}
-                  value={startDate}
-                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  type="text"
+                  value={totalBudget}
                   required
+                  onChange={(e) => setTotalBudget(e.target.value)}
+                  placeholder={`Select Total Budget`}
+                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 />
-                {errors.startDate && (
+                {errors.totalBudget && (
                   <p className="text-red-500 text-xs mt-1">
-                    {errors.startDate}
+                    {errors.totalBudget}
                   </p>
                 )}
               </div>
-              <div className="flex-1">
-                <p className="text-sm">End Date</p>
-                <Input
-                  type="date"
-                  onChange={(e) => setEndDate(e.target.value)}
-                  value={endDate}
-                  className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  required
-                />
-                {errors.endDate && (
-                  <p className="text-red-500 text-xs mt-1">{errors.endDate}</p>
-                )}
+
+              {/* date */}
+              <div className="flex gap-4">
+                <div className="flex-1">
+                  <p className="text-sm">Start Date</p>
+                  <Input
+                    type="date"
+                    onChange={(e) => setStartDate(e.target.value)}
+                    value={startDate}
+                    className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    required
+                  />
+                  {errors.startDate && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.startDate}
+                    </p>
+                  )}
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm">End Date</p>
+                  <Input
+                    type="date"
+                    onChange={(e) => setEndDate(e.target.value)}
+                    value={endDate}
+                    className="py-2 px-3 border border-gray-300 rounded-md text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    required
+                  />
+                  {errors.endDate && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.endDate}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        {/* **********right side section****************************************************************************** */}
-        <div className="flex-1">
-          <div className="flex justify-end items-center gap-5">
-            <OutlineButton>Save Draft</OutlineButton>
-            <PrimaryButton onClick={handleSubmit}>
-              <span className="flex items-center gap-2">
-                {loading && (
-                  <svg
-                    className="animate-spin h-5 w-5 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                    />
-                  </svg>
-                )}
-                {loading ? "Launching Campaign..." : "Launch Campaign"}
-              </span>
-            </PrimaryButton>
-          </div>
-
-          <div className="border border-gray-300 my-3" />
-          {/* prompt section */}
-          <div>
-            <CampaignSubHeader text={"Ad Copy"}></CampaignSubHeader>
-            <div className="mb-2 mt-5">
-              <label htmlFor="bt" className="font-bold">
-                Company Info
-              </label>
-              <input
-                id="bt"
-                type="text"
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-                className="border border-gray-200 rounded-lg w-full py-2 px-3 mt-2"
-              />
+          {/* **********right side section****************************************************************************** */}
+          <div className="flex-1">
+            <div className="flex justify-end items-center gap-5">
+              <OutlineButton>Save Draft</OutlineButton>
+              <PrimaryButton onClick={handleSubmit}>
+                <span className="flex items-center gap-2">
+                  {loading && (
+                    <svg
+                      className="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      />
+                    </svg>
+                  )}
+                  {loading ? "Launching Campaign..." : "Launch Campaign"}
+                </span>
+              </PrimaryButton>
             </div>
 
-            <div className="mb-2 mt-5 flex flex-col">
-              <label htmlFor="platform" className="font-bold">
-                Platform
-              </label>
-              <select
-                id="platform"
-                value={platform}
-                onChange={(e) => setPlatform(e.target.value)}
-                className="py-2 px-2 border border-gray-200 rounded-lg mt-2"
-              >
-                <option value="">Select Platform</option>
-                <option value="Facebook">Facebook</option>
-                <option value="Google">Google</option>
-                <option value="Tiktok">Tiktok</option>
-                <option value="LinkedIn">LinkedIn</option>
-                <option value="Instagram">Instagram</option>
-              </select>
-            </div>
-
+            <div className="border border-gray-300 my-3" />
+            {/* prompt section */}
             <div>
-              <label className="font-bold" htmlFor="prompt">
-                Prompt
-              </label>
-              <textarea
-                name="prompt"
-                id="prompt"
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                className="border-[1px] border-gray-200 w-full rounded-xl px-3 py-2 text-sm mt-2"
-              />
-            </div>
+              <CampaignSubHeader text={"Ad Copy"}></CampaignSubHeader>
+              <div className="mb-2 mt-5">
+                <label htmlFor="bt" className="font-bold">
+                  Company Info
+                </label>
+                <input
+                  id="bt"
+                  type="text"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  className="border border-gray-200 rounded-lg w-full py-2 px-3 mt-2"
+                />
+              </div>
 
-            <button
-              onClick={handleGenerateAdsData}
-              className="px-4 py-2 mt-4 rounded-3xl bg-[#654FAE] cursor-pointer text-white font-bold"
-            >
-              Generate
-            </button>
-          </div>
-          {/* media section */}
-          <div className="mt-5">
-            <CampaignSubHeader text="Ad Media" />
-            <div className="bg-black rounded-md flex justify-center items-center gap-2 h-64 mx-6">
-              <button className="px-4 py-2 rounded-3xl border border-[#8E6EFF] cursor-pointer text-[#8E6EFF] font-bold">
-                Save Draft
-              </button>
-              <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-white font-bold">
-                Browse Templates
+              <div className="mb-2 mt-5 flex flex-col">
+                <label htmlFor="platform" className="font-bold">
+                  Platform
+                </label>
+                <select
+                  id="platform"
+                  value={platform}
+                  onChange={(e) => setPlatform(e.target.value)}
+                  className="py-2 px-2 border border-gray-200 rounded-lg mt-2"
+                >
+                  <option value="">Select Platform</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="Google">Google</option>
+                  <option value="Tiktok">Tiktok</option>
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="Instagram">Instagram</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="font-bold" htmlFor="prompt">
+                  Prompt
+                </label>
+                <textarea
+                  name="prompt"
+                  id="prompt"
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  className="border-[1px] border-gray-200 w-full rounded-xl px-3 py-2 text-sm mt-2"
+                />
+              </div>
+
+              <button
+                onClick={handleGenerateAdsData}
+                className="px-4 py-2 mt-4 rounded-3xl bg-[#654FAE] cursor-pointer text-white font-bold"
+              >
+                Generate
               </button>
             </div>
+            {/* media section */}
+            <div className="mt-5">
+              <CampaignSubHeader text="Ad Media" />
+              <div className="bg-black rounded-md flex justify-center items-center gap-2 h-64 mx-6">
+                <button className="px-4 py-2 rounded-3xl border border-[#8E6EFF] cursor-pointer text-[#8E6EFF] font-bold">
+                  Save Draft
+                </button>
+                <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-white font-bold">
+                  Browse Templates
+                </button>
+              </div>
 
-            {/* <div>
+              {/* <div>
               <input
                 type="file"
                 accept="video/*"
@@ -1383,78 +1402,79 @@ const DashboardCampaignCreate = () => {
               />
             </div> */}
 
-            <div className="flex justify-center items-center py-3">
-              <button className="px-4 py-2 rounded-md border cursor-pointer font-bold">
-                Add Media +
-              </button>
-            </div>
-          </div>
-          {/* ------------write prompt section--------- */}
-          <div className="flex items-center w-full p-3 rounded-full bg-[#f5f3ff] shadow-sm">
-            {/* Dropdown */}
-            <div className="relative text-blue-500">
-              <select className="w-[100px] py-4 px-2 border border-gray-300 rounded-md text-sm bg-white">
-                <option value="image">Image</option>
-                <option value="text">Text</option>
-              </select>
-            </div>
-
-            {/* Input field */}
-            <input
-              type="text"
-              placeholder="Write Prompt..."
-              className="flex-1 mx-3 text-sm bg-transparent outline-none text-gray-700 placeholder-gray-400"
-            />
-
-            {/* Icon button */}
-            <button className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-md cursor-pointer">
-              <FaWandMagicSparkles className="text-white" />
-            </button>
-          </div>
-          {/* ------------preview section--------- */}
-          <div className="mt-5">
-            <CampaignSubHeader text="Ad Preview" />
-            <div className="flex justify-end">
-              <div className="inline-flex items-center bg-white border border-gray-300 rounded-full overflow-hidden text-sm font-medium">
-                <button
-                  onClick={() => setSelected("mobile")}
-                  className={`px-4 py-3 transition-colors duration-200 ${
-                    selected === "mobile"
-                      ? "bg-purple-500 text-white"
-                      : "text-black"
-                  }`}
-                >
-                  Mobile
-                </button>
-                <button
-                  onClick={() => setSelected("desktop")}
-                  className={`px-4 py-3 transition-colors duration-200 ${
-                    selected === "desktop"
-                      ? "bg-purple-500 text-white"
-                      : "text-black"
-                  }`}
-                >
-                  Desktop
+              <div className="flex justify-center items-center py-3">
+                <button className="px-4 py-2 rounded-md border cursor-pointer font-bold">
+                  Add Media +
                 </button>
               </div>
             </div>
-            <div className="mt-7 flex justify-center">
-              <img src="/src/assets/mobilepreview.jpg" />
-            </div>
-            <div className="flex justify-end mt-5">
-              <button
-                onClick={handlegenerate}
-                className="px-3 py-2 text-white
-               rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-md cursor-pointer"
-              >
-                Get AI Optimize Suggestions
-                <FaWandMagicSparkles className="text-white ml-2" />
+            {/* ------------write prompt section--------- */}
+            <div className="flex items-center w-full p-3 rounded-full bg-[#f5f3ff] shadow-sm">
+              {/* Dropdown */}
+              <div className="relative text-blue-500">
+                <select className="w-[100px] py-4 px-2 border border-gray-300 rounded-md text-sm bg-white">
+                  <option value="image">Image</option>
+                  <option value="text">Text</option>
+                </select>
+              </div>
+
+              {/* Input field */}
+              <input
+                type="text"
+                placeholder="Write Prompt..."
+                className="flex-1 mx-3 text-sm bg-transparent outline-none text-gray-700 placeholder-gray-400"
+              />
+
+              {/* Icon button */}
+              <button className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-md cursor-pointer">
+                <FaWandMagicSparkles className="text-white" />
               </button>
+            </div>
+            {/* ------------preview section--------- */}
+            <div className="mt-5">
+              <CampaignSubHeader text="Ad Preview" />
+              <div className="flex justify-end">
+                <div className="inline-flex items-center bg-white border border-gray-300 rounded-full overflow-hidden text-sm font-medium">
+                  <button
+                    onClick={() => setSelected("mobile")}
+                    className={`px-4 py-3 transition-colors duration-200 ${
+                      selected === "mobile"
+                        ? "bg-purple-500 text-white"
+                        : "text-black"
+                    }`}
+                  >
+                    Mobile
+                  </button>
+                  <button
+                    onClick={() => setSelected("desktop")}
+                    className={`px-4 py-3 transition-colors duration-200 ${
+                      selected === "desktop"
+                        ? "bg-purple-500 text-white"
+                        : "text-black"
+                    }`}
+                  >
+                    Desktop
+                  </button>
+                </div>
+              </div>
+              <div className="mt-7 flex justify-center">
+                <img src="/src/assets/mobilepreview.jpg" />
+              </div>
+              <div className="flex justify-end mt-5">
+                <button
+                  onClick={handlegenerate}
+                  className="px-3 py-2 text-white
+               rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-md cursor-pointer"
+                >
+                  Get AI Optimize Suggestions
+                  <FaWandMagicSparkles className="text-white ml-2" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+ 
   );
 };
 

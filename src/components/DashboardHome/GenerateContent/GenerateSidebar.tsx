@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import GeminiIcon from "@/assets/CustomIcon/GeminiIcon";
+
 import { RootState } from "@/store/store";
 import axios from "axios";
 import { IoMdSearch } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
+import GeminiIcon from "@/assets/CustomIcon/GeminiIcon";
 
 const fetchHistory = async (token: string) => {
   const res = await axios.get(
@@ -45,6 +46,8 @@ const GenerateSidebar = ({
     queryFn: () => fetchHistory(token as string),
     enabled: !!token, // only fetch if token exists
   });
+
+  console.log(chatbotHistory)
 
 
 

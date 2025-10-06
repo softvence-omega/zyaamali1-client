@@ -1,3 +1,4 @@
+import CommonWrapper from "@/common/CommonWrapper";
 import elipse from "../../assets/Ellipse 5.png";
 
 type Service = {
@@ -7,7 +8,7 @@ type Service = {
 };
 
 export const Services = () => {
-  // Corrected type: data should be an array of Service objects (Service[])
+  // Service data
   const data: Service[] = [
     {
       id: "1",
@@ -42,34 +43,41 @@ export const Services = () => {
   ];
 
   return (
-    <div className="bg-[#010610]  relative">
-      <img src={elipse} alt="" className="absolute" />
-      <div className="flex justify-center items-center pt-20 pb-10">
-        <h1
-          className="bg-gradient-to-b from-[#FFFFFF] to-[#8E6EFF] bg-clip-text text-transparent font-bold  text-7xl lg:text-[90px] 2xl:text-[120px]"
-        >
-          Services
-        </h1>
-      </div>
-      <div className="max-w-[1400px] mx-auto my-auto">
-        <div className="flex flex-col gap-10 p-10">
-          {data.map((service) => (
-            <div
-              key={service.id}
-              className="flex justify-between items-center pb-8 border-b-2"
-            >
-              <div className="flex-1">
-                <h1 className="text-3xl text-white font-light w-2/4">
-                  {service?.title}
-                </h1>
-              </div>
-              <div className="flex-1">
-                <h1 className="text-white/70">{service?.description}</h1>
-              </div>
-            </div>
-          ))}
+    <div className="bg-[#010610] relative">
+      <CommonWrapper>
+        {" "}
+        <img
+          src={elipse}
+          alt="Background Ellipse"
+          className="absolute top-0 left-0 z-0"
+        />
+        {/* Title */}
+        <div className="flex justify-center items-center pt-20 pb-10 z-10">
+          <h1 className="bg-gradient-to-b from-[#FFFFFF] to-[#8E6EFF] bg-clip-text text-transparent font-bold text-7xl lg:text-[90px] 2xl:text-[120px]">
+            Services
+          </h1>
         </div>
-      </div>
+        {/* Service List */}
+        <div className=" my-auto z-10">
+          <div className="flex flex-col gap-10 py-6 sm:py-10">
+            {data.map((service) => (
+              <div
+                key={service.id}
+                className="flex justify-between items-center pb-8 border-b-2 border-gray-600"
+              >
+                <div className="flex-1">
+                  <h2 className="text-3xl text-white font-light">
+                    {service?.title}
+                  </h2>
+                </div>
+                <div className="flex-1">
+                  <p className="text-white/70">{service?.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </CommonWrapper>
     </div>
   );
 };

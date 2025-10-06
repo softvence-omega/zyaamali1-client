@@ -8,13 +8,13 @@ interface SectionBlockProps {
 
 const SectionBlock:React.FC<SectionBlockProps> = ({ img, title, description}) => {
   return (
-    <div className=" my-5">
+    <div className=" my-5 mb-20 flex flex-col justify-center max-w-[1400px] mx-auto">
       {img && (
-        <div className="my-5 max-w-7xl">
+        <div className="my-5 max-w-[1400px] mx-auto">
           <img src={img} alt={title || "section image"} />
         </div>
       )}
-      <div>
+      <div className="max-w-[1400px] mx-auto">
         <h1 className="text-2xl font-semibold">
           {title}
         </h1>

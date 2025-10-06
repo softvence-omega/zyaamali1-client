@@ -1,13 +1,20 @@
 import FunnelIcon from "@/assets/CustomIcon/FunnelIcon";
 import CampaignPerformanceTable from "@/components/Dashboard/CampaignPerformance/CampaignPerformanceTable";
 import PrimaryButton from "@/components/ui/PrimaryButton";
+import TopBar from "@/utils/TopBar";
 import { FaPlus } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 const DashboardCampaign = () => {
+  const breadcrumbPaths = [
+    { name: "Dashboard", link: "/dashboard" },
+    { name: "Campaigns", link: "/dashboard/campaign" },
+
+  ];
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-4">
+      <TopBar paths={breadcrumbPaths}></TopBar>
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-5 gap-4">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium">
