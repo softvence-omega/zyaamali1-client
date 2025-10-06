@@ -8,9 +8,11 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const ProfileSection: React.FC = () => {
-  
+
+  const user = useSelector((state)=> state.auth.user)
   const [editMode, setEditMode] = useState<{ [key: string]: boolean }>({});
   const [formData, setFormData] = useState({
     fullName: "",
@@ -18,6 +20,8 @@ const ProfileSection: React.FC = () => {
     companyName: "",
     country: "",
   });
+
+  console.log(formData)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,17 +44,20 @@ const ProfileSection: React.FC = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          "http://localhost:5000/api/v1/user/profile", // replace with your API endpoint
+          `http://localhost:5000/api/v1/user/get-single-user/${user.userId}`, // replace with your API endpoint
           { withCredentials: true }
         );
 
         // Assuming your API returns { fullName, email, companyName, country }
         setFormData({
-          fullName: response.data.fullName || "",
-          email: response.data.email || "",
-          companyName: response.data.companyName || "",
-          country: response.data.country || "",
+          fullName: response.data.data.fullName || "",
+          email: response.data.data.email || "",
+          companyName: response.data.data.companyName || "",
+          country: response.data.data.country || "",
         });
+
+        console.log(response.data.data)
+
       } catch (err: any) {
         console.error(err);
         setError("Failed to fetch profile data");
