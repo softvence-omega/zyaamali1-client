@@ -27,7 +27,7 @@ const BrandProfileForm = ({ control, errors }: BrandProfileFormProps) => {
             </select>
           )}
         />
-        {errors.brandVoice && <span className="text-red-500">{errors.brandVoice.message}</span>}
+        {/* {errors.brandVoice && <span className="text-red-500">{errors.brandVoice.message}</span>} */}
       </div>
 
       <div>
