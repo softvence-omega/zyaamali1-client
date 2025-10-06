@@ -22,7 +22,9 @@ const BusinessManagement: React.FC = () => {
 
         setBusinessData(response.data.data.businessInfo);
       } catch (err: any) {
-        setError(err.response?.data?.message || "Failed to fetch business data");
+        setError(
+          err.response?.data?.message || "Failed to fetch business data"
+        );
       } finally {
         setLoading(false);
       }

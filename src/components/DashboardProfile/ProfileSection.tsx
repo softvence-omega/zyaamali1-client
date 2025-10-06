@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 import {
   Select,
@@ -7,15 +7,19 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import axios from "axios";
 
 const ProfileSection: React.FC = () => {
+  
   const [editMode, setEditMode] = useState<{ [key: string]: boolean }>({});
   const [formData, setFormData] = useState({
-    fullName: "Kathryn Murphy",
-    email: "kathryn@gmail.com",
-    companyName: "ABC Company",
-    country: "Canada",
+    fullName: "",
+    email: "",
+    companyName: "",
+    country: "",
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const countries = [
     "United States",
@@ -30,6 +34,36 @@ const ProfileSection: React.FC = () => {
     "South Africa",
     // Add more countries as needed
   ];
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "http://localhost:5000/api/v1/user/profile", // replace with your API endpoint
+          { withCredentials: true }
+        );
+
+        // Assuming your API returns { fullName, email, companyName, country }
+        setFormData({
+          fullName: response.data.fullName || "",
+          email: response.data.email || "",
+          companyName: response.data.companyName || "",
+          country: response.data.country || "",
+        });
+      } catch (err: any) {
+        console.error(err);
+        setError("Failed to fetch profile data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfileData();
+  }, []);
+
+  if (loading) return <p className="text-gray-600">Loading profile...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
 
   return (
     <div className="py-6 px-6 border-b bg-gray-100 rounded-3xl border-gray-200">
@@ -131,7 +165,7 @@ const ProfileSection: React.FC = () => {
             />
           </div>
 
-          {/* Country - Now a dropdown */}
+          {/* Country */}
           <div>
             <div className="flex items-center justify-between">
               <label
@@ -157,7 +191,7 @@ const ProfileSection: React.FC = () => {
                 <SelectTrigger className="w-full mt-1">
                   <SelectValue placeholder="Select country" />
                 </SelectTrigger>
-                <SelectContent className="bg-T-300">
+                <SelectContent>
                   {countries.map((country) => (
                     <SelectItem key={country} value={country}>
                       {country}
