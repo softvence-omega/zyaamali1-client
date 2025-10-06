@@ -16,9 +16,9 @@ const DashboardCampaign = () => {
     <div className="px-4 sm:px-6 lg:px-8 py-4">
       <TopBar paths={breadcrumbPaths}></TopBar>
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-5 gap-4">
+      <div className="flex flex-col  mb-5 gap-4 md:gap-8">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium">
-          <span className="bg-gradient-to-r from-black to-[#8e6eff] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-black dark:from-gray-300 to-[#8e6eff] bg-clip-text text-transparent">
             Campaign Performance
           </span>
         </h1>
@@ -28,7 +28,7 @@ const DashboardCampaign = () => {
       </div>
 
       {/* Search Section */}
-      <div className="mt-6 sm:mt-10 relative">
+      <div className="mt-6 sm:mt-10 relative ">
         <div className="relative max-w-3xl mx-auto">
           <input
             type="text"

@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 
 const ContentHeader: React.FC<{
   templateType: string;
-  selectedPlatforms: string[];
+  selectedPlatforms: string[]
   searchTerm: string;
   startDate: string;
   endDate: string;

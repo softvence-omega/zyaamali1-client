@@ -13,8 +13,8 @@ interface SaleItemProps {
 
 const SaleItem = ({ image, title, ctr, conversion }: SaleItemProps) => {
   return (
-    <div className="flex flex-col lg:flex-row gap-3 md:gap-5 items-center rounded-lg p-2 md:p-0 hover:bg-gray-50 transition-colors">
-      <div className="lg:w-[100px] lg:h-[151px] w-full h-40 md:h-48 overflow-hidden">
+    <div className="flex flex-col lg:flex-row gap-3 md:gap-5 items-center rounded-lg p-2 md:p-0 hover:bg-gray-50 dark:hover:bg-[#2a3344] transition-colors">
+      <div className="lg:w-[100px] lg:h-[151px] w-full h-40 md:h-48 overflow-hidden rounded-lg">
         <img
           className="object-cover w-full h-full rounded-lg"
           src={image}
@@ -22,17 +22,17 @@ const SaleItem = ({ image, title, ctr, conversion }: SaleItemProps) => {
         />
       </div>
       <div className="flex flex-col items-center lg:items-start text-center lg:text-left w-full">
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-800 dark:text-gray-100">
           {title}
         </h1>
         <div className="flex flex-col sm:flex-row gap-2 md:gap-3 items-center mt-2 w-full justify-center lg:justify-start">
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center text-gray-600 dark:text-gray-300">
             <ThunderIcon />
             <span className="text-xs md:text-sm">
               CTR: <span className="text-blue-500 font-medium">{ctr}</span>
             </span>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center text-gray-600 dark:text-gray-300">
             <ConversionIcon />
             <span className="text-xs md:text-sm">
               Conversion:{" "}
@@ -53,7 +53,7 @@ const Sale = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-3 md:gap-5 px-2 py-3 md:px-4 md:py-5 bg-white rounded-lg">
+    <div className="flex flex-col gap-3 md:gap-5 px-2 py-3 md:px-4 md:py-5 bg-white dark:bg-[#1e2939] rounded-lg border border-gray-200 dark:border-gray-600 transition-colors">
       {saleItems.map((item, index) => (
         <SaleItem key={index} {...item} />
       ))}

@@ -13,8 +13,8 @@ const TopBar: React.FC<BreadcrumbProps> = ({ paths }) => {
         <span key={index} className="flex items-center">
           <Link
             to={path.link}
-            className={`text-gray-600 hover:text-blue-600 transition-colors duration-300 ${
-              index === paths.length - 1 ? "font-semibold text-gray-900" : ""
+            className={`text-gray-600 hover:text-blue-600 dark:hover:text-blue-600 transition-colors duration-300 ${
+              index === paths.length - 1 ? "font-semibold text-gray-900 dark:text-gray-300" : "dark:text-gray-300"
             }`} // Make last item bold
           >
             {path.name}
