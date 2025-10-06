@@ -140,7 +140,7 @@ const CampaignPerformanceTable = () => {
   };
 
   return (
-    <div className="border border-Foundation-text-T-75/30 rounded-lg p-4 bg-white dark:bg-Foundation-gray-bg dark:text-gray-300 mt-10">
+    <div className="border border-Foundation-text-T-75/30 rounded-lg p-4 bg-white dark:bg-[#1e2939] dark:text-gray-300 mt-10">
       {deleteModalOpen && (
         <>
           <div className="fixed inset-0 bg-black/60 z-40"></div>
