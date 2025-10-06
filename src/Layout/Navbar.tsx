@@ -87,7 +87,7 @@ const Navbar: React.FC = () => {
 
       <li className="relative group">
         <NavLink
-          to=""
+          to="/services/campaign"
           className={({ isActive }) =>
             `font-medium transition-colors duration-300 ease-in-out px-3 py-2 rounded-md ${
               isActive
