@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 
 const ProfileSection: React.FC = () => {
   const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
 
   const [editMode, setEditMode] = useState<{ [key: string]: boolean }>({});
   const [formData, setFormData] = useState({
@@ -67,10 +68,17 @@ const ProfileSection: React.FC = () => {
   const handleUpdateProfile = async () => {
     try {
       setUpdating(true);
+
       const response = await axios.patch(
         `http://localhost:5000/api/v1/user/update-profile`,
         formData,
-      
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // if your backend uses cookies
+        }
       );
 
       alert("Profile updated successfully!");
