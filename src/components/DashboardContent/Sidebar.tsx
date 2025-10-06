@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div className="p-4 md:p-6 w-full md:w-64 lg:w-72 flex-shrink-0 rounded-lg bg-white shadow-md dark:bg-[#1e2939] dark:text-gray-300">
       {/* 🔍 Search */}
-      <div className="relative mb-6">
+      <div className="relative ">
         <input
           type="text"
           placeholder="Search template"

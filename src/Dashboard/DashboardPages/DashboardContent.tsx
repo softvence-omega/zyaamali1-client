@@ -28,7 +28,7 @@ export default function DashboardContent() {
   return (
     <div>
       <TopBar paths={breadcrumbPaths} />
-      <div className="flex">
+      <div className="flex gap-3">
         <Sidebar
           templateType={templateType}
           setTemplateType={setTemplateType}
