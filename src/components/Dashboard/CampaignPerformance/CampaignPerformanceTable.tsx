@@ -140,7 +140,7 @@ const CampaignPerformanceTable = () => {
   };
 
   return (
-    <div className="border border-Foundation-text-T-75/30 rounded-lg p-4 bg-white dark:bg-Foundation-gray-bg dark:text-gray-300 mt-10">
+    <div className="border border-Foundation-text-T-75/30 rounded-lg p-4 bg-white dark:bg-[#1e2939] dark:text-gray-300 mt-10">
       {deleteModalOpen && (
         <>
           <div className="fixed inset-0 bg-black/60 z-40"></div>
@@ -184,7 +184,7 @@ const CampaignPerformanceTable = () => {
       <div className="hidden lg:block w-full overflow-x-auto">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="border-b border-b-gray-700">
               <TableHead className="w-[180px]">Campaign Name</TableHead>
               <TableHead>Platform</TableHead>
               <TableHead>Status</TableHead>
@@ -198,7 +198,7 @@ const CampaignPerformanceTable = () => {
           </TableHeader>
           <TableBody>
             {campaigns.map((campaign) => (
-              <TableRow key={campaign.id} className="">
+              <TableRow key={campaign.id} className="dark:border-b dark:border-b-gray-600">
                 <TableCell className="font-medium py-6">
                   {campaign.campaignName}
                 </TableCell>
