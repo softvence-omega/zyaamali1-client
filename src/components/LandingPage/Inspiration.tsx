@@ -22,15 +22,15 @@ export const Inspiration = () => {
     ];
 
     return (
-        <div className="px-4 py-12">
+        <div className="px-4 py-12 bg-white dark:bg-gray-900">
             <div className="max-w-[1400px] mx-auto">
                 {/* Heading */}
                 <div className="flex justify-center items-center flex-col gap-6 text-center px-4">
                     <h1 className="bg-gradient-to-l from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] bg-clip-text text-transparent md:text-7xl text-4xl font-bold">
                         Get Inspiration
                     </h1>
-                    <p className="max-w-2xl text-black/50">
-                        Explore real campaigns powered by Adelo AI, from local brands to global creators. See what’s
+                    <p className="max-w-2xl text-black/50 dark:text-gray-400">
+                        Explore real campaigns powered by Adelo AI, from local brands to global creators. See what's
                         working, adapt it to your voice, and launch your next winning ad faster.
                     </p>
                 </div>
@@ -40,7 +40,7 @@ export const Inspiration = () => {
                     {inspirationImages.map((img) => (
                         <div
                             key={img.id}
-                            className="cursor-pointer break-inside-avoid overflow-hidden rounded-2xl shadow-md  transition-transform duration-300"
+                            className="cursor-pointer break-inside-avoid overflow-hidden rounded-2xl shadow-md dark:shadow-gray-700/30 transition-transform duration-300"
                         >
                             <img
                                 src={img.src}
@@ -51,15 +51,15 @@ export const Inspiration = () => {
                     ))}
                 </div>
                 <div className="flex justify-center items-center py-6">
-                    <div className="flex justify-center items-center gap-5 rounded-3xl border border-solid border-[#654FAE]  px-8 py-2 text-[#8e6eff]font-semibold text-lg transition-colors duration-300 cursor-pointer hover:bg-[#b1a7d4]">
+                    <div className="flex justify-center items-center gap-5 rounded-3xl border border-solid border-[#654FAE] dark:border-[#8E6EFF] px-8 py-2 text-[#8e6eff] dark:text-[#A891FB] font-semibold text-lg transition-colors duration-300 cursor-pointer hover:bg-[#b1a7d4] dark:hover:bg-gray-800">
                         <h1>More</h1>
                         <svg className="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <g clip-path="url(#clip0_823_965)">
-                                <path d="M-0.00158691 20.8613L10.1431 10.7167L13.2795 13.8532L3.13489 23.9978L-0.00158691 20.8613Z" fill="#8E6EFF" />
-                                <path d="M15.1523 5.70996L11.1473 9.71543L14.2843 12.8524L18.2897 8.84741L15.1523 5.70996Z" fill="#8E6EFF" />
-                                <path d="M7.04273 9.74781L8.76592 6.5971L11.9166 4.87391L8.76592 3.15072L7.04273 0L5.31954 3.15072L2.16882 4.87391L5.31954 6.5971L7.04273 9.74781Z" fill="#8E6EFF" />
-                                <path d="M19.8812 8.23745L21.3374 5.57488L23.9999 4.11875L21.3374 2.66257L19.8812 0L18.425 2.66257L15.7625 4.11875L18.425 5.57488L19.8812 8.23745Z" fill="#8E6EFF" />
-                                <path d="M19.8812 10.9502L18.425 13.6128L15.7625 15.0689L18.425 16.5251L19.8812 19.1876L21.3374 16.5251L23.9999 15.0689L21.3374 13.6128L19.8812 10.9502Z" fill="#8E6EFF" />
+                            <g clipPath="url(#clip0_823_965)">
+                                <path d="M-0.00158691 20.8613L10.1431 10.7167L13.2795 13.8532L3.13489 23.9978L-0.00158691 20.8613Z" fill="currentColor" />
+                                <path d="M15.1523 5.70996L11.1473 9.71543L14.2843 12.8524L18.2897 8.84741L15.1523 5.70996Z" fill="currentColor" />
+                                <path d="M7.04273 9.74781L8.76592 6.5971L11.9166 4.87391L8.76592 3.15072L7.04273 0L5.31954 3.15072L2.16882 4.87391L5.31954 6.5971L7.04273 9.74781Z" fill="currentColor" />
+                                <path d="M19.8812 8.23745L21.3374 5.57488L23.9999 4.11875L21.3374 2.66257L19.8812 0L18.425 2.66257L15.7625 4.11875L18.425 5.57488L19.8812 8.23745Z" fill="currentColor" />
+                                <path d="M19.8812 10.9502L18.425 13.6128L15.7625 15.0689L18.425 16.5251L19.8812 19.1876L21.3374 16.5251L23.9999 15.0689L21.3374 13.6128L19.8812 10.9502Z" fill="currentColor" />
                             </g>
                             <defs>
                                 <clipPath id="clip0_823_965">

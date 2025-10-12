@@ -5,7 +5,7 @@ import { RootState } from "../store";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/v1",
+    baseUrl: "https://zyaamali1-backend.onrender.com/api/v1",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
@@ -16,7 +16,7 @@ export const baseApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["chats", ],
+  tagTypes: ["chats"],
 
   endpoints: () => ({}),
 });

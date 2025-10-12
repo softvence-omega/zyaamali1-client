@@ -8,10 +8,11 @@ import face from "../../assets/face.png";
 import instra from "../../assets/instra.png";
 import google from "../../assets/google.png";
 import tiktok from "../../assets/tiktok.png";
-import facebook from "../../assets/f1.png";
-import instragram from "../../assets/in1.png";
-import google1 from "../../assets/g1.png";
-import linkdine from "../../assets/li1.png";
+import facebook from "@/assets/SocialIcon/facebook.svg";
+// import instragram from "../../assets/inn1.png";
+import instragram from "@/assets/SocialIcon/instagram.svg";
+import google1 from "@/assets/SocialIcon/google.svg";
+import linkdine from "@/assets/SocialIcon/linkedin.svg";
 
 import {
   Select,
@@ -49,6 +50,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import TopBar from "@/utils/TopBar";
 
 const data = [
   { date: "April 1", spend: 400, click: 1600 },
@@ -268,14 +270,21 @@ const items = [
   },
 ];
 
+const breadcrumbPaths = [
+  { name: "Dashboard", link: "/dashboard" },
+  { name: "Reports", link: "/dashboard/analytics" },
+];
+
 const DashboardAnalytics = () => {
   return (
     <div className="overflow-x-hidden px-4 sm:px-6 lg:px-8 py-6">
       {/* title */}
 
-      <h2 className=" text-4xl font-bold">
+      <TopBar paths={breadcrumbPaths}></TopBar>
+
+      <h2 className=" text-4xl font-bold dark:text-gray-300">
         Report &{" "}
-        <span className="bg-gradient-to-r from-[#000000] via-[#4F3FBF] to-[#8E6EFF] bg-clip-text text-transparent   text-4xl font-bold ">
+        <span className="bg-gradient-to-r from-[#000000] dark:from-gray-400 via-[#4F3FBF] to-[#8E6EFF] bg-clip-text text-transparent   text-4xl font-bold ">
           Analytics
         </span>
       </h2>
@@ -299,15 +308,15 @@ const DashboardAnalytics = () => {
           return (
             <div
               key={index}
-              className="bg-T-200 rounded-xl p-4 sm:p-5 shadow-sm transition hover:shadow-md"
+              className="bg-T-200 dark:bg-[#1e2939] rounded-xl p-4 sm:p-5 shadow-sm transition hover:shadow-md"
             >
               <div className="flex justify-between items-center mb-1 sm:mb-2">
-                <h4 className="capitalize text-sm sm:text-base text-T-400">
+                <h4 className="capitalize text-sm sm:text-base text-T-400 dark:text-gray-300">
                   {title}
                 </h4>
                 <div className="text-blue-400 text-base sm:text-lg">{icon}</div>
               </div>
-              <h1 className="text-xl sm:text-2xl bg-[linear-gradient(to_right,_#000000_10%,_#4F3FBF_20%,_#8E6EFF_80%)] bg-clip-text text-transparent mb-1 sm:mb-2">
+              <h1 className="text-xl sm:text-2xl bg-gradient-to-r from-[#000000] dark:from-gray-300 via-[#4F3FBF] to-[#8E6EFF]  bg-clip-text text-transparent mb-1 sm:mb-2">
                 {amount}
               </h1>
               <div
@@ -325,15 +334,28 @@ const DashboardAnalytics = () => {
 
       <div className="  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
         <div className="flex-1 min-w-[200px] text-T-400 ">
-          <h1 className="text-T-500">Business</h1>
+          <h1 className="text-T-500 dark:text-gray-300 mb-2">Business</h1>
           <Select>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Business" />
             </SelectTrigger>
-            <SelectContent className="bg-T-300">
-              <SelectItem value="All Business">All Business</SelectItem>
-              <SelectItem value="AI Business">AI Business</SelectItem>
-              <SelectItem value="FaceBook Business">
+            <SelectContent className="bg-T-300 dark:bg-[#1e2939] dark:text-gray-300 ">
+              <SelectItem
+                value="All Business"
+                className="dark:hover:bg-gray-500"
+              >
+                All Business
+              </SelectItem>
+              <SelectItem
+                value="AI Business"
+                className="dark:hover:bg-gray-500"
+              >
+                AI Business
+              </SelectItem>
+              <SelectItem
+                value="FaceBook Business"
+                className="dark:hover:bg-gray-500"
+              >
                 FaceBook Business
               </SelectItem>
             </SelectContent>
@@ -341,43 +363,70 @@ const DashboardAnalytics = () => {
         </div>
 
         <div className="flex-1 min-w-[200px] text-T-400">
-          <h1 className="text-T-500">Platform</h1>
+          <h1 className="text-T-500 dark:text-gray-300 mb-2">Platform</h1>
           <Select>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="All Platforms" />
             </SelectTrigger>
-            <SelectContent className="bg-T-300">
-              <SelectItem value="Facebook">Facebook</SelectItem>
-              <SelectItem value="Instragram">Instragram</SelectItem>
-              <SelectItem value="Google">Google</SelectItem>
+            <SelectContent className="bg-T-300 dark:bg-[#1e2939] dark:text-gray-300 ">
+              <SelectItem value="Facebook" className="dark:hover:bg-gray-500">
+                Facebook
+              </SelectItem>
+              <SelectItem value="Instragram" className="dark:hover:bg-gray-500">
+                Instragram
+              </SelectItem>
+              <SelectItem value="Google" className="dark:hover:bg-gray-500">
+                Google
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         <div className="flex-1 min-w-[200px] text-T-400">
-          <h1 className="text-T-500">Champign</h1>
+          <h1 className="text-T-500 dark:text-gray-300 mb-2">Champign</h1>
           <Select>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="All Champign" />
             </SelectTrigger>
-            <SelectContent className="bg-T-300">
-              <SelectItem value="Holiday special">Holiday special</SelectItem>
-              <SelectItem value="Eid Special">Eid Special</SelectItem>
-              <SelectItem value="Brand Awareness">Brand Awareness</SelectItem>
+            <SelectContent className="bg-T-300 dark:bg-[#1e2939] dark:text-gray-300">
+              <SelectItem
+                value="Holiday special"
+                className="dark:hover:bg-gray-500"
+              >
+                Holiday special
+              </SelectItem>
+              <SelectItem
+                value="Eid Special"
+                className="dark:hover:bg-gray-500"
+              >
+                Eid Special
+              </SelectItem>
+              <SelectItem
+                value="Brand Awareness"
+                className="dark:hover:bg-gray-500"
+              >
+                Brand Awareness
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         <div className="flex-1 min-w-[200px] text-T-400">
-          <h1 className="text-T-500">Date Range</h1>
+          <h1 className="text-T-500 dark:text-gray-300 mb-2">Date Range</h1>
           <Select>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Last 30 days" />
             </SelectTrigger>
-            <SelectContent className="bg-T-300">
-              <SelectItem value="LastWeek">Last Week</SelectItem>
-              <SelectItem value="LastMonth">Last Month</SelectItem>
-              <SelectItem value="LastYear">Last Year</SelectItem>
+            <SelectContent className="bg-T-300 dark:bg-[#1e2939] dark:text-gray-300 ">
+              <SelectItem value="LastWeek" className="dark:hover:bg-gray-500">
+                Last Week
+              </SelectItem>
+              <SelectItem value="LastMonth" className="dark:hover:bg-gray-500">
+                Last Month
+              </SelectItem>
+              <SelectItem value="LastYear" className="dark:hover:bg-gray-500">
+                Last Year
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -387,9 +436,11 @@ const DashboardAnalytics = () => {
         <div className=" md:w-1/2">
           {/* rechart */}
           <div>
-            <div className="w-full mb-5  bg-T-200 rounded-xl shadow-sm  ">
+            <div className="w-full mb-5  bg-T-200 dark:bg-[#1e2939] rounded-xl shadow-sm  ">
               <div className="flex justify-between items-center mb-2 p-4">
-                <h2 className="text-xl text-black">Spend & Clicks</h2>
+                <h2 className="text-xl text-black dark:text-gray-300">
+                  Spend & Clicks
+                </h2>
                 <div className="flex items-center space-x-3 text-xs">
                   <div className="flex items-center space-x-1">
                     <span className="w-2 h-2 rounded-full bg-red-300" />
@@ -446,88 +497,110 @@ const DashboardAnalytics = () => {
           </div>
 
           {/* Conversion Funnel */}
-          <div className="bg-T-200 rounded-md pb-2">
-            <h1 className="mx-3 pt-3 mb-5 text-xl text-black">
+          <div className="bg-T-200 dark:bg-[#1e2939] rounded-md pb-2">
+            <h1 className="mx-3 pt-3 mb-5 text-xl text-black dark:text-gray-300">
               Conversion Funnel
             </h1>
-            <div className=" flex bg-blue-50 items-center justify-between mx-4 px-4 py-3 rounded-md mb-4">
-              <div className="flex items-center gap-3">
-                <img className="h-8 w-8" src={frame} alt="" />
-                <div>
-                  <h1 className="text-xl">Impressions</h1>
-                  <p className="text-sm">Total views on your ads</p>
+            <div className="px-6">
+              <div className=" flex bg-blue-50 items-center justify-between mx-4 px-4 py-3 rounded-md mb-4">
+                <div className="flex items-center gap-3">
+                  <img className="h-8 w-8" src={frame} alt="" />
+                  <div>
+                    <h1 className="text-xl">Impressions</h1>
+                    <p className="text-sm">Total views on your ads</p>
+                  </div>
                 </div>
+                <h1> $3,456</h1>
               </div>
-              <h1> $3,456</h1>
-            </div>
-            <div className=" flex bg-green-100 items-center justify-between mx-4 px-4 py-3 rounded-md mb-4">
-              <div className="flex items-center gap-3">
-                <img className="h-8 w-8" src={frame1} alt="" />
-                <div>
-                  <h1 className="text-xl">Clicks</h1>
-                  <p className="text-sm">User who clicked ads</p>
+              <div className=" flex bg-green-100 items-center justify-between mx-4 px-4 py-3 rounded-md mb-4">
+                <div className="flex items-center gap-3">
+                  <img className="h-8 w-8" src={frame1} alt="" />
+                  <div>
+                    <h1 className="text-xl">Clicks</h1>
+                    <p className="text-sm">User who clicked ads</p>
+                  </div>
                 </div>
+                <h1> $3,456</h1>
               </div>
-              <h1> $3,456</h1>
-            </div>
-            <div className=" flex bg-blue-100 items-center justify-between mx-4 px-4 py-3 rounded-md mb-4 ">
-              <div className="flex items-center gap-3">
-                <img className="h-8 w-8" src={frame2} alt="" />
-                <div>
-                  <h1 className="text-xl">Conversions</h1>
-                  <p className="text-sm">Completed desired actions</p>
+              <div className=" flex bg-blue-100 items-center justify-between mx-4 px-4 py-3 rounded-md mb-4 ">
+                <div className="flex items-center gap-3">
+                  <img className="h-8 w-8" src={frame2} alt="" />
+                  <div>
+                    <h1 className="text-xl">Conversions</h1>
+                    <p className="text-sm">Completed desired actions</p>
+                  </div>
                 </div>
+                <h1> $3,456</h1>
               </div>
-              <h1> $3,456</h1>
             </div>
           </div>
         </div>
 
         {/* Platform Breakdown */}
-        <div className="w-full md:w-1/2 bg-T-300 rounded-md">
+        <div className="w-full md:w-1/2 bg-T-300 dark:bg-[#1e2939] dark:text-gray-300 rounded-md">
           <div className="rounded-xl shadow-sm mx-auto">
             {/* Header */}
             <div className="flex justify-between items-center p-3">
-              <h2 className="text-xl text-black ">Platform Breakdown</h2>
-              <a href="#" className="text-sm text-violet-600 font-medium">
+              <h2 className="text-xl text-black dark:text-gray-300">
+                Platform Breakdown
+              </h2>
+              <a
+                href="#"
+                className="text-sm text-violet-600 dark:text-gray-300 font-medium"
+              >
                 View All
               </a>
             </div>
 
             <div className="px-2 rounded-xl space-y-4">
               {platforms.map((p, idx) => (
-                <div key={idx} className="bg-white rounded-lg shadow-sm">
+                <div
+                  key={idx}
+                  className="bg-white dark:bg-[#1e2939] dark:text-gray-300 rounded-lg shadow-sm"
+                >
                   <div className="flex justify-between items-center p-2">
                     <div className="flex items-center space-x-3">
                       <div className="h-5 w-5">
                         <img src={p.icon} alt="" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-800">
+                        <h3 className="font-semibold text-gray-800 dark:text-gray-300">
                           {p.name}
                         </h3>
-                        <p className="text-sm text-gray-500">{p.campaigns}</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {p.campaigns}
+                        </p>
                       </div>
                     </div>
 
                     <div className="text-right">
-                      <p className="text-sm text-gray-500">Spend</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Spend
+                      </p>
                       <p className="">{p.spend}</p>
                     </div>
                   </div>
 
                   <div className="flex justify-between pl-5 md:pl-10 pb-2 text-sm text-gray-500">
                     <div className="pl-5 md:pl-0">
-                      <p>Impression</p>
-                      <p className="text-gray-700">{p.impression}</p>
+                      <p className="dark:text-gray-300">Impression</p>
+                      <p className="text-gray-700 dark:text-gray-400">
+                        {p.impression}
+                      </p>
                     </div>
                     <div>
-                      <p>Clicks</p>
-                      <p className="text-gray-700">{p.clicks}</p>
+                      <p className="dark:text-gray-300">Clicks</p>
+                      <p className="text-gray-700 dark:text-gray-400">
+                        {p.clicks}
+                      </p>
                     </div>
                     <div className="flex flex-col items-center pr-2">
-                      <p>ROAS</p>
-                      <p className={`font-semibold ${p.roasColor}`}>{p.roas}</p>
+                      <p className="dark:text-gray-300">ROAS</p>
+                      <p
+                        className={`font-semibold dark:text-gray-400 ${p.roasColor}`}
+                      >
+                        {p.roas}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -538,16 +611,18 @@ const DashboardAnalytics = () => {
       </div>
 
       {/* table  Campaign Performance */}
-      <div className="mt-5 bg-T-200 pb-5 rounded-md">
+      <div className="mt-5 bg-T-200 dark:bg-[#1e2939]  pb-5 rounded-md">
         <div className="flex justify-between my-5 mx-5 pt-4">
-          <h1 className="text-xl text-black ">Campaign Performance</h1>
+          <h1 className="text-xl text-black dark:text-gray-300">
+            Campaign Performance
+          </h1>
           <h3 className="text-primary text-sm">View All </h3>
         </div>
 
-        <div className="bg-white mx-5 rounded-md overflow-x-auto">
+        <div className="bg-white dark:bg-[#1e2939] mx-5 rounded-md overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow className="text-T-400 text-sm md:text-[16px]">
+              <TableRow className="text-T-400 dark:text-gray-300 text-sm md:text-[16px]">
                 <TableHead>Campaign Name</TableHead>
                 <TableHead>Platform</TableHead>
                 <TableHead>Status</TableHead>
@@ -565,11 +640,14 @@ const DashboardAnalytics = () => {
 
             <TableBody>
               {campaignData.map((campaign, index) => (
-                <TableRow key={index} className="text-[10px]  md:text-[16px]">
+                <TableRow
+                  key={index}
+                  className="text-[10px] dark:text-gray-300 md:text-[16px]"
+                >
                   <TableCell>{campaign.campaignName}</TableCell>
 
                   <TableCell>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 py-5">
                       <img src={campaign.platform} alt="" className="w-5 h-5" />
                       <span className=" mr-3  ">{campaign.name}</span>
                     </div>
@@ -610,7 +688,7 @@ const DashboardAnalytics = () => {
 
       {/* Ai Insights */}
 
-      <div className="mt-5 pb-3 bg-T-200 rounded-md">
+      <div className="mt-5 pb-3 bg-T-200 dark:bg-[#1e2939] dark:text-gray-300 rounded-md">
         <div className="flex items-center justify-between my-5 mx-5 pt-2">
           <div className="flex gap-2 items-center">
             <img src={img} alt="giminy" />
@@ -623,7 +701,7 @@ const DashboardAnalytics = () => {
           {items.map((item, index) => (
             <div
               key={index}
-              className="flex  gap-4 rounded-md my-5 p-3 mx-5 bg-blue-300 "
+              className="flex  gap-4 rounded-md my-5 p-3 mx-5 bg-blue-300 dark:bg-blue-700"
             >
               <div>
                 <img

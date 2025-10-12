@@ -2,56 +2,111 @@ import starling from '../../assets/starling.png';
 import addCampagin from '../../assets/ad-campaign.png';
 import content from '../../assets/fi_6663539.png';
 import aiPowered from '../../assets/ai-powered.png';
+import CommonWrapper from '@/common/CommonWrapper';
 
 const FeaturesSection = () => {
+  const features = [
+    {
+      icon: starling,
+      title: "Sterling",
+      description: "Get personalized advice, strategy recommendations, and insights tailored to your business goals.",
+      gradient: "from-purple-500 to-blue-500"
+    },
+    {
+      icon: addCampagin,
+      title: "Ad Campaign Automation",
+      description: "Automate the creation, optimization, and tracking of your ads, saving time and improving campaign performance.",
+      gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: content,
+      title: "Content & Copy Generation",
+      description: "Quickly generate high-quality content for social media, email campaigns, and ads with customizable templates to match your brand.",
+      gradient: "from-cyan-500 to-green-500"
+    },
+    {
+      icon: aiPowered,
+      title: "AI-Powered Feedback Loop",
+      description: "Receive actionable feedback on your marketing materials to ensure they are clear, relevant, and impactful.",
+      gradient: "from-green-500 to-purple-500"
+    }
+  ];
+
   return (
-    <div className="bg-white text-black font-sans px-4 sm:px-6 md:px-12 lg:px-24 py-12 md:py-20">
-      {/* Heading */}
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight text-left max-w-5xl mb-12 sm:mb-16">
-        At ADELO, we offer <span className="text-[#8a72dfe8]">AI tools to</span> <br />
-        <span>automate and <span className="text-[#8a72dfe8]">enhance your</span></span> <br />
-        <span>marketing <span className="text-[#8a72dfe8]">campaigns, tailored for</span></span> <br />
-        <span>businesses <span className="text-[#8a72dfe8]">of all sizes.</span></span>
-      </h1>
+    <div className="bg-white dark:bg-gray-900 font-sans px-4 sm:px-6 md:px-12 lg:px-24 py-16 md:py-24">
+  <CommonWrapper>
+        {/* Header Section */}
+      <div className="max-w-4xl mx-auto text-center mb-16 md:mb-20">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
+          <span className="bg-gradient-to-r from-[#8a72dfe8] to-[#A891FB] dark:from-[#A891FB] dark:to-[#C0AFFA] bg-clip-text text-transparent">
+            AI-Powered Marketing
+          </span>
+          <br />
+          <span className="text-gray-900 dark:text-white">
+            Tools That Scale With Your Business
+          </span>
+        </h1>
+        <p className="text-lg text-gray-600 dark:text-gray-300 mx-auto max-w-2xl ">
+          Transform your marketing strategy with intelligent automation. From content creation to campaign optimization, 
+          we provide the tools you need to succeed in today's digital landscape.
+        </p>
+      </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 border-black/10">
-        {/* Card 1 */}
-        <div className="border-b border-r border-black/10 p-6 sm:p-8 md:p-10">
-          <img src={starling} alt="Sterling" className="w-12 h-12 sm:w-16 sm:h-16 mb-4" />
-          <h2 className="text-lg text-[#1E1B4B] font-semibold mb-2">Sterling</h2>
-          <p className="text-sm text-black/70 leading-relaxed">
-            Get personalized advice, strategy recommendations, and <br /> insights tailored to your business goals.
-          </p>
-        </div>
+      {/* Features Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+        {features.map((feature, index) => (
+          <div
+            key={index}
+            className="group relative bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700 hover:border-transparent"
+          >
+            {/* Gradient Border Effect */}
+            <div className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+            
+            {/* Icon Container */}
+            <div className="relative mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-2xl shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <img 
+                  src={feature.icon} 
+                  alt={feature.title}
+                  className="w-8 h-8 dark:invert dark:opacity-90" 
+                />
+              </div>
+              {/* Floating Gradient Dot */}
+              <div className={`absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r ${feature.gradient} rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+            </div>
 
-        {/* Card 2 */}
-        <div className="border-b border-black/10 p-6 sm:p-8 md:p-10">
-          <img src={addCampagin} alt="Ad Campaign" className="w-12 h-12 sm:w-16 sm:h-16 mb-4" />
-          <h2 className="text-lg text-[#1E1B4B] font-semibold mb-2">Ad Campaign Automation</h2>
-          <p className="text-sm text-black/70 leading-relaxed">
-            Automate the creation, optimization, and tracking of <br /> your ads, saving time and improving campaign performance.
-          </p>
-        </div>
+            {/* Content */}
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#8a72dfe8] group-hover:to-[#A891FB] group-hover:bg-clip-text transition-all duration-300">
+              {feature.title}
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-base">
+              {feature.description}
+            </p>
 
-        {/* Card 3 */}
-        <div className="border-r border-black/10 p-6 sm:p-8 md:p-10">
-          <img src={content} alt="Content & Copy" className="w-12 h-12 sm:w-16 sm:h-16 mb-4" />
-          <h2 className="text-lg text-[#1E1B4B] font-semibold mb-2">Content & Copy Generation</h2>
-          <p className="text-sm text-black/70 leading-relaxed">
-            Quickly generate high-quality content for social media, <br /> email campaigns, and ads, with customizable templates <br /> to match your brand.
-          </p>
-        </div>
+            {/* Hover Arrow */}
+            <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+              <div className="w-8 h-8 bg-gradient-to-r from-[#8a72dfe8] to-[#A891FB] rounded-full flex items-center justify-center">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
-        {/* Card 4 */}
-        <div className="p-6 sm:p-8 md:p-10">
-          <img src={aiPowered} alt="AI Feedback" className="w-12 h-12 sm:w-16 sm:h-16 mb-4" />
-          <h2 className="text-lg text-[#1E1B4B] font-semibold mb-2">AI-Powered Feedback Loop</h2>
-          <p className="text-sm text-black/70 leading-relaxed">
-            Receive actionable feedback on your marketing <br /> materials to ensure they are clear, relevant, and <br /> impactful.
-          </p>
+      {/* Bottom CTA */}
+      <div className="text-center mt-16 md:mt-20">
+        <div className="inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-[#8a72dfe8] to-[#A891FB] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group">
+          <span className="text-white font-semibold text-lg">Explore All Features</span>
+          <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors duration-300">
+            <svg className="w-4 h-4 text-white transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </div>
         </div>
       </div>
+  </CommonWrapper>
     </div>
   );
 };

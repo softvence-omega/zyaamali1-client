@@ -1,5 +1,6 @@
 "use client";
 
+import TopBar from "@/utils/TopBar";
 import type React from "react";
 import { useState } from "react";
 import {
@@ -130,22 +131,30 @@ const DashboardSubscription: React.FC = () => {
     </button>
   );
 
+    const breadcrumbPaths = [
+    { name: "Dashboard", link: "/dashboard" },
+    { name: "Setting", link: "" },
+    { name: " Subscription", link: "/dashboard/subscription" },
+  ];
+
+
   return (
     <div className="w-full mx-auto p-6 space-y-8">
       {/* Header */}
+       <TopBar paths={breadcrumbPaths}></TopBar>
       <div>
-        <h1 className="bg-gradient-to-b from-[#8E6EFF] to-[#000000] bg-clip-text text-transparent block text-4xl font-bold">
+        <h1 className="bg-gradient-to-b from-[#8E6EFF] to-[#000000] dark:to-gray-400 bg-clip-text text-transparent block text-4xl font-bold">
           Billing & Subscription
         </h1>
-        <p className="text-T-600 mt-2">
+        <p className="text-T-600 dark:text-gray-400 mt-2">
           Manage your subscription, payment method & billing history
         </p>
       </div>
 
       {/* Current Plan */}
-      <div className="bg-white">
-        <div className="py-3 px-4 bg-T-300 rounded-2xl flex items-center justify-start">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+      <div className="bg-white dark:bg-[#1e2939] dark:text-gray-300 p-6 rounded-2xl">
+        <div className="py-3 px-4 bg-T-300 rounded-2xl flex items-center justify-start mb-6 dark:bg-gray-700 ">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-300 ">
             Current Subscription Plan
           </h2>
         </div>
@@ -153,7 +162,7 @@ const DashboardSubscription: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-start justify-between mt-2 gap-6">
           <div className="flex-1">
             <div className="flex items-center space-x-2">
-              <span className="text-lg font-medium text-gray-900">
+              <span className="text-lg font-medium text-gray-900 dark:text-gray-300">
                 Pro Plan
               </span>
               <span className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-3xl">
@@ -169,7 +178,7 @@ const DashboardSubscription: React.FC = () => {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center text-lg text-gray-600"
+                  className="flex items-center text-lg text-gray-600 dark:text-gray-400"
                 >
                   <FaCheck className="w-3 h-3 text-[#FF8818] mr-2" />
                   {item}
@@ -179,13 +188,13 @@ const DashboardSubscription: React.FC = () => {
           </div>
 
           <div className="text-left">
-            <div className="text-sm text-gray-600">Next Billing Date</div>
-            <div className="font-medium text-gray-900">22/06/2026</div>
-            <div className="text-sm text-gray-600 mt-2">Current Amount</div>
-            <div className="text-2xl font-bold text-gray-900">$19.99</div>
+            <div className="text-sm text-gray-600 dark:text-gray-300">Next Billing Date</div>
+            <div className="font-medium text-gray-900 dark:text-gray-400">22/06/2026</div>
+            <div className="text-sm text-gray-600 mt-2 dark:text-gray-300">Current Amount</div>
+            <div className="text-2xl font-bold text-gray-900 dark:text-gray-400">$19.99</div>
 
             <div className="flex space-x-2 mt-4">
-              <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-T-100 font-bold">
+              <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-T-100 font-bold ">
                 Change Plan
               </button>
               <button
@@ -200,14 +209,14 @@ const DashboardSubscription: React.FC = () => {
       </div>
 
       {/* Pricing Plans */}
-      <div className="bg-white">
-        <h2 className="text-xl font-medium text-T-900 mb-6">Pricing Plans</h2>
+      <div className="bg-white p-6 rounded-2xl dark:bg-[#1e2939] dark:text-gray-300">
+        <h2 className="text-xl font-medium text-T-900 dark:text-gray-300 mb-6">Pricing Plans</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {pricingPlans.map((plan, index) => (
             <div
               key={index}
-              className={`flex flex-col justify-between border rounded-lg p-6 relative bg-T-300 h-full ${
+              className={`flex flex-col justify-between border rounded-lg p-6 relative bg-T-300 dark:bg-[#1e2939] dark:text-gray-300 h-full ${
                 plan.popular ? "border-purple-500" : "border-gray-200"
               }`}
             >
@@ -220,22 +229,22 @@ const DashboardSubscription: React.FC = () => {
               )}
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-300">
                   {plan.name}
                 </h3>
                 <div className="mt-2">
                   <span className="text-3xl font-bold text-blue-400">
                     {plan.price}
                   </span>
-                  <span className="text-gray-600">{plan.period}</span>
+                  <span className="text-gray-600 dark:text-gray-400">{plan.period}</span>
                 </div>
-                <hr className="mt-6 text-T-400" />
+                <hr className="mt-6 text-T-400 dark:border-gray-400" />
 
                 <ul className="mt-6 space-y-3">
                   {plan.features.map((feature, featureIndex) => (
                     <li
                       key={featureIndex}
-                      className="flex items-center text-sm text-gray-600"
+                      className="flex items-center text-sm text-gray-600 dark:text-gray-300"
                     >
                       <FaCheck className="w-3 h-3 text-[#FF8818] mr-3 flex-shrink-0" />
                       {feature}
@@ -255,9 +264,9 @@ const DashboardSubscription: React.FC = () => {
       </div>
 
       {/* Payment Methods */}
-      <div className="bg-T-300 p-6 rounded-2xl">
+      <div className="bg-T-300 dark:bg-[#1e2939] dark:text-gray-300 p-6 rounded-2xl ">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-300">
             Payment Methods
           </h2>
           <button className="px-4 py-2 rounded-3xl bg-gradient-to-r from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] cursor-pointer text-T-100 font-bold">
@@ -265,57 +274,58 @@ const DashboardSubscription: React.FC = () => {
           </button>
         </div>
 
-        <div className="flex items-center justify-between p-4 border border-T-300 rounded-lg">
+        <div className="flex items-center justify-between p-4 border border-T-300 rounded-lg dark:border-gray-400">
           <div className="flex items-center space-x-3">
             <FaCreditCard className="w-6 h-6 text-gray-400" />
             <div>
-              <div className="font-medium text-gray-900">Visa Card</div>
-              <div className="text-sm text-gray-600">**** **** **** 1234</div>
+              <div className="font-medium text-gray-900 dark:text-gray-300">Visa Card</div>
+              <div className="text-sm text-gray-600 dark:text-gray-500">**** **** **** 1234</div>
             </div>
           </div>
           <div className="text-right">
-            <div className="text-sm text-gray-600">23/06/2025</div>
+            <div className="text-sm text-gray-600 dark:text-gray-500">23/06/2025</div>
           </div>
         </div>
       </div>
 
       {/* Billing History */}
-      <div className="bg-T-300 rounded-2xl p-6">
+      <div className="bg-T-300 dark:bg-[#1e2939] dark:text-gray-300 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-300">
             Billing History
           </h2>
-          <select className="border border-gray-300 rounded-md px-3 py-1 text-sm">
+          <select className="border border-gray-300 rounded-md px-3 py-1 text-sm dark:bg-[#1e2939]">
             <option>6 Months</option>
             <option>12 Months</option>
             <option>All Time</option>
           </select>
         </div>
 
-        <div className="overflow-x-auto bg-white p-3 rounded-2xl">
+        <div className="overflow-x-auto bg-white dark:bg-[#1e2939] dark:text-gray-300 p-3 rounded-2xl">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-left py-3 text-sm font-medium text-gray-600">
+              <tr className="border-b border-gray-200 dark:border-b-gray-500">
+                <th className="text-left py-3 text-sm font-medium text-gray-600 dark:text-gray-300 ">
                   Invoice
                 </th>
-                <th className="text-left py-3 text-sm font-medium text-gray-600">
+                <th className="text-left py-3 text-sm font-medium text-gray-600 dark:text-gray-300">
                   Date
                 </th>
-                <th className="text-left py-3 text-sm font-medium text-gray-600">
+                <th className="text-left py-3 text-sm font-medium text-gray-600 dark:text-gray-300">
                   Amount
                 </th>
-                <th className="text-left py-3 text-sm font-medium text-gray-600">
+                <th className="text-left py-3 text-sm font-medium text-gray-600 dark:text-gray-300">
                   Action
                 </th>
               </tr>
             </thead>
             <tbody>
               {billingHistory.map((item, index) => (
-                <tr key={index} className="border-b border-gray-100">
-                  <td className="py-3 text-sm text-gray-900">{item.invoice}</td>
-                  <td className="py-3 text-sm text-gray-600">{item.date}</td>
-                  <td className="py-3 text-sm text-gray-900">{item.amount}</td>
+                <tr key={index} className="border-b border-gray-100 dark:border-b-gray-500">
+                  <td className="py-5 text-sm text-gray-900 dark:text-gray-300">{item.invoice}</td>
+                  <td className="py-3 text-sm text-gray-600 dark:text-gray-300">{item.date}</td>
+                  <td className="py-3 text-sm text-gray-600 dark:text-gray-300">{item.date}</td>
+                  <td className="py-3 text-sm text-gray-900 dark:text-gray-300">{item.amount}</td>
                   <td className="py-3">
                     <button className="text-purple-600 text-sm font-medium hover:text-purple-700 flex items-center">
                       <FaDownload className="w-3 h-3 mr-1" />
@@ -330,40 +340,40 @@ const DashboardSubscription: React.FC = () => {
       </div>
 
       {/* Auto Renew & Notification */}
-      <div className="bg-white p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-white dark:bg-[#1e2939] dark:text-gray-300 p-6 rounded-2xl">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-300 mb-4">
           Auto Renew & Notification
         </h2>
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between p-4 border border-T-300 rounded-2xl">
+          <div className="flex items-center justify-between p-4 border border-T-300 rounded-2xl dark:border-gray-400">
             <div>
-              <div className="font-medium text-gray-900">Auto Renew</div>
-              <div className="text-sm text-gray-600">
+              <div className="font-medium text-gray-900 dark:text-gray-300">Auto Renew</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">
                 Automatically renew your subscription when it expires
               </div>
             </div>
             <ToggleSwitch checked={autoRenew} onChange={setAutoRenew} />
           </div>
 
-          <div className="flex items-center justify-between p-4 border border-T-300 rounded-2xl">
+          <div className="flex items-center justify-between p-4 border border-T-300 dark:border-gray-400 rounded-2xl">
             <div>
-              <div className="font-medium text-gray-900">
+              <div className="font-medium text-gray-900 dark:text-gray-300">
                 Payment Confirmed Email
               </div>
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-600 dark:text-gray-400">
                 Receive email when your payment has been confirmed
               </div>
             </div>
             <ToggleSwitch checked={paymentEmail} onChange={setPaymentEmail} />
           </div>
 
-          <div className="flex items-center justify-between p-4 border border-T-300 rounded-2xl">
+          <div className="flex items-center justify-between p-4 border border-T-300 rounded-2xl dark:border-gray-400">
             <div>
-              <div className="font-medium text-gray-900">
+              <div className="font-medium text-gray-900 dark:text-gray-300">
                 Billing Reminders Email
               </div>
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-600 dark:text-gray-400">
                 Receive email when your subscription expires
               </div>
             </div>
@@ -376,18 +386,18 @@ const DashboardSubscription: React.FC = () => {
       </div>
 
       {/* Contact Support */}
-      <div className="bg-white p-6">
+      <div className="bg-white p-6 dark:bg-[#1e2939] dark:text-gray-300 rounded-2xl">
         <div className="flex flex-col items-start justify-start">
           <div className="flex items-center space-x-3">
-            <FaHeadset className="w-6 h-6 font-black text-black" />
+            <FaHeadset className="w-6 h-6 font-black text-black dark:text-gray-400" />
             <div>
-              <div className="font-medium text-gray-900">Contact Support</div>
-              <div className="text-sm text-gray-600">
+              <div className="font-medium text-gray-900 dark:text-gray-300">Contact Support</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">
                 Get help with your account
               </div>
             </div>
           </div>
-          <Link to={"/dashboard/help"} className="flex items-center text-purple-600 text-sm font-medium hover:text-purple-700 mt-2">
+          <Link to={"/dashboard/help"} className="flex items-center text-purple-600 text-sm font-medium hover:text-purple-700 dark:text-purple-300 dark:hover:text-purple-600  mt-2">
             Go to Contact Us Page
             <FaChevronRight className="w-3 h-3 ml-1" />
           </Link>

@@ -3,21 +3,18 @@ import { FiDownload, FiShare, FiChevronDown } from "react-icons/fi";
 import { IoArrowBack } from "react-icons/io5";
 import { useRef } from "react";
 
-import orange from "../../assets/Orange.png";
-import media1 from "../../assets/media-1.png";
-import media2 from "../../assets/media-2.png";
-import media3 from "../../assets/media-3.png";
-import media4 from "../../assets/media-4.png";
 import group from "../../assets/Group.png";
 import picicon from "../../assets/picicon.png";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { Creative } from "@/types";
 
 export default function DashboardContentPreview() {
-  const accessToken = useSelector((state) => state.auth.token);
+  const accessToken = useSelector((state: RootState) => state.auth.token);
 
-  const [allContent, setAllContent] = useState([]); // For the "1:1" dropdown
-  const [singleContent, setSingleContent] = useState([]);
+  const [allContent, setAllContent] = useState<Creative[]>([]); // For the "1:1" dropdown
+  const [singleContent, setSingleContent] = useState<Creative>();
   console.log(singleContent);
 
   const queryParams = new URLSearchParams(window.location.search);
@@ -33,11 +30,14 @@ export default function DashboardContentPreview() {
     }
   };
 
+  console.log("all content", allContent);
+  console.log("single content ", singleContent);
+
   useEffect(() => {
     const getAllContent = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/v1/content/get-single-content/${contentId}`,
+          `https://zyaamali1-backend.onrender.com/api/v1/content/get-single-content/${contentId}`,
           {
             method: "GET",
             headers: {
@@ -61,7 +61,7 @@ export default function DashboardContentPreview() {
     const getAllContent = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/v1/content/get-all-content",
+          "https://zyaamali1-backend.onrender.com/api/v1/content/get-all-content",
           {
             method: "GET",
             headers: {
@@ -81,6 +81,7 @@ export default function DashboardContentPreview() {
     getAllContent();
   }, []);
 
+  console.log("single content ", singleContent);
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Header */}
@@ -168,17 +169,17 @@ export default function DashboardContentPreview() {
         <section className="lg:col-span-8 flex flex-col w-full px-4 sm:px-8 lg:px-12">
           {/* Canvas */}
           <div className="flex items-center justify-center px-4 sm:px-8 py-8 sm:py-12 bg-[#020817]">
-            {singleContent.type === "image" ? (
+            {singleContent?.type === "image" ? (
               <img
                 src={singleContent.link}
-                alt={singleContent.title || "content"}
-                className="object-cover rounded-2xl w-full h-full"
+                alt={"content"}
+                className="object-cover h-screen rounded-2xl w-full "
               />
             ) : (
               <div className="relative w-full h-full">
                 <video
                   ref={videoRef}
-                  src={singleContent.link}
+                  src={singleContent?.link}
                   className="object-cover rounded-2xl w-full h-full"
                   controls={isPlaying}
                 />
@@ -220,7 +221,7 @@ export default function DashboardContentPreview() {
                         {content.type === "image" ? (
                           <img
                             src={content.link}
-                            alt={content.title || "content"}
+                            alt={"content"}
                             className="object-cover rounded-2xl w-full h-full"
                           />
                         ) : (
@@ -250,7 +251,7 @@ export default function DashboardContentPreview() {
                     <div className="h-36 rounded-lg overflow-hidden bg-gray-800 col-span-3">
                       <img
                         src={allContent[index * 4 + 3].link}
-                        alt={allContent[index * 4 + 3].title || "Media"}
+                        alt="Media"
                         className="w-full h-full object-cover"
                       />
                     </div>

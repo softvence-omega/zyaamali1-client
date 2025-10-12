@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import bg from "../../assets/reviewbg.jpg"; // Import the background image
 
 export const Review = () => {
@@ -84,7 +85,7 @@ export const Review = () => {
                 {[...Array(5)].map((_, i) => (
                     <svg
                         key={i}
-                        className={`w-4 h-4 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                        className={`w-4 h-4 ${i < rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'}`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
@@ -97,28 +98,22 @@ export const Review = () => {
     };
 
     return (
-        <div
-            className="py-16 px-4  bg-cover bg-center"
-
-        >
-
-            <div className="max-w-7xl mx-auto relative" >
+        <div className="py-16  bg-cover bg-center dark:bg-gray-900">
+            <div className="max-w-[1400px] mx-auto relative">
                 <img
                     src={bg}
                     alt="Background"
-                    className="absolute inset-0 w-full h-full object-cover opacity-30"
+                    className="absolute inset-0 w-full h-full object-cover opacity-30 dark:opacity-20"
                 />
-                <div className="absolute inset-0 bg-black/50" /> {/* Dark overlay */}
+                <div className="absolute inset-0 bg-black/50 dark:bg-black/70" /> {/* Dark overlay */}
             </div>
 
-
-
-            <div className="max-w-7xl mx-auto "> {/* Ensure content is above the overlay */}
+            <div className="max-w-[1400px] mx-auto relative z-10"> {/* Ensure content is above the overlay */}
                 <div className="flex justify-center items-center flex-col gap-6 text-center px-4">
                     <h1 className="bg-gradient-to-l from-[#654FAE] via-[#C0AFFA] to-[#8E6EFF] bg-clip-text text-transparent md:text-7xl text-4xl font-bold">
-                        <span className="text-gray-700"> Love From</span> Our Users
+                        <span className="text-gray-700 dark:text-gray-300"> Love From</span> Our Users
                     </h1>
-                    <p className="max-w-2xl text-black/50 mb-10">
+                    <p className="max-w-2xl text-black/50 dark:text-gray-400 mb-10">
                         Join a growing community of marketers, creators, and business owners who trust Adelo to
                         simplify their advertising and reduce their costs.
                     </p>
@@ -129,8 +124,7 @@ export const Review = () => {
                         <div
                             key={review.id}
                             className={`
-                                bg-white rounded-2xl p-6 shadow-md border-1 flex flex-col
-                               
+                                bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-md dark:shadow-gray-700/30 border-1 flex flex-col
                             `}
                         >
                             <div className="flex items-center mb-4">
@@ -138,21 +132,20 @@ export const Review = () => {
                                     src={review.avatar}
                                     alt={review.name}
                                     className="w-10 h-10 rounded-full object-cover mr-3"
-
                                 />
                                 <div className="flex-1">
-                                    <p className="font-bold text-gray-800 text-base">{review.name}</p>
-                                    <p className="text-sm text-gray-500">{review.handle}</p>
+                                    <p className="font-bold text-gray-800 dark:text-white text-base">{review.name}</p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">{review.handle}</p>
                                 </div>
                                 <StarRating rating={review.rating} />
                             </div>
-                            <p className="text-gray-700 text-sm leading-relaxed">
+                            <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                                 {review.reviewText}
                             </p>
                         </div>
                     ))}
                 </div>
             </div>
-        </div >
+        </div>
     );
 };

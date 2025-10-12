@@ -1,94 +1,53 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
-import { FaChevronDown } from "react-icons/fa"; // Assuming react-icons
+import { FaChevronDown } from "react-icons/fa";
 import img from "../../assets/dash-content.png"; // Make sure this path is correct
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import { useState, useEffect } from "react";
 
 const ContentHeader: React.FC<{
   templateType: string;
   selectedPlatforms: string[];
   searchTerm: string;
-}> = ({ templateType, selectedPlatforms, searchTerm }) => {
+  startDate: string;
+  endDate: string;
+}> = ({ templateType, selectedPlatforms, searchTerm, startDate, endDate }) => {
   const navigate = useNavigate();
   const accessToken = useSelector((state: any) => state.auth.token);
+  const user = useSelector((state: any) => state.auth.user);
 
   const [contentType, setContentType] = useState("image");
   const [prompt, setPrompt] = useState("");
-  const [aspectRatio, setAspectRatio] = useState("1:1");
+  const [aspectRatio] = useState("1:1");
   const [platfrom, setPlatform] = useState("google");
   const [allContent, setAllContent] = useState<any[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
 
-  const handleGenerate = async () => {
+  console.log("all content ", allContent);
+  // Fetch all content initially
+  const getAllContent = async () => {
     try {
-      let response;
-      if (contentType === "image") {
-        response = await axios.post(
-          "https://ads-ai-m3e5.onrender.com/ads/generate/image",
-          { prompt }
-        );
-        console.log("image  ", response.data);
-      } else if (contentType === "video") {
-        response = await axios.post(
-          `https://ads-ai-m3e5.onrender.com/ads/generate/vedio?prompt=${prompt}`
-        );
-
-        console.log("video ", response.data);
-      } else {
-        console.warn("⚠️ Unsupported content type:", contentType);
-        return;
-      }
-
-      if (response.data) {
-        const result = await axios.post(
-          "http://localhost:5000/api/v1/content/post-generated-content",
-          {
-            type: contentType,
-            platform: platfrom,
-            ratio: aspectRatio,
-            link: response.data.video_urls || response.data.image_urls,
-            source: "generated",
-            prompt,
+      const res = await fetch(
+        "https://zyaamali1-backend.onrender.com/api/v1/content/get-all-content",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
           },
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        if (result.data) toast.success("The content generated successfully");
-      }
-    } catch (error: any) {
-      console.error("❌ Error generating content:", error);
+        }
+      );
+
+      const data = await res.json();
+      setAllContent(data.data.result || []);
+    } catch (error) {
+      console.error("Error fetching content:", error);
     }
   };
 
-  const handleGeneratew = (id: string) => {
-    navigate(`/contentpreview?contentId=${id}`);
-  };
-
   useEffect(() => {
-    const getAllContent = async () => {
-      try {
-        const res = await fetch(
-          "http://localhost:5000/api/v1/content/get-all-content",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = await res.json();
-        setAllContent(data.data.result || []);
-      } catch (error) {
-        console.error("Error fetching content:", error);
-      }
-    };
     getAllContent();
   }, [accessToken]);
 
@@ -103,12 +62,101 @@ const ContentHeader: React.FC<{
       item.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.prompt?.toLowerCase().includes(searchTerm.toLowerCase());
 
-    return matchesType && matchesPlatform && matchesSearch;
+    // Filter by date range
+    const itemDate = new Date(item.createdAt);
+
+    const startDateFilter = startDate ? new Date(startDate) <= itemDate : true;
+    const endDateFilter = endDate ? new Date(endDate) >= itemDate : true;
+
+    return (
+      matchesType &&
+      matchesPlatform &&
+      matchesSearch &&
+      startDateFilter &&
+      endDateFilter
+    );
   });
 
-  console.log(filteredContent);
+  const handleGenerate = async () => {
+    if (!prompt.trim()) {
+      toast.error("Please enter a prompt");
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      let response;
+      if (contentType === "image") {
+        response = await axios.post(
+          "https://adelo.ai.mantelworthy.online/library/generate/image-content",
+          {
+            prompt,
+            platform: platfrom,
+          }
+        );
+        console.log("image  ", response.data);
+      } else if (contentType === "video") {
+        response = await axios.post(
+          `https://adelo.ai.mantelworthy.online/library/generate/video-content`,
+          {
+            prompt,
+            platform: platfrom,
+          }
+        );
+        console.log("video ", response.data);
+      } else {
+        console.warn("⚠️ Unsupported content type:", contentType);
+        return;
+      }
+
+      if (response.data) {
+        console.log("saved Generate data request ", {
+          type: contentType,
+          platform: platfrom,
+          ratio: aspectRatio,
+          link: response.data.video_urls || response.data.image_urls,
+          source: "generated",
+          prompt,
+          owner: user.userId,
+        });
+        const result = await axios.post(
+          "https://zyaamali1-backend.onrender.com/api/v1/content/post-generated-content",
+          {
+            type: contentType,
+            platform: platfrom,
+            ratio: aspectRatio,
+            link: response.data.video_urls || response.data.image_urls,
+            source: "generated",
+            prompt,
+            owner: user.userId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (result.data) {
+          toast.success("The content generated successfully");
+          // Refresh the content list
+          await getAllContent(); // Refresh content after generation
+        }
+      }
+    } catch (error: any) {
+      console.error("❌ Error generating content:", error);
+      toast.error("Failed to generate content. Please try again.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const handleGeneratew = (id: string) => {
+    navigate(`/contentpreview?contentId=${id}`);
+  };
+
   return (
-    <div className="relative mb-8 w-full">
+    <div className="relative mb-8 w-full mt-10">
       {/* Background Image */}
       <img
         src={img}
@@ -139,6 +187,7 @@ const ContentHeader: React.FC<{
               className="appearance-none bg-transparent border border-white border-opacity-50 text-white py-2 px-4 pr-8 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
               value={contentType}
               onChange={(e) => setContentType(e.target.value)}
+              disabled={isGenerating}
             >
               <option value="image" className="bg-gray-800 text-white">
                 Image
@@ -158,36 +207,24 @@ const ContentHeader: React.FC<{
               className="w-full pl-4 pr-10 py-2 sm:py-3 md:py-4 lg:py-5 bg-transparent border border-white border-opacity-50 text-white placeholder-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
+              disabled={isGenerating}
             />
           </div>
 
-          {/* Generate Button */}
+          {/* Generate Button with Loading Spinner */}
           <button
             onClick={handleGenerate}
-            className="flex-shrink-0 px-6 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200 w-full sm:w-auto"
+            className="flex-shrink-0 cursor-pointer px-6 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200 w-full sm:w-auto disabled:bg-purple-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-w-[120px]"
           >
-            Generate
+            {isGenerating ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span>Generating...</span>
+              </>
+            ) : (
+              "Generate"
+            )}
           </button>
-        </div>
-
-        {/* Aspect Ratio Dropdown */}
-        <div className="relative inline-block sm:w-auto mt-4 ml-2">
-          <select
-            className="appearance-none bg-opacity-20 backdrop-filter backdrop-blur-lg border border-white border-opacity-50 text-white py-2 px-4 pr-8 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 w-40 sm:w-48"
-            value={aspectRatio}
-            onChange={(e) => setAspectRatio(e.target.value)}
-          >
-            <option value="1:1" className="bg-gray-800 text-white">
-              1:1
-            </option>
-            <option value="16:9" className="bg-gray-800 text-white">
-              16:9
-            </option>
-            <option value="9:16" className="bg-gray-800 text-white">
-              9:16
-            </option>
-          </select>
-          <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white pointer-events-none" />
         </div>
 
         {/* Platform Dropdown */}
@@ -196,6 +233,7 @@ const ContentHeader: React.FC<{
             className="appearance-none bg-opacity-20 backdrop-filter backdrop-blur-lg border border-white border-opacity-50 text-white py-2 px-4 pr-8 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 w-40 sm:w-48"
             value={platfrom}
             onChange={(e) => setPlatform(e.target.value)}
+            disabled={isGenerating}
           >
             <option value="facebook" className="bg-gray-800 text-white">
               Facebook
@@ -216,15 +254,35 @@ const ContentHeader: React.FC<{
           <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white pointer-events-none" />
         </div>
 
+        {/* Loading Overlay for Content Generation */}
+        {isGenerating && (
+          <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50">
+            <div className="bg-white/95 rounded-2xl p-8 max-w-md mx-4 text-center shadow-2xl border border-white/20">
+              <div className="w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Generating {contentType === "image" ? "Image" : "Video"}
+              </h3>
+              <p className="text-gray-600">
+                This may take up some seconds. Please wait...
+              </p>
+              <div className="mt-4 flex justify-center space-x-1">
+                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce delay-150"></div>
+                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce delay-300"></div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Content Grid */}
         <div className="px-4 py-12">
           <div className="max-w-[1400px] mx-auto">
-            <div className="columns-1 sm:columns-2 md:columns-4 gap-4 space-y-4 mt-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 space-y-4 mt-12">
               {filteredContent.map((img) => (
                 <div
                   onClick={() => handleGeneratew(img._id)}
                   key={img._id}
-                  className="cursor-pointer break-inside-avoid overflow-hidden rounded-2xl shadow-md h-40 transition-transform duration-300 relative group"
+                  className="cursor-pointer break-inside-avoid overflow-hidden rounded-2xl shadow-md h-40 transition-transform duration-300 relative group hover:scale-105"
                 >
                   {img.type === "image" ? (
                     <img

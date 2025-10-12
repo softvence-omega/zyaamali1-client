@@ -6,19 +6,21 @@ import { FaArrowRight } from "react-icons/fa6";
 const TableCell = ({ value, label }: { value: string; label: string }) => (
   <td className="p-4">
     <div className="text-center">
-      <h1 className="text-xl">{value}</h1>
-      <p className="text-Foundation-text-T-75 text-sm">{label}</p>
+      <h1 className="text-xl text-gray-900 dark:text-white transition-colors duration-300">{value}</h1>
+      <p className="text-gray-600 dark:text-gray-400 text-sm transition-colors duration-300">{label}</p>
     </div>
   </td>
 );
 
 const ActiveCampaign = () => {
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden p-5 m-5">
+    <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden p-5  bg-white dark:bg-gray-800 transition-colors duration-300">
       {/* Header Section */}
       <div className="flex items-center gap-4 mb-8">
-        <AnnouncementIcon />
-        <h1 className="text-2xl">Active Campaigns</h1>
+        <div className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
+          <AnnouncementIcon />
+        </div>
+        <h1 className="text-2xl text-gray-900 dark:text-white transition-colors duration-300">Active Campaigns</h1>
       </div>
 
       {/* Table Section */}
@@ -26,7 +28,10 @@ const ActiveCampaign = () => {
         <table className="w-full border-collapse">
           <tbody>
             {campaignData.map((campaign, index) => (
-              <tr key={index}>
+              <tr 
+                key={index}
+                className="border-b border-gray-200 dark:border-gray-700 last:border-b-0 transition-colors duration-300"
+              >
                 <TableCell value={campaign.platform} label="Platform" />
                 <TableCell value={campaign.impressions} label="Impressions" />
                 <TableCell value={campaign.ctr} label="CTR" />
@@ -36,13 +41,14 @@ const ActiveCampaign = () => {
             ))}
           </tbody>
         </table>
-        <div className="flex items-center gap-2 md:gap-3 flex-wrap">
-          <button className="text-[#8E6EFF] text-sm md:text-base font-medium hover:underline">
+        
+        {/* View All Button */}
+        <div className="flex items-center gap-2 md:gap-3 flex-wrap mt-6">
+          <button className="text-[#8E6EFF] dark:text-purple-400 text-sm md:text-base font-medium hover:underline transition-colors duration-300 hover:text-[#7B5BE6] dark:hover:text-purple-300">
             View All Campaigns
           </button>
-          <FaArrowRight className="text-[#8E6EFF] text-base" />
+          <FaArrowRight className="text-[#8E6EFF] dark:text-purple-400 text-base transition-colors duration-300" />
         </div>
-
       </div>
     </div>
   );

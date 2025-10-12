@@ -47,11 +47,11 @@ const Accordion = () => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md px-4 py-8 sm:px-6 md:px-16 lg:px-20 xl:px-24 max-w-full md:max-w-4xl mx-auto mt-10">
+    <div className="bg-white dark:bg-[#1e2939] rounded-2xl shadow-md px-4 py-8 sm:px-6 md:px-16 lg:px-20 xl:px-24 max-w-full md:max-w-4xl mx-auto mt-10">
       {faqs.map((faq, index) => (
         <div
           key={index}
-          className="border-b last:border-b-0 py-6 md:py-8 border-[#D9DBE9] transition-all duration-200 ease-in-out"
+          className="border-b last:border-b-0 py-6 md:py-8 border-[#D9DBE9] dark:border-gray-400 transition-all duration-200 ease-in-out"
         >
           <button
             onClick={() => toggle(index)}
@@ -60,8 +60,8 @@ const Accordion = () => {
             <span
               className={`text-lg sm:text-xl md:text-2xl font-medium transition-colors duration-200 ${
                 openIndex === index
-                  ? "text-[#3A4C67]"
-                  : "text-[#212121] hover:text-[#3A4C67]"
+                  ? "text-[#3A4C67] dark:text-gray-200"
+                  : "text-[#212121] dark:text-gray-300 hover:text-[#3A4C67] dark:hover:text-gray-100"
               }`}
             >
               {faq.question}
@@ -78,7 +78,7 @@ const Accordion = () => {
             }`}
           >
             <div className="overflow-hidden">
-              <p className="mt-2 text-sm text-[#878788] leading-relaxed">
+              <p className="mt-2 text-sm text-[#878788] dark:text-gray-400 leading-relaxed">
                 {faq.answer}
               </p>
             </div>

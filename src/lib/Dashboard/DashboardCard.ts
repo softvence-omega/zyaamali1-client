@@ -11,7 +11,7 @@ export const usersCards: DashboardCardProps[] = [
     iconBgColor: "bg-[#3B82F6]/20",
     iconColor: "text-[#3B82F6]",
     cardTitle: "Active Campaigns",
-    stats: "7",
+    stats: "0",
     description: "ROI 212%",
     textColor: "text-[#3B82F6]",
     borderColor: "border-[#3B82F6]",

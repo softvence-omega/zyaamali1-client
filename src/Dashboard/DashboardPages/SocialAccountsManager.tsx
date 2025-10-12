@@ -1,8 +1,7 @@
 // src/components/DashboardProfile/SocialAccountsManager.tsx
-import AvailableIntegration from '@/components/DashboardProfile/AvailableIntegration';
-import ConnectedAdAccounts from '@/components/DashboardProfile/ConnectedAdAccounts';
-import React, { useState, useEffect, useCallback } from 'react';
-
+import AvailableIntegration from "@/components/DashboardProfile/AvailableIntegration";
+import ConnectedAdAccounts from "@/components/DashboardProfile/ConnectedAdAccounts";
+import React, { useState, useEffect, useCallback } from "react";
 
 interface AdAccount {
   _id: string;
@@ -20,7 +19,7 @@ const SocialAccountsManager: React.FC = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "http://localhost:5000/api/v1/connect/get-All-Data"
+        "https://zyaamali1-backend.onrender.com/api/v1/connect/get-All-Data"
       );
 
       if (!response.ok) {
@@ -44,22 +43,18 @@ const SocialAccountsManager: React.FC = () => {
 
   // Function to update account status after connection
   const handleAccountConnected = (accountName: string) => {
-    setSocialAccounts(prevAccounts => 
-      prevAccounts.map(account => 
-        account.name === accountName 
-          ? { ...account, isSynced: true } 
-          : account
+    setSocialAccounts((prevAccounts) =>
+      prevAccounts.map((account) =>
+        account.name === accountName ? { ...account, isSynced: true } : account
       )
     );
   };
 
   // Function to update account status after disconnection
   const handleAccountDisconnected = (accountName: string) => {
-    setSocialAccounts(prevAccounts => 
-      prevAccounts.map(account => 
-        account.name === accountName 
-          ? { ...account, isSynced: false } 
-          : account
+    setSocialAccounts((prevAccounts) =>
+      prevAccounts.map((account) =>
+        account.name === accountName ? { ...account, isSynced: false } : account
       )
     );
   };
@@ -67,13 +62,13 @@ const SocialAccountsManager: React.FC = () => {
   return (
     <div>
       <ConnectedAdAccounts
-        socialAccounts={socialAccounts} 
+        socialAccounts={socialAccounts}
         loading={loading}
         onAccountDisconnected={handleAccountDisconnected}
         onReloadAccounts={loadAccounts}
       />
-      <AvailableIntegration 
-        socialAccounts={socialAccounts} 
+      <AvailableIntegration
+        socialAccounts={socialAccounts}
         loading={loading}
         onAccountConnected={handleAccountConnected}
       />

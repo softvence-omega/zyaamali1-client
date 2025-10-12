@@ -17,14 +17,18 @@ interface AvailableIntegrationProps {
 
 const AvailableIntegration: React.FC<AvailableIntegrationProps> = ({
   socialAccounts,
-  
-  onAccountConnected
+
+  onAccountConnected,
 }) => {
   const integrationApis: Record<string, string> = {
-    "Meta Ads": "http://localhost:5000/api/v1/connect/facebook-auth",
-    "TikTok Ads": "http://localhost:5000/api/v1/connect/tiktok-auth",
-    "LinkedIn Ads": "http://localhost:5000/api/v1/connect/linkedin-auth",
-    "Google Ads": "http://localhost:5000/api/v1/connect/google-auth",
+    "Meta Ads":
+      "https://zyaamali1-backend.onrender.com/api/v1/connect/facebook-auth",
+    "TikTok Ads":
+      "https://zyaamali1-backend.onrender.com/api/v1/connect/tiktok-auth",
+    "LinkedIn Ads":
+      "https://zyaamali1-backend.onrender.com/api/v1/connect/linkedin-auth",
+    "Google Ads":
+      "https://zyaamali1-backend.onrender.com/api/v1/connect/google-auth",
   };
 
   const handleConnect = (name: string) => {
@@ -39,7 +43,7 @@ const AvailableIntegration: React.FC<AvailableIntegrationProps> = ({
 
       // Open OAuth in new window
       const authWindow = window.open(apiUrl, "_blank", "width=600,height=700");
-      
+
       // Check for connection completion periodically
       const checkInterval = setInterval(() => {
         if (authWindow && authWindow.closed) {

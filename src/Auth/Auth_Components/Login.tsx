@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
@@ -30,20 +31,22 @@ export default function LoginForm() {
   const onSubmit = async (data: LoginInputs) => {
     console.log(data);
     try {
-      const response = await fetch("http://localhost:5000/api/v1/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://zyaamali1-backend.onrender.com/api/v1/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+          // credentials: "include",
+        }
+      );
 
       if (!response.ok) throw new Error("Login failed");
 
       const result = await response.json();
       reset();
 
-      const user = verifyToken(result?.data?.accessToken);
-      console.log(user);
+      const user = verifyToken(result?.data?.accessToken) as any;
 
       // assuming API returns { user, token }
       dispatch(login({ user: user, token: result?.data?.accessToken }));
@@ -55,7 +58,11 @@ export default function LoginForm() {
         sameSite: "strict",
       });
 
-      navigate("/dashboard");
+      if (user?.onBoardingcompleted) {
+        navigate("/dashboard");
+      } else {
+        navigate("/auth/onboarding");
+      }
     } catch (error) {
       console.error(error);
       alert("Login failed. Please try again.");

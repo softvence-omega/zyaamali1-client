@@ -20,9 +20,9 @@ interface ConnectedAdAccountsProps {
 
 const ConnectedAdAccounts: React.FC<ConnectedAdAccountsProps> = ({
   socialAccounts,
-  
+
   onAccountDisconnected,
-  onReloadAccounts
+  onReloadAccounts,
 }) => {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
@@ -30,7 +30,7 @@ const ConnectedAdAccounts: React.FC<ConnectedAdAccountsProps> = ({
     setDeletingId(id);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/v1/connect/update-Data?name=${name}`,
+        `https://zyaamali1-backend.onrender.com/api/v1/connect/update-Data?name=${name}`,
         {
           method: "PUT",
           headers: {
@@ -47,10 +47,10 @@ const ConnectedAdAccounts: React.FC<ConnectedAdAccountsProps> = ({
 
       const result = await response.json();
       console.log("✅ Updated successfully:", result);
-      
+
       // Notify parent component that account was disconnected
       onAccountDisconnected(name);
-      
+
       // Reload accounts to ensure we have the latest data
       onReloadAccounts();
     } catch (error) {
