@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect, KeyboardEvent } from "react";
-import { FaComments, FaTimes, FaRobot } from "react-icons/fa";
+import { FaComments, FaTimes } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import { RootState } from "@/store/store";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { setSessionId } from "@/store/Features/SessionSlice/SessionSlice";
+import GeminiIcon from "@/assets/CustomIcon/GeminiIcon";
 
 // Message Bubble Component to display each chat message
 const MessageBubble = ({
@@ -323,9 +324,11 @@ const FloatingChatButton = () => {
           {/* Header */}
           <div className="flex items-center justify-between p-6 bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 text-white rounded-t-2xl">
             <div className="flex items-center gap-3">
-              <FaRobot className="text-white" size={18} />
+              {/* <FaRobot className="text-white" size={18} /> */}
+              <GeminiIcon />
+              {/* here i replease i  to image  */}
               <div>
-                <h3 className="font-bold text-lg">Sterling AI</h3>
+                <h3 className="font-bold text-lg">Startlink AI </h3>
                 <p className="text-blue-100 dark:text-blue-200 text-xs flex items-center gap-1">
                   <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                   Online • Ready to help

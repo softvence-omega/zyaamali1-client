@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { RiAppleLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import video from "../../assets/6676845_Gradient_Banner_1920x1080.mp4";
+import { countries } from "@/utils/Countries";
 
 type SignupInputs = {
   fullName: string;
@@ -121,7 +122,7 @@ export default function SignupForm() {
               <label className="block text-sm font-medium text-black mb-1">
                 Country
               </label>
-              <select
+              {/* <select
                 {...register("country", { required: "Country is required" })}
                 className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white text-sm"
               >
@@ -129,6 +130,17 @@ export default function SignupForm() {
                 <option value="bangladesh">Bangladesh</option>
                 <option value="india">India</option>
                 <option value="usa">USA</option>
+              </select> */}
+              <select
+                {...register("country", { required: "Country is required" })}
+                className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8a63f8] bg-white text-sm"
+              >
+                <option value="">Select country</option>
+                {countries.map((country) => (
+                  <option key={country.id} value={country.name}>
+                    {country.name}
+                  </option>
+                ))}
               </select>
               {errors.country && (
                 <p className="text-red-500 text-xs">{errors.country.message}</p>

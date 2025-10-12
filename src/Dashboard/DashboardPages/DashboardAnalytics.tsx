@@ -8,10 +8,11 @@ import face from "../../assets/face.png";
 import instra from "../../assets/instra.png";
 import google from "../../assets/google.png";
 import tiktok from "../../assets/tiktok.png";
-import facebook from "../../assets/f1.png";
-import instragram from "../../assets/in1.png";
-import google1 from "../../assets/g1.png";
-import linkdine from "../../assets/li1.png";
+import facebook from "@/assets/SocialIcon/facebook.svg";
+// import instragram from "../../assets/inn1.png";
+import instragram from "@/assets/SocialIcon/instagram.svg";
+import google1 from "@/assets/SocialIcon/google.svg";
+import linkdine from "@/assets/SocialIcon/linkedin.svg";
 
 import {
   Select,
@@ -540,15 +541,23 @@ const DashboardAnalytics = () => {
           <div className="rounded-xl shadow-sm mx-auto">
             {/* Header */}
             <div className="flex justify-between items-center p-3">
-              <h2 className="text-xl text-black dark:text-gray-300">Platform Breakdown</h2>
-              <a href="#" className="text-sm text-violet-600 dark:text-gray-300 font-medium">
+              <h2 className="text-xl text-black dark:text-gray-300">
+                Platform Breakdown
+              </h2>
+              <a
+                href="#"
+                className="text-sm text-violet-600 dark:text-gray-300 font-medium"
+              >
                 View All
               </a>
             </div>
 
             <div className="px-2 rounded-xl space-y-4">
               {platforms.map((p, idx) => (
-                <div key={idx} className="bg-white dark:bg-[#1e2939] dark:text-gray-300 rounded-lg shadow-sm">
+                <div
+                  key={idx}
+                  className="bg-white dark:bg-[#1e2939] dark:text-gray-300 rounded-lg shadow-sm"
+                >
                   <div className="flex justify-between items-center p-2">
                     <div className="flex items-center space-x-3">
                       <div className="h-5 w-5">
@@ -558,12 +567,16 @@ const DashboardAnalytics = () => {
                         <h3 className="font-semibold text-gray-800 dark:text-gray-300">
                           {p.name}
                         </h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{p.campaigns}</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {p.campaigns}
+                        </p>
                       </div>
                     </div>
 
                     <div className="text-right">
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Spend</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Spend
+                      </p>
                       <p className="">{p.spend}</p>
                     </div>
                   </div>
@@ -571,15 +584,23 @@ const DashboardAnalytics = () => {
                   <div className="flex justify-between pl-5 md:pl-10 pb-2 text-sm text-gray-500">
                     <div className="pl-5 md:pl-0">
                       <p className="dark:text-gray-300">Impression</p>
-                      <p className="text-gray-700 dark:text-gray-400">{p.impression}</p>
+                      <p className="text-gray-700 dark:text-gray-400">
+                        {p.impression}
+                      </p>
                     </div>
                     <div>
                       <p className="dark:text-gray-300">Clicks</p>
-                      <p className="text-gray-700 dark:text-gray-400">{p.clicks}</p>
+                      <p className="text-gray-700 dark:text-gray-400">
+                        {p.clicks}
+                      </p>
                     </div>
                     <div className="flex flex-col items-center pr-2">
                       <p className="dark:text-gray-300">ROAS</p>
-                      <p className={`font-semibold dark:text-gray-400 ${p.roasColor}`}>{p.roas}</p>
+                      <p
+                        className={`font-semibold dark:text-gray-400 ${p.roasColor}`}
+                      >
+                        {p.roas}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -592,7 +613,9 @@ const DashboardAnalytics = () => {
       {/* table  Campaign Performance */}
       <div className="mt-5 bg-T-200 dark:bg-[#1e2939]  pb-5 rounded-md">
         <div className="flex justify-between my-5 mx-5 pt-4">
-          <h1 className="text-xl text-black dark:text-gray-300">Campaign Performance</h1>
+          <h1 className="text-xl text-black dark:text-gray-300">
+            Campaign Performance
+          </h1>
           <h3 className="text-primary text-sm">View All </h3>
         </div>
 
@@ -617,7 +640,10 @@ const DashboardAnalytics = () => {
 
             <TableBody>
               {campaignData.map((campaign, index) => (
-                <TableRow key={index} className="text-[10px] dark:text-gray-300 md:text-[16px]">
+                <TableRow
+                  key={index}
+                  className="text-[10px] dark:text-gray-300 md:text-[16px]"
+                >
                   <TableCell>{campaign.campaignName}</TableCell>
 
                   <TableCell>
