@@ -33,27 +33,38 @@ const BusinessManagement: React.FC = () => {
     fetchOnboardingData();
   }, [user?.userId]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (loading)
+    return (
+      <p className="text-gray-600 dark:text-gray-300 animate-pulse">
+        Loading...
+      </p>
+    );
+  if (error)
+    return <p className="text-red-500 dark:text-red-400">{error}</p>;
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Business Information</h2>
+    <div className="p-6 bg-white dark:bg-gray-900 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+      <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-100">
+        Business Information
+      </h2>
 
       {businessData ? (
-        <div className="space-y-3 text-gray-700">
+        <div className="space-y-4 text-gray-700 dark:text-gray-300">
           <p>
-            <strong>Business Name:</strong> {businessData.businessName}
+            <span className="font-medium">Business Name:</span>{" "}
+            {businessData.businessName}
           </p>
           <p>
-            <strong>Description:</strong> {businessData.description}
+            <span className="font-medium">Description:</span>{" "}
+            {businessData.description}
           </p>
           <p>
-            <strong>Business Goal:</strong> {businessData.buniessGoal}
+            <span className="font-medium">Business Goal:</span>{" "}
+            {businessData.buniessGoal}
           </p>
         </div>
       ) : (
-        <p>No business data found.</p>
+        <p className="text-gray-600 dark:text-gray-400">No business data found.</p>
       )}
     </div>
   );

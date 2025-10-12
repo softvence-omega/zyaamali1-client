@@ -29,7 +29,7 @@ function DashboardHome() {
             Manage your campaign and accelerate your marketing with ai tools
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-start md:items-end">
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-start md:items-end ">
           <PrimaryButton onClick={handleclick} icon={<FaPlus />}>
             Create New Campaign
           </PrimaryButton>

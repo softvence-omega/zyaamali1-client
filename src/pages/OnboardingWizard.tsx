@@ -607,11 +607,7 @@ const OnboardingWizard = () => {
                                 label: "Website",
                                 description: "Share your website URL",
                               },
-                              {
-                                value: "description",
-                                label: "Description",
-                                description: "Tell us about your business",
-                              },
+
                               {
                                 value: "skip",
                                 label: "Skip",
@@ -632,9 +628,6 @@ const OnboardingWizard = () => {
                                 <div>
                                   <div className="font-medium text-gray-900 dark:text-white transition-colors duration-200">
                                     {option.label}
-                                  </div>
-                                  <div className="text-sm text-gray-600 dark:text-gray-400 mt-1 transition-colors duration-200">
-                                    {option.description}
                                   </div>
                                 </div>
                               </label>

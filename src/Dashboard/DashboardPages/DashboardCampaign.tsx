@@ -2,6 +2,7 @@ import FunnelIcon from "@/assets/CustomIcon/FunnelIcon";
 import CampaignPerformanceTable from "@/components/Dashboard/CampaignPerformance/CampaignPerformanceTable";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import TopBar from "@/utils/TopBar";
+import toast from "react-hot-toast";
 import { FaPlus } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -10,8 +11,13 @@ const DashboardCampaign = () => {
   const breadcrumbPaths = [
     { name: "Dashboard", link: "/dashboard" },
     { name: "Campaigns", link: "/dashboard/campaign" },
-
   ];
+
+  const handleclick = () => {
+    toast("🚧 Coming Soon!");
+    // navigate("/dashboard/campaign/create");
+  };
+
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-4">
       <TopBar paths={breadcrumbPaths}></TopBar>
@@ -22,9 +28,12 @@ const DashboardCampaign = () => {
             Campaign Performance
           </span>
         </h1>
-        <Link to={"/dashboard/campaign/create"}>
+        <button
+          // to={"/dashboard/campaign/create"}
+          onClick={handleclick}
+        >
           <PrimaryButton icon={<FaPlus />}>Create New Campaign</PrimaryButton>
-        </Link>
+        </button>
       </div>
 
       {/* Search Section */}
