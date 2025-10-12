@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type HeroSectionProps = {
   backgroundImage: string;
@@ -13,8 +13,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   backgroundImage,
   titleTop,
   titleBottom,
-  gradientFrom = '#8E6EFF',
-  gradientTo = '#000000',
+  gradientFrom = "#8E6EFF",
+  gradientTo = "#000000",
   description,
 }) => {
   return (
@@ -33,8 +33,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             className="bg-clip-text text-transparent "
             style={{
               backgroundImage: `linear-gradient(to bottom, ${gradientFrom}, ${gradientTo})`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
             }}
           >
             {titleTop}
@@ -43,7 +43,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         </h1>
 
         {description && (
-          <p className="text-white dark:text-gray-300 mt-4 text-base sm:text-lg max-w-6xl mx-auto ">
+          <p className="text-black dark:text-gray-300 mt-4 text-base sm:text-lg max-w-6xl mx-auto ">
             {description}
           </p>
         )}

@@ -32,10 +32,7 @@ const GenerateSidebar = ({
   const queryClient = useQueryClient();
 
   // ✅ Fetch history with React Query
-  const {
-    data: chatbotHistory = [],
-    isLoading,
-  } = useQuery({
+  const { data: chatbotHistory = [], isLoading } = useQuery({
     queryKey: ["chatbotHistory"],
     queryFn: () => fetchHistory(token as string),
     enabled: !!token,

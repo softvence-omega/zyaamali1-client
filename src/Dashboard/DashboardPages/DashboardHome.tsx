@@ -8,13 +8,15 @@ import ActiveCampaign from "@/components/DashboardHome/ActiveCampaign";
 import AiSuggestion from "@/components/DashboardHome/AiSuggestion";
 import Sale from "@/components/DashboardHome/Sale";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function DashboardHome() {
   const navigate = useNavigate();
   const handleclick = () => {
-    navigate("/dashboard/campaign/create");
+    toast("🚧 Coming Soon!");
+    // navigate("/dashboard/campaign/create");
   };
-  
+
   return (
     <div className="px-4 md:px-6 dark:bg-gray-900 min-h-screen transition-colors duration-300">
       {/* heading  */}
@@ -28,41 +30,33 @@ function DashboardHome() {
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-start md:items-end">
-          <PrimaryButton 
-            onClick={handleclick} 
-            icon={<FaPlus />}
-            
-          >
+          <PrimaryButton onClick={handleclick} icon={<FaPlus />}>
             Create New Campaign
           </PrimaryButton>
+
           <OutlineButton
             icon={<FaWandMagicSparkles />}
             onClick={() => {
               navigate("generate-content");
             }}
-            
           >
             Generate Marketing Content
           </OutlineButton>
         </div>
       </div>
-      
+
       {/* cards  */}
       <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-4 my-8 md:my-16">
         {usersCards.map((card, idx) => (
-          <DashboardCard 
-            key={idx} 
-            {...card} 
-            
-          />
+          <DashboardCard key={idx} {...card} />
         ))}
       </div>
-      
+
       {/* Active Campaign  */}
       <div>
         <ActiveCampaign />
       </div>
-      
+
       {/* AI Suggestion  */}
       <div className="flex flex-col lg:grid lg:grid-cols-3 gap-4 my-8 md:my-16">
         <div className="lg:col-span-2">

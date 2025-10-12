@@ -14,6 +14,7 @@ import GoogleAdsLogo from "@/assets/SocialIcon/google.svg";
 import InstagramLogo from "@/assets/SocialIcon/instagram.svg";
 import LinkedinLogo from "@/assets/SocialIcon/linkedin.svg";
 import TikTokLogo from "@/assets/SocialIcon/tiktok.svg";
+import { Trash } from "lucide-react";
 
 const CampaignPerformanceTable = () => {
   const platformLogos: Record<string, string> = {
@@ -198,7 +199,10 @@ const CampaignPerformanceTable = () => {
           </TableHeader>
           <TableBody>
             {campaigns.map((campaign) => (
-              <TableRow key={campaign.id} className="dark:border-b dark:border-b-gray-600">
+              <TableRow
+                key={campaign.id}
+                className="dark:border-b dark:border-b-gray-600"
+              >
                 <TableCell className="font-medium py-6">
                   {campaign.campaignName}
                 </TableCell>
@@ -232,13 +236,14 @@ const CampaignPerformanceTable = () => {
                 <TableCell>{campaign.clicks}</TableCell>
                 <TableCell>{campaign.conversions}</TableCell>
                 <TableCell>{campaign.roas}</TableCell>
-                <TableCell className="flex space-x-2">
-                  <button className="text-blue-500 underline">Details</button>
+                <TableCell className="">
+                  {/* <button className="text-blue-500 underline">Details</button> */}
                   <button
-                    className="text-red-500 underline"
+                    className="text-red-500 underline cursor-pointer"
                     onClick={() => handleDeleteClick(campaign.id)}
                   >
-                    Delete
+                    <Trash />
+                    {/* Delete */}
                   </button>
                 </TableCell>
               </TableRow>

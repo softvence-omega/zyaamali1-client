@@ -156,10 +156,10 @@ const ChatUI = (sessionIdForChat: any) => {
   const [input, setInput] = useState("");
   const token = useSelector((state: RootState) => state.auth.token);
 
-  // ✅ Ref for auto-scroll
+  //  Ref for auto-scroll
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // ✅ Always scroll to bottom when messages change
+  //  Always scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -286,7 +286,7 @@ const ChatUI = (sessionIdForChat: any) => {
                 <div className="text-center max-w-md">
                   <div className="text-4xl mb-4">🤖</div>
                   <h3 className="text-lg font-semibold mb-2 text-gray-100">
-                    Ask Sterling: Your AI Marketing Assistant
+                    Ask Startlink : Your AI Marketing Assistant
                   </h3>
                   <p className="text-sm text-gray-400">
                     Ask me anything about marketing strategies, campaigns, or
