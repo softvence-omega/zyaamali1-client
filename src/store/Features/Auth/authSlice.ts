@@ -5,6 +5,7 @@ export type TUser = {
   role?: string;
   email: string;
   name:string
+  onBoardingcompleted?:boolean
 };
 
 type TAuthState = {

@@ -1,8 +1,10 @@
-import { Controller } from "react-hook-form";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
 
-const AccountConnectionsForm = ({ control, errors }) => {
+
+const AccountConnectionsForm = () => {
     const platforms = [
     {
       id: "google-ads",

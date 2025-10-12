@@ -5,7 +5,7 @@ type SidebarProps = {
   templateType: string;
   setTemplateType: (val: string) => void;
   selectedPlatforms: string[];
-  setSelectedPlatforms: (val: string[]) => void;
+  setSelectedPlatforms: React.Dispatch<React.SetStateAction<string[]>>;
   searchTerm: string;
   setSearchTerm: (val: string) => void;
   setStartDate: (date: string) => void; // New prop for start date
@@ -32,9 +32,9 @@ const Sidebar: React.FC<SidebarProps> = ({
     "instagram",
   ];
 
-  const handlePlatformChange = (platform: any) => {
-    setSelectedPlatforms((prev) => {
-      const platformSet = new Set(prev); // create a Set for easy add/remove
+  const handlePlatformChange = (platform: string) => {
+    setSelectedPlatforms((prev: string[]) => {
+      const platformSet: Set<string> = new Set(prev); // create a Set for easy add/remove
       if (platformSet.has(platform)) {
         platformSet.delete(platform); // remove if already selected
       } else {
@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div className="p-4 md:p-6 w-full md:w-64 lg:w-72 flex-shrink-0 rounded-lg bg-white shadow-md dark:bg-[#1e2939] dark:text-gray-300">
       {/* 🔍 Search */}
-      <div className="relative mb-6">
+      <div className="relative ">
         <input
           type="text"
           placeholder="Search template"

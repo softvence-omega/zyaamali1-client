@@ -32,7 +32,7 @@ import CampaignSubHeader from "@/components/Dashboard/campaign/CampaignSubHeader
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import OutlineButton from "@/components/ui/OutlineButton";
 import { useNavigate } from "react-router-dom";
-import { GiEngagementRing } from "react-icons/gi";
+
 import { PiTrafficConeFill } from "react-icons/pi";
 import { MdOutlineInstallMobile } from "react-icons/md";
 import { ImDisplay } from "react-icons/im";
@@ -50,7 +50,6 @@ import { CiText } from "react-icons/ci";
 import { GiCometSpark } from "react-icons/gi";
 import { countries } from "@/utils/Countries";
 import { AdsData } from "@/types";
-import TopBar from "@/utils/TopBar";
 
 const objectives = [
   {
@@ -214,7 +213,7 @@ const DashboardCampaignCreate = () => {
     "Create an engaging ad copy for a summer sale offering 40% off"
   );
 
-  const [adsData, setAdsData] = useState<AdsData>();
+  const [, setAdsData] = useState<AdsData>();
 
   //  console.log("always ", locationCode, locationId);
 
@@ -262,7 +261,7 @@ const DashboardCampaignCreate = () => {
   const fetchSocialAccounts = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/v1/connect/get-All-Data"
+        "https://zyaamali1-backend.onrender.com/api/v1/connect/get-All-Data"
       );
       if (!response.ok) throw new Error("Failed to fetch social accounts");
 
@@ -445,7 +444,7 @@ const DashboardCampaignCreate = () => {
       try {
         setLoading(true);
         const res = await axios.post(
-          "http://localhost:5000/api/v1/ads/tiktok/create-ad",
+          "https://zyaamali1-backend.onrender.com/api/v1/ads/tiktok/create-ad",
           fd,
           {
             headers: {
@@ -470,7 +469,7 @@ const DashboardCampaignCreate = () => {
       setLoading(true);
       console.log(payload);
       const res = await axios.post(
-        `http://localhost:5000/api/v1/ads/${endpoint}/create-ad`,
+        `https://zyaamali1-backend.onrender.com/api/v1/ads/${endpoint}/create-ad`,
         payload
       );
       console.log("API Response:", res.data);
@@ -538,7 +537,7 @@ const DashboardCampaignCreate = () => {
 
     try {
       const res = await axios.post(
-        "http://74.118.168.229:8000/ads/generate",
+        "https://adelo.ai.mantelworthy.online/ads/generate",
         data,
         {
           headers: {

@@ -1,6 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller } from "react-hook-form";
 
-const BrandProfileForm = ({ control, errors }) => {
+import { Control, FieldErrors } from "react-hook-form";
+
+interface BrandProfileFormProps {
+  control: Control<any>;
+  errors: FieldErrors<any>;
+}
+
+const BrandProfileForm = ({ control,  }: BrandProfileFormProps) => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-semibold">Brand Profile</h2>
@@ -19,7 +28,7 @@ const BrandProfileForm = ({ control, errors }) => {
             </select>
           )}
         />
-        {errors.brandVoice && <span className="text-red-500">{errors.brandVoice.message}</span>}
+        {/* {errors.brandVoice && <span className="text-red-500">{errors.brandVoice.message}</span>} */}
       </div>
 
       <div>

@@ -1,6 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller } from "react-hook-form";
 
-const MarketingGoalsForm = ({ control, errors }) => {
+import { Control, FieldErrors } from "react-hook-form";
+
+interface BrandProfileFormProps {
+  control: Control<any>;
+  errors: FieldErrors<any>;
+}
+const MarketingGoalsForm = ({ control }: BrandProfileFormProps) => {
   const goals = [
     { id: "brand-awareness", label: "Brand Awareness", description: "Increase visibility and recognition" },
     { id: "lead-generation", label: "Lead Generation", description: "Generate more qualified leads" },
@@ -57,11 +64,11 @@ const MarketingGoalsForm = ({ control, errors }) => {
           </div>
         )}
       />
-      {errors.marketingGoals && (
+      {/* {errors.marketingGoals && (
         <span className="text-sm text-red-500 font-medium">
           {errors.marketingGoals.message}
         </span>
-      )}
+      )} */}
     </div>
   );
 };

@@ -166,7 +166,7 @@ const ChatUI = (sessionIdForChat: any) => {
 
   const fetchChatHistory = async () => {
     const res = await axios.get(
-      `http://localhost:5000/api/v1/chatbot/get-single?sessionId=${sessionIdForChat.sessionIdForChat}`,
+      `https://zyaamali1-backend.onrender.com/api/v1/chatbot/get-single?sessionId=${sessionIdForChat.sessionIdForChat}`,
       {
         headers: { Authorization: `Bearer ${accessToken}` },
       }
@@ -234,7 +234,7 @@ const ChatUI = (sessionIdForChat: any) => {
     try {
       setIsSending(true);
       const res = await axios.post(
-        "http://74.118.168.229:8000/chatting/chat",
+        "https://adelo.ai.mantelworthy.online/chatting/chat",
         payload
       );
 
