@@ -1,7 +1,7 @@
 // src/components/AccountActions.tsx
 import { LogOut } from "lucide-react";
 import React from "react";
-import { FaGoogle } from "react-icons/fa"; // Assuming you use react-icons for the Google icon
+// import { FaGoogle } from "react-icons/fa"; // Assuming you use react-icons for the Google icon
 
 const AccountActions: React.FC = () => {
   const handleLogout = () => {

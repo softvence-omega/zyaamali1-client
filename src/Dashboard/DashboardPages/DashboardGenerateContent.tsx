@@ -1,4 +1,4 @@
-import Sidebar from "@/components/Dashboard/Sidebar";
+// import Sidebar from "@/components/Dashboard/Sidebar";
 import GenerateContent from "@/components/DashboardHome/GenerateContent/GenerateContent";
 import GenerateSidebar from "@/components/DashboardHome/GenerateContent/GenerateSidebar";
 import { useState } from "react";

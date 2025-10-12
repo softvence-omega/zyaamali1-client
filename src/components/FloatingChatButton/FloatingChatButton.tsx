@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect, KeyboardEvent } from "react";
-import { FaComments, FaTimes, FaRobot } from "react-icons/fa";
+import { FaComments, FaTimes } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
