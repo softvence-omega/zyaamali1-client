@@ -250,7 +250,7 @@ const FloatingChatButton = () => {
 
     try {
       const res = await axios.post(
-        "http://74.118.168.229:8000/chatting/chat",
+        "https://adelo.ai.mantelworthy.online/chatting/chat",
         payload
       );
 
@@ -294,106 +294,105 @@ const FloatingChatButton = () => {
   };
 
   return (
-  <>
-  {/* Floating button */}
-  <div
-    onClick={toggleChat}
-    onMouseEnter={() => setIsHovered(true)}
-    onMouseLeave={() => setIsHovered(false)}
-    className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 text-white p-5 rounded-2xl shadow-2xl cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-3xl group"
-  >
-    <div className="relative">
-      <FaComments
-        size={28}
-        className="transition-transform duration-300 group-hover:scale-110"
-      />
-      <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
-    </div>
-    {isHovered && (
-      <div className="absolute bottom-full right-0 mb-3 px-3 py-2 bg-gray-900 dark:bg-gray-700 text-white text-sm rounded-lg whitespace-nowrap shadow-md">
-        Chat with Sterling AI
-        <div className="absolute top-full right-4 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
-      </div>
-    )}
-  </div>
-
-  {/* Chat Window */}
-  {isChatOpen && (
-    <div className="fixed bottom-24 right-6 z-40 bg-white dark:bg-gray-900 shadow-2xl rounded-2xl w-96 max-w-4xl border border-gray-200 dark:border-gray-700 transition-colors duration-300">
-      {/* Header */}
-      <div className="flex items-center justify-between p-6 bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 text-white rounded-t-2xl">
-        <div className="flex items-center gap-3">
-          <FaRobot className="text-white" size={18} />
-          <div>
-            <h3 className="font-bold text-lg">Sterling AI</h3>
-            <p className="text-blue-100 dark:text-blue-200 text-xs flex items-center gap-1">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              Online • Ready to help
-            </p>
-          </div>
+    <>
+      {/* Floating button */}
+      <div
+        onClick={toggleChat}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 text-white p-5 rounded-2xl shadow-2xl cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-3xl group"
+      >
+        <div className="relative">
+          <FaComments
+            size={28}
+            className="transition-transform duration-300 group-hover:scale-110"
+          />
+          <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
         </div>
-        <button
-          onClick={toggleChat}
-          className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition"
-        >
-          <FaTimes size={14} />
-        </button>
-      </div>
-
-      {/* Chat Messages */}
-      <div className="h-96 overflow-y-auto bg-gray-50 dark:bg-gray-800 p-4 transition-colors duration-300">
-        {messages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full text-gray-500 dark:text-gray-400 text-center px-4">
-            <div className="text-4xl mb-4">🤖</div>
-            <h3 className="text-lg font-semibold mb-2">
-              Welcome to Sterling AI
-            </h3>
-            <p className="text-sm">
-              Ask me anything about marketing strategies, campaigns, or
-              analytics!
-            </p>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {messages.map((msg) => (
-              <MessageBubble
-                key={msg.id}
-                role={msg.role}
-                message={msg.message}
-                isSending={msg.id === loadingMessageId && isSending}
-              />
-            ))}
+        {isHovered && (
+          <div className="absolute bottom-full right-0 mb-3 px-3 py-2 bg-gray-900 dark:bg-gray-700 text-white text-sm rounded-lg whitespace-nowrap shadow-md">
+            Chat with Sterling AI
+            <div className="absolute top-full right-4 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
           </div>
         )}
       </div>
 
-      {/* Input Box */}
-      <div className="p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 rounded-b-2xl transition-colors duration-300">
-        <div className="flex items-center gap-3">
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Type your message..."
-            className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 border-0 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:bg-white dark:focus:bg-gray-800 transition-all duration-200 text-sm placeholder-gray-500 dark:placeholder-gray-400"
-          />
-          <button
-            onClick={handleSendMessage}
-            disabled={!message.trim() || isSending}
-            className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-white p-3 rounded-2xl transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 shadow-md"
-          >
-            <IoIosSend size={18} />
-          </button>
-        </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-3">
-          Press Enter to send • Sterling AI Marketing Assistant
-        </p>
-      </div>
-    </div>
-  )}
-</>
+      {/* Chat Window */}
+      {isChatOpen && (
+        <div className="fixed bottom-24 right-6 z-40 bg-white dark:bg-gray-900 shadow-2xl rounded-2xl w-96 max-w-4xl border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+          {/* Header */}
+          <div className="flex items-center justify-between p-6 bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 text-white rounded-t-2xl">
+            <div className="flex items-center gap-3">
+              <FaRobot className="text-white" size={18} />
+              <div>
+                <h3 className="font-bold text-lg">Sterling AI</h3>
+                <p className="text-blue-100 dark:text-blue-200 text-xs flex items-center gap-1">
+                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                  Online • Ready to help
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={toggleChat}
+              className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition"
+            >
+              <FaTimes size={14} />
+            </button>
+          </div>
 
+          {/* Chat Messages */}
+          <div className="h-96 overflow-y-auto bg-gray-50 dark:bg-gray-800 p-4 transition-colors duration-300">
+            {messages.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-full text-gray-500 dark:text-gray-400 text-center px-4">
+                <div className="text-4xl mb-4">🤖</div>
+                <h3 className="text-lg font-semibold mb-2">
+                  Welcome to Sterling AI
+                </h3>
+                <p className="text-sm">
+                  Ask me anything about marketing strategies, campaigns, or
+                  analytics!
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {messages.map((msg) => (
+                  <MessageBubble
+                    key={msg.id}
+                    role={msg.role}
+                    message={msg.message}
+                    isSending={msg.id === loadingMessageId && isSending}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Input Box */}
+          <div className="p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 rounded-b-2xl transition-colors duration-300">
+            <div className="flex items-center gap-3">
+              <input
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type your message..."
+                className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 border-0 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:bg-white dark:focus:bg-gray-800 transition-all duration-200 text-sm placeholder-gray-500 dark:placeholder-gray-400"
+              />
+              <button
+                onClick={handleSendMessage}
+                disabled={!message.trim() || isSending}
+                className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-white p-3 rounded-2xl transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 shadow-md"
+              >
+                <IoIosSend size={18} />
+              </button>
+            </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-3">
+              Press Enter to send • Sterling AI Marketing Assistant
+            </p>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -88,7 +88,7 @@ const ContentHeader: React.FC<{
       let response;
       if (contentType === "image") {
         response = await axios.post(
-          "http://74.118.168.229:8000/library/generate/image-content",
+          "https://adelo.ai.mantelworthy.online/library/generate/image-content",
           {
             prompt,
             platform: platfrom,
@@ -97,7 +97,7 @@ const ContentHeader: React.FC<{
         console.log("image  ", response.data);
       } else if (contentType === "video") {
         response = await axios.post(
-          `http://74.118.168.229:8000/library/generate/video-content`,
+          `https://adelo.ai.mantelworthy.online/library/generate/video-content`,
           {
             prompt,
             platform: platfrom,

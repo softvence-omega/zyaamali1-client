@@ -491,7 +491,7 @@ const DashboardCampaignCreateLatest = () => {
     };
     try {
       const res = await axios.post(
-        "http://74.118.168.229:8000/ads/generate",
+        "https://adelo.ai.mantelworthy.online/ads/generate",
         data,
         {
           headers: {
