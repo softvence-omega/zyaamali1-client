@@ -16,33 +16,33 @@ type SidebarProps = {
 const Sidebar: React.FC<SidebarProps> = ({
   templateType,
   setTemplateType,
-  selectedPlatforms,
-  setSelectedPlatforms,
+  // selectedPlatforms,
+  // setSelectedPlatforms,
   searchTerm,
   setSearchTerm,
   setStartDate,
   setEndDate,
   resetFilters
 }) => {
-  const platforms = [
-    "facebook",
-    "google",
-    "linkedin",
-    "tiktok",
-    "instagram",
-  ];
+  // const platforms = [
+  //   "facebook",
+  //   "google",
+  //   "linkedin",
+  //   "tiktok",
+  //   "instagram",
+  // ];
 
-  const handlePlatformChange = (platform: string) => {
-    setSelectedPlatforms((prev: string[]) => {
-      const platformSet: Set<string> = new Set(prev); // create a Set for easy add/remove
-      if (platformSet.has(platform)) {
-        platformSet.delete(platform); // remove if already selected
-      } else {
-        platformSet.add(platform); // add if not selected
-      }
-      return Array.from(platformSet); // convert back to array
-    });
-  };
+  // const handlePlatformChange = (platform: string) => {
+  //   setSelectedPlatforms((prev: string[]) => {
+  //     const platformSet: Set<string> = new Set(prev); // create a Set for easy add/remove
+  //     if (platformSet.has(platform)) {
+  //       platformSet.delete(platform); // remove if already selected
+  //     } else {
+  //       platformSet.add(platform); // add if not selected
+  //     }
+  //     return Array.from(platformSet); // convert back to array
+  //   });
+  // };
 
   return (
     <div className="p-4 md:p-6 w-full md:w-64 lg:w-72 flex-shrink-0 rounded-lg bg-white shadow-md dark:bg-[#1e2939] dark:text-gray-300">
@@ -59,7 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* 🖼 Template Type */}
-      <h3 className="text-lg font-semibold text-gray-800 mb-3 dark:text-gray-300">Template Type</h3>
+      <h3 className="text-lg font-semibold text-gray-800 mb-3 dark:text-gray-300 mt-4">Template Type</h3>
       <div className="space-y-2">
         <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
           <input
@@ -86,7 +86,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* 🌐 Platforms */}
-      <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3 dark:text-gray-300">Platform</h3>
+      {/* <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3 dark:text-gray-300">Platform</h3>
       <div className="space-y-2">
         {platforms.map((platform) => (
           <label key={platform} className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
@@ -99,10 +99,10 @@ const Sidebar: React.FC<SidebarProps> = ({
             {platform.charAt(0).toUpperCase() + platform.slice(1)}
           </label>
         ))}
-      </div>
+      </div> */}
 
       {/* 📅 Date Filter */}
-      <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3 dark:text-gray-300">Filter by Date</h3>
+      <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3 dark:text-gray-300 mt-4">Filter by Date</h3>
       <div className="space-y-2">
         <div>
           <label className="block text-gray-700 dark:text-gray-300">Start Date</label>

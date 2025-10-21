@@ -284,7 +284,7 @@ const ChatUI = (sessionIdForChat: any) => {
             {messages.length === 0 && !isLoading && (
               <div className="flex flex-col items-center justify-center h-full">
                 <div className="text-center max-w-md">
-                  <div className="text-4xl mb-4">🤖</div>
+                  <div className="text-4xl mb-4"></div>
                   <h3 className="text-lg font-semibold mb-2 text-gray-100">
                     Ask Startlink : Your AI Marketing Assistant
                   </h3>

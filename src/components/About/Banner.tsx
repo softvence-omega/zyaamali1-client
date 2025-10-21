@@ -24,7 +24,7 @@ const Banner = () => {
           <span className="text-black dark:text-white block mt-2 font-semibold">Assistant</span>
         </h1>
 
-        <p className="text-gray-700 dark:text-gray-200 mt-6 sm:text-lg max-w-4xl mx-auto leading-relaxed font-medium">
+        <p className="text-gray-700 dark:text-gray-200 mt-6 sm:text-lg max-w-4xl mx-auto leading-relaxed ">
           Sterling is your personal AI marketing assistant — ready to help
           you brainstorm, create, and optimize marketing campaigns anytime
           you need. Unlike traditional bots, Sterling offers smart,

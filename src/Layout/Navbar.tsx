@@ -5,7 +5,7 @@ import logo from "../assets/Adelo_black.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { logout } from "@/store/Features/Auth/authSlice";
-import ThemeToggleButton from "@/context/ThemeToggleButton";
+// import ThemeToggleButton from "@/context/ThemeToggleButton";
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -197,9 +197,9 @@ const Navbar: React.FC = () => {
 
             {/* End */}
             <div className="navbar-end flex  gap-4 items-center">
-              <div className="">
+              {/* <div className="">
                 <ThemeToggleButton />
-              </div>
+              </div> */}
               {user ? (
                 <div className="relative" ref={dropdownRef}>
                   {/* Profile button */}
