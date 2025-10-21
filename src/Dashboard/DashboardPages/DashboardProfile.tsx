@@ -11,18 +11,18 @@ const DashboardProfile = () => {
   const breadcrumbPaths = [
     { name: "Dashboard", link: "/dashboard" },
     { name: "Profile", link: "/dashboard/userprofile" },
-
   ];
+
   return (
     <div className="min-h-screen p-2 md:p-8">
-        <TopBar paths={breadcrumbPaths}></TopBar>
-      <div className=" md:p-6 md:space-y-8">
+      <TopBar paths={breadcrumbPaths} />
+      <div className="md:p-6 md:space-y-8">
         <ProfileSection />
-        <div className="bg-gray-100 rounded-3xl mt-4 py-6 px-6">
+        <div className=" dark:bg-gray-900 rounded-3xl mt-4 ">
           <BusinessManagement />
-         <SocialAccountsManager></SocialAccountsManager>
+          <SocialAccountsManager />
         </div>
-        <TeamMembers></TeamMembers>
+        <TeamMembers />
         <ChangePassword />
         <AccountActions />
       </div>

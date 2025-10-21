@@ -11,15 +11,7 @@ interface BrandProfileFormProps {
 const BusinessDetailsForm = ({ control, errors }: BrandProfileFormProps) => {
   return (
     <div className="space-y-8">
-      {/* Header Section */}
-      <div className="text-center mb-2">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
-          Business Details
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 text-lg">
-          Tell us about your business to personalize your experience
-        </p>
-      </div>
+
 
       {/* Business Name Field */}
       <div className="space-y-2">

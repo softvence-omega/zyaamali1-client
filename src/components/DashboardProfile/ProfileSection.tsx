@@ -11,13 +11,13 @@ import {
 } from "@/components/ui/select";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const ProfileSection: React.FC = () => {
   interface RootState {
     auth: {
       user: {
         userId: string;
-        // add other user properties if needed
       };
       token: string;
     };
@@ -50,7 +50,6 @@ const ProfileSection: React.FC = () => {
     "South Africa",
   ];
 
-  // Fetch profile data
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -89,13 +88,14 @@ const ProfileSection: React.FC = () => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          withCredentials: true, // if your backend uses cookies
+          withCredentials: true,
         }
       );
 
       console.log(response);
 
-      alert("Profile updated successfully!");
+      // alert("Profile updated successfully!");
+      toast.success('Profile updated successfully')
       setEditMode({});
     } catch (err: any) {
       console.error(err);
@@ -105,17 +105,24 @@ const ProfileSection: React.FC = () => {
     }
   };
 
-  if (loading) return <p className="text-gray-600">Loading profile...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (loading)
+    return (
+      <p className="text-gray-600 dark:text-gray-300 animate-pulse">
+        Loading profile...
+      </p>
+    );
+  if (error)
+    return <p className="text-red-500 dark:text-red-400">{error}</p>;
 
   return (
-    <div className="py-6 px-6 border-b bg-gray-100 rounded-3xl border-gray-200">
-      <h2 className="text-xl font-semibold text-gray-800 mb-6">
+    <div className="py-6 px-6 border rounded-3xl bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 shadow-md transition-colors duration-300">
+      <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6">
         Personal Information
       </h2>
 
       <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
-        <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+        {/* Profile Picture */}
+        <div className="relative w-24 h-24 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 ring-2 ring-gray-300 dark:ring-gray-600 flex-shrink-0">
           <img
             src="https://via.placeholder.com/96"
             alt="Profile"
@@ -123,13 +130,13 @@ const ProfileSection: React.FC = () => {
           />
         </div>
 
-        <div className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+        <div className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
           {/* Full Name */}
           <div>
             <div className="flex items-center justify-between">
               <label
                 htmlFor="fullName"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 Full Name
               </label>
@@ -137,7 +144,7 @@ const ProfileSection: React.FC = () => {
                 onClick={() =>
                   setEditMode((prev) => ({ ...prev, fullName: !prev.fullName }))
                 }
-                className="w-4 h-4 text-gray-500 cursor-pointer"
+                className="w-4 h-4 text-gray-500 dark:text-gray-400 cursor-pointer hover:text-blue-500 transition"
               />
             </div>
             <input
@@ -148,29 +155,31 @@ const ProfileSection: React.FC = () => {
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, fullName: e.target.value }))
               }
-              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${
-                editMode.fullName ? "bg-white" : "bg-gray-50"
+              className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm transition ${
+                editMode.fullName
+                  ? "bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-600 text-gray-900 dark:text-gray-100"
+                  : "bg-gray-100 dark:bg-gray-800/60 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 cursor-not-allowed"
               }`}
             />
           </div>
 
-          {/* Email - not editable */}
+          {/* Email */}
           <div>
             <div className="flex items-center justify-between">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 Email
               </label>
-              <FaEdit className="w-4 h-4 text-gray-300 cursor-not-allowed" />
+              <FaEdit className="w-4 h-4 text-gray-300 dark:text-gray-600 cursor-not-allowed" />
             </div>
             <input
               type="email"
               id="email"
               value={formData.email}
               readOnly
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm bg-black/40 text-white cursor-not-allowed"
+              className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm sm:text-sm bg-gray-200 dark:bg-gray-800/70 text-gray-700 dark:text-gray-400 border-gray-300 dark:border-gray-700 cursor-not-allowed"
             />
           </div>
 
@@ -179,7 +188,7 @@ const ProfileSection: React.FC = () => {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="companyName"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 Company Name
               </label>
@@ -190,7 +199,7 @@ const ProfileSection: React.FC = () => {
                     companyName: !prev.companyName,
                   }))
                 }
-                className="w-4 h-4 text-gray-500 cursor-pointer"
+                className="w-4 h-4 text-gray-500 dark:text-gray-400 cursor-pointer hover:text-blue-500 transition"
               />
             </div>
             <input
@@ -204,8 +213,10 @@ const ProfileSection: React.FC = () => {
                   companyName: e.target.value,
                 }))
               }
-              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${
-                editMode.companyName ? "bg-white" : "bg-gray-50"
+              className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm transition ${
+                editMode.companyName
+                  ? "bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-600 text-gray-900 dark:text-gray-100"
+                  : "bg-gray-100 dark:bg-gray-800/60 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 cursor-not-allowed"
               }`}
             />
           </div>
@@ -215,7 +226,7 @@ const ProfileSection: React.FC = () => {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="country"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 Country
               </label>
@@ -223,7 +234,7 @@ const ProfileSection: React.FC = () => {
                 onClick={() =>
                   setEditMode((prev) => ({ ...prev, country: !prev.country }))
                 }
-                className="w-4 h-4 text-gray-500 cursor-pointer"
+                className="w-4 h-4 text-gray-500 dark:text-gray-400 cursor-pointer hover:text-blue-500 transition"
               />
             </div>
             {editMode.country ? (
@@ -233,12 +244,16 @@ const ProfileSection: React.FC = () => {
                   setFormData((prev) => ({ ...prev, country: value }))
                 }
               >
-                <SelectTrigger className="w-full mt-1">
+                <SelectTrigger className="w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200">
                   <SelectValue placeholder="Select country" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                   {countries.map((country) => (
-                    <SelectItem key={country} value={country}>
+                    <SelectItem
+                      key={country}
+                      value={country}
+                      className="hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
                       {country}
                     </SelectItem>
                   ))}
@@ -250,7 +265,7 @@ const ProfileSection: React.FC = () => {
                 id="country"
                 value={formData.country}
                 readOnly
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm bg-gray-50"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm sm:text-sm bg-gray-100 dark:bg-gray-800/60 text-gray-600 dark:text-gray-300"
               />
             )}
           </div>
@@ -258,11 +273,11 @@ const ProfileSection: React.FC = () => {
       </div>
 
       {/* Update Button */}
-      <div className="mt-6 flex justify-end">
+      <div className="mt-8 flex justify-end">
         <button
           onClick={handleUpdateProfile}
           disabled={updating}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-70"
+          className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium rounded-lg transition disabled:opacity-70"
         >
           {updating ? "Updating..." : "Update Profile"}
         </button>

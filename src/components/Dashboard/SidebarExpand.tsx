@@ -8,7 +8,7 @@ import { LuLayoutGrid } from "react-icons/lu";
 import { BiWallet } from "react-icons/bi";
 import user from "../../assets/user.png";
 import { MessageCircleMore, Settings } from "lucide-react";
-import ThemeToggleButton from "@/context/ThemeToggleButton";
+// import ThemeToggleButton from "@/context/ThemeToggleButton";
 
 const SidebarExpand = () => {
   const [activeItem, setActiveItem] = useState("Dashboard");
@@ -175,9 +175,9 @@ const SidebarExpand = () => {
             Sohaggg
           </p>
         </div>
-        <div>
+        {/* <div>
           <ThemeToggleButton />
-        </div>
+        </div> */}
       </div>
 
       {/* Sidebar toggle button for mobile */}
