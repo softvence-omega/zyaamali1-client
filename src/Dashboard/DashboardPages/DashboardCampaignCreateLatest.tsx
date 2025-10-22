@@ -490,15 +490,11 @@ const DashboardCampaignCreateLatest = () => {
       prompt: prompt,
     };
     try {
-      const res = await axios.post(
-        "https://adelo.ai.mantelworthy.online/ads/generate",
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await axios.post("https://ai.adelo.ai/ads/generate", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       setTitle(res.data.ads_features.title);
       setSelectedObjective(res.data.ads_features.objective.toLowerCase());
       setSelectedPlatform(res.data.ads_features.platform);

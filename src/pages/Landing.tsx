@@ -11,11 +11,9 @@ import { Review } from "@/components/LandingPage/Review";
 import { Pricing } from "@/components/LandingPage/Pricing";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useTheme } from "@/context/ThemeContext";
 
 const Landing: React.FC = () => {
   const location = useLocation();
-  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     if (location.hash) {
@@ -33,7 +31,7 @@ const Landing: React.FC = () => {
       {/* Hero Section with Background */}
       <div className="relative min-h-screen overflow-hidden">
         {/* Conditional background - video for light mode, dark overlay for dark mode */}
-        {!isDarkMode ? (
+      
           <>
             <video
               autoPlay
@@ -48,9 +46,7 @@ const Landing: React.FC = () => {
             {/* Light overlay to improve text readability */}
             <div className="absolute inset-0 dark:bg-black/20" />
           </>
-        ) : (
-          <div className="absolute inset-0 bg-black opacity-70" />
-        )}
+        
 
         <CommonWrapper>
           <div className="relative z-10 pt-34 pb-18 text-white dark:text-gray-200">

@@ -234,7 +234,7 @@ const ChatUI = (sessionIdForChat: any) => {
     try {
       setIsSending(true);
       const res = await axios.post(
-        "https://adelo.ai.mantelworthy.online/chatting/chat",
+        "https://ai.adelo.ai/chatting/chat",
         payload
       );
 
