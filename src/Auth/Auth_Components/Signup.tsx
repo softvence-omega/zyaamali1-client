@@ -30,7 +30,7 @@ export default function SignupForm() {
 
     try {
       const response = await fetch(
-        "https://zyaamali1-backend.onrender.com/api/v1/user/register",
+        "https://api.adelo.ai/api/v1/user/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

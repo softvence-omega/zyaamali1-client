@@ -16,7 +16,7 @@ const BusinessManagement: React.FC = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `https://zyaamali1-backend.onrender.com/api/v1/onboarding/get-single/${user?.userId}`,
+          `https://api.adelo.ai/api/v1/onboarding/get-single/${user?.userId}`,
           { withCredentials: true }
         );
 
@@ -39,8 +39,7 @@ const BusinessManagement: React.FC = () => {
         Loading...
       </p>
     );
-  if (error)
-    return <p className="text-red-500 dark:text-red-400">{error}</p>;
+  if (error) return <p className="text-red-500 dark:text-red-400">{error}</p>;
 
   return (
     <div className="p-6 bg-white dark:bg-gray-900 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 transition-colors duration-300">
@@ -64,7 +63,9 @@ const BusinessManagement: React.FC = () => {
           </p>
         </div>
       ) : (
-        <p className="text-gray-600 dark:text-gray-400">No business data found.</p>
+        <p className="text-gray-600 dark:text-gray-400">
+          No business data found.
+        </p>
       )}
     </div>
   );

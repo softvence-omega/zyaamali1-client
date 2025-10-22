@@ -50,7 +50,7 @@
 //         console.log("✅ Final Onboarding Data:", data);
 
 //         const response = await axios.post(
-//           `https://zyaamali1-backend.onrender.com/api/v1/onboarding/create`,
+//           `https://api.adelo.ai/api/v1/onboarding/create`,
 //           {
 //             userId: user?.userId,
 //             brandName: data.brandName,
@@ -418,7 +418,7 @@ const OnboardingWizard = () => {
         console.log("✅ Final Onboarding Data:", data);
 
         const response = await axios.post(
-          `https://zyaamali1-backend.onrender.com/api/v1/onboarding/create`,
+          `https://api.adelo.ai/api/v1/onboarding/create`,
           {
             userId: user?.userId,
             brandName: data.brandName,

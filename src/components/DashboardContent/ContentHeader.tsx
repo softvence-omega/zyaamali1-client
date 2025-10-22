@@ -30,7 +30,7 @@ const ContentHeader: React.FC<{
   const getAllContent = async () => {
     try {
       const res = await fetch(
-        "https://zyaamali1-backend.onrender.com/api/v1/content/get-all-content",
+        "https://api.adelo.ai/api/v1/content/get-all-content",
         {
           method: "GET",
           headers: {
@@ -120,7 +120,7 @@ const ContentHeader: React.FC<{
           owner: user.userId,
         });
         const result = await axios.post(
-          "https://zyaamali1-backend.onrender.com/api/v1/content/post-generated-content",
+          "https://api.adelo.ai/api/v1/content/post-generated-content",
           {
             type: contentType,
             platform: platfrom,

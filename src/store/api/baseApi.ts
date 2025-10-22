@@ -5,7 +5,7 @@ import { RootState } from "../store";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://zyaamali1-backend.onrender.com/api/v1",
+    baseUrl: "https://api.adelo.ai/api/v1",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;

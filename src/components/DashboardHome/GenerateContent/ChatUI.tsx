@@ -166,7 +166,7 @@ const ChatUI = (sessionIdForChat: any) => {
 
   const fetchChatHistory = async () => {
     const res = await axios.get(
-      `https://zyaamali1-backend.onrender.com/api/v1/chatbot/get-single?sessionId=${sessionIdForChat.sessionIdForChat}`,
+      `https://api.adelo.ai/api/v1/chatbot/get-single?sessionId=${sessionIdForChat.sessionIdForChat}`,
       {
         headers: { Authorization: `Bearer ${accessToken}` },
       }

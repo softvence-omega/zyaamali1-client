@@ -28,7 +28,7 @@ const ConnectedAdAccounts: React.FC<ConnectedAdAccountsProps> = ({
     setDeletingId(id);
     try {
       const response = await fetch(
-        `https://zyaamali1-backend.onrender.com/api/v1/connect/update-Data?name=${name}`,
+        `https://api.adelo.ai/api/v1/connect/update-Data?name=${name}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
