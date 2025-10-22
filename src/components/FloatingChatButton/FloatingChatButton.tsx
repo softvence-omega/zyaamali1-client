@@ -166,7 +166,7 @@ const FloatingChatButton = () => {
 
     try {
       const res = await axios.get(
-        `https://zyaamali1-backend.onrender.com/api/v1/chatbot/get-single?sessionId=${sessionIdForChat}`,
+        `https://api.adelo.ai/api/v1/chatbot/get-single?sessionId=${sessionIdForChat}`,
         {
           headers: { Authorization: `Bearer ${accessToken}` },
         }
@@ -251,7 +251,7 @@ const FloatingChatButton = () => {
 
     try {
       const res = await axios.post(
-        "https://adelo.ai.mantelworthy.online/chatting/chat",
+        "https://ai.adelo.ai/chatting/chat",
         payload
       );
 
