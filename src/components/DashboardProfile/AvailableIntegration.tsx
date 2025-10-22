@@ -19,14 +19,10 @@ const AvailableIntegration: React.FC<AvailableIntegrationProps> = ({
   onAccountConnected,
 }) => {
   const integrationApis: Record<string, string> = {
-    "Meta Ads":
-      "https://zyaamali1-backend.onrender.com/api/v1/connect/facebook-auth",
-    "TikTok Ads":
-      "https://zyaamali1-backend.onrender.com/api/v1/connect/tiktok-auth",
-    "LinkedIn Ads":
-      "https://zyaamali1-backend.onrender.com/api/v1/connect/linkedin-auth",
-    "Google Ads":
-      "https://zyaamali1-backend.onrender.com/api/v1/connect/google-auth",
+    "Meta Ads": "https://api.adelo.ai/api/v1/connect/facebook-auth",
+    "TikTok Ads": "https://api.adelo.ai/api/v1/connect/tiktok-auth",
+    "LinkedIn Ads": "https://api.adelo.ai/api/v1/connect/linkedin-auth",
+    "Google Ads": "https://api.adelo.ai/api/v1/connect/google-auth",
   };
 
   const handleConnect = (name: string) => {

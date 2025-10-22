@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const fetchHistory = async (token: string) => {
   const res = await axios.get(
-    "https://zyaamali1-backend.onrender.com/api/v1/chatbot-history/get-all",
+    "https://api.adelo.ai/api/v1/chatbot-history/get-all",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ const GenerateSidebar = ({
   const [searchQuery, setSearchQuery] = useState("");
   const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
   const queryClient = useQueryClient();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // ✅ Fetch history with React Query
   const { data: chatbotHistory = [], isLoading } = useQuery({
@@ -50,17 +50,20 @@ const GenerateSidebar = ({
     setSessionIdForChat(sessionId);
   };
 
-  const handleBack =()=>{
-    navigate('/dashboard')
-  }
+  const handleBack = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <div className="lg:w-[360px] h-screen flex flex-col rounded-l-2xl transition-all duration-300 bg-gray-50 text-gray-900 dark:bg-[#111827] dark:text-gray-100">
       {/* Header */}
 
       <div className="mb-3 mt-4 mx-4">
-        <button onClick={handleBack} className="cursor-pointer px-4 py-1 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 transition">
-        <ArrowLeft />
+        <button
+          onClick={handleBack}
+          className="cursor-pointer px-4 py-1 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 transition"
+        >
+          <ArrowLeft />
         </button>
       </div>
       <div className="flex items-center justify-center gap-3 mb-6 mt-3">

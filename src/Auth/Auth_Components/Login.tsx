@@ -31,15 +31,12 @@ export default function LoginForm() {
   const onSubmit = async (data: LoginInputs) => {
     console.log(data);
     try {
-      const response = await fetch(
-        "https://zyaamali1-backend.onrender.com/api/v1/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-          // credentials: "include",
-        }
-      );
+      const response = await fetch("https://api.adelo.ai/api/v1/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        // credentials: "include",
+      });
 
       if (!response.ok) throw new Error("Login failed");
 

@@ -37,7 +37,7 @@ export default function DashboardContentPreview() {
     const getAllContent = async () => {
       try {
         const res = await fetch(
-          `https://zyaamali1-backend.onrender.com/api/v1/content/get-single-content/${contentId}`,
+          `https://api.adelo.ai/api/v1/content/get-single-content/${contentId}`,
           {
             method: "GET",
             headers: {
@@ -61,7 +61,7 @@ export default function DashboardContentPreview() {
     const getAllContent = async () => {
       try {
         const res = await fetch(
-          "https://zyaamali1-backend.onrender.com/api/v1/content/get-all-content",
+          "https://api.adelo.ai/api/v1/content/get-all-content",
           {
             method: "GET",
             headers: {

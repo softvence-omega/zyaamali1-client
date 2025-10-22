@@ -8,7 +8,6 @@ import { persistor, store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
-import { ThemeProvider } from "./context/ThemeContext";  // Import ThemeProvider
 
 const queryClient = new QueryClient();
 
@@ -19,9 +18,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <QueryClientProvider client={queryClient}>
         <PersistGate loading={null} persistor={persistor}>
           {/* Wrap the app with ThemeProvider */}
-          <ThemeProvider>
+       
             <RouterProvider router={routes} />
-          </ThemeProvider>
+         
         </PersistGate>
       </QueryClientProvider>
     </Provider>

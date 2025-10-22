@@ -55,7 +55,7 @@ const ProfileSection: React.FC = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `https://zyaamali1-backend.onrender.com/api/v1/user/get-single-user/${user.userId}`,
+          `https://api.adelo.ai/api/v1/user/get-single-user/${user.userId}`,
           { withCredentials: true }
         );
 
@@ -81,7 +81,7 @@ const ProfileSection: React.FC = () => {
       setUpdating(true);
 
       const response = await axios.put(
-        `https://zyaamali1-backend.onrender.com/api/v1/user/update-profile`,
+        `https://api.adelo.ai/api/v1/user/update-profile`,
         formData,
         {
           headers: {
@@ -95,7 +95,7 @@ const ProfileSection: React.FC = () => {
       console.log(response);
 
       // alert("Profile updated successfully!");
-      toast.success('Profile updated successfully')
+      toast.success("Profile updated successfully");
       setEditMode({});
     } catch (err: any) {
       console.error(err);
@@ -111,8 +111,7 @@ const ProfileSection: React.FC = () => {
         Loading profile...
       </p>
     );
-  if (error)
-    return <p className="text-red-500 dark:text-red-400">{error}</p>;
+  if (error) return <p className="text-red-500 dark:text-red-400">{error}</p>;
 
   return (
     <div className="py-6 px-6 border rounded-3xl bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 shadow-md transition-colors duration-300">

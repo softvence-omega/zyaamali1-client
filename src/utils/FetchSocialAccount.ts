@@ -7,7 +7,7 @@ export const fetchSocialAccounts = async (
     setLoading(true);
 
     const response = await fetch(
-      "https://zyaamali1-backend.onrender.com/api/v1/connect/get-All-Data"
+      "https://api.adelo.ai/api/v1/connect/get-All-Data"
     );
 
     if (!response.ok) {
