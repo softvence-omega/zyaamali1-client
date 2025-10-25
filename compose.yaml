@@ -1,0 +1,12 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: arafat2025/adelo-fr:latest
+    platform: linux/amd64
+    environment:
+      NODE_ENV: development
+    ports:
+      - "3001:3001"
+  
